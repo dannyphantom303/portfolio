@@ -1,0 +1,153 @@
+#!/usr/bin/env node
+// Portfolio generator — reads projects.json (+ screenshots/) and renders a static,
+// public-safe site into dist/. No external deps. Run: node build.js
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = __dirname;
+const DIST = path.join(ROOT, 'dist');
+const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'projects.json'), 'utf8'));
+
+const esc = (s = '') => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const dateStr = new Date().toISOString().slice(0, 10);
+
+// Public-safe guard: never render a project flagged not-publicSafe.
+const projects = reg.projects.filter(p => p.publicSafe !== false);
+const aiDoable = projects.filter(p => p.aiDoable);
+
+function shots(slug) {
+  const dir = path.join(ROOT, 'screenshots', slug);
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(f => /\.(png|jpe?g|webp|gif)$/i.test(f)).sort();
+}
+
+const CSS = `
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--ac:#f0b429;--gr:#3fb950}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--bd);padding:18px 0;position:sticky;top:0;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);z-index:5}
+header .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:700;color:var(--ac)}
+nav a{color:var(--mut);font-size:14px;margin-left:18px}
+nav a:hover{color:var(--tx)}
+.hero{padding:64px 0 40px}
+.hero h1{font-size:2.4rem;font-weight:800;letter-spacing:-.02em}
+.hero p{color:var(--mut);font-size:1.15rem;max-width:680px;margin-top:12px}
+.hero .cta{margin-top:24px}
+.btn{display:inline-block;background:var(--ac);color:#0d1117;font-weight:600;padding:10px 18px;border-radius:8px;font-size:14px;margin-right:10px}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0 48px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ac);transform:translateY(-2px)}
+.card .ic{font-size:26px}
+.card h3{margin:8px 0 4px;font-size:1.05rem}
+.card p{color:var(--mut);font-size:13.5px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--bd);color:var(--mut);margin:8px 6px 0 0}
+.tag.ai{color:var(--gr);border-color:var(--gr)}
+h2.sec{font-size:1.4rem;margin:32px 0 8px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+.proj{padding:40px 0;border-bottom:1px solid var(--bd)}
+.proj h1{font-size:1.9rem}
+.proj .meta{color:var(--mut);font-size:13px;margin:8px 0 16px}
+.proj ul{margin:12px 0 12px 22px}
+.proj li{margin-bottom:6px}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:18px 0}
+.shots img{width:100%;border-radius:10px;border:1px solid var(--bd)}
+.video{margin:18px 0}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
+.stack span{display:inline-block;font-size:12px;background:var(--card);border:1px solid var(--bd);padding:2px 9px;border-radius:6px;margin:0 6px 6px 0}
+footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mut);font-size:13px;text-align:center;margin-top:40px}
+.back{color:var(--mut);font-size:14px}
+`;
+
+function shell(title, body) {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(reg.owner.summary)}"/>
+<style>${CSS}</style></head><body>
+<header><div class="wrap"><a class="brand" href="index.html">Daniel Daymude</a>
+<nav><a href="index.html#projects">Projects</a><a href="resume.html">Résumé</a><a href="mailto:${esc(reg.owner.contactEmail)}">Contact</a></nav>
+</div></header>${body}
+<footer><div class="wrap">© ${new Date().getFullYear()} Daniel Daymude · ${esc(reg.owner.contactEmail)} · updated ${dateStr}</div></footer>
+</body></html>`;
+}
+
+function cardHtml(p) {
+  return `<a class="card" href="project/${p.slug}.html"><div class="ic">${esc(p.icon)}</div>
+<h3>${esc(p.name)}</h3><p>${esc(p.tagline)}</p>
+<span class="tag">${esc(p.status)}</span>${p.aiDoable ? '<span class="tag ai">AI-runnable service</span>' : ''}</a>`;
+}
+
+function indexHtml() {
+  const body = `
+<main class="wrap">
+  <section class="hero">
+    <h1>${esc(reg.owner.name)}</h1>
+    <p>${esc(reg.owner.summary)}</p>
+    <div class="cta">
+      <a class="btn" href="mailto:${esc(reg.owner.contactEmail)}">Work with me</a>
+      <a class="btn alt" href="resume.html">Résumé</a>
+    </div>
+  </section>
+  <h2 class="sec" id="projects">Projects (${projects.length})</h2>
+  <div class="grid">${projects.map(cardHtml).join('\n')}</div>
+  <h2 class="sec">Services I can run for you</h2>
+  <p style="color:var(--mut);margin-top:8px">These are delivered as AI-run services — you get the outcome, the agents do the work:
+  ${aiDoable.map(p => esc(p.name)).join(' · ')}.</p>
+</main>`;
+  return shell(`${reg.owner.name} — AI Systems Portfolio`, body);
+}
+
+function projectHtml(p) {
+  const imgs = shots(p.slug);
+  const video = p.video ? `<div class="video"><iframe src="${esc(p.video)}" allowfullscreen loading="lazy" title="${esc(p.name)} demo"></iframe></div>` : '';
+  const gallery = imgs.length ? `<div class="shots">${imgs.map(f => `<img src="../screenshots/${p.slug}/${esc(f)}" alt="${esc(p.name)} screenshot" loading="lazy"/>`).join('')}</div>` : '';
+  const body = `
+<main class="wrap">
+  <article class="proj">
+    <a class="back" href="../index.html">← All projects</a>
+    <h1 style="margin-top:14px">${esc(p.icon)} ${esc(p.name)}</h1>
+    <div class="meta">${esc(p.status)}${p.aiDoable ? ' · <span style="color:var(--gr)">AI-runnable service</span>' : ''}</div>
+    <p>${esc(p.tagline)}</p>
+    <h2 class="sec">What it is</h2>
+    <p>${esc(p.writeup)}</p>
+    <h2 class="sec">Highlights</h2>
+    <ul>${p.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
+    <h2 class="sec">Stack</h2>
+    <div class="stack">${p.stack.map(s => `<span>${esc(s)}</span>`).join('')}</div>
+    ${video}${gallery}
+  </article>
+</main>`;
+  return shell(`${p.name} — ${reg.owner.name}`, body);
+}
+
+function resumeHtml() {
+  const body = `
+<main class="wrap">
+  <article class="proj">
+    <h1>${esc(reg.owner.name)}</h1>
+    <div class="meta">${esc(reg.owner.location)} · ${esc(reg.owner.contactEmail)}</div>
+    ${fs.existsSync(path.join(ROOT, 'resume.pdf')) ? '<p style="margin-top:14px"><a class="btn" href="resume.pdf">Download PDF résumé</a></p>' : ''}
+    <h2 class="sec">Summary</h2><p>${esc(reg.owner.summary)}</p>
+    <h2 class="sec">Selected Projects</h2>
+    <ul>${projects.map(p => `<li><strong>${esc(p.name)}</strong> — ${esc(p.tagline)}</li>`).join('')}</ul>
+    ${Object.entries(reg.skills).map(([k, v]) => `<h2 class="sec">${esc(k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))}</h2><div class="stack">${v.map(s => `<span>${esc(s)}</span>`).join('')}</div>`).join('')}
+  </article>
+</main>`;
+  return shell(`Résumé — ${reg.owner.name}`, body);
+}
+
+// ── write ──
+fs.rmSync(DIST, { recursive: true, force: true });
+fs.mkdirSync(path.join(DIST, 'project'), { recursive: true });
+fs.writeFileSync(path.join(DIST, 'index.html'), indexHtml());
+fs.writeFileSync(path.join(DIST, 'resume.html'), resumeHtml());
+for (const p of projects) fs.writeFileSync(path.join(DIST, 'project', `${p.slug}.html`), projectHtml(p));
+if (fs.existsSync(path.join(ROOT, 'screenshots'))) fs.cpSync(path.join(ROOT, 'screenshots'), path.join(DIST, 'screenshots'), { recursive: true });
+if (fs.existsSync(path.join(ROOT, 'resume.pdf'))) fs.copyFileSync(path.join(ROOT, 'resume.pdf'), path.join(DIST, 'resume.pdf'));
+fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
+
+console.log(`Built ${projects.length} projects (+ résumé) → ${DIST}`);
+console.log(`  index.html, resume.html, ${projects.length} project pages, ${projects.reduce((n, p) => n + shots(p.slug).length, 0)} screenshots`);

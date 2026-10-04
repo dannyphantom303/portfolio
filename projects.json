@@ -1,0 +1,243 @@
+{
+  "owner": {
+    "name": "Daniel Daymude",
+    "title": "AI Automation Engineer & Systems Builder",
+    "location": "Redding, CA",
+    "contactEmail": "ddaymude.ai@gmail.com",
+    "resumeSource": "Daniel Daymude Resume.pdf",
+    "summary": "Business-finance operator turned AI systems builder. I design and ship tracking systems, custom calculators, automations, and multi-agent AI platforms that turn messy operations into clean, forecastable numbers.",
+    "incomeGoal": { "annualUsd": 100000, "monthlyUsd": 8334, "preference": "passive-first" },
+    "links": {
+      "github": "",
+      "devto": "",
+      "hashnode": "",
+      "linkedin": "",
+      "x": "",
+      "youtube": "",
+      "email": "ddaymude.ai@gmail.com"
+    }
+  },
+  "skills": {
+    "finance_ops": ["Financial Data Review", "Forecasting & Pricing Models", "Custom Calculators", "Spreadsheet Reporting", "Process & Compliance Documentation"],
+    "ai_engineering": ["Multi-Agent Orchestration", "LLM Cost Optimization (Token Killers)", "Local LLM Deployment (Ollama / LM Studio)", "Prompt & Context Engineering", "RAG & Knowledge Graphs"],
+    "product": ["Dashboard Development", "Workflow Automation", "Content Pipelines", "Realtime Data Viz", "API Integration"],
+    "tools": ["Hermes Agent", "Node.js", "Python", "ComfyUI", "Obsidian", "Tailscale", "Excel"]
+  },
+  "projects": [
+    {
+      "slug": "sport-command-center",
+      "name": "Sport — Multi-Agent AI Operations System",
+      "tagline": "A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.",
+      "icon": "🚀",
+      "status": "Live (internal)",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["Hermes Agent", "Node.js", "SQLite", "Tailscale"],
+      "writeup": "Sport is the operating system for a portfolio of AI ventures. It runs a hierarchy of agents — an executive coordinator, venture CEOs, and specialists — over a shared kanban/task bus, with approval gates on anything that leaves the machine. Built to remove the human bottleneck from repetitive operations: monitoring, research, drafting, and reporting all run as scheduled agent jobs.",
+      "highlights": [
+        "Multi-agent orchestration with role hierarchy and task routing",
+        "Approval-gated outbound actions (nothing posts or sends without sign-off)",
+        "Scheduled autonomous jobs + realtime status dashboard"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "track-my-gold",
+      "name": "Track My Gold",
+      "tagline": "A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.",
+      "icon": "⛏️",
+      "status": "Live",
+      "aiDoable": false,
+      "publicSafe": true,
+      "stack": ["Node.js", "YouTube API", "Instagram API", "SEO tooling"],
+      "writeup": "Track My Gold is a content-operation dashboard: it surfaces video performance, manages an approval queue for comments and engagement, tracks affiliate revenue, and runs SEO checks — all in one panel. It shows how I turn a creator workflow into a measurable, automatable pipeline rather than a pile of spreadsheets.",
+      "highlights": [
+        "Unified metrics across YouTube, Instagram, and affiliate channels",
+        "Approval queue for outbound engagement (review, edit, approve)",
+        "SEO + content-strategy panels driving weekly decisions"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "content-autopilot",
+      "name": "Content Autopilot",
+      "tagline": "An AI content pipeline: draft, review, approve, and publish on a schedule.",
+      "icon": "📝",
+      "status": "Live",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["Node.js", "LLM drafting", "Buffer API"],
+      "writeup": "Content Autopilot generates draft posts, routes them through a human review step, and publishes approved content automatically. It's a clean example of human-in-the-loop automation: the machine does the volume, the human keeps the judgment.",
+      "highlights": [
+        "AI-drafted posts with review/edit/redo controls",
+        "One-click publish to social scheduling (Buffer)",
+        "Built for wearable/AR review surfaces (Meta Ray-Ban, Quest)"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "token-killers",
+      "name": "Token Killers — LLM Cost Optimization",
+      "tagline": "A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.",
+      "icon": "💸",
+      "status": "Live (consulting offer)",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["LLM APIs", "Local LLMs (Ollama/LM Studio)", "Prompt engineering"],
+      "writeup": "Token Killers is an audit-and-rebuild service for teams bleeding money on AI APIs. It combines prompt/context compression, model routing, caching, and local-model offload — then proves the savings with a before/after calculator. The differentiator is that I run the same stack on my own hardware, so the claims are verifiable, not theoretical.",
+      "highlights": [
+        "Interactive savings calculator (public lead magnet)",
+        "Local-LLM offload for privacy + zero marginal cost",
+        "Playbook productized as a paid PDF"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "hermes-vision",
+      "name": "Hermes Vision — AI on Phone & Glasses",
+      "tagline": "A mobile/wearable client that connects a device to a running AI agent session.",
+      "icon": "👓",
+      "status": "Live",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["PWA", "SSE streaming", "Service workers"],
+      "writeup": "Hermes Vision puts a live AI agent session on your phone or smart glasses: pick up a session, choose a model, and stream replies in real time. The interesting engineering is the realtime streaming layer and the wearable-first UI (grid navigation, focus modes, wheel/swipe input).",
+      "highlights": [
+        "Server-sent-event streaming of agent replies",
+        "Wearable-first input model (2-D grid nav, focus paging)",
+        "Installable PWA with offline app shell"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "hermes-worlds",
+      "name": "Hermes Worlds & Game — 3D AI Agent Playgrounds",
+      "tagline": "Browser 3D worlds where you walk up to AI characters and talk to them.",
+      "icon": "🥽",
+      "status": "Live (prototype)",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["WebGL/Three.js", "SSE chat", "Node.js"],
+      "writeup": "Hermes Worlds is a series of explorable 3D scenes (a western frontier town, a gold mine, a saloon) populated by AI characters you can converse with and take quests from. It demonstrates realtime agent chat inside a game loop — the same named-SSE event stream that powers the other clients.",
+      "highlights": [
+        "Interactive 3D environments with AI NPCs",
+        "Realtime agent dialogue over streaming events",
+        "Quest/objective system driven by the agent"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "autolisting",
+      "name": "Autolisting — AI Listing Generator",
+      "tagline": "Upload a video + details, get a finished, formatted listing in a 10-step pipeline.",
+      "icon": "🏠",
+      "status": "Live",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["Node.js", "LLM", "Media processing"],
+      "writeup": "Autolisting turns raw property video and a few fields into a polished, publish-ready listing. It runs a visible 10-step pipeline so the user can see exactly where the machine is and step in when needed — automation with transparency.",
+      "highlights": [
+        "Video upload → structured listing",
+        "Visible multi-step processing pipeline",
+        "Reduces a manual copywriting task to a review"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "obsidian-brain",
+      "name": "Obsidian Brain — Knowledge Graph Dashboard",
+      "tagline": "A live 3D visualization of a personal knowledge vault.",
+      "icon": "🧠",
+      "status": "Live",
+      "aiDoable": false,
+      "publicSafe": true,
+      "stack": ["Python", "Node.js", "WebGL"],
+      "writeup": "Obsidian Brain renders a personal knowledge base as an interactive 3D graph, regenerating from the vault so it's always current. It's a study in turning unstructured notes into navigable structure — the same skill behind the finance tracking systems.",
+      "highlights": [
+        "Live regeneration from source notes",
+        "Interactive 3D graph navigation",
+        "Search + drill-down into connected ideas"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "net-worth-ledger",
+      "name": "Net Worth Ledger",
+      "tagline": "A live personal-finance tracker with web-refreshable balances.",
+      "icon": "💰",
+      "status": "Live",
+      "aiDoable": false,
+      "publicSafe": true,
+      "stack": ["Node.js", "SQLite", "Web search refresh"],
+      "writeup": "A net-worth ledger that aggregates assets and liabilities into a single live number, with on-demand refresh. It's the same 'clean numbers from messy inputs' discipline I used managing commissions and financial reporting earlier in my career — now automated.",
+      "highlights": [
+        "Aggregated live net-worth total",
+        "Manual + web-search-driven balance refresh",
+        "Auditable history"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "insta360-x4",
+      "name": "Insta360 X4 Control Dashboard",
+      "tagline": "A local control + live-view panel for a 360 camera.",
+      "icon": "📷",
+      "status": "Live",
+      "aiDoable": false,
+      "publicSafe": true,
+      "stack": ["Node.js", "Camera API"],
+      "writeup": "A dashboard that connects to an Insta360 X4 for live view and control from the desktop. Small, practical hardware-integration work — bridging a device API into a clean web UI.",
+      "highlights": [
+        "Live camera preview in the browser",
+        "Remote capture controls",
+        "Device API → web UI bridge"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "agentic-ai-course",
+      "name": "Applied Agentic AI — Course Project",
+      "tagline": "A completed 11-module program on agentic AI systems, design, and impact.",
+      "icon": "⚡",
+      "status": "Completed",
+      "aiDoable": false,
+      "publicSafe": true,
+      "stack": ["Agentic AI", "Systems design"],
+      "writeup": "Virginia Tech × Simplilearn's Applied Agentic AI program (11 modules: systems, design, and impact), applied directly to the real agent platform I run. Structured, current, and immediately put to work.",
+      "highlights": [
+        "11 modules covering agent systems, design, and impact",
+        "Applied to a live multi-agent platform"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "project-showcase-engine",
+      "name": "Project Showcase & Income Engine",
+      "tagline": "This site: every project auto-turned into a published write-up, résumé update, and income channel.",
+      "icon": "🛠️",
+      "status": "Building",
+      "aiDoable": true,
+      "publicSafe": true,
+      "stack": ["Node.js", "GitHub Pages", "Dev.to API", "Hashnode API"],
+      "writeup": "The engine behind this portfolio: a project registry drives automatic write-ups, screenshots, and a self-updating résumé, then syndicates them across publishing platforms and feeds a scored job/client pipeline. If you're reading this, it's working.",
+      "highlights": [
+        "Registry-driven site generation",
+        "Daily refresh + multi-platform syndication",
+        "Résumé regenerated from real project data"
+      ],
+      "screenshots": [],
+      "video": ""
+    }
+  ]
+}
