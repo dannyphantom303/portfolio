@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public-safe portfolio for the Project Showcase & Income Engine",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node --test test/site.test.js",
+    "lint": "node -c build.js && node -c syndicate.js"
+  }
+}
