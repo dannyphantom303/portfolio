@@ -1,3 +1,4 @@
 .env
 refresh.log
 node_modules/
+.video-cache/

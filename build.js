@@ -150,6 +150,13 @@ function resumeHtml() {
 }
 
 // ── write ──
+// Preserve generated videos across rebuilds (build.js wipes dist/; videos are
+// produced by the separate make-video.py step). Stash → wipe → rebuild → restore.
+const VIDEO_CACHE = path.join(ROOT, '.video-cache');
+if (fs.existsSync(path.join(DIST, 'videos'))) {
+  if (fs.existsSync(VIDEO_CACHE)) fs.rmSync(VIDEO_CACHE, { recursive: true, force: true });
+  fs.renameSync(path.join(DIST, 'videos'), VIDEO_CACHE);
+}
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'project'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'index.html'), indexHtml());
@@ -157,6 +164,8 @@ fs.writeFileSync(path.join(DIST, 'resume.html'), resumeHtml());
 for (const p of projects) fs.writeFileSync(path.join(DIST, 'project', `${p.slug}.html`), projectHtml(p));
 if (fs.existsSync(path.join(ROOT, 'screenshots'))) fs.cpSync(path.join(ROOT, 'screenshots'), path.join(DIST, 'screenshots'), { recursive: true });
 if (fs.existsSync(path.join(ROOT, 'resume.pdf'))) fs.copyFileSync(path.join(ROOT, 'resume.pdf'), path.join(DIST, 'resume.pdf'));
+// restore preserved videos (see comment above the write block)
+if (fs.existsSync(VIDEO_CACHE)) fs.renameSync(VIDEO_CACHE, path.join(DIST, 'videos'));
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 
 console.log(`Built ${projects.length} projects (+ résumé) → ${DIST}`);

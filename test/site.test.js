@@ -40,6 +40,16 @@ test('build: generates index, resume, and one page per public-safe project', () 
   }
 });
 
+test('build: preserves dist/videos across a rebuild (regression)', () => {
+  // build.js wipes dist/; the separate make-video step writes dist/videos.
+  // A rebuild must NOT delete already-generated videos.
+  const vdir = path.join(DIST, 'videos');
+  fs.mkdirSync(vdir, { recursive: true });
+  fs.writeFileSync(path.join(vdir, '_regression-stub.mp4'), 'stub');
+  execFileSync('node', ['build.js'], { cwd: ROOT });
+  assert.ok(fs.existsSync(path.join(vdir, '_regression-stub.mp4')), 'videos dir preserved across rebuild');
+});
+
 test('output: AI-runnable projects are badged, and the services section exists', () => {
   const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
   assert.match(html, /Services I can run for you/);
