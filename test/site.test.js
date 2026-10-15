@@ -89,6 +89,15 @@ test('security: no secrets, tokens, or internal URLs in the published site', () 
   }
 });
 
+test('discover: auto-syncs new projects from the Command Center, idempotently, without tokens', () => {
+  // discover.js parses the Command Center cards so a new project shows up on the
+  // portfolio without hand-editing projects.json. A second run must add nothing.
+  const out = execFileSync('node', ['discover.js', '--dry-run'], { cwd: ROOT, encoding: 'utf8' });
+  assert.match(out, /no new projects/, 'second run must find nothing new (idempotent)');
+  const raw = fs.readFileSync(path.join(ROOT, 'projects.json'), 'utf8');
+  assert.doesNotMatch(raw, /token=/, 'token-gated dashboard URLs must never be written to the registry');
+});
+
 test('router: /portfolio handler exists and is traversal-guarded', () => {
   const src = fs.readFileSync('/Users/dan/Scripts/tmg-router.js', 'utf8');
   assert.match(src, /'\/portfolio'/, 'portfolio route registered');
