@@ -68,6 +68,16 @@ def concat(clips, out_mp4):
     os.remove(listf)
 
 
+def to_gif(mp4, gif, width=760, fps=12):
+    """Animated GIF preview from an mp4 (single ffmpeg pass, no drawtext needed)."""
+    subprocess.run([
+        "ffmpeg", "-y", "-i", mp4, "-vf",
+        f"fps={fps},scale={width}:-1:flags=lanczos,split[s0][s1];"
+        f"[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=bayer:bayer_scale=3",
+        "-loop", "0", gif],
+        check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
 def make_reel():
     d = os.path.join(ROOT, "reel")
     if not os.path.isdir(d):
@@ -119,7 +129,11 @@ def make_project_video(slug):
         clips.append(c)
     out = os.path.join(VOUT, f"{slug}.mp4")
     concat(clips, out)
-    print(f"→ {slug}.mp4")
+    try:
+        to_gif(out, os.path.join(VOUT, f"{slug}.gif"))
+    except subprocess.CalledProcessError:
+        print(f"  (gif skipped: {slug})")
+    print(f"→ {slug}.mp4 + .gif")
     return out
 
 

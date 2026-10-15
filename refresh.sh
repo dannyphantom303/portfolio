@@ -5,8 +5,9 @@ set -euo pipefail
 cd /Users/dan/portfolio
 LOG=/Users/dan/portfolio/refresh.log
 echo "[$(date '+%F %T')] refresh start" >> "$LOG"
-node build.js >> "$LOG" 2>&1
+# Videos/GIFs FIRST so build.js can embed them (build preserves dist/videos via cache).
 python3 "$PWD/make-video.py" all >> "$LOG" 2>&1 || true
+node build.js >> "$LOG" 2>&1
 node syndicate.js >> "$LOG" 2>&1 || true
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git add -A >> "$LOG" 2>&1 || true

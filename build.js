@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-// Portfolio generator — reads projects.json (+ screenshots/) and renders a static,
-// public-safe site into dist/. No external deps. Run: node build.js
+// Portfolio generator — reads projects.json (+ screenshots/, videos/) and renders a
+// static, public-safe site into dist/. No external deps. Run: node build.js
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
+const VIDEOS = path.join(DIST, 'videos');
 const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'projects.json'), 'utf8'));
 
 const esc = (s = '') => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -20,46 +21,70 @@ function shots(slug) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir).filter(f => /\.(png|jpe?g|webp|gif)$/i.test(f)).sort();
 }
+// Assets are restored into dist/videos BEFORE pages are written (see write block),
+// so existence checks here are reliable — unlike the old move-to-cache-then-write order.
+const asset = (slug, ext) => fs.existsSync(path.join(VIDEOS, `${slug}.${ext}`));
 
 const CSS = `
-:root{--bg:#fafafa;--card:#fff;--bd:#d2d2d7;--tx:#1d1d1f;--mut:#6e6e73;--ac:#0071e3;--gr:#34c759}
+:root{--bg:#fafafa;--card:#fff;--bd:#d2d2d7;--tx:#1d1d1f;--mut:#6e6e73;--ac:#0071e3;--gr:#34c759;--rd:20px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:960px;margin:0 auto;padding:0 24px}
-header{border-bottom:1px solid var(--bd);padding:18px 0;position:sticky;top:0;background:rgba(250,250,250,.92);backdrop-filter:blur(8px);z-index:5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--bd);padding:16px 0;position:sticky;top:0;background:rgba(250,250,250,.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);z-index:10}
 header .wrap{display:flex;justify-content:space-between;align-items:center}
-.brand{font-weight:700;color:var(--tx)}
+.brand{font-weight:600;letter-spacing:-.01em}
 .brand span{color:var(--ac)}
-nav a{color:var(--mut);font-size:14px;margin-left:18px}
+nav a{color:var(--mut);font-size:14px;margin-left:22px;transition:color .2s}
 nav a:hover{color:var(--tx)}
-.hero{padding:64px 0 40px}
-.hero h1{font-size:2.4rem;font-weight:700;letter-spacing:-.02em}
-.hero p{color:var(--mut);font-size:1.15rem;max-width:680px;margin-top:12px}
-.hero .cta{margin-top:24px}
-.btn{display:inline-block;background:var(--ac);color:#fff;font-weight:600;padding:10px 18px;border-radius:980px;font-size:14px;margin-right:10px}
-.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0 48px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:24px;transition:box-shadow .15s}
-.card:hover{box-shadow:0 4px 24px rgba(0,0,0,.08)}
-.card .ic{font-size:26px}
-.card h3{margin:8px 0 4px;font-size:1.05rem;font-weight:600}
-.card p{color:var(--mut);font-size:13.5px}
-.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#f5f5f7;color:var(--mut);margin:8px 6px 0 0}
-.tag.ai{color:var(--gr);background:#e8f8ed}
-h2.sec{font-size:1.4rem;margin:32px 0 8px;border-bottom:1px solid var(--bd);padding-bottom:8px}
-.proj{padding:40px 0;border-bottom:1px solid var(--bd)}
-.proj h1{font-size:1.9rem;font-weight:700;letter-spacing:-.02em}
-.proj .meta{color:var(--mut);font-size:13px;margin:8px 0 16px}
-.proj ul{margin:12px 0 12px 22px}
-.proj li{margin-bottom:6px}
-.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:18px 0}
-.shots img{width:100%;border-radius:10px;border:1px solid var(--bd)}
-.video{margin:18px 0}
-.video iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
-.stack span{display:inline-block;font-size:12px;background:#f5f5f7;border:1px solid var(--bd);padding:2px 9px;border-radius:6px;margin:0 6px 6px 0}
-footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mut);font-size:13px;text-align:center;margin-top:40px}
+.hero{padding:80px 0 32px;text-align:center}
+.hero h1{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1.08}
+.hero p{color:var(--mut);font-size:1.2rem;max-width:660px;margin:16px auto 0}
+.cta{margin-top:26px}
+.btn{display:inline-block;background:var(--ac);color:#fff;font-weight:600;padding:12px 22px;border-radius:980px;font-size:15px;margin:0 5px;transition:transform .15s,opacity .15s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.alt{background:transparent;color:var(--ac);border:1px solid var(--bd)}
+.reel{margin:8px 0 8px;border-radius:var(--rd);overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+.reel video{width:100%;display:block}
+.cap{color:var(--mut);font-size:13px;text-align:center;margin-top:12px}
+h2.sec{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin:56px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin:8px 0 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--rd);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(0,0,0,.28)}
+.cover{aspect-ratio:16/10;background:linear-gradient(135deg,#eef1f5,#dfe6ee);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .glyph{font-size:64px;filter:saturate(1.2)}
+.card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
+.card p{color:var(--mut);font-size:14px;margin-top:6px;flex:1}
+.badges{margin-top:14px}
+.tag{display:inline-block;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:999px;background:#f0f0f2;color:var(--mut);margin:0 6px 6px 0}
+.tag.ai{color:#1a7f37;background:#e6f6ea}
+.proj{padding:52px 0}
 .back{color:var(--mut);font-size:14px}
+.proj h1{font-size:2.6rem;font-weight:700;letter-spacing:-.03em;margin-top:18px;line-height:1.1}
+.meta{color:var(--mut);font-size:14px;margin:10px 0 4px}
+.lede{font-size:1.25rem;color:var(--tx);max-width:720px;margin-top:10px}
+.cover-lg{margin:32px 0;border-radius:var(--rd);overflow:hidden;border:1px solid var(--bd);box-shadow:0 24px 60px -30px rgba(0,0,0,.35)}
+.cover-lg img{width:100%;display:block}
+.proj h2{font-size:1.35rem;font-weight:600;letter-spacing:-.01em;margin:40px 0 12px}
+.proj p.body{max-width:760px}
+.proj ul{margin:12px 0 0 20px;max-width:760px}
+.proj li{margin-bottom:8px}
+.vid,.gif{margin:20px 0;max-width:760px}
+.vid video{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.gif img{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.stack span{font-size:13px;background:#f5f5f7;border:1px solid var(--bd);padding:4px 12px;border-radius:8px}
+.cta-band{margin:56px 0 0;padding:40px;border-radius:var(--rd);background:linear-gradient(135deg,#0a84ff,#0055cc);color:#fff;text-align:center}
+.cta-band h2{margin:0 0 8px;font-size:1.5rem}
+.cta-band p{opacity:.9;margin-bottom:18px}
+.cta-band .btn{background:#fff;color:#0055cc}
+footer{border-top:1px solid var(--bd);padding:32px 0;color:var(--mut);font-size:13px;text-align:center;margin-top:56px}
+@media(max-width:640px){.hero h1{font-size:2.2rem}.proj h1{font-size:1.9rem}}
 `;
 
 function shell(title, body) {
@@ -75,10 +100,18 @@ function shell(title, body) {
 </body></html>`;
 }
 
+const cover = (p, prefix) => {
+  const first = shots(p.slug)[0];
+  return first
+    ? `<div class="cover"><img src="${prefix}screenshots/${p.slug}/${esc(first)}" alt="${esc(p.name)}" loading="lazy"/></div>`
+    : `<div class="cover"><div class="glyph">${esc(p.icon)}</div></div>`;
+};
+
 function cardHtml(p) {
-  return `<a class="card" href="project/${p.slug}.html"><div class="ic">${esc(p.icon)}</div>
-<h3>${esc(p.name)}</h3><p>${esc(p.tagline)}</p>
-<span class="tag">${esc(p.status)}</span>${p.aiDoable ? '<span class="tag ai">AI-runnable service</span>' : ''}</a>`;
+  return `<a class="card" href="project/${p.slug}.html">
+${cover(p, '')}
+<div class="body"><h3>${esc(p.name)}</h3><p>${esc(p.tagline)}</p>
+<div class="badges"><span class="tag">${esc(p.status)}</span>${p.aiDoable ? '<span class="tag ai">AI-runnable service</span>' : ''}</div></div></a>`;
 }
 
 function indexHtml() {
@@ -92,42 +125,52 @@ function indexHtml() {
       <a class="btn alt" href="resume.html">Résumé</a>
     </div>
   </section>
-  <section class="video">
-    <video controls preload="metadata">
+  <section class="reel">
+    <video controls preload="metadata" poster="">
       <source src="videos/showcase-reel.mp4" type="video/mp4">Your browser does not support the video tag.
     </video>
-    <p style="color:var(--mut);font-size:13px;margin-top:10px">Portfolio showcase reel — project write-ups, screenshots, and demos, refreshed daily.</p>
   </section>
+  <p class="cap">Showcase reel — real screenshots, write-ups, and demos, refreshed daily.</p>
   <h2 class="sec" id="projects">Projects (${projects.length})</h2>
   <div class="grid">${projects.map(cardHtml).join('\n')}</div>
   <h2 class="sec">Services I can run for you</h2>
-  <p style="color:var(--mut);margin-top:8px">These are delivered as AI-run services — you get the outcome, the agents do the work:
-  ${aiDoable.map(p => esc(p.name)).join(' · ')}.</p>
+  <p class="cap" style="text-align:left;color:var(--mut)">Delivered as AI-run services — you get the outcome, the agents do the work:<br>
+  ${aiDoable.map(p => `<strong>${esc(p.name)}</strong>`).join(' · ')}.</p>
 </main>`;
   return shell(`${reg.owner.name} — AI Systems Portfolio`, body);
 }
 
 function projectHtml(p) {
   const imgs = shots(p.slug);
-  const localMp4 = path.join(ROOT, 'dist', 'videos', `${p.slug}.mp4`);
-  const video = fs.existsSync(localMp4)
-    ? `<div class="video"><video controls preload="metadata"><source src="../videos/${p.slug}.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>`
-    : (p.video ? `<div class="video"><iframe src="${esc(p.video)}" allowfullscreen loading="lazy" title="${esc(p.name)} demo"></iframe></div>` : '');
-  const gallery = imgs.length ? `<div class="shots">${imgs.map(f => `<img src="../screenshots/${p.slug}/${esc(f)}" alt="${esc(p.name)} screenshot" loading="lazy"/>`).join('')}</div>` : '';
+  const video = asset(p.slug, 'mp4')
+    ? `<div class="vid"><video controls preload="metadata"><source src="../videos/${p.slug}.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>`
+    : (p.video ? `<div class="vid"><iframe src="${esc(p.video)}" allowfullscreen loading="lazy" title="${esc(p.name)} demo" style="width:100%;aspect-ratio:16/9;border:1px solid var(--bd);border-radius:14px"></iframe></div>` : '');
+  const gif = asset(p.slug, 'gif')
+    ? `<div class="gif"><img src="../videos/${p.slug}.gif" alt="${esc(p.name)} animated preview" loading="lazy"/></div>` : '';
+  const gallery = imgs.length ? `<h2>Gallery</h2><div class="shots">${imgs.map(f => `<img src="../screenshots/${p.slug}/${esc(f)}" alt="${esc(p.name)} screenshot" loading="lazy"/>`).join('')}</div>` : '';
+  const coverLg = cover(p, '../').replace('class="cover"', 'class="cover-lg"').replace('class="cover"', '');
   const body = `
 <main class="wrap">
   <article class="proj">
     <a class="back" href="../index.html">← All projects</a>
-    <h1 style="margin-top:14px">${esc(p.icon)} ${esc(p.name)}</h1>
-    <div class="meta">${esc(p.status)}${p.aiDoable ? ' · <span style="color:var(--gr)">AI-runnable service</span>' : ''}</div>
-    <p>${esc(p.tagline)}</p>
-    <h2 class="sec">What it is</h2>
-    <p>${esc(p.writeup)}</p>
-    <h2 class="sec">Highlights</h2>
+    <h1>${esc(p.name)}</h1>
+    <div class="meta">${esc(p.icon)} ${esc(p.status)}${p.aiDoable ? ' · <span style="color:var(--gr)">AI-runnable service</span>' : ''}</div>
+    <p class="lede">${esc(p.tagline)}</p>
+    ${coverLg}
+    <h2>Overview</h2>
+    <p class="body">${esc(p.writeup)}</p>
+    <h2>Highlights</h2>
     <ul>${p.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
-    <h2 class="sec">Stack</h2>
+    ${video ? '<h2>Demo</h2>' + video : ''}
+    ${gif ? '<h2>Preview</h2>' + gif : ''}
+    ${gallery}
+    <h2>Stack</h2>
     <div class="stack">${p.stack.map(s => `<span>${esc(s)}</span>`).join('')}</div>
-    ${video}${gallery}
+    <div class="cta-band">
+      <h2>Want this built for your business?</h2>
+      <p>${p.aiDoable ? 'This can run as an AI-managed service — the agents do the work.' : 'I design, ship, and hand off systems like this.'}</p>
+      <a class="btn" href="mailto:${esc(reg.owner.contactEmail)}">Get in touch</a>
+    </div>
   </article>
 </main>`;
   return shell(`${p.name} — ${reg.owner.name}`, body);
@@ -139,33 +182,33 @@ function resumeHtml() {
   <article class="proj">
     <h1>${esc(reg.owner.name)}</h1>
     <div class="meta">${esc(reg.owner.location)} · ${esc(reg.owner.contactEmail)}</div>
-    ${fs.existsSync(path.join(ROOT, 'resume.pdf')) ? '<p style="margin-top:14px"><a class="btn" href="resume.pdf">Download PDF résumé</a></p>' : ''}
-    <h2 class="sec">Summary</h2><p>${esc(reg.owner.summary)}</p>
-    <h2 class="sec">Selected Projects</h2>
+    ${fs.existsSync(path.join(ROOT, 'resume.pdf')) ? '<p style="margin-top:16px"><a class="btn" href="resume.pdf">Download PDF résumé</a></p>' : ''}
+    <h2>Summary</h2><p class="body">${esc(reg.owner.summary)}</p>
+    <h2>Selected Projects</h2>
     <ul>${projects.map(p => `<li><strong>${esc(p.name)}</strong> — ${esc(p.tagline)}</li>`).join('')}</ul>
-    ${Object.entries(reg.skills).map(([k, v]) => `<h2 class="sec">${esc(k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))}</h2><div class="stack">${v.map(s => `<span>${esc(s)}</span>`).join('')}</div>`).join('')}
+    ${Object.entries(reg.skills).map(([k, v]) => `<h2>${esc(k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))}</h2><div class="stack">${v.map(s => `<span>${esc(s)}</span>`).join('')}</div>`).join('')}
   </article>
 </main>`;
   return shell(`Résumé — ${reg.owner.name}`, body);
 }
 
 // ── write ──
-// Preserve generated videos across rebuilds (build.js wipes dist/; videos are
-// produced by the separate make-video.py step). Stash → wipe → rebuild → restore.
+// Preserve generated videos (mp4+gif) across rebuilds. build.js wipes dist/, so we
+// stash videos, wipe, restore them FIRST, then render pages (so asset() checks work).
 const VIDEO_CACHE = path.join(ROOT, '.video-cache');
-if (fs.existsSync(path.join(DIST, 'videos'))) {
+if (fs.existsSync(VIDEOS)) {
   if (fs.existsSync(VIDEO_CACHE)) fs.rmSync(VIDEO_CACHE, { recursive: true, force: true });
-  fs.renameSync(path.join(DIST, 'videos'), VIDEO_CACHE);
+  fs.renameSync(VIDEOS, VIDEO_CACHE);
 }
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'project'), { recursive: true });
+if (fs.existsSync(VIDEO_CACHE)) fs.renameSync(VIDEO_CACHE, VIDEOS);
+else fs.mkdirSync(VIDEOS, { recursive: true });
 fs.writeFileSync(path.join(DIST, 'index.html'), indexHtml());
 fs.writeFileSync(path.join(DIST, 'resume.html'), resumeHtml());
 for (const p of projects) fs.writeFileSync(path.join(DIST, 'project', `${p.slug}.html`), projectHtml(p));
 if (fs.existsSync(path.join(ROOT, 'screenshots'))) fs.cpSync(path.join(ROOT, 'screenshots'), path.join(DIST, 'screenshots'), { recursive: true });
 if (fs.existsSync(path.join(ROOT, 'resume.pdf'))) fs.copyFileSync(path.join(ROOT, 'resume.pdf'), path.join(DIST, 'resume.pdf'));
-// restore preserved videos (see comment above the write block)
-if (fs.existsSync(VIDEO_CACHE)) fs.renameSync(VIDEO_CACHE, path.join(DIST, 'videos'));
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 
 console.log(`Built ${projects.length} projects (+ résumé) → ${DIST}`);

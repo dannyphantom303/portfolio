@@ -48,12 +48,34 @@ test('build: preserves dist/videos across a rebuild (regression)', () => {
   fs.writeFileSync(path.join(vdir, '_regression-stub.mp4'), 'stub');
   execFileSync('node', ['build.js'], { cwd: ROOT });
   assert.ok(fs.existsSync(path.join(vdir, '_regression-stub.mp4')), 'videos dir preserved across rebuild');
+  // clean up the stub so the test leaves no artifacts
+  fs.rmSync(path.join(vdir, '_regression-stub.mp4'), { force: true });
 });
 
 test('output: AI-runnable projects are badged, and the services section exists', () => {
   const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
   assert.match(html, /Services I can run for you/);
   assert.match(html, /AI-runnable service/);
+});
+
+test('build: embeds the local demo video on a project page when the asset exists (regression)', () => {
+  // Previously build.js moved dist/videos to a cache BEFORE rendering pages, so the
+  // existsSync check was always false and videos were never embedded.
+  const vdir = path.join(DIST, 'videos');
+  fs.mkdirSync(vdir, { recursive: true });
+  const slug = reg.projects.find(p => p.publicSafe !== false).slug;
+  fs.writeFileSync(path.join(vdir, `${slug}.mp4`), 'stub');
+  execFileSync('node', ['build.js'], { cwd: ROOT });
+  const html = fs.readFileSync(path.join(DIST, 'project', `${slug}.html`), 'utf8');
+  assert.match(html, new RegExp(`<video[^>]*>\\s*<source src="\\.\\./videos/${slug}\\.mp4"`), 'demo video embedded');
+  fs.rmSync(path.join(vdir, `${slug}.mp4`), { force: true });
+  execFileSync('node', ['build.js'], { cwd: ROOT }); // restore clean state
+});
+
+test('router: /portfolio redirects to /portfolio/ so relative links resolve', () => {
+  const src = fs.readFileSync('/Users/dan/Scripts/tmg-router.js', 'utf8');
+  assert.match(src, /pathname === '\/portfolio'\)[\s\S]*?301[\s\S]*?Location: '\/portfolio\/'/, 'slash redirect present');
+  assert.match(src, /pathname === '\/portfolio\/'\)[\s\S]*?dist\/index\.html/, 'index served at trailing slash');
 });
 
 test('security: no secrets, tokens, or internal URLs in the published site', () => {
