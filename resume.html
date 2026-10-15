@@ -3,44 +3,65 @@
 <title>Résumé — Daniel Daymude</title>
 <meta name="description" content="Business-finance operator turned AI systems builder. I design and ship tracking systems, custom calculators, automations, and multi-agent AI platforms that turn messy operations into clean, forecastable numbers."/>
 <style>
-:root{--bg:#fafafa;--card:#fff;--bd:#d2d2d7;--tx:#1d1d1f;--mut:#6e6e73;--ac:#0071e3;--gr:#34c759}
+:root{--bg:#fafafa;--card:#fff;--bd:#d2d2d7;--tx:#1d1d1f;--mut:#6e6e73;--ac:#0071e3;--gr:#34c759;--rd:20px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:960px;margin:0 auto;padding:0 24px}
-header{border-bottom:1px solid var(--bd);padding:18px 0;position:sticky;top:0;background:rgba(250,250,250,.92);backdrop-filter:blur(8px);z-index:5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--bd);padding:16px 0;position:sticky;top:0;background:rgba(250,250,250,.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);z-index:10}
 header .wrap{display:flex;justify-content:space-between;align-items:center}
-.brand{font-weight:700;color:var(--tx)}
+.brand{font-weight:600;letter-spacing:-.01em}
 .brand span{color:var(--ac)}
-nav a{color:var(--mut);font-size:14px;margin-left:18px}
+nav a{color:var(--mut);font-size:14px;margin-left:22px;transition:color .2s}
 nav a:hover{color:var(--tx)}
-.hero{padding:64px 0 40px}
-.hero h1{font-size:2.4rem;font-weight:700;letter-spacing:-.02em}
-.hero p{color:var(--mut);font-size:1.15rem;max-width:680px;margin-top:12px}
-.hero .cta{margin-top:24px}
-.btn{display:inline-block;background:var(--ac);color:#fff;font-weight:600;padding:10px 18px;border-radius:980px;font-size:14px;margin-right:10px}
-.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0 48px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:24px;transition:box-shadow .15s}
-.card:hover{box-shadow:0 4px 24px rgba(0,0,0,.08)}
-.card .ic{font-size:26px}
-.card h3{margin:8px 0 4px;font-size:1.05rem;font-weight:600}
-.card p{color:var(--mut);font-size:13.5px}
-.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#f5f5f7;color:var(--mut);margin:8px 6px 0 0}
-.tag.ai{color:var(--gr);background:#e8f8ed}
-h2.sec{font-size:1.4rem;margin:32px 0 8px;border-bottom:1px solid var(--bd);padding-bottom:8px}
-.proj{padding:40px 0;border-bottom:1px solid var(--bd)}
-.proj h1{font-size:1.9rem;font-weight:700;letter-spacing:-.02em}
-.proj .meta{color:var(--mut);font-size:13px;margin:8px 0 16px}
-.proj ul{margin:12px 0 12px 22px}
-.proj li{margin-bottom:6px}
-.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:18px 0}
-.shots img{width:100%;border-radius:10px;border:1px solid var(--bd)}
-.video{margin:18px 0}
-.video iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
-.stack span{display:inline-block;font-size:12px;background:#f5f5f7;border:1px solid var(--bd);padding:2px 9px;border-radius:6px;margin:0 6px 6px 0}
-footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mut);font-size:13px;text-align:center;margin-top:40px}
+.hero{padding:80px 0 32px;text-align:center}
+.hero h1{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1.08}
+.hero p{color:var(--mut);font-size:1.2rem;max-width:660px;margin:16px auto 0}
+.cta{margin-top:26px}
+.btn{display:inline-block;background:var(--ac);color:#fff;font-weight:600;padding:12px 22px;border-radius:980px;font-size:15px;margin:0 5px;transition:transform .15s,opacity .15s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.alt{background:transparent;color:var(--ac);border:1px solid var(--bd)}
+.reel{margin:8px 0 8px;border-radius:var(--rd);overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+.reel video{width:100%;display:block}
+.cap{color:var(--mut);font-size:13px;text-align:center;margin-top:12px}
+h2.sec{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin:56px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin:8px 0 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--rd);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(0,0,0,.28)}
+.cover{aspect-ratio:16/10;background:linear-gradient(135deg,#eef1f5,#dfe6ee);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .glyph{font-size:64px;filter:saturate(1.2)}
+.card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
+.card p{color:var(--mut);font-size:14px;margin-top:6px;flex:1}
+.badges{margin-top:14px}
+.tag{display:inline-block;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:999px;background:#f0f0f2;color:var(--mut);margin:0 6px 6px 0}
+.tag.ai{color:#1a7f37;background:#e6f6ea}
+.proj{padding:52px 0}
 .back{color:var(--mut);font-size:14px}
+.proj h1{font-size:2.6rem;font-weight:700;letter-spacing:-.03em;margin-top:18px;line-height:1.1}
+.meta{color:var(--mut);font-size:14px;margin:10px 0 4px}
+.lede{font-size:1.25rem;color:var(--tx);max-width:720px;margin-top:10px}
+.cover-lg{margin:32px 0;border-radius:var(--rd);overflow:hidden;border:1px solid var(--bd);box-shadow:0 24px 60px -30px rgba(0,0,0,.35)}
+.cover-lg img{width:100%;display:block}
+.proj h2{font-size:1.35rem;font-weight:600;letter-spacing:-.01em;margin:40px 0 12px}
+.proj p.body{max-width:760px}
+.proj ul{margin:12px 0 0 20px;max-width:760px}
+.proj li{margin-bottom:8px}
+.vid,.gif{margin:20px 0;max-width:760px}
+.vid video{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.gif img{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.stack span{font-size:13px;background:#f5f5f7;border:1px solid var(--bd);padding:4px 12px;border-radius:8px}
+.cta-band{margin:56px 0 0;padding:40px;border-radius:var(--rd);background:linear-gradient(135deg,#0a84ff,#0055cc);color:#fff;text-align:center}
+.cta-band h2{margin:0 0 8px;font-size:1.5rem}
+.cta-band p{opacity:.9;margin-bottom:18px}
+.cta-band .btn{background:#fff;color:#0055cc}
+footer{border-top:1px solid var(--bd);padding:32px 0;color:var(--mut);font-size:13px;text-align:center;margin-top:56px}
+@media(max-width:640px){.hero h1{font-size:2.2rem}.proj h1{font-size:1.9rem}}
 </style></head><body>
 <header><div class="wrap"><a class="brand" href="index.html">Daniel Daymude<span>.</span></a>
 <nav><a href="index.html#projects">Projects</a><a href="resume.html">Résumé</a><a href="mailto:ddaymude.ai@gmail.com">Contact</a></nav>
@@ -49,12 +70,12 @@ footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mut);font-size:
   <article class="proj">
     <h1>Daniel Daymude</h1>
     <div class="meta">Redding, CA · ddaymude.ai@gmail.com</div>
-    <p style="margin-top:14px"><a class="btn" href="resume.pdf">Download PDF résumé</a></p>
-    <h2 class="sec">Summary</h2><p>Business-finance operator turned AI systems builder. I design and ship tracking systems, custom calculators, automations, and multi-agent AI platforms that turn messy operations into clean, forecastable numbers.</p>
-    <h2 class="sec">Selected Projects</h2>
+    <p style="margin-top:16px"><a class="btn" href="resume.pdf">Download PDF résumé</a></p>
+    <h2>Summary</h2><p class="body">Business-finance operator turned AI systems builder. I design and ship tracking systems, custom calculators, automations, and multi-agent AI platforms that turn messy operations into clean, forecastable numbers.</p>
+    <h2>Selected Projects</h2>
     <ul><li><strong>Sport — Multi-Agent AI Operations System</strong> — A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.</li><li><strong>Track My Gold</strong> — A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.</li><li><strong>Content Autopilot</strong> — An AI content pipeline: draft, review, approve, and publish on a schedule.</li><li><strong>Token Killers — LLM Cost Optimization</strong> — A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.</li><li><strong>Hermes Vision — AI on Phone &amp; Glasses</strong> — A mobile/wearable client that connects a device to a running AI agent session.</li><li><strong>Hermes Worlds &amp; Game — 3D AI Agent Playgrounds</strong> — Browser 3D worlds where you walk up to AI characters and talk to them.</li><li><strong>Autolisting — AI Listing Generator</strong> — Upload a video + details, get a finished, formatted listing in a 10-step pipeline.</li><li><strong>Obsidian Brain — Knowledge Graph Dashboard</strong> — A live 3D visualization of a personal knowledge vault.</li><li><strong>Net Worth Ledger</strong> — A live personal-finance tracker with web-refreshable balances.</li><li><strong>Insta360 X4 Control Dashboard</strong> — A local control + live-view panel for a 360 camera.</li><li><strong>Applied Agentic AI — Course Project</strong> — A completed 11-module program on agentic AI systems, design, and impact.</li><li><strong>Project Showcase &amp; Income Engine</strong> — This site: every project auto-turned into a published write-up, résumé update, and income channel.</li></ul>
-    <h2 class="sec">Finance Ops</h2><div class="stack"><span>Financial Data Review</span><span>Forecasting &amp; Pricing Models</span><span>Custom Calculators</span><span>Spreadsheet Reporting</span><span>Process &amp; Compliance Documentation</span></div><h2 class="sec">Ai Engineering</h2><div class="stack"><span>Multi-Agent Orchestration</span><span>LLM Cost Optimization (Token Killers)</span><span>Local LLM Deployment (Ollama / LM Studio)</span><span>Prompt &amp; Context Engineering</span><span>RAG &amp; Knowledge Graphs</span></div><h2 class="sec">Product</h2><div class="stack"><span>Dashboard Development</span><span>Workflow Automation</span><span>Content Pipelines</span><span>Realtime Data Viz</span><span>API Integration</span></div><h2 class="sec">Tools</h2><div class="stack"><span>Hermes Agent</span><span>Node.js</span><span>Python</span><span>ComfyUI</span><span>Obsidian</span><span>Tailscale</span><span>Excel</span></div>
+    <h2>Finance Ops</h2><div class="stack"><span>Financial Data Review</span><span>Forecasting &amp; Pricing Models</span><span>Custom Calculators</span><span>Spreadsheet Reporting</span><span>Process &amp; Compliance Documentation</span></div><h2>Ai Engineering</h2><div class="stack"><span>Multi-Agent Orchestration</span><span>LLM Cost Optimization (Token Killers)</span><span>Local LLM Deployment (Ollama / LM Studio)</span><span>Prompt &amp; Context Engineering</span><span>RAG &amp; Knowledge Graphs</span></div><h2>Product</h2><div class="stack"><span>Dashboard Development</span><span>Workflow Automation</span><span>Content Pipelines</span><span>Realtime Data Viz</span><span>API Integration</span></div><h2>Tools</h2><div class="stack"><span>Hermes Agent</span><span>Node.js</span><span>Python</span><span>ComfyUI</span><span>Obsidian</span><span>Tailscale</span><span>Excel</span></div>
   </article>
 </main>
-<footer><div class="wrap">© 2026 Daniel Daymude · ddaymude.ai@gmail.com · updated 2026-10-06</div></footer>
+<footer><div class="wrap">© 2026 Daniel Daymude · ddaymude.ai@gmail.com · updated 2026-10-15</div></footer>
 </body></html>
