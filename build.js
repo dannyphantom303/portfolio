@@ -159,13 +159,11 @@ function projectHtml(p) {
     ${coverLg}
     <h2>Overview</h2>
     <p class="body">${esc(p.writeup)}</p>
-    <h2>Highlights</h2>
-    <ul>${p.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
+    ${p.highlights.length ? '<h2>Highlights</h2>\n    <ul>' + p.highlights.map(h => `<li>${esc(h)}</li>`).join('') + '</ul>' : ''}
     ${video ? '<h2>Demo</h2>' + video : ''}
     ${gif ? '<h2>Preview</h2>' + gif : ''}
     ${gallery}
-    <h2>Stack</h2>
-    <div class="stack">${p.stack.map(s => `<span>${esc(s)}</span>`).join('')}</div>
+    ${p.stack.length ? '<h2>Stack</h2>\n    <div class="stack">' + p.stack.map(s => `<span>${esc(s)}</span>`).join('') + '</div>' : ''}
     <div class="cta-band">
       <h2>Want this built for your business?</h2>
       <p>${p.aiDoable ? 'This can run as an AI-managed service — the agents do the work.' : 'I design, ship, and hand off systems like this.'}</p>

@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Muse Prototypes — Daniel Daymude</title>
+<meta name="description" content="Business-finance operator turned AI systems builder. I design and ship tracking systems, custom calculators, automations, and multi-agent AI platforms that turn messy operations into clean, forecastable numbers."/>
+<style>
+:root{--bg:#fafafa;--card:#fff;--bd:#d2d2d7;--tx:#1d1d1f;--mut:#6e6e73;--ac:#0071e3;--gr:#34c759;--rd:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--bd);padding:16px 0;position:sticky;top:0;background:rgba(250,250,250,.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);z-index:10}
+header .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:600;letter-spacing:-.01em}
+.brand span{color:var(--ac)}
+nav a{color:var(--mut);font-size:14px;margin-left:22px;transition:color .2s}
+nav a:hover{color:var(--tx)}
+.hero{padding:80px 0 32px;text-align:center}
+.hero h1{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1.08}
+.hero p{color:var(--mut);font-size:1.2rem;max-width:660px;margin:16px auto 0}
+.cta{margin-top:26px}
+.btn{display:inline-block;background:var(--ac);color:#fff;font-weight:600;padding:12px 22px;border-radius:980px;font-size:15px;margin:0 5px;transition:transform .15s,opacity .15s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.alt{background:transparent;color:var(--ac);border:1px solid var(--bd)}
+.reel{margin:8px 0 8px;border-radius:var(--rd);overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+.reel video{width:100%;display:block}
+.cap{color:var(--mut);font-size:13px;text-align:center;margin-top:12px}
+h2.sec{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin:56px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin:8px 0 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--rd);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(0,0,0,.28)}
+.cover{aspect-ratio:16/10;background:linear-gradient(135deg,#eef1f5,#dfe6ee);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .glyph{font-size:64px;filter:saturate(1.2)}
+.card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
+.card p{color:var(--mut);font-size:14px;margin-top:6px;flex:1}
+.badges{margin-top:14px}
+.tag{display:inline-block;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:999px;background:#f0f0f2;color:var(--mut);margin:0 6px 6px 0}
+.tag.ai{color:#1a7f37;background:#e6f6ea}
+.proj{padding:52px 0}
+.back{color:var(--mut);font-size:14px}
+.proj h1{font-size:2.6rem;font-weight:700;letter-spacing:-.03em;margin-top:18px;line-height:1.1}
+.meta{color:var(--mut);font-size:14px;margin:10px 0 4px}
+.lede{font-size:1.25rem;color:var(--tx);max-width:720px;margin-top:10px}
+.cover-lg{margin:32px 0;border-radius:var(--rd);overflow:hidden;border:1px solid var(--bd);box-shadow:0 24px 60px -30px rgba(0,0,0,.35)}
+.cover-lg img{width:100%;display:block}
+.proj h2{font-size:1.35rem;font-weight:600;letter-spacing:-.01em;margin:40px 0 12px}
+.proj p.body{max-width:760px}
+.proj ul{margin:12px 0 0 20px;max-width:760px}
+.proj li{margin-bottom:8px}
+.vid,.gif{margin:20px 0;max-width:760px}
+.vid video{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.gif img{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;border:1px solid var(--bd);display:block}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.stack span{font-size:13px;background:#f5f5f7;border:1px solid var(--bd);padding:4px 12px;border-radius:8px}
+.cta-band{margin:56px 0 0;padding:40px;border-radius:var(--rd);background:linear-gradient(135deg,#0a84ff,#0055cc);color:#fff;text-align:center}
+.cta-band h2{margin:0 0 8px;font-size:1.5rem}
+.cta-band p{opacity:.9;margin-bottom:18px}
+.cta-band .btn{background:#fff;color:#0055cc}
+footer{border-top:1px solid var(--bd);padding:32px 0;color:var(--mut);font-size:13px;text-align:center;margin-top:56px}
+@media(max-width:640px){.hero h1{font-size:2.2rem}.proj h1{font-size:1.9rem}}
+</style></head><body>
+<header><div class="wrap"><a class="brand" href="index.html">Daniel Daymude<span>.</span></a>
+<nav><a href="index.html#projects">Projects</a><a href="resume.html">Résumé</a><a href="mailto:ddaymude.ai@gmail.com">Contact</a></nav>
+</div></header>
+<main class="wrap">
+  <article class="proj">
+    <a class="back" href="../index.html">← All projects</a>
+    <h1>Muse Prototypes</h1>
+    <div class="meta">🤠 Online</div>
+    <p class="lede">TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.</p>
+    <div class="cover-lg"><div class="glyph">🤠</div></div>
+    <h2>Overview</h2>
+    <p class="body">Muse Prototypes is one of the systems in my AI portfolio. TrackMyGold Frontier — western town, gold mine, saloon &amp; forge. Find Goldie, accept quests, explore the realm.</p>
+    <h2>Highlights</h2>
+    <ul><li>TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.</li><li>Find Goldie, accept quests, explore the realm.</li></ul>
+    
+    
+    
+    
+    <div class="cta-band">
+      <h2>Want this built for your business?</h2>
+      <p>I design, ship, and hand off systems like this.</p>
+      <a class="btn" href="mailto:ddaymude.ai@gmail.com">Get in touch</a>
+    </div>
+  </article>
+</main>
+<footer><div class="wrap">© 2026 Daniel Daymude · ddaymude.ai@gmail.com · updated 2026-10-15</div></footer>
+</body></html>

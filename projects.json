@@ -6,7 +6,11 @@
     "contactEmail": "ddaymude.ai@gmail.com",
     "resumeSource": "Daniel Daymude Resume.pdf",
     "summary": "Business-finance operator turned AI systems builder. I design and ship tracking systems, custom calculators, automations, and multi-agent AI platforms that turn messy operations into clean, forecastable numbers.",
-    "incomeGoal": { "annualUsd": 100000, "monthlyUsd": 8334, "preference": "passive-first" },
+    "incomeGoal": {
+      "annualUsd": 100000,
+      "monthlyUsd": 8334,
+      "preference": "passive-first"
+    },
     "links": {
       "github": "",
       "devto": "",
@@ -18,10 +22,36 @@
     }
   },
   "skills": {
-    "finance_ops": ["Financial Data Review", "Forecasting & Pricing Models", "Custom Calculators", "Spreadsheet Reporting", "Process & Compliance Documentation"],
-    "ai_engineering": ["Multi-Agent Orchestration", "LLM Cost Optimization (Token Killers)", "Local LLM Deployment (Ollama / LM Studio)", "Prompt & Context Engineering", "RAG & Knowledge Graphs"],
-    "product": ["Dashboard Development", "Workflow Automation", "Content Pipelines", "Realtime Data Viz", "API Integration"],
-    "tools": ["Hermes Agent", "Node.js", "Python", "ComfyUI", "Obsidian", "Tailscale", "Excel"]
+    "finance_ops": [
+      "Financial Data Review",
+      "Forecasting & Pricing Models",
+      "Custom Calculators",
+      "Spreadsheet Reporting",
+      "Process & Compliance Documentation"
+    ],
+    "ai_engineering": [
+      "Multi-Agent Orchestration",
+      "LLM Cost Optimization (Token Killers)",
+      "Local LLM Deployment (Ollama / LM Studio)",
+      "Prompt & Context Engineering",
+      "RAG & Knowledge Graphs"
+    ],
+    "product": [
+      "Dashboard Development",
+      "Workflow Automation",
+      "Content Pipelines",
+      "Realtime Data Viz",
+      "API Integration"
+    ],
+    "tools": [
+      "Hermes Agent",
+      "Node.js",
+      "Python",
+      "ComfyUI",
+      "Obsidian",
+      "Tailscale",
+      "Excel"
+    ]
   },
   "projects": [
     {
@@ -32,7 +62,12 @@
       "status": "Live (internal)",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["Hermes Agent", "Node.js", "SQLite", "Tailscale"],
+      "stack": [
+        "Hermes Agent",
+        "Node.js",
+        "SQLite",
+        "Tailscale"
+      ],
       "writeup": "Sport is the operating system for a portfolio of AI ventures. It runs a hierarchy of agents — an executive coordinator, venture CEOs, and specialists — over a shared kanban/task bus, with approval gates on anything that leaves the machine. Built to remove the human bottleneck from repetitive operations: monitoring, research, drafting, and reporting all run as scheduled agent jobs.",
       "highlights": [
         "Multi-agent orchestration with role hierarchy and task routing",
@@ -50,7 +85,12 @@
       "status": "Live",
       "aiDoable": false,
       "publicSafe": true,
-      "stack": ["Node.js", "YouTube API", "Instagram API", "SEO tooling"],
+      "stack": [
+        "Node.js",
+        "YouTube API",
+        "Instagram API",
+        "SEO tooling"
+      ],
       "writeup": "Track My Gold is a content-operation dashboard: it surfaces video performance, manages an approval queue for comments and engagement, tracks affiliate revenue, and runs SEO checks — all in one panel. It shows how I turn a creator workflow into a measurable, automatable pipeline rather than a pile of spreadsheets.",
       "highlights": [
         "Unified metrics across YouTube, Instagram, and affiliate channels",
@@ -68,7 +108,11 @@
       "status": "Live",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["Node.js", "LLM drafting", "Buffer API"],
+      "stack": [
+        "Node.js",
+        "LLM drafting",
+        "Buffer API"
+      ],
       "writeup": "Content Autopilot generates draft posts, routes them through a human review step, and publishes approved content automatically. It's a clean example of human-in-the-loop automation: the machine does the volume, the human keeps the judgment.",
       "highlights": [
         "AI-drafted posts with review/edit/redo controls",
@@ -86,7 +130,11 @@
       "status": "Live (consulting offer)",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["LLM APIs", "Local LLMs (Ollama/LM Studio)", "Prompt engineering"],
+      "stack": [
+        "LLM APIs",
+        "Local LLMs (Ollama/LM Studio)",
+        "Prompt engineering"
+      ],
       "writeup": "Token Killers is an audit-and-rebuild service for teams bleeding money on AI APIs. It combines prompt/context compression, model routing, caching, and local-model offload — then proves the savings with a before/after calculator. The differentiator is that I run the same stack on my own hardware, so the claims are verifiable, not theoretical.",
       "highlights": [
         "Interactive savings calculator (public lead magnet)",
@@ -104,7 +152,11 @@
       "status": "Live",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["PWA", "SSE streaming", "Service workers"],
+      "stack": [
+        "PWA",
+        "SSE streaming",
+        "Service workers"
+      ],
       "writeup": "Hermes Vision puts a live AI agent session on your phone or smart glasses: pick up a session, choose a model, and stream replies in real time. The interesting engineering is the realtime streaming layer and the wearable-first UI (grid navigation, focus modes, wheel/swipe input).",
       "highlights": [
         "Server-sent-event streaming of agent replies",
@@ -122,7 +174,11 @@
       "status": "Live (prototype)",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["WebGL/Three.js", "SSE chat", "Node.js"],
+      "stack": [
+        "WebGL/Three.js",
+        "SSE chat",
+        "Node.js"
+      ],
       "writeup": "Hermes Worlds is a series of explorable 3D scenes (a western frontier town, a gold mine, a saloon) populated by AI characters you can converse with and take quests from. It demonstrates realtime agent chat inside a game loop — the same named-SSE event stream that powers the other clients.",
       "highlights": [
         "Interactive 3D environments with AI NPCs",
@@ -140,7 +196,11 @@
       "status": "Live",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["Node.js", "LLM", "Media processing"],
+      "stack": [
+        "Node.js",
+        "LLM",
+        "Media processing"
+      ],
       "writeup": "Autolisting turns raw property video and a few fields into a polished, publish-ready listing. It runs a visible 10-step pipeline so the user can see exactly where the machine is and step in when needed — automation with transparency.",
       "highlights": [
         "Video upload → structured listing",
@@ -158,7 +218,11 @@
       "status": "Live",
       "aiDoable": false,
       "publicSafe": true,
-      "stack": ["Python", "Node.js", "WebGL"],
+      "stack": [
+        "Python",
+        "Node.js",
+        "WebGL"
+      ],
       "writeup": "Obsidian Brain renders a personal knowledge base as an interactive 3D graph, regenerating from the vault so it's always current. It's a study in turning unstructured notes into navigable structure — the same skill behind the finance tracking systems.",
       "highlights": [
         "Live regeneration from source notes",
@@ -176,7 +240,11 @@
       "status": "Live",
       "aiDoable": false,
       "publicSafe": true,
-      "stack": ["Node.js", "SQLite", "Web search refresh"],
+      "stack": [
+        "Node.js",
+        "SQLite",
+        "Web search refresh"
+      ],
       "writeup": "A net-worth ledger that aggregates assets and liabilities into a single live number, with on-demand refresh. It's the same 'clean numbers from messy inputs' discipline I used managing commissions and financial reporting earlier in my career — now automated.",
       "highlights": [
         "Aggregated live net-worth total",
@@ -194,7 +262,10 @@
       "status": "Live",
       "aiDoable": false,
       "publicSafe": true,
-      "stack": ["Node.js", "Camera API"],
+      "stack": [
+        "Node.js",
+        "Camera API"
+      ],
       "writeup": "A dashboard that connects to an Insta360 X4 for live view and control from the desktop. Small, practical hardware-integration work — bridging a device API into a clean web UI.",
       "highlights": [
         "Live camera preview in the browser",
@@ -212,7 +283,10 @@
       "status": "Completed",
       "aiDoable": false,
       "publicSafe": true,
-      "stack": ["Agentic AI", "Systems design"],
+      "stack": [
+        "Agentic AI",
+        "Systems design"
+      ],
       "writeup": "Virginia Tech × Simplilearn's Applied Agentic AI program (11 modules: systems, design, and impact), applied directly to the real agent platform I run. Structured, current, and immediately put to work.",
       "highlights": [
         "11 modules covering agent systems, design, and impact",
@@ -229,12 +303,111 @@
       "status": "Building",
       "aiDoable": true,
       "publicSafe": true,
-      "stack": ["Node.js", "GitHub Pages", "Dev.to API", "Hashnode API"],
+      "stack": [
+        "Node.js",
+        "GitHub Pages",
+        "Dev.to API",
+        "Hashnode API"
+      ],
       "writeup": "The engine behind this portfolio: a project registry drives automatic write-ups, screenshots, and a self-updating résumé, then syndicates them across publishing platforms and feeds a scored job/client pipeline. If you're reading this, it's working.",
       "highlights": [
         "Registry-driven site generation",
         "Daily refresh + multi-platform syndication",
         "Résumé regenerated from real project data"
+      ],
+      "screenshots": [],
+      "video": ""
+    },
+    {
+      "slug": "cnbc-live-on-glasses",
+      "name": "CNBC Live on Glasses",
+      "tagline": "Watch CNBC live on Meta Ray-Ban Display glasses.",
+      "icon": "📺",
+      "status": "Live",
+      "aiDoable": false,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "CNBC Live on Glasses is one of the systems in my AI portfolio. Watch CNBC live on Meta Ray-Ban Display glasses.",
+      "highlights": [
+        "Watch CNBC live on Meta Ray-Ban Display glasses."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/cnbc/"
+    },
+    {
+      "slug": "gold-spot-explorer",
+      "name": "Gold Spot Explorer",
+      "tagline": "Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w",
+      "icon": "🗺️",
+      "status": "Free data",
+      "aiDoable": true,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "Gold Spot Explorer is one of the systems in my AI portfolio. Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source. Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in. A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline. Tells you whether ground is claimed, BLM, National Forest, state or private — and shades the public land on every basemap and at every zoom, in a custom overlay where green means federal ground you can generally stake a claim on and red means federal ground closed to mineral entry, so you know at a glance whether you may mine before you drive out. Includes a free AI guide that runs on this machine — ask it about the ground on screen and it points the map at its answer. Scores 0–100, walkable target zones, satellite + terrain overlay, GPX export. Free public data.",
+      "highlights": [
+        "Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source.",
+        "Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in.",
+        "A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/goldmap/"
+    },
+    {
+      "slug": "ai-consulting",
+      "name": "AI Consulting",
+      "tagline": "AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.",
+      "icon": "🤖",
+      "status": "Live",
+      "aiDoable": true,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "AI Consulting is one of the systems in my AI portfolio. AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.",
+      "highlights": [
+        "AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/ai",
+      "note": "Dashboard shows private data — listed text-only, no screenshot."
+    },
+    {
+      "slug": "openclaw",
+      "name": "OpenClaw",
+      "tagline": "OpenClaw gateway — AI agent orchestration and tools.",
+      "icon": "🦅",
+      "status": "Live",
+      "aiDoable": true,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "OpenClaw is one of the systems in my AI portfolio. OpenClaw gateway — AI agent orchestration and tools.",
+      "highlights": [
+        "OpenClaw gateway — AI agent orchestration and tools."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/openclaw",
+      "note": "Dashboard shows private data — listed text-only, no screenshot."
+    },
+    {
+      "slug": "muse-prototypes",
+      "name": "Muse Prototypes",
+      "tagline": "TrackMyGold Frontier — western town, gold mine, saloon & forge.",
+      "icon": "🤠",
+      "status": "Online",
+      "aiDoable": false,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "Muse Prototypes is one of the systems in my AI portfolio. TrackMyGold Frontier — western town, gold mine, saloon & forge. Find Goldie, accept quests, explore the realm.",
+      "highlights": [
+        "TrackMyGold Frontier — western town, gold mine, saloon & forge.",
+        "Find Goldie, accept quests, explore the realm."
       ],
       "screenshots": [],
       "video": ""
