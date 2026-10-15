@@ -2,3 +2,6 @@
 refresh.log
 node_modules/
 .video-cache/
+
+__pycache__/
+*.pyc
