@@ -6,6 +6,6 @@
   "scripts": {
     "build": "node build.js",
     "test": "node --test test/site.test.js",
-    "lint": "node -c build.js && node -c syndicate.js && node -c discover.js"
+    "lint": "node -c build.js && node -c syndicate.js && node -c discover.js && node -c publish-dashboard.js && node -c publish-run.js"
   }
 }
