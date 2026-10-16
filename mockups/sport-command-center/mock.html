@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1120;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+h1{font-size:15px;padding:16px 18px;letter-spacing:.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+.card{background:#121a2e;border:1px solid #1e2a44;border-radius:12px;padding:14px}
+.card h3{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#64748b;margin:0 0 10px}
+.row{display:flex;justify-content:space-between;font-size:12px;margin:5px 0}
+.row b{color:#e2e8f0}
+.green{color:#34d399}.red{color:#f87171}.gray{color:#64748b}
+.bar{height:6px;border-radius:6px;background:#1e293b;margin-top:6px;overflow:hidden}
+.bar>i{display:block;height:100%;background:#3b82f6}
+.agent{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:12px}
+.dot{width:8px;height:8px;background:#22c5 5e;border-radius:50%}
+</style></head><body>
+<h1>Sport — Multi-Agent AI Operations · DEMO PANEL (Sample Data)</h1>
+<div class="wrap">
+  <div style="display:grid;gap:14px">
+    <div class="card">
+      <h3>Kanban Board</h3>
+      <div class="row"><span>Status</span><b class="green">Healthy · demo run</b></div>
+      <div class="row"><span>Boards</span><b>4</b></div>
+      <div class="row"><span>Open tasks</span><b>23</b></div>
+      <div class="row"><span>Queued for dispatcher</span><b>3</b></div>
+      <div class="bar"><i style="width:94%"></i></div>
+    </div>
+    <div class="card">
+      <h3>Agent Roles</h3>
+      <div class="agent"><span><span class="dot" style="background:#8b5cf6"></span>Trio-1 · Executor</span><b class="green">ONLINE</b></div>
+      <div class="agent"><span><span class="dot" style="background:#f59e0b"></span>Deputy-1 · Coordinator</span><b class="green">ONLINE</b></div>
+      <div class="agent"><span><span class="dot" style="background:#22c55e"></span>Runner-1</span><b class="green">IDLE</b></div>
+    </div>
+  </div>
+  <div style="display:grid;gap:14px">
+    <div class="card">
+      <h3>Task Queue (Sample)</h3>
+      <div class="row"><span>Research · SEO</span><b>Running 12%</b><div class="bar"><i style="width:12%"></i></div></div>
+      <div class="row"><span>Draft reply</span><b>Queued 28%</b><div class="bar"><i style="width:28%"></i></div></div>
+      <div class="row"><span>Approve payout</span><b class="red">Awaiting sign-off</b></div>
+    </div>
+    <div class="card">
+      <h3>Model Slot (demo)</h3>
+      <div class="row"><span>Runtime</span><b>hermes-v0.3</b></div>
+      <div class="row"><span>Cost period</span><b>$0.00 sim</b></div>
+      <div class="row"><span>State</span><b class="gray">test env</b></div>
+    </div>
+  </div>
+</div>
+</body></html>

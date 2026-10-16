@@ -1,17 +1,95 @@
 {
+  "updated": "2026-10-16 21:14:00",
   "posts": {
+    "sport-command-center": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "smart-home-hub": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "track-my-gold": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "content-autopilot": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "token-killers": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "hermes-vision": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "hermes-worlds": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "autolisting": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "obsidian-brain": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "net-worth-ledger": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "insta360-x4": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "agentic-ai-course": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "project-showcase-engine": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
     "cnbc-live-on-glasses": {
+      "blogger": "pending",
+      "devto": "pending",
       "github": "pending"
     },
     "gold-spot-explorer": {
-      "blogger": "pending"
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
     },
     "ai-consulting": {
+      "blogger": "pending",
+      "devto": "pending",
       "github": "pending"
     },
     "openclaw": {
-      "devto": "pending"
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
+    },
+    "muse-prototypes": {
+      "blogger": "pending",
+      "devto": "pending",
+      "github": "pending"
     }
-  },
-  "updated": "2026-10-16 19:45:14"
+  }
 }

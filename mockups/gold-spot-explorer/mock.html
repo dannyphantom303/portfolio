@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050810;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+h1{font-size:15px;padding:16px 18px;letter-spacing:-.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.map{background:#0b1220;border:1px solid #1c2a44;border-radius:14px;padding:14px;min-height:260px;position:relative;overflow:hidden}
+.crack{position:absolute;border-top:2px dashed #44a3f3;border-left:2px dashed #44a3f3;background:rgba(68,163,243,.08)}
+.score{position:absolute;font-weight:700;font-size:12px;color:#34d399}
+.panel{background:#111a2a;border:1px solid #1c2a44;border-radius:14px;padding:16px}
+.panel .h{font-size:11px;color:#64748b;letter-spacing:1px;margin-bottom:6px}
+.rank{display:flex;justify-content:space-between;font-size:12px;padding:7px 0;border-top:1px solid #1c2a44}
+.rank b{color:#e2e8f0}
+</style></head><body>
+<h1>Gold Spot Explorer · DEMO PANEL (Sample Data)</h1>
+<div class="wrap">
+  <div class="map">
+    <div class="crack" style="top:40px;left:60px;width:120px;height:3px;transform:rotate(12deg)"></div>
+    <div class="crack" style="top:200px;left:240px;width:90px;height:3px;transform:rotate(-8deg)"></div>
+    <div class="crack" style="top:70px;left:380px;width:160px;height:3px;transform:rotate(2deg)"></div>
+    <div class="score" style="top:6px;left:70px">score 82</div>
+    <div class="score" style="top:12px;left:265px;color:#fbbf24">score 64</div>
+    <div class="score" style="top:40px;left:400px;color:#34d399">public</div>
+    <div style="position:absolute;bottom:6px;right:8px;font-size:10px;color:#64748b">USGS bare-earth LiDAR · 3D mesh on demand</div>
+  </div>
+  <div class="panel">
+    <div class="h">TOP SOURCES (ranked vs. historical ground)</div>
+    <div class="rank"><span>Ravine A · creek bed</span><b>82 · public LB</b></div>
+    <div class="rank"><span>Old dig site</span><b>64 · National Forest</b></div>
+    <div class="rank"><span>West bench</span><b>51 · claim</b></div>
+    <div style="font-size:11px;color:#64748b;margin-top:8px">GPX export · satellite overlay</div>
+  </div>
+</div>
+</body></html>

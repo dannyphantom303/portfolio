@@ -366,7 +366,7 @@
     {
       "slug": "gold-spot-explorer",
       "name": "Gold Spot Explorer",
-      "tagline": "Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w",
+      "tagline": "Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source.",
       "icon": "🗺️",
       "status": "Free data",
       "aiDoable": true,

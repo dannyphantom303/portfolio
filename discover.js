@@ -68,6 +68,19 @@ function parseCards(html) {
   return out;
 }
 
+// Taglines appear on the landing cards and inside every syndicated post. A hard
+// 160-char slice cut sentences mid-word (gold-spot-explorer shipped as
+// "...and ravine beds and score w"), so cap at 200 but cut on a word boundary
+// and mark the elision instead of guillotining the word.
+const TAGLINE_MAX = 200;
+function shortTagline(s) {
+  const t = (s || '').trim();
+  if (t.length <= TAGLINE_MAX) return t;
+  const cut = t.slice(0, TAGLINE_MAX);
+  const sp = cut.lastIndexOf(' ');
+  return (sp > 80 ? cut.slice(0, sp) : cut).replace(/[\s,;:—–-]+$/, '') + '…';
+}
+
 function main() {
   const reg = JSON.parse(fs.readFileSync(REG_PATH, 'utf8'));
   const existingSlugs = new Set(reg.projects.map(p => p.slug));
@@ -83,7 +96,7 @@ function main() {
     const entry = {
       slug,
       name: c.name,
-      tagline: sentences[0] ? sentences[0].slice(0, 160) : c.name,
+      tagline: sentences[0] ? shortTagline(sentences[0]) : c.name,
       icon: c.icon,
       status: c.status || 'Live',
       aiDoable: /\bai\b|agent|automat|llm/i.test(`${c.name} ${c.desc}`),

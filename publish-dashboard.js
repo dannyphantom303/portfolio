@@ -14,6 +14,8 @@
 // Run:  node publish-dashboard.js      (normally invoked by refresh.sh)
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
+const { execFileSync } = require('child_process');
 
 const ROOT = __dirname;
 
@@ -44,14 +46,40 @@ const SITE = process.env.SITE_URL || 'https://sport.taila73942.ts.net/portfolio'
 
 // ── platform readiness (detected, never guessed) ────────────────────────────────────
 const hasDevto = !!process.env.DEVTO_API_KEY;
+
+// GitHub: a remote means the site + posts are deploying (deploy-github-pages.sh /
+// refresh.sh push the dist/ subtree to gh-pages).
+const gitRemote = (() => {
+  try { return execFileSync('git', ['remote', 'get-url', 'origin'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch (e) { return ''; }
+})();
+const pagesUrl = gitRemote && /github\.com[:/]([^/]+)\/([^/.]+)/.exec(gitRemote)
+  ? `https://${/github\.com[:/]([^/]+)\//.exec(gitRemote)[1]}.github.io/${/github\.com[:/][^/]+\/([^/.]+)/.exec(gitRemote)[1]}/`
+  : '';
+
+// Blogger: the API needs an OAuth access token; blogger-publish.js writes the
+// created drafts (all as drafts — nothing goes live on its own) to blogger-results.json.
+const bloggerResults = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(OUT_DIR, 'blogger-results.json'), 'utf8')); } catch (e) { return { posts: {} }; }
+})();
+const bloggerDrafts = Object.values(bloggerResults.posts || {}).filter(p => p.postId).length;
+const bloggerToken = (() => {
+  try {
+    const p = process.env.BLOGGER_TOKEN_FILE || path.join(os.homedir(), '.hermes', 'profiles', 'dev', 'blog', 'blogger-token.json');
+    return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch (e) { return null; }
+})();
+const hasBlogger = !!bloggerToken && !!(process.env.BLOGGER_ACCESS_TOKEN || bloggerToken.access_token);
+
 const platforms = {
   blogger: {
     label: 'Blogger',
     account: 'ddaymude.ai@gmail.com',
-    ready: false,
-    status: 'needs-login',
-    note: 'Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing).',
-    howto: 'Sign in to blogger.com as ddaymude.ai@gmail.com in the browser, then run: node publish-run.js --platforms blogger',
+    ready: hasBlogger,
+    status: hasBlogger ? (bloggerDrafts ? 'drafts-ready' : 'ready') : 'needs-login',
+    note: hasBlogger
+      ? `${bloggerDrafts}/18 drafts created as Blogger drafts on danieldaymude.blogspot.com (blog ${process.env.BLOGGER_BLOG_ID || '6379488244824949695'}). Review + publish each one in the Blogger editor.`
+      : 'Needs an OAuth access token (BLOGGER_ACCESS_TOKEN, or ~/.hermes/profiles/dev/blog/blogger-token.json).',
+    howto: 'node blogger-publish.js --live  (creates/refreshes the drafts — never publishes them)',
   },
   devto: {
     label: 'dev.to',
@@ -64,11 +92,13 @@ const platforms = {
   },
   github: {
     label: 'GitHub',
-    account: 'ddaymude.ai@gmail.com',
-    ready: false,
-    status: 'needs-auth',
-    note: 'No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists.',
-    howto: 'Create the repo as ddaymude.ai, then: git remote add origin <url> && bash deploy-github-pages.sh',
+    account: 'dannyphantom303',
+    ready: !!gitRemote,
+    status: gitRemote ? 'ready' : 'needs-auth',
+    note: gitRemote
+      ? `origin ${gitRemote}${pagesUrl ? ` — site live at ${pagesUrl}` : ''} (gh CLI authenticated; refresh.sh pushes the dist/ subtree to gh-pages daily).`
+      : 'No git remote. Run: gh repo create portfolio --public --source=. --remote=origin --push',
+    howto: 'bash deploy-github-pages.sh   (or refresh.sh, which does it every run)',
   },
 };
 

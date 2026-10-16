@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#070b14;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+h1{font-size:15px;padding:16px 18px;letter-spacing:-.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+.scene{background:linear-gradient(160deg,#1f2a3a,#0c1524);border-radius:14px;padding:16px;min-height:240px}
+.scene .h{font-size:11px;color:#64748b;letter-spacing:1px}
+.node{display:flex;gap:10px;align-items:flex-start;font-size:12px;margin:9px 0}
+.node .ico{font-size:18px}
+.chip{font-size:11px;background:#121c30;border:1px solid #1c2a44;border-radius:20px;padding:3px 10px;margin-top:8px}
+</style></head><body>
+<h1>Hermes Worlds &amp; Game — 3D AI Agent Playgrounds · DEMO PANEL (Mock Data)</h1>
+<div class="wrap">
+  <div class="scene">
+    <div class="h">WORLD · 3D (Three.js)</div>
+    <div class="node"><span class="ico">🤠</span><div><b>Goldie</b><br>The realm host.<br>3 quests live.</div></div>
+    <div class="node"><span class="ico">🪙</span><div><b>Old Mine</b><br>Quarry zone · gold score 8/10</div></div>
+  </div>
+  <div class="scene">
+    <div class="h">WORLD · 3D</div>
+    <div class="node"><span class="ico">🏚️</span><div><b>Frontier Town</b><br>Dwellings: 14 · traders online</div></div>
+    <div class="node"><span class="ico">🤠</span><div><b>Saloon &amp; Forge</b><br>Scribe ready</div></div>
+  </div>
+  <div class="scene">
+    <div class="h">CHAT · named SSE</div>
+    <div class="node"><span class="ico">💬</span><div><b>You → Goldie</b><br>“Find a gold source on the map.”</div></div>
+    <div class="node"><span class="ico">💬</span><div><b>Goldie → You</b><br>“Check the ravine at #34. Claimable.”</div></div>
+    <div class="chip">realtime dialogue · streaming</div>
+  </div>
+</div>
+</body></html>

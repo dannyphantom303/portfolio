@@ -1,0 +1,111 @@
+{
+  "posts": {
+    "sport-command-center": {
+      "postId": "6432375665139586318",
+      "title": "Building Sport — Multi-Agent AI Operations System: A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/6432375665139586318",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "smart-home-hub": {
+      "postId": "52546650911618731",
+      "title": "Building Smart Home Hub — Home Assistant on a Raspberry Pi: Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/52546650911618731",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "track-my-gold": {
+      "postId": "3186882185116295605",
+      "title": "Building Track My Gold: A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/3186882185116295605",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "content-autopilot": {
+      "postId": "1127088944285100249",
+      "title": "Building Content Autopilot: An AI content pipeline: draft, review, approve, and publish on a schedule.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/1127088944285100249",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "token-killers": {
+      "postId": "8504994569040036265",
+      "title": "Building Token Killers — LLM Cost Optimization: A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/8504994569040036265",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "hermes-vision": {
+      "postId": "316235701774564946",
+      "title": "Building Hermes Vision — AI on Phone & Glasses: A mobile/wearable client that connects a device to a running AI agent session.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/316235701774564946",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "hermes-worlds": {
+      "postId": "4798882649252461327",
+      "title": "Building Hermes Worlds & Game — 3D AI Agent Playgrounds: Browser 3D worlds where you walk up to AI characters and talk to them.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/4798882649252461327",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "autolisting": {
+      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+    },
+    "obsidian-brain": {
+      "postId": "1140082833818721520",
+      "title": "Building Obsidian Brain — Knowledge Graph Dashboard: A live 3D visualization of a personal knowledge vault.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/1140082833818721520",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "net-worth-ledger": {
+      "postId": "2544810466239849706",
+      "title": "Building Net Worth Ledger: A live personal-finance tracker with web-refreshable balances.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/2544810466239849706",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "insta360-x4": {
+      "postId": "2129925173948631849",
+      "title": "Building Insta360 X4 Control Dashboard: A local control + live-view panel for a 360 camera.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/2129925173948631849",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "agentic-ai-course": {
+      "postId": "3415345338006946215",
+      "title": "Building Applied Agentic AI — Course Project: A completed 11-module program on agentic AI systems, design, and impact.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/3415345338006946215",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "project-showcase-engine": {
+      "postId": "3050935208222458927",
+      "title": "Building Project Showcase & Income Engine: This site: every project auto-turned into a published write-up, résumé update, and income channel.",
+      "status": "DRAFT",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/3050935208222458927",
+      "url": "https://danieldaymude.blogspot.com/"
+    },
+    "cnbc-live-on-glasses": {
+      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+    },
+    "gold-spot-explorer": {
+      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+    },
+    "ai-consulting": {
+      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+    },
+    "openclaw": {
+      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+    },
+    "muse-prototypes": {
+      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+    }
+  },
+  "updated": "2026-10-16 21:19:39",
+  "blog": {
+    "id": "6379488244824949695",
+    "url": "https://danieldaymude.blogspot.com"
+  }
+}

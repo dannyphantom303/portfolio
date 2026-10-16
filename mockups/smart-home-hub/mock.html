@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0a0f1a;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+h1{font-size:15px;padding:16px 18px;letter-spacing:.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px}
+.card{background:#111a2a;border:1px solid #1c2a44;border-radius:14px;padding:16px}
+.tile{aspect-ratio:16/9;background:linear-gradient(135deg,#1e293b,#0f172a);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-bottom:12px}
+.tile .i{font-size:30px}
+.tile .n{font-size:18px;font-weight:700;color:#f0f9ff}
+.tile .s{font-size:11px;color:#64748b}
+.live{color:#34d399;font-weight:600;font-size:11px;letter-spacing:1px}
+.dur{color:#fbbf24;font-weight:700}
+</style></head><body>
+<h1>Smart Home Hub — Home Assistant on Raspberry Pi · DEMO PANEL (Mock Data)</h1>
+<div class="wrap">
+  <div class="card">
+    <div class="live">● LIVE PREVIEW (synthetic)</div>
+    <div class="tile"><span class="i">☂️</span><span class="n">24.7°C</span><span class="s">Living room thermostat</span></div>
+    <div class="tile"><span class="i">💡</span><span class="n">80%</span><span class="s">Living room lights</span></div>
+    <div class="tile"><span class="i">🔒</span><span class="n">LOCKED</span><span class="s">Front door</span></div>
+  </div>
+  <div class="card">
+    <h3 style="margin:0 0 10px;font-size:12px;color:#64748b">Automation History</h3>
+    <div style="font-size:12px;margin-bottom:8px;color:#64748b"><span class="live">ACTIVE</span> Morning weather briefing · wrote automation.yaml · reloaded</div>
+    <div style="font-size:12px;margin-bottom:8px">Shopping-list reminder → deployed · OK</div>
+    <div style="font-size:12px">Media watchdog → active</div>
+  </div>
+  <div class="card">
+    <h3 style="margin:0 0 10px;font-size:12px;color:#64748b">Backup / Mirror</h3>
+    <div class="row" style="margin:0"><span>Last mirror sync</span><b class="green">2h ago</b></div>
+    <div class="row" style="margin:0"><span>Config size</span><b>142 KB</b></div>
+    <div class="row" style="margin:0"><span>Restore drill</span><b class="green">Passed</b></div>
+  </div>
+</div>
+</body></html>

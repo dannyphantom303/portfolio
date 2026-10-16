@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0a0f1a;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+h1{font-size:15px;padding:16px 18px;letter-spacing:-.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+.up{display:grid;gap:10px}
+.step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px dashed #1c2a44;font-size:12px}
+.step .no{background:#2563eb;color:#fff;font-weight:700;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;flex:0 0 22px}
+.step b{color:#e2e8f0}
+.step .d{color:#64748b}
+.line{color:#34d399}
+.card{background:#111a2a;border:1px solid #1c2a44;border-radius:14px;padding:16px}
+</style></head><body>
+<h1>Autolisting — AI Listing Generator · DEMO PIPELINE (Sample Data)</h1>
+<div class="wrap">
+  <div class="card">
+    <div style="font-weight:700;margin-bottom:8px">Pipeline step 4 / 10</div>
+    <div class="step"><div class="no">01</div><div><b>Credential</b><div class="d">ingest.mp4 · 19s</div><span class="line">done</span></div></div>
+    <div class="step"><div class="no">02</div><div><b>Transcribe</b><div class="d">video, 19s</div><span class="line">done</span></div></div>
+    <div class="step"><div class="no">03</div><div><b>Extract fields</b><div class="d">address, price, beds/baths</div><span class="line">done</span></div></div>
+    <div class="step"><div class="no">04</div><div><b>Draft listing</b><div class="d">7 drafts, ranked</div><span class="line" style="color:#fbbf24">running</span></div></div>
+    <div class="step"><div class="no">05</div><div><b>Format + images</b><div class="d">hero, gallery, headline</div><span class="d">queued</span></div></div>
+    <div class="step"><div class="no">06</div><div><b>Compliance check</b><div class="d">flag prohibited terms</div><span class="d">queued</span></div></div>
+  </div>
+  <div class="card">
+    <h3 style="margin:0 0 10px;font-size:12px;color:#64748b">Output preview</h3>
+    <div style="font-size:12px"><b>Riverside 2BR</b><div class="d">Cozy two-bedroom near the creek... · $0 (demo)</div></div>
+    <div style="font-size:12px;margin-top:8px"><span class="line">status: publicSafe</span></div>
+  </div>
+</div>
+</body></html>

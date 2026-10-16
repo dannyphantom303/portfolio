@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#081020;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+h1{font-size:15px;padding:16px 18px;letter-spacing:-.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.left{display:grid;gap:10px}
+.bar-item{display:flex;align-items:center;gap:12px;font-size:12px;padding:9px 0;border-top:1px dashed #1c2a44}
+.bar-item .t{color:#9fb3ff}
+.barm{background:#1a1240;border:1px solid #2a1f6a;border-radius:6px;height:26px;position:relative}
+.barm>i{display:block;height:100%;background:linear-gradient(90deg,#4f46e5,#0ea5e9);border-radius:6px}
+.state{color:#34d399}
+.card{background:#111a2a;border:1px solid #1c2a44;border-radius:14px;padding:16px}
+.kv{font-size:12px;margin:9px 0;display:flex;justify-content:space-between}
+.kv span{color:#64748b}
+.kv b{color:#e2e8f0}
+</style></head><body>
+<h1>OpenClaw — Agent Orchestration &amp; Tools · DEMO PANEL (Mock Data)</h1>
+<div class="wrap">
+  <div class="left">
+    <div style="font-size:11px;color:#64748b;letter-spacing:1px">AVAILABLE TOOLS</div>
+    <div class="bar-item"><span class="t">run_detection.py</span><div class="barm"><i style="width:100%"></i></div></div>
+    <div class="bar-item"><span class="t">fetch_url</span><div class="barm"><i style="width:78%"></i></div></div>
+    <div class="bar-item"><span class="t">read_file</span><div class="barm"><i style="width:70%"></i></div></div>
+    <div class="bar-item"><span class="t">search_web</span><div class="barm"><i style="width:55%"></i></div></div>
+    <div class="bar-item"><span class="t">post_comment</span><div class="barm"><i style="width:45%"></i></div></div>
+    <div style="font-size:11px;color:#64748b;letter-spacing:1px">ACTIVE GATEWAYS</div>
+    <div class="bar-item"><span class="t">local gateway</span><span class="state">online</span></div>
+    <div class="bar-item"><span class="t">cloud relay</span><span class="state">idle</span></div>
+  </div>
+  <div class="card">
+    <div style="font-weight:700;margin-bottom:10px">Router status</div>
+    <div class="kv"><span>engine</span><b>v0.3</b></div>
+    <div class="kv"><span>mode</span><b>demo</b></div>
+    <div class="kv"><span>session</span><b>#mock-01</b></div>
+    <div class="kv"><span>tokens in</span><b class="state">0</b></div>
+    <div class="kv"><span>queue depth</span><b>0</b></div>
+  </div>
+</div>
+</body></html>

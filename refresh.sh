@@ -24,6 +24,10 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   fi
   if git remote get-url origin >/dev/null 2>&1; then
     git push origin HEAD >> "$LOG" 2>&1 || echo "[$(date '+%F %T')] push failed" >> "$LOG"
+    # GitHub Pages serves the free public copy (https://<user>.github.io/portfolio/)
+    # from the gh-pages branch = the dist/ subtree, so push it too or Pages goes stale.
+    git subtree push --prefix dist origin gh-pages >> "$LOG" 2>&1 \
+      || echo "[$(date '+%F %T')] gh-pages push failed" >> "$LOG"
   else
     echo "[$(date '+%F %T')] no origin remote yet — committed locally only" >> "$LOG"
   fi

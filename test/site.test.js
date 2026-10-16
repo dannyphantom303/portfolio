@@ -205,3 +205,34 @@ test('detail: authored content is safe to publish (no secrets or internal URLs)'
   const raw = fs.readFileSync(path.join(ROOT, 'src', 'projects-detail.json'), 'utf8');
   assert.doesNotMatch(raw, /discord\.com\/api\/webhooks|hermes-command-token|localhost:8787|token=/, 'no secrets in authored content');
 });
+// ── Blogger syndication (blogger-publish.js) ───────────────────────────────────────
+// The posts go out to a real blog, so the converter and the draft-only rule get
+// regression tests: a mangled post is visible to the public, and a post that
+// published itself would break the "nothing publishes without Dan" house rule.
+const blogger = require(path.join(ROOT, 'blogger-publish.js'));
+
+test('blogger: every draft converts to well-formed post HTML', () => {
+  const pub = reg.projects.filter(p => p.publicSafe !== false);
+  for (const p of pub) {
+    const { title, html } = blogger.readDraft(p.slug);
+    assert.ok(title.length > 10, `${p.slug} needs a real post title`);
+    assert.equal((html.match(/<ul>/g) || []).length, (html.match(/<\/ul>/g) || []).length, `${p.slug} unbalanced <ul>`);
+    assert.match(html, /<a href="https:\/\/[^"]+">/, `${p.slug} must link a live URL`);
+    assert.match(html, new RegExp(`project/${p.slug}\\.html`), `${p.slug} must link its project page`);
+    assert.match(html, /<em>[\s\S]*<\/em>/, `${p.slug} missing the italic footer`);
+    assert.doesNotMatch(html, /\*\*|^#\s/m, `${p.slug} leaked raw markdown into the post`);
+    assert.doesNotMatch(html, /undefined|\[object Object\]/, `${p.slug} has an unrendered placeholder`);
+  }
+});
+
+test('blogger: converter emits the list opener before its items', () => {
+  const html = blogger.mdToHtml('## Highlights\n- one\n- two\n\n## Stack\nnode\n');
+  assert.match(html, /<ul>\s*<li>one<\/li>\s*<li>two<\/li>\s*<\/ul>/, 'list must open before its items');
+  assert.match(html, /<h3>Highlights<\/h3>/, '## maps to h3 (the post title carries the h1)');
+});
+
+test('blogger: publisher only ever creates drafts', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'blogger-publish.js'), 'utf8');
+  assert.match(src, /posts\?isDraft=true/, 'post creation must pass isDraft=true');
+  assert.doesNotMatch(src, /[?&]isDraft=false/, 'nothing may publish a live post');
+});
