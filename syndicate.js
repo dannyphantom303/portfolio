@@ -22,6 +22,15 @@ const projects = reg.projects.filter(p => p.publicSafe !== false);
 fs.mkdirSync(path.join(ROOT, 'dist', 'posts'), { recursive: true });
 
 function markdown(p) {
+  // Only emit sections that have content: an empty "## Stack" heading reads as a
+  // broken post on the blog (5 projects have no stack recorded yet).
+  const highlights = (p.highlights || []).filter(h => h && String(h).trim());
+  const stack = (p.stack || []).filter(s => s && String(s).trim());
+  const sections = [
+    highlights.length ? `## Highlights\n${highlights.map(h => `- ${h}`).join('\n')}` : '',
+    stack.length ? `## Stack\n${stack.join(', ')}` : '',
+    `## Live project\nSee the write-up, screenshots, and demo at ${SITE}/project/${p.slug}.html`,
+  ].filter(Boolean).join('\n\n');
   return `---
 title: "Building ${p.name}: ${p.tagline}"
 published: false
@@ -33,14 +42,7 @@ tags: ${JSON.stringify((p.stack || []).slice(0, 4).map(s => s.toLowerCase().repl
 
 ${p.writeup}
 
-## Highlights
-${(p.highlights || []).map(h => `- ${h}`).join('\n')}
-
-## Stack
-${(p.stack || []).join(', ')}
-
-## Live project
-See the write-up, screenshots, and demo at ${SITE}/project/${p.slug}.html
+${sections}
 
 ---
 *I build AI systems that turn messy operations into clean numbers. Need something like this?

@@ -50,7 +50,11 @@
       "url": "https://danieldaymude.blogspot.com/"
     },
     "autolisting": {
-      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "postId": "5399092927239940014",
+      "status": "DRAFT",
+      "via": "editor",
+      "url": "https://danieldaymude.blogspot.com/",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/5399092927239940014"
     },
     "obsidian-brain": {
       "postId": "1140082833818721520",
@@ -88,24 +92,57 @@
       "url": "https://danieldaymude.blogspot.com/"
     },
     "cnbc-live-on-glasses": {
-      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "postId": "6121554914202452996",
+      "status": "DRAFT",
+      "via": "editor",
+      "url": "https://danieldaymude.blogspot.com/",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/6121554914202452996"
     },
     "gold-spot-explorer": {
-      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "postId": "7616987405383239434",
+      "status": "DRAFT",
+      "via": "editor",
+      "url": "https://danieldaymude.blogspot.com/",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/7616987405383239434"
     },
     "ai-consulting": {
-      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "postId": "929876904650607255",
+      "status": "DRAFT",
+      "via": "editor",
+      "url": "https://danieldaymude.blogspot.com/",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/929876904650607255"
     },
     "openclaw": {
-      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "postId": "5862084000199435627",
+      "status": "DRAFT",
+      "via": "editor",
+      "url": "https://danieldaymude.blogspot.com/",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/5862084000199435627"
     },
     "muse-prototypes": {
-      "error": "403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The caller does not have permission\",\n    \"errors\": [\n      {\n        \"message\": \"The caller does not have permission\",\n        \"domain\": \"global\",\n        \"reason\": \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "postId": "8516080112000688611",
+      "status": "DRAFT",
+      "via": "editor",
+      "url": "https://danieldaymude.blogspot.com/",
+      "edit": "https://www.blogger.com/blog/post/edit/6379488244824949695/8516080112000688611"
     }
   },
-  "updated": "2026-10-16 21:19:39",
+  "updated": "2026-10-16 21:35:23",
   "blog": {
     "id": "6379488244824949695",
     "url": "https://danieldaymude.blogspot.com"
+  },
+  "blocked": {
+    "at": "2026-10-16T21:23:54",
+    "remaining": [
+      "autolisting",
+      "cnbc-live-on-glasses",
+      "gold-spot-explorer",
+      "ai-consulting",
+      "openclaw",
+      "muse-prototypes"
+    ],
+    "note": "API posts.insert blocked (403) after 12 drafts — remaining 6 created through the Blogger web editor.",
+    "resolved": "2026-10-16"
   }
 }

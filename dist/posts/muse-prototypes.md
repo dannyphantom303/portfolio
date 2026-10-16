@@ -13,9 +13,6 @@ Muse Prototypes is one of the systems in my AI portfolio. TrackMyGold Frontier â
 - TrackMyGold Frontier â€” western town, gold mine, saloon & forge.
 - Find Goldie, accept quests, explore the realm.
 
-## Stack
-
-
 ## Live project
 See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/muse-prototypes.html
 

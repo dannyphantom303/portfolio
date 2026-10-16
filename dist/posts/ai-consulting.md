@@ -12,9 +12,6 @@ AI Consulting is one of the systems in my AI portfolio. AI consulting project ma
 ## Highlights
 - AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.
 
-## Stack
-
-
 ## Live project
 See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/ai-consulting.html
 

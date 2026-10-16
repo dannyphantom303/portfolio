@@ -236,3 +236,14 @@ test('blogger: publisher only ever creates drafts', () => {
   assert.match(src, /posts\?isDraft=true/, 'post creation must pass isDraft=true');
   assert.doesNotMatch(src, /[?&]isDraft=false/, 'nothing may publish a live post');
 });
+
+test('posts: no empty sections reach the blog', () => {
+  const dir = path.join(ROOT, 'dist', 'posts');
+  for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.md'))) {
+    const md = fs.readFileSync(path.join(dir, f), 'utf8');
+    for (const sec of md.split(/^## /m).slice(1)) {
+      const [name, ...rest] = sec.split('\n');
+      assert.ok(rest.join('\n').trim().length > 0, `${f}: empty "${name.trim()}" section`);
+    }
+  }
+});

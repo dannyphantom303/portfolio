@@ -10,9 +10,30 @@ Below is exactly what is fully automatic, what needs a key, and what can only be
 | **GitHub Pages** | Yes | GitHub username (one-time login) | Hosts the free domain `https://<user>.github.io/portfolio/` |
 | **Dev.to** | Yes | Dev.to API key → https://dev.to/settings/extensions | `syndicate.js` posts automatically |
 | **Hashnode** | Yes | Personal access token → https://hashnode.com/settings/developer **and** publication id | GraphQL createDraft/publish |
+| **Blogger** | Yes | Google OAuth token (see below) | `blogger-publish.js` creates **drafts** on danieldaymude.blogspot.com — nothing publishes itself |
 | **Reddit** | Yes | A "script" OAuth app (client id/secret + your login) | r/SideProject, r/LocalLLaMA, r/goldprospecting |
 
 Put the keys in `/Users/dan/portfolio/.env` (see `.env.example`). The daily job will then publish.
+
+## Blogger — drafts only, and the API write block to expect
+
+`node blogger-publish.js`            → dry run: shows what would be created
+`node blogger-publish.js --live`     → creates/refreshes the drafts (never publishes)
+`node blogger-publish.js --live --max 5` → cap writes per run (default 5)
+
+Blog id `6379488244824949695` (danieldaymude.blogspot.com), token at
+`~/.hermes/profiles/dev/blog/blogger-token.json` (or `BLOGGER_ACCESS_TOKEN`).
+Every post goes up with `isDraft=true`, and the script skips any slug whose title already
+exists — Dan reviews and hits Publish himself.
+
+**Expect this to fail on a young blog.** Blogger's anti-spam blocks API post creation on a new
+blog: a burst of writes returns `429 rateLimitExceeded` and then a hard
+`403 "The caller does not have permission"` that lasts for days (reads, edits, deletes and the
+web editor keep working). Retrying extends it, so `blogger-publish.js` stops on the first 403 and
+records `blocked.remaining` in `publish/blogger-results.json`. When it happens, create the
+remaining drafts through the web editor (https://www.blogger.com/blog/posts/6379488244824949695):
+open the draft, set the title, paste the post HTML, save — the editor path is not blocked. Record
+the ids in `publish/blogger-results.json` with `"via": "editor"` so the script skips them next run.
 
 ## Not fully automatable (I'll prep the post; you click publish)
 

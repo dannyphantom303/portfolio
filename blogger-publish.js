@@ -27,6 +27,13 @@ const TOKEN_FILE = process.env.BLOGGER_TOKEN_FILE
   || path.join(os.homedir(), '.hermes', 'profiles', 'dev', 'blog', 'blogger-token.json');
 const BLOG_ID = process.env.BLOGGER_BLOG_ID || '6379488244824949695';   // danieldaymude.blogspot.com
 const BLOG_URL = process.env.BLOGGER_BLOG_URL || 'https://danieldaymude.blogspot.com';
+// Blogger's anti-spam throttles bursts of API-created posts hard (a 12-post burst
+// tripped a multi-day 403 block on 2026-10-16), so cap writes per run.
+const MAX_PER_RUN = (() => {
+  const i = process.argv.indexOf('--max');
+  const n = i > -1 ? parseInt(process.argv[i + 1], 10) : 5;
+  return Number.isFinite(n) && n > 0 ? n : 5;
+})();
 
 function token() {
   if (process.env.BLOGGER_ACCESS_TOKEN) return process.env.BLOGGER_ACCESS_TOKEN;
@@ -94,16 +101,19 @@ async function api(method, url, body) {
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
-// Blogger throttles the API on a fresh blog: a burst of post creations gets 429
-// (rateLimitExceeded) and then 403 forbidden once the per-user posting rate trips.
-// Both clear on their own, so every call backs off instead of giving up — a daily
-// run must be able to finish unattended.
+// Blogger's anti-spam blocks API post creation outright on a young blog: a burst
+// of writes gets 429 (rateLimitExceeded) and then a hard 403 "The caller does not
+// have permission" for days (reading/editing still work, the web editor still
+// works). So: 429 is retried, but the first 403 ends the run — retrying it only
+// keeps the block warm. See the card t_3a69f43e notes.
+class BloggerBlocked extends Error {}
 async function withRetry(fn, label) {
   let wait = 15000;
   for (let i = 0; ; i++) {
     try { return await fn(); }
     catch (e) {
-      if (i >= 8 || !/429|403|rateLimitExceeded|quota|forbidden|5\d\d/.test(e.message)) throw e;
+      if (/\b403\b|forbidden/i.test(e.message)) throw new BloggerBlocked(e.message);
+      if (i >= 4 || !/429|rateLimitExceeded|quota|5\d\d/.test(e.message)) throw e;
       console.log(`    ${label}: ${e.message.replace(/\s+/g, ' ').slice(0, 70)} — retry in ${wait / 1000}s`);
       await sleep(wait);
       wait = Math.min(wait * 2, 300000);
@@ -132,6 +142,7 @@ async function main() {
       skipped++; console.log(`  ${slug}: already on the blog — skipped`); continue;
     }
     if (!LIVE) { console.log(`  ${slug}: would create DRAFT "${title}" (${html.length} B html)`); continue; }
+    if (created >= MAX_PER_RUN) { console.log(`  ${slug}: per-run write cap (${MAX_PER_RUN}) reached — stopping (re-run to continue)`); break; }
     try {
       const post = await withRetry(() => api('POST', `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?isDraft=true`, { title, content: html }), slug);
       const edit = `https://www.blogger.com/blog/post/edit/${BLOG_ID}/${post.id}`;
@@ -141,6 +152,13 @@ async function main() {
       console.log(`  ${slug}: DRAFT created — ${edit}`);
       await sleep(2500);   // stay under the per-user API rate
     } catch (e) {
+      if (e instanceof BloggerBlocked) {
+        console.log(`  ${slug}: Blogger is refusing API post creation (403 forbidden) — stopping this run.`);
+        console.log('  → create the remaining drafts in the web editor (https://www.blogger.com/blog/posts/' + BLOG_ID + '),');
+        console.log('    or wait a few days: Blogger lifts the API write block on its own once posting looks human again.');
+        results.blocked = { at: new Date().toISOString().slice(0, 19), remaining: slugs.filter(s => !(results.posts[s] || {}).postId) };
+        break;
+      }
       console.log(`  ${slug}: FAIL ${e.message}`);
       results.posts[slug] = { error: e.message };
       fs.writeFileSync(RESULTS, JSON.stringify(results, null, 2) + '\n');
