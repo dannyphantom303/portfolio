@@ -1,95 +1,113 @@
 {
-  "updated": "2026-10-16 21:14:00",
   "posts": {
+    "ai-consulting": {
+      "github": "pending",
+      "blogger": "pending",
+      "devto": "draft",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/ai-consulting-the-commercial-half-of-the-portfolio-built-on-the-same-board-2eo-temp-slug-1023725 (dev.to draft — review, then hit Publish on dev.to)"
+    },
     "sport-command-center": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/sport-a-multi-agent-ai-operations-system-for-a-one-person-company-3kba-temp-slug-8139883 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "smart-home-hub": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/home-assistant-on-a-raspberry-pi-driven-by-plain-english-g8o-temp-slug-6679663 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "track-my-gold": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/track-my-gold-a-youtube-engagement-and-affiliate-dashboard-2a6i-temp-slug-5048751 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "content-autopilot": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/content-autopilot-draft-review-approve-publish-on-a-schedule-244h-temp-slug-8315740 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "token-killers": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/token-killers-cutting-ai-api-spend-without-cutting-quality-2a85-temp-slug-1383795 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "hermes-vision": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-vision-a-live-ai-agent-session-on-phone-and-glasses-484f-temp-slug-5516050 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "hermes-worlds": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-worlds-an-explorable-3d-frontier-where-the-agents-are-characters-5bc5-temp-slug-5700636 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "autolisting": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/autolisting-a-visible-ten-step-pipeline-that-turns-property-video-into-a-finished-listing-2e55-temp-slug-2048318 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "obsidian-brain": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/obsidian-brain-a-live-3d-graph-of-a-note-vault-built-without-a-single-model-call-2d2c-temp-slug-4921636 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "net-worth-ledger": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/net-worth-ledger-one-number-computed-from-entries-a-human-can-audit-5a43-temp-slug-77653 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "insta360-x4": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/insta360-x4-a-local-dashboard-for-a-360-camera-mounted-behind-a-path-prefix-1a1a-temp-slug-4895120 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "agentic-ai-course": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/applied-agentic-ai-what-survived-contact-with-a-real-agent-fleet-41ei-temp-slug-89796 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "project-showcase-engine": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/project-showcase-engine-the-daily-pipeline-that-generates-this-portfolio-506e-temp-slug-518112 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "cnbc-live-on-glasses": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/cnbc-live-on-the-meta-ray-ban-display-a-proxy-in-front-of-a-referer-gated-cdn-3952-temp-slug-9985471 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "gold-spot-explorer": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
-    },
-    "ai-consulting": {
-      "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/gold-spot-explorer-ranking-historical-gold-ground-against-bare-earth-lidar-j78-temp-slug-984874 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "openclaw": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/openclaw-a-local-agent-gateway-configured-in-one-auditable-file-1f62-temp-slug-5691914 (dev.to draft — review, then hit Publish on dev.to)"
     },
     "muse-prototypes": {
       "blogger": "pending",
-      "devto": "pending",
-      "github": "pending"
+      "devto": "draft",
+      "github": "pending",
+      "devto_note": "https://dev.to/dan_f3bcb7300e832d9d2f797/muse-prototypes-the-same-3d-world-packaged-to-be-opened-rather-than-deployed-2h94-temp-slug-7400802 (dev.to draft — review, then hit Publish on dev.to)"
     }
-  }
+  },
+  "updated": "2026-10-16 23:05:36"
 }

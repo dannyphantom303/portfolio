@@ -240,6 +240,7 @@ const html = `<!DOCTYPE html>
 .pchip .pval{font:600 10.5px/1 var(--font-mono);letter-spacing:.5px;padding:3px 6px;border-radius:6px;background:rgba(17,18,20,.06);color:var(--ink-400)}
 .pchip.approved .pval{background:rgba(77,255,163,.28);color:#0d5c35}
 .pchip.published .pval{background:var(--ink-900);color:var(--live)}
+.pchip.draft .pval{background:rgba(255,196,0,.24);color:#8a6100}
 .pchip.blocked .pval{background:rgba(255,95,95,.2);color:#a12626}
 .pdraft{margin-top:6px}
 .pdraft summary{cursor:pointer;font-size:12.5px;color:var(--ink-400);font-weight:600;padding:6px 0}
@@ -294,7 +295,7 @@ const html = `<!DOCTYPE html>
 window.__PUBLISH_TOKEN__ = window.__PUBLISH_TOKEN__ || null;
 const STATE_URL = '/publish/api/state';
 const APPROVE_URL = '/publish/api/approve';
-const ORDER = { pending: 'approved', approved: 'blocked', blocked: 'pending' };
+const ORDER = { pending: 'approved', approved: 'blocked', blocked: 'pending', draft: 'pending' };
 
 function setStatus(slug, platform, val) {
   const el = document.querySelector('.pchip[data-slug="' + slug + '"][data-platform="' + platform + '"]');

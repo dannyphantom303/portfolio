@@ -1,0 +1,315 @@
+{
+  "verified": "2026-10-16T23:07:06",
+  "account": "dan_f3bcb7300e832d9d2f797",
+  "total": 18,
+  "published": 0,
+  "fail": 0,
+  "posts": [
+    {
+      "slug": "sport-command-center",
+      "id": 4864855,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/sport-a-multi-agent-ai-operations-system-for-a-one-person-company-3kba-temp-slug-8139883",
+      "title": "Sport: a multi-agent AI operations system for a one-person company",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "aiagents",
+        "multiagentsystems",
+        "orchestration",
+        "sqlite"
+      ],
+      "bodyLen": 5708
+    },
+    {
+      "slug": "smart-home-hub",
+      "id": 4864856,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/home-assistant-on-a-raspberry-pi-driven-by-plain-english-g8o-temp-slug-6679663",
+      "title": "Home Assistant on a Raspberry Pi, driven by plain English",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "homeassistant",
+        "raspberrypi",
+        "smarthome",
+        "docker"
+      ],
+      "bodyLen": 5090
+    },
+    {
+      "slug": "track-my-gold",
+      "id": 4864851,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/track-my-gold-a-youtube-engagement-and-affiliate-dashboard-2a6i-temp-slug-5048751",
+      "title": "Track My Gold: a YouTube engagement and affiliate dashboard",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "youtube",
+        "contentoperations",
+        "seo",
+        "dashboard"
+      ],
+      "bodyLen": 4655
+    },
+    {
+      "slug": "content-autopilot",
+      "id": 4864857,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/content-autopilot-draft-review-approve-publish-on-a-schedule-244h-temp-slug-8315740",
+      "title": "Content Autopilot: draft, review, approve, publish on a schedule",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "contentautomation",
+        "humanintheloop",
+        "llm",
+        "buffer"
+      ],
+      "bodyLen": 4445
+    },
+    {
+      "slug": "token-killers",
+      "id": 4864858,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/token-killers-cutting-ai-api-spend-without-cutting-quality-2a85-temp-slug-1383795",
+      "title": "Token Killers: cutting AI API spend without cutting quality",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "llmcost",
+        "tokenoptimization",
+        "modelrouting",
+        "localllm"
+      ],
+      "bodyLen": 4597
+    },
+    {
+      "slug": "hermes-vision",
+      "id": 4864859,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-vision-a-live-ai-agent-session-on-phone-and-glasses-484f-temp-slug-5516050",
+      "title": "Hermes Vision: a live AI agent session on phone and glasses",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "pwa",
+        "serversentevents",
+        "wearables",
+        "metarayban"
+      ],
+      "bodyLen": 4727
+    },
+    {
+      "slug": "hermes-worlds",
+      "id": 4864860,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-worlds-an-explorable-3d-frontier-where-the-agents-are-characters-5bc5-temp-slug-5700636",
+      "title": "Hermes Worlds: an explorable 3D frontier where the agents are characters",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "webgl",
+        "3d",
+        "aiagents",
+        "sse"
+      ],
+      "bodyLen": 4518
+    },
+    {
+      "slug": "autolisting",
+      "id": 4864862,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/autolisting-a-visible-ten-step-pipeline-that-turns-property-video-into-a-finished-listing-2e55-temp-slug-2048318",
+      "title": "Autolisting: a visible ten-step pipeline that turns property video into a finished listing",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "mediapipeline",
+        "ffmpeg",
+        "videoprocessing",
+        "realestate"
+      ],
+      "bodyLen": 4926
+    },
+    {
+      "slug": "obsidian-brain",
+      "id": 4864864,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/obsidian-brain-a-live-3d-graph-of-a-note-vault-built-without-a-single-model-call-2d2c-temp-slug-4921636",
+      "title": "Obsidian Brain: a live 3D graph of a note vault, built without a single model call",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "knowledgegraph",
+        "obsidian",
+        "webgl",
+        "python"
+      ],
+      "bodyLen": 4108
+    },
+    {
+      "slug": "net-worth-ledger",
+      "id": 4864865,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/net-worth-ledger-one-number-computed-from-entries-a-human-can-audit-5a43-temp-slug-77653",
+      "title": "Net Worth Ledger: one number, computed from entries a human can audit",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "financeops",
+        "sql",
+        "networth",
+        "ledger"
+      ],
+      "bodyLen": 3383
+    },
+    {
+      "slug": "insta360-x4",
+      "id": 4864866,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/insta360-x4-a-local-dashboard-for-a-360-camera-mounted-behind-a-path-prefix-1a1a-temp-slug-4895120",
+      "title": "Insta360 X4: a local dashboard for a 360 camera, mounted behind a path prefix",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "hardware",
+        "insta360",
+        "localdashboard",
+        "webui"
+      ],
+      "bodyLen": 3275
+    },
+    {
+      "slug": "agentic-ai-course",
+      "id": 4864868,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/applied-agentic-ai-what-survived-contact-with-a-real-agent-fleet-41ei-temp-slug-89796",
+      "title": "Applied Agentic AI: what survived contact with a real agent fleet",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "agenticai",
+        "training",
+        "agentdesign",
+        "guardrails"
+      ],
+      "bodyLen": 3564
+    },
+    {
+      "slug": "project-showcase-engine",
+      "id": 4864869,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/project-showcase-engine-the-daily-pipeline-that-generates-this-portfolio-506e-temp-slug-518112",
+      "title": "Project Showcase Engine: the daily pipeline that generates this portfolio",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "staticsite",
+        "generator",
+        "automation",
+        "cron"
+      ],
+      "bodyLen": 4959
+    },
+    {
+      "slug": "cnbc-live-on-glasses",
+      "id": 4864870,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/cnbc-live-on-the-meta-ray-ban-display-a-proxy-in-front-of-a-referer-gated-cdn-3952-temp-slug-9985471",
+      "title": "CNBC live on the Meta Ray-Ban Display: a proxy in front of a Referer-gated CDN",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "streaming",
+        "hls",
+        "proxy",
+        "wearables"
+      ],
+      "bodyLen": 4698
+    },
+    {
+      "slug": "gold-spot-explorer",
+      "id": 4864871,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/gold-spot-explorer-ranking-historical-gold-ground-against-bare-earth-lidar-j78-temp-slug-984874",
+      "title": "Gold Spot Explorer: ranking historical gold ground against bare-earth LiDAR",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "geospatial",
+        "lidar",
+        "goldprospecting",
+        "3dterrain"
+      ],
+      "bodyLen": 4880
+    },
+    {
+      "slug": "ai-consulting",
+      "id": 4864854,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/ai-consulting-the-commercial-half-of-the-portfolio-built-on-the-same-board-2eo-temp-slug-1023725",
+      "title": "AI Consulting: the commercial half of the portfolio, built on the same board",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "consulting",
+        "automation",
+        "pricing",
+        "intake"
+      ],
+      "bodyLen": 3620
+    },
+    {
+      "slug": "openclaw",
+      "id": 4864872,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/openclaw-a-local-agent-gateway-configured-in-one-auditable-file-1f62-temp-slug-5691914",
+      "title": "OpenClaw: a local agent gateway, configured in one auditable file",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "gateway",
+        "agents",
+        "messaging",
+        "configuration"
+      ],
+      "bodyLen": 3964
+    },
+    {
+      "slug": "muse-prototypes",
+      "id": 4864873,
+      "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/muse-prototypes-the-same-3d-world-packaged-to-be-opened-rather-than-deployed-2h94-temp-slug-7400802",
+      "title": "Muse Prototypes: the same 3D world, packaged to be opened rather than deployed",
+      "titleMatch": true,
+      "bodyMatch": true,
+      "isDraft": true,
+      "canonicalOK": true,
+      "tags": [
+        "prototypes",
+        "3d",
+        "aiagents",
+        "shareabledemos"
+      ],
+      "bodyLen": 3186
+    }
+  ]
+}

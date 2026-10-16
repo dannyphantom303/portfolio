@@ -53,34 +53,64 @@ function mark(slug, platform, value, note) {
   state.posts[slug] = state.posts[slug] || {};
   state.posts[slug][platform] = value;
   if (note) state.posts[slug][`${platform}_note`] = note;
+  flushState(); // persist after every outcome so an interrupted run stays resumable
+}
+function flushState() {
+  state.updated = new Date().toISOString().replace('T', ' ').slice(0, 19);
+  fs.writeFileSync(STATE_PATH, JSON.stringify(state, null, 2) + '\n');
 }
 function readDraft(slug) {
   try { return fs.readFileSync(path.join(POSTS, slug + '.md'), 'utf8'); } catch (e) { return ''; }
 }
+// Drafts carry authored front-matter (title, tags, canonical). Prefer it over the
+// registry so the dev.to post uses the same SEO title/labels as the write-up page.
+function frontMatter(slug) {
+  const raw = readDraft(slug);
+  const m = raw.match(/^---\n([\s\S]*?)\n---\n/);
+  if (!m) return {};
+  const fm = {};
+  for (const line of m[1].split('\n')) {
+    const mm = line.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
+    if (!mm) continue;
+    let v = mm[2].trim();
+    try { fm[mm[1]] = JSON.parse(v); } catch (e) { fm[mm[1]] = v.replace(/^["']|["']$/g, ''); }
+  }
+  return fm;
+}
+const devtoTags = (slug, p) => {
+  const src = frontMatter(slug).tags || p.stack || [];
+  return src.map(s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean).slice(0, 4);
+};
 function draftToDevto(slug) {
   const p = bySlug[slug] || { name: slug };
+  const fm = frontMatter(slug);
   const body = readDraft(slug).replace(/^---[\s\S]*?---\n/, ''); // strip front-matter
   return {
     article: {
-      title: `Building ${p.name}`,
+      title: fm.title || `Building ${p.name}`,
       body_markdown: body,
       published: PUBLISH_LIVE,                       // draft unless the caller says otherwise
-      tags: (p.stack || []).slice(0, 4).map(s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean).slice(0, 4),
+      tags: devtoTags(slug, p),
       canonical_url: `${SITE}/project/${slug}.html`,
     },
   };
 }
 
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
 async function postDevto(slug) {
   if (!process.env.DEVTO_API_KEY) throw new Error('DEVTO_API_KEY not set in /Users/dan/portfolio/.env');
-  const r = await fetch('https://dev.to/api/articles', {
-    method: 'POST',
-    headers: { 'api-key': process.env.DEVTO_API_KEY, 'content-type': 'application/json' },
-    body: JSON.stringify(draftToDevto(slug)),
-  });
-  if (!r.ok) throw new Error(`dev.to ${r.status}: ${(await r.text()).slice(0, 200)}`);
-  const j = await r.json();
-  return j.url || j.canonical_url || `dev.to article ${j.id}`;
+  for (let attempt = 1; ; attempt++) {
+    const r = await fetch('https://dev.to/api/articles', {
+      method: 'POST',
+      headers: { 'api-key': process.env.DEVTO_API_KEY, 'content-type': 'application/json' },
+      body: JSON.stringify(draftToDevto(slug)),
+    });
+    if (r.status === 429 && attempt <= 3) { await sleep(20000 * attempt); continue; } // young-account throttle
+    if (!r.ok) throw new Error(`dev.to ${r.status}: ${(await r.text()).slice(0, 200)}`);
+    const j = await r.json();
+    return j.url || j.canonical_url || `dev.to article ${j.id}`;
+  }
 }
 
 function githubRemote() {
@@ -106,9 +136,13 @@ function githubRemote() {
       try {
         if (!LIVE) { run.actions.push({ slug, platform: 'devto', result: 'would POST as ' + (PUBLISH_LIVE ? 'published' : 'draft') }); console.log(`  dev.to  ${slug}: would post ${PUBLISH_LIVE ? 'PUBLISHED' : 'DRAFT'}`); continue; }
         const url = await postDevto(slug);
-        mark(slug, 'devto', 'published', url);
-        run.actions.push({ slug, platform: 'devto', result: 'ok', url });
+        // dev.to drafts are NOT public — record `draft` (not `published`) so the review
+        // dashboard never claims a post is live when it is still sitting on the platform.
+        mark(slug, 'devto', PUBLISH_LIVE ? 'published' : 'draft',
+          url + (PUBLISH_LIVE ? '' : ' (dev.to draft — review, then hit Publish on dev.to)'));
+        run.actions.push({ slug, platform: 'devto', result: 'ok', url, published_on_devto: PUBLISH_LIVE });
         console.log(`  dev.to  ${slug}: ${url}`);
+        await sleep(4000); // space article creation out for a young account
       } catch (e) {
         mark(slug, 'devto', 'blocked', e.message);
         run.actions.push({ slug, platform: 'devto', result: 'blocked', error: e.message });
