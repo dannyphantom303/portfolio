@@ -29,6 +29,7 @@ const ALIAS = {
   '/career': 'project-showcase-engine',
   '/hermes-game': 'hermes-worlds',
   '/vr': 'hermes-worlds',
+  '/hermes-home': 'smart-home-hub',
 };
 
 const pathOf = href => {
