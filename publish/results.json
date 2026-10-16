@@ -24,6 +24,27 @@
       "summary": {
         "would": 2
       }
+    },
+    {
+      "at": "2026-10-16 19:44:10",
+      "live": false,
+      "actions": [],
+      "summary": {}
+    },
+    {
+      "at": "2026-10-16 19:44:17",
+      "live": false,
+      "actions": [
+        {
+          "slug": "openclaw",
+          "platform": "github",
+          "result": "blocked",
+          "error": "no git remote — add one (git remote add origin <url>) then bash deploy-github-pages.sh"
+        }
+      ],
+      "summary": {
+        "blocked": 1
+      }
     }
   ]
 }
