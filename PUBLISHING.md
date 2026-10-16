@@ -15,6 +15,30 @@ Below is exactly what is fully automatic, what needs a key, and what can only be
 
 Put the keys in `/Users/dan/portfolio/.env` (see `.env.example`). The daily job will then publish.
 
+## dev.to — drafts by default, and the two commands
+
+Key goes in `/Users/dan/portfolio/.env` as `DEVTO_API_KEY=…` (https://dev.to/settings/extensions).
+The publisher reads `publish/state.json` and only posts drafts whose **dev.to chip reads
+`approved`**; the /publish/ dashboard is where that approval is set.
+
+```
+node publish-run.js                              # dry run: lists what would go out
+node publish-run.js --live --platforms devto     # POSTs approved drafts as dev.to DRAFTS
+node publish-run.js --live --platforms devto --publish-live   # make them PUBLIC on dev.to
+```
+
+* Default landing state is a **dev.to draft** (`published:false`) — the house rule holds, nothing
+  goes public on its own. A created draft is recorded in `state.json` as `devto: "draft"` (amber
+  chip) with its URL in `devto_note`, never as `published`.
+* The post uses the authored SEO title + the draft's own tags (from the front-matter in
+  `dist/posts/<slug>.md`), and sets `canonical_url` back to the project page, so dev.to does not
+  compete with the portfolio page in search.
+* Article creation is throttled (4 s apart, 429 → 20/40/60 s backoff) because a freshly created
+  dev.to account gets rate-limited; `state.json` is flushed after every outcome so a killed run
+  resumes without re-posting.
+* Full per-slug verification (id, title, body, canonical, tags) is written to
+  `publish/devto-results.json` by the check that re-reads the drafts from the dev.to API.
+
 ## Blogger — drafts only, and the API write block to expect
 
 `node blogger-publish.js`            → dry run: shows what would be created
