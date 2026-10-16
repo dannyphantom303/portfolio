@@ -52,6 +52,17 @@ test('build: preserves dist/videos across a rebuild (regression)', () => {
   fs.rmSync(path.join(vdir, '_regression-stub.mp4'), { force: true });
 });
 
+test('build: preserves dist/posts across a rebuild (regression)', () => {
+  // syndicate.js writes dist/posts AFTER the build; a lone `node build.js` — which is what
+  // `npm test` runs — must not strip the published post drafts from dist/.
+  const pdir = path.join(DIST, 'posts');
+  fs.mkdirSync(pdir, { recursive: true });
+  fs.writeFileSync(path.join(pdir, '_regression-stub.md'), 'stub');
+  execFileSync('node', ['build.js'], { cwd: ROOT });
+  assert.ok(fs.existsSync(path.join(pdir, '_regression-stub.md')), 'posts dir preserved across rebuild');
+  fs.rmSync(path.join(pdir, '_regression-stub.md'), { force: true });
+});
+
 test('output: AI-runnable projects are badged, and the services section exists', () => {
   const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
   assert.match(html, /Services I can run for you/);

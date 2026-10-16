@@ -1,7 +1,7 @@
 .env
 refresh.log
 node_modules/
-.video-cache/
+.dist-stash/
 
 __pycache__/
 *.pyc

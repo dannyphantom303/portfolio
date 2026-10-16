@@ -191,17 +191,26 @@ function resumeHtml() {
 }
 
 // ── write ──
-// Preserve generated videos (mp4+gif) across rebuilds. build.js wipes dist/, so we
-// stash videos, wipe, restore them FIRST, then render pages (so asset() checks work).
-const VIDEO_CACHE = path.join(ROOT, '.video-cache');
-if (fs.existsSync(VIDEOS)) {
-  if (fs.existsSync(VIDEO_CACHE)) fs.rmSync(VIDEO_CACHE, { recursive: true, force: true });
-  fs.renameSync(VIDEOS, VIDEO_CACHE);
+// Preserve the two dirs build.js does not own — videos/ (make-video.py) and posts/
+// (syndicate.js, which runs AFTER the build in refresh.sh) — across the dist/ wipe, and
+// restore them FIRST so the asset() checks below see them. A lone `node build.js` (which is
+// what `npm test` runs) must never strip them from the published dist/.
+const KEEP = ['videos', 'posts'];
+const STASH = path.join(ROOT, '.dist-stash');
+fs.rmSync(STASH, { recursive: true, force: true });
+fs.mkdirSync(STASH, { recursive: true });
+for (const d of KEEP) {
+  const src = path.join(DIST, d);
+  if (fs.existsSync(src)) fs.renameSync(src, path.join(STASH, d));
 }
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'project'), { recursive: true });
-if (fs.existsSync(VIDEO_CACHE)) fs.renameSync(VIDEO_CACHE, VIDEOS);
-else fs.mkdirSync(VIDEOS, { recursive: true });
+for (const d of KEEP) {
+  const src = path.join(STASH, d);
+  if (fs.existsSync(src)) fs.renameSync(src, path.join(DIST, d));
+  else if (d === 'videos') fs.mkdirSync(VIDEOS, { recursive: true }); // asset() + make-video.py target
+}
+fs.rmSync(STASH, { recursive: true, force: true });
 fs.writeFileSync(path.join(DIST, 'index.html'), indexHtml());
 fs.writeFileSync(path.join(DIST, 'resume.html'), resumeHtml());
 for (const p of projects) fs.writeFileSync(path.join(DIST, 'project', `${p.slug}.html`), projectHtml(p));
