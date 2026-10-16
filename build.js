@@ -12,7 +12,15 @@ const VIDEOS = path.join(DIST, 'videos');
 // editing dist/index.html by hand is reverted by the next refresh. When this file exists it
 // is rendered verbatim; delete it to fall back to the generated index below.
 const SRC_INDEX = path.join(ROOT, 'src', 'index.html');
+// Shared v3 stylesheet for the project write-up pages (same design language as the index).
+const SRC_CSS = path.join(ROOT, 'src', 'project.css');
+// Hand-authored detail content (overview, how-it-works, models + running cost, build steps).
+// Kept OUT of projects.json so discover.js can keep auto-syncing that file without clobbering prose.
+const SRC_DETAIL = path.join(ROOT, 'src', 'projects-detail.json');
 const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'projects.json'), 'utf8'));
+const DETAIL = fs.existsSync(SRC_DETAIL) ? JSON.parse(fs.readFileSync(SRC_DETAIL, 'utf8')) : { projects: {} };
+const detail = DETAIL.projects || {};
+const costModel = DETAIL.costModel || {};
 
 const esc = (s = '') => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const dateStr = new Date().toISOString().slice(0, 10);
@@ -147,38 +155,205 @@ function indexHtml() {
   return shell(`${reg.owner.name} — AI Systems Portfolio`, body);
 }
 
+// ── v3 detail pages ────────────────────────────────────────────────────────────────
+// The project write-up shares the authored index's design language (src/project.css).
+const DETAIL_CSS = fs.existsSync(SRC_CSS) ? fs.readFileSync(SRC_CSS, 'utf8') : CSS;
+
+const detailShell = (title, body) => `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(reg.owner.summary)}"/>
+<style>${DETAIL_CSS}</style></head><body>
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">Daniel Daymude<small>AI SYSTEMS</small></a>
+  <div class="navlinks"><a href="../index.html#projects">All work</a><a href="../index.html#services">Services</a><a href="../resume.html">Résumé</a></div>
+  <a class="nav-cta" href="mailto:${esc(reg.owner.contactEmail)}">Work with me</a>
+</div></nav>
+<div class="wrap">${body}</div>
+<footer><div class="wrap"><div class="foot-card">
+  <h2>Want this <span style="color:var(--ink-300)">running in your business?</span></h2>
+  <p>Most of what you just read started as an afternoon experiment and is running unattended today. Tell me what is eating your week and I will tell you honestly whether an agent should touch it.</p>
+  <div class="cta-row" style="justify-content:center">
+    <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:${esc(reg.owner.contactEmail)}">${esc(reg.owner.contactEmail)}</a>
+    <a class="btn line" href="../index.html#projects">Back to all work</a>
+  </div>
+  <div class="fine"><span>© ${new Date().getFullYear()} DANIEL DAYMUDE</span><span>UPDATED ${dateStr} · ${projects.length} BUILDS · ${reg.agent || '7'} AGENTS</span></div>
+</div></div></footer>
+</body></html>`;
+
+// Reuse the animated SVG demo authored for the same project's card on the landing page.
+function heroSvg(slug) {
+  if (!fs.existsSync(SRC_INDEX)) return '';
+  const h = fs.readFileSync(SRC_INDEX, 'utf8');
+  const at = h.indexOf(`data-slug="${slug}"`);
+  if (at < 0) return '';
+  const s = h.indexOf('<svg', at), e = h.indexOf('</svg>', s);
+  return (s > 0 && e > s) ? h.slice(s, e + 6) : '';
+}
+
+// runtime key -> cost tag. local* and the free catalogue are $0 marginal; credits and paid
+// models are the only spend, and each of those carries its published per-million rate.
+function rateTag(key = '') {
+  const k = String(key);
+  if (/^local/.test(k)) return ['rate-local', 'LOCAL · $0'];
+  if (k === 'nous-free') return ['rate-free', 'FREE TIER · $0'];
+  if (k === 'ollama-cloud') return ['rate-credit', 'CREDITS'];
+  if (k === 'openrouter-paid') return ['rate-paid', 'METERED'];
+  return ['rate-free', '$0'];
+}
+
+function costTable(d) {
+  const rows = (d.models || []).map(m => {
+    const [cls, label] = rateTag(m.runtime);
+    const rt = (costModel.runtimes || {})[m.runtime] || {};
+    const where = rt.label || m.runtime || '';
+    return `<tr>
+      <td><b>${esc(m.job)}</b><div class="fine-note" style="margin-top:6px">${esc(where)}</div></td>
+      <td class="model hide-sm">${esc(m.model)}</td>
+      <td class="hide-sm">${esc(m.note || '')}</td>
+      <td><span class="rate-tag ${cls}">${esc(label)}</span></td>
+    </tr>`;
+  }).join('\n');
+  const priceRows = (costModel.priceTable || []).map(r => `<tr>
+      <td>${esc(r.model)}</td><td class="num">$${r.in.toFixed(4)}</td><td class="num">$${r.out.toFixed(4)}</td></tr>`).join('');
+  const sources = (costModel.sources || []).map(s => `<li><a href="${esc(s.split(' ')[0])}" target="_blank" rel="noopener">${esc(s)}</a></li>`).join('');
+  return `<div class="cost-card">
+    <table class="cost">
+      <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${d.costNote ? `<div class="cost-note">${esc(d.costNote)}</div>` : ''}
+    <div class="cost-note"><b>The full model price list.</b> ${esc(costModel.reading || '')}</div>
+    <table class="price-table">
+      <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>
+      <tbody>${priceRows}</tbody>
+    </table>
+    <div class="fine-note">Rates published by the providers, read ${esc(costModel.asOf || '')}. Local models (Ollama / LM Studio) carry no per-token fee; free-catalogue models are $0 at the provider's standard rate limits.</div>
+    <div class="fine-note">Sources</div>
+    <ul class="hl" style="margin-top:8px">${sources}</ul>
+  </div>`;
+}
+
 function projectHtml(p) {
+  const d = detail[p.slug] || {};
   const imgs = shots(p.slug);
   const video = asset(p.slug, 'mp4')
-    ? `<div class="vid"><video controls preload="metadata"><source src="../videos/${p.slug}.mp4" type="video/mp4">Your browser does not support the video tag.</video></div>`
-    : (p.video ? `<div class="vid"><iframe src="${esc(p.video)}" allowfullscreen loading="lazy" title="${esc(p.name)} demo" style="width:100%;aspect-ratio:16/9;border:1px solid var(--bd);border-radius:14px"></iframe></div>` : '');
+    ? `<div class="vid"><video controls preload="metadata">
+<source src="../videos/${p.slug}.mp4" type="video/mp4">
+Your browser does not support the video tag.</video></div>`
+    : (p.video ? `<div class="vid"><iframe src="${esc(p.video)}" allowfullscreen loading="lazy" title="${esc(p.name)} demo" style="width:100%;aspect-ratio:16/9;border:0;border-radius:18px"></iframe></div>` : '');
   const gif = asset(p.slug, 'gif')
     ? `<div class="gif"><img src="../videos/${p.slug}.gif" alt="${esc(p.name)} animated preview" loading="lazy"/></div>` : '';
-  const gallery = imgs.length ? `<h2>Gallery</h2><div class="shots">${imgs.map(f => `<img src="../screenshots/${p.slug}/${esc(f)}" alt="${esc(p.name)} screenshot" loading="lazy"/>`).join('')}</div>` : '';
-  const coverLg = cover(p, '../').replace('class="cover"', 'class="cover-lg"').replace('class="cover"', '');
+  const svg = heroSvg(p.slug);
+  const models = d.models || [];
+  const paidRows = models.filter(m => m.runtime === 'openrouter-paid').length;
+  const steps = (d.howItWorks || []).map((s, i) => `<article class="step">
+      <div class="n">${String(i + 1).padStart(2, '0')}</div><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></article>`).join('\n');
+  const howto = (d.howto || []).map((s, i) => `<article class="step">
+      <div class="n">${String(i + 1).padStart(2, '0')}</div><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></article>`).join('\n');
+  const lessons = (d.lessons || []).map((l, i) => `<article class="lesson"><span>NOTE ${String(i + 1).padStart(2, '0')}</span>${esc(l)}</article>`).join('\n');
+  const highlights = (p.highlights || []).length
+    ? `<div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul>${p.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul></div>` : '';
+  const live = d.live && d.live.url
+    ? `<a class="btn light" href="${esc(d.live.url)}" target="_blank" rel="noopener">${esc(d.live.label || 'Open it')}</a>`
+    : `<a class="btn light" href="mailto:${esc(reg.owner.contactEmail)}?subject=${encodeURIComponent(p.name)}">Ask me for a walkthrough</a>`;
+  const sideRows = [
+    ['STATUS', p.status],
+    ['SURFACE', d.live ? 'Public link above' : 'Private — not published'],
+    ['MODEL / ENGINE SLOTS', String(models.length)],
+    ['MARGINAL RUNNING COST', paidRows ? 'Metered only on escalation' : '$0 — free tier / local'],
+    ['STACK', (p.stack || []).join(' · ') || '—'],
+  ].map(([k, v]) => `<div class="kv"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
+  const gallery = imgs.length ? `<div class="shots">${imgs.map(f => `<img src="../screenshots/${p.slug}/${esc(f)}" alt="${esc(p.name)} screenshot" loading="lazy"/>`).join('')}</div>` : '';
   const body = `
-<main class="wrap">
-  <article class="proj">
-    <a class="back" href="../index.html">← All projects</a>
+<header class="hero">
+  <div class="ink">
+    <div class="eyebrow">${esc(d.kicker || p.status)} — FULL WRITE-UP</div>
     <h1>${esc(p.name)}</h1>
-    <div class="meta">${esc(p.icon)} ${esc(p.status)}${p.aiDoable ? ' · <span style="color:var(--gr)">AI-runnable service</span>' : ''}</div>
-    <p class="lede">${esc(p.tagline)}</p>
-    ${coverLg}
-    <h2>Overview</h2>
-    <p class="body">${esc(p.writeup)}</p>
-    ${p.highlights.length ? '<h2>Highlights</h2>\n    <ul>' + p.highlights.map(h => `<li>${esc(h)}</li>`).join('') + '</ul>' : ''}
-    ${video ? '<h2>Demo</h2>' + video : ''}
-    ${gif ? '<h2>Preview</h2>' + gif : ''}
-    ${gallery}
-    ${p.stack.length ? '<h2>Stack</h2>\n    <div class="stack">' + p.stack.map(s => `<span>${esc(s)}</span>`).join('') + '</div>' : ''}
-    <div class="cta-band">
-      <h2>Want this built for your business?</h2>
-      <p>${p.aiDoable ? 'This can run as an AI-managed service — the agents do the work.' : 'I design, ship, and hand off systems like this.'}</p>
-      <a class="btn" href="mailto:${esc(reg.owner.contactEmail)}">Get in touch</a>
+    <p class="sub">${esc(p.tagline)}</p>
+    <div class="cta-row">${live}
+      <a class="btn ghostd" href="../index.html#projects">← All projects</a>
     </div>
-  </article>
-</main>`;
-  return shell(`${p.name} — ${reg.owner.name}`, body);
+    <div class="hero-stats">
+      <div class="hstat"><div class="v">${esc((p.status || '').split('·')[0].trim())}</div><div class="k">CURRENT STATE</div></div>
+      <div class="hstat"><div class="v"><em>${paidRows ? 'Metered' : '$0'}</em></div><div class="k">MARGINAL RUNNING COST</div></div>
+      <div class="hstat"><div class="v">${models.length}</div><div class="k">MODELS / ENGINES</div></div>
+      <div class="hstat"><div class="v">${(p.stack || []).length}</div><div class="k">STACK COMPONENTS</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="demo">
+  <div class="demo-frame">
+    <div class="well quad">
+      <div class="reel-chip"><i></i>LIVE DEMO</div>
+      ${svg || `<div style="display:flex;height:100%;align-items:center;justify-content:center;font:700 12px var(--font-mono);letter-spacing:2px;color:var(--ink-400)">${esc(p.name.toUpperCase())}</div>`}
+    </div>
+    <aside class="demo-side">
+      <h3>At a glance</h3>
+      ${sideRows}
+      ${d.linkNote ? `<div class="fine-note" style="margin-top:18px">${esc(d.linkNote)}</div>` : ''}
+    </aside>
+  </div>
+  ${video ? `<div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div>${video}</div>` : ''}
+  ${gif ? `<div style="margin-top:26px"><div class="eyebrow">ANIMATED PREVIEW</div>${gif}</div>` : ''}
+</section>
+
+<section id="overview">
+  <div class="sec-head">
+    <div class="eyebrow">THE PROJECT</div>
+    <h2>What it is <span class="soft">and why it exists</span></h2>
+  </div>
+  <p class="prose">${esc(d.overview || p.writeup)}</p>
+  ${highlights}
+</section>
+
+<section id="how">
+  <div class="sec-head">
+    <div class="eyebrow">HOW IT WORKS</div>
+    <h2>The mechanism <span class="soft">end to end</span></h2>
+    <p>No hand-waving: this is the actual chain, in the order it runs.</p>
+  </div>
+  <div class="steps ordered">${steps}</div>
+</section>
+
+<section id="models">
+  <div class="sec-head">
+    <div class="eyebrow">MODELS &amp; RUNNING COST</div>
+    <h2>Every model this project touches <span class="soft">and what each one costs</span></h2>
+    <p>Model, tier and the published rate behind it — so the running cost is a number you can check, not a claim.</p>
+  </div>
+  ${costTable(d)}
+</section>
+
+<section id="build">
+  <div class="sec-head">
+    <div class="eyebrow">BUILD IT YOURSELF</div>
+    <h2>The steps <span class="soft">in order, with the traps</span></h2>
+    <p>This is the short version of what I would do again — including the parts that bit me first.</p>
+  </div>
+  <div class="steps ordered">${howto}</div>
+</section>
+
+${lessons ? `<section id="notes">
+  <div class="sec-head">
+    <div class="eyebrow">WHAT I LEARNED</div>
+    <h2>Notes from the build</h2>
+  </div>
+  <div class="lessons">${lessons}</div>
+</section>` : ''}
+
+<section id="stack">
+  <div class="sec-head">
+    <div class="eyebrow">STACK</div>
+    <h2>What it is made of</h2>
+  </div>
+  <div class="stack">${(p.stack || []).map(s => `<span>${esc(s)}</span>`).join('')}</div>
+  ${gallery ? `<div style="margin-top:30px"><div class="eyebrow">SCREENS</div>${gallery}</div>` : ''}
+  <p class="fine-note">Everything above is drawn from the same registry that drives the landing page, so this page regenerates itself daily.</p>
+</section>
+`;
+  return detailShell(`${p.name} — ${reg.owner.name}`, body);
 }
 
 function resumeHtml() {
@@ -190,7 +365,7 @@ function resumeHtml() {
     ${fs.existsSync(path.join(ROOT, 'resume.pdf')) ? '<p style="margin-top:16px"><a class="btn" href="resume.pdf">Download PDF résumé</a></p>' : ''}
     <h2>Summary</h2><p class="body">${esc(reg.owner.summary)}</p>
     <h2>Selected Projects</h2>
-    <ul>${projects.map(p => `<li><strong>${esc(p.name)}</strong> — ${esc(p.tagline)}</li>`).join('')}</ul>
+    <ul>${projects.map(p => `<li><a href="project/${p.slug}.html"><strong>${esc(p.name)}</strong></a> — ${esc(p.tagline)}</li>`).join('')}</ul>
     ${Object.entries(reg.skills).map(([k, v]) => `<h2>${esc(k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))}</h2><div class="stack">${v.map(s => `<span>${esc(s)}</span>`).join('')}</div>`).join('')}
   </article>
 </main>`;
@@ -226,4 +401,6 @@ if (fs.existsSync(path.join(ROOT, 'resume.pdf'))) fs.copyFileSync(path.join(ROOT
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 
 console.log(`Built ${projects.length} projects (+ résumé) → ${DIST}`);
+const withDetail = projects.filter(p => detail[p.slug]).length;
+console.log(`  detail write-ups: ${withDetail}/${projects.length} from src/projects-detail.json`);
 console.log(`  index.html${fs.existsSync(SRC_INDEX) ? ' [src/index.html]' : ' [generated]'}, resume.html, ${projects.length} project pages, ${projects.reduce((n, p) => n + shots(p.slug).length, 0)} screenshots`);

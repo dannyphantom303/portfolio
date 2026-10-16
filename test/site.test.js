@@ -122,3 +122,62 @@ test('router: /portfolio handler exists and is traversal-guarded', () => {
   assert.match(src, /'\/portfolio'/, 'portfolio route registered');
   assert.match(src, /startsWith\('\/Users\/dan\/portfolio\/dist'\)/, 'dist containment guard present');
 });
+
+// ── project write-up pages (v3 restyle) ─────────────────────────────────────────────
+test('detail: every project has an authored write-up with all sections', () => {
+  const detail = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'projects-detail.json'), 'utf8'));
+  const cost = detail.costModel;
+  assert.ok(cost && cost.priceTable.length >= 8, 'published price table present');
+  assert.ok(cost.runtimes['local-ollama'] && cost.runtimes['nous-free'], 'runtime tiers documented');
+  const pub = reg.projects.filter(p => p.publicSafe !== false);
+  for (const p of pub) {
+    const d = detail.projects[p.slug];
+    assert.ok(d, `missing authored write-up for ${p.slug}`);
+    for (const k of ['kicker', 'overview', 'howItWorks', 'models', 'howto', 'lessons']) {
+      assert.ok(d[k], `${p.slug} missing ${k}`);
+    }
+    assert.ok(d.howItWorks.length >= 3, `${p.slug} needs at least 3 how-it-works steps`);
+    assert.ok(d.howto.length >= 2, `${p.slug} needs build steps`);
+    assert.ok(d.models.length >= 1, `${p.slug} needs a model/cost breakdown`);
+    for (const m of d.models) {
+      assert.ok(m.job && m.model && m.runtime, `${p.slug} model row needs job/model/runtime`);
+      assert.ok(cost.runtimes[m.runtime], `${p.slug} uses unknown runtime ${m.runtime}`);
+    }
+    assert.ok(d.costNote && d.costNote.length > 40, `${p.slug} needs a cost note`);
+  }
+});
+
+test('detail: every landing-page card links to a project page that exists', () => {
+  const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
+  const slugs = [...html.matchAll(/href="project\/([a-z0-9-]+)\.html"/g)].map(m => m[1]);
+  const pub = reg.projects.filter(p => p.publicSafe !== false).map(p => p.slug);
+  assert.equal(new Set(slugs).size, pub.length, `every project must be linked from the landing page (got ${slugs.length} links)`);
+  for (const s of slugs) {
+    assert.ok(fs.existsSync(path.join(DIST, 'project', `${s}.html`)), `${s}.html missing for landing-page link`);
+  }
+  for (const s of pub) assert.ok(slugs.includes(s), `${s} is not linked from the landing page`);
+});
+
+test('output: project pages render the write-up, cost breakdown and build steps', () => {
+  const detail = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'projects-detail.json'), 'utf8'));
+  const pub = reg.projects.filter(p => p.publicSafe !== false);
+  for (const p of pub) {
+    const html = fs.readFileSync(path.join(DIST, 'project', `${p.slug}.html`), 'utf8');
+    for (const id of ['demo', 'overview', 'how', 'models', 'build', 'stack']) {
+      assert.match(html, new RegExp(`id="${id}"`), `${p.slug} missing #${id}`);
+    }
+    assert.match(html, /MARGINAL RUNNING COST/, `${p.slug} missing the cost line`);
+    assert.match(html, /class="price-table"/, `${p.slug} missing the published price table`);
+    assert.match(html, /MODELS &amp; RUNNING COST/, `${p.slug} missing the models section`);
+    const steps = (html.match(/class="step"/g) || []).length;
+    assert.equal(steps, detail.projects[p.slug].howItWorks.length + detail.projects[p.slug].howto.length,
+      `${p.slug} rendered ${steps} steps, expected howItWorks + howto`);
+    assert.doesNotMatch(html, /undefined|\[object Object\]/, `${p.slug} has an unrendered placeholder`);
+    assert.match(html, /<style>[\s\S]{2000,}<\/style>/, `${p.slug} must inline the shared stylesheet`);
+  }
+});
+
+test('detail: authored content is safe to publish (no secrets or internal URLs)', () => {
+  const raw = fs.readFileSync(path.join(ROOT, 'src', 'projects-detail.json'), 'utf8');
+  assert.doesNotMatch(raw, /discord\.com\/api\/webhooks|hermes-command-token|localhost:8787|token=/, 'no secrets in authored content');
+});
