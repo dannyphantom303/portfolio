@@ -1292,8 +1292,11 @@
         "The same automation that runs a business can run the business that sells the automation.",
         "Structured intake removes most of the back-and-forth that makes small projects unprofitable."
       ],
-      "live": null,
-      "linkNote": "The client view is private; the public consulting page and calculator are available on request."
+      "live": {
+        "url": "https://sport.taila73942.ts.net/consulting",
+        "label": "Open the token-savings calculator"
+      },
+      "linkNote": "The calculator is the public front door of this project — no login, it runs the numbers live."
     },
     "openclaw": {
       "kicker": "AGENT GATEWAY",
