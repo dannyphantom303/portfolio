@@ -12,9 +12,6 @@ OpenClaw is one of the systems in my AI portfolio. OpenClaw gateway — AI agent
 ## Highlights
 - OpenClaw gateway — AI agent orchestration and tools.
 
-## Stack
-
-
 ## Live project
 See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/openclaw.html
 

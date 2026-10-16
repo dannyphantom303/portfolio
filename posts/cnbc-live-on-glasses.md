@@ -12,9 +12,6 @@ CNBC Live on Glasses is one of the systems in my AI portfolio. Watch CNBC live o
 ## Highlights
 - Watch CNBC live on Meta Ray-Ban Display glasses.
 
-## Stack
-
-
 ## Live project
 See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/cnbc-live-on-glasses.html
 

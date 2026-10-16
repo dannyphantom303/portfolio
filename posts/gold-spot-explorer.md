@@ -14,9 +14,6 @@ Gold Spot Explorer is one of the systems in my AI portfolio. Ranks historical go
 - Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in.
 - A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline.
 
-## Stack
-
-
 ## Live project
 See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/gold-spot-explorer.html
 
