@@ -1,6 +1,7 @@
 {
-  "verified": "2026-10-16T23:07:06",
+  "verified": "2026-10-16T23:08:36",
   "account": "dan_f3bcb7300e832d9d2f797",
+  "account_url": "https://dev.to/dashboard",
   "total": 18,
   "published": 0,
   "fail": 0,
@@ -8,308 +9,308 @@
     {
       "slug": "sport-command-center",
       "id": 4864855,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/sport-a-multi-agent-ai-operations-system-for-a-one-person-company-3kba-temp-slug-8139883",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/sport-command-center.html",
       "title": "Sport: a multi-agent AI operations system for a one-person company",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "aiagents",
         "multiagentsystems",
         "orchestration",
         "sqlite"
       ],
-      "bodyLen": 5708
+      "body_len": 5708,
+      "verified": true
     },
     {
       "slug": "smart-home-hub",
       "id": 4864856,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/home-assistant-on-a-raspberry-pi-driven-by-plain-english-g8o-temp-slug-6679663",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/smart-home-hub.html",
       "title": "Home Assistant on a Raspberry Pi, driven by plain English",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "homeassistant",
         "raspberrypi",
         "smarthome",
         "docker"
       ],
-      "bodyLen": 5090
+      "body_len": 5090,
+      "verified": true
     },
     {
       "slug": "track-my-gold",
       "id": 4864851,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/track-my-gold-a-youtube-engagement-and-affiliate-dashboard-2a6i-temp-slug-5048751",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/track-my-gold.html",
       "title": "Track My Gold: a YouTube engagement and affiliate dashboard",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "youtube",
         "contentoperations",
         "seo",
         "dashboard"
       ],
-      "bodyLen": 4655
+      "body_len": 4655,
+      "verified": true
     },
     {
       "slug": "content-autopilot",
       "id": 4864857,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/content-autopilot-draft-review-approve-publish-on-a-schedule-244h-temp-slug-8315740",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/content-autopilot.html",
       "title": "Content Autopilot: draft, review, approve, publish on a schedule",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "contentautomation",
         "humanintheloop",
         "llm",
         "buffer"
       ],
-      "bodyLen": 4445
+      "body_len": 4445,
+      "verified": true
     },
     {
       "slug": "token-killers",
       "id": 4864858,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/token-killers-cutting-ai-api-spend-without-cutting-quality-2a85-temp-slug-1383795",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/token-killers.html",
       "title": "Token Killers: cutting AI API spend without cutting quality",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "llmcost",
         "tokenoptimization",
         "modelrouting",
         "localllm"
       ],
-      "bodyLen": 4597
+      "body_len": 4597,
+      "verified": true
     },
     {
       "slug": "hermes-vision",
       "id": 4864859,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-vision-a-live-ai-agent-session-on-phone-and-glasses-484f-temp-slug-5516050",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/hermes-vision.html",
       "title": "Hermes Vision: a live AI agent session on phone and glasses",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "pwa",
         "serversentevents",
         "wearables",
         "metarayban"
       ],
-      "bodyLen": 4727
+      "body_len": 4727,
+      "verified": true
     },
     {
       "slug": "hermes-worlds",
       "id": 4864860,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-worlds-an-explorable-3d-frontier-where-the-agents-are-characters-5bc5-temp-slug-5700636",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/hermes-worlds.html",
       "title": "Hermes Worlds: an explorable 3D frontier where the agents are characters",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "webgl",
         "3d",
         "aiagents",
         "sse"
       ],
-      "bodyLen": 4518
+      "body_len": 4518,
+      "verified": true
     },
     {
       "slug": "autolisting",
       "id": 4864862,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/autolisting-a-visible-ten-step-pipeline-that-turns-property-video-into-a-finished-listing-2e55-temp-slug-2048318",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/autolisting.html",
       "title": "Autolisting: a visible ten-step pipeline that turns property video into a finished listing",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "mediapipeline",
         "ffmpeg",
         "videoprocessing",
         "realestate"
       ],
-      "bodyLen": 4926
+      "body_len": 4926,
+      "verified": true
     },
     {
       "slug": "obsidian-brain",
       "id": 4864864,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/obsidian-brain-a-live-3d-graph-of-a-note-vault-built-without-a-single-model-call-2d2c-temp-slug-4921636",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/obsidian-brain.html",
       "title": "Obsidian Brain: a live 3D graph of a note vault, built without a single model call",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "knowledgegraph",
         "obsidian",
         "webgl",
         "python"
       ],
-      "bodyLen": 4108
+      "body_len": 4108,
+      "verified": true
     },
     {
       "slug": "net-worth-ledger",
       "id": 4864865,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/net-worth-ledger-one-number-computed-from-entries-a-human-can-audit-5a43-temp-slug-77653",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/net-worth-ledger.html",
       "title": "Net Worth Ledger: one number, computed from entries a human can audit",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "financeops",
         "sql",
         "networth",
         "ledger"
       ],
-      "bodyLen": 3383
+      "body_len": 3383,
+      "verified": true
     },
     {
       "slug": "insta360-x4",
       "id": 4864866,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/insta360-x4-a-local-dashboard-for-a-360-camera-mounted-behind-a-path-prefix-1a1a-temp-slug-4895120",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/insta360-x4.html",
       "title": "Insta360 X4: a local dashboard for a 360 camera, mounted behind a path prefix",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "hardware",
         "insta360",
         "localdashboard",
         "webui"
       ],
-      "bodyLen": 3275
+      "body_len": 3275,
+      "verified": true
     },
     {
       "slug": "agentic-ai-course",
       "id": 4864868,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/applied-agentic-ai-what-survived-contact-with-a-real-agent-fleet-41ei-temp-slug-89796",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/agentic-ai-course.html",
       "title": "Applied Agentic AI: what survived contact with a real agent fleet",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "agenticai",
         "training",
         "agentdesign",
         "guardrails"
       ],
-      "bodyLen": 3564
+      "body_len": 3564,
+      "verified": true
     },
     {
       "slug": "project-showcase-engine",
       "id": 4864869,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/project-showcase-engine-the-daily-pipeline-that-generates-this-portfolio-506e-temp-slug-518112",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/project-showcase-engine.html",
       "title": "Project Showcase Engine: the daily pipeline that generates this portfolio",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "staticsite",
         "generator",
         "automation",
         "cron"
       ],
-      "bodyLen": 4959
+      "body_len": 4959,
+      "verified": true
     },
     {
       "slug": "cnbc-live-on-glasses",
       "id": 4864870,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/cnbc-live-on-the-meta-ray-ban-display-a-proxy-in-front-of-a-referer-gated-cdn-3952-temp-slug-9985471",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/cnbc-live-on-glasses.html",
       "title": "CNBC live on the Meta Ray-Ban Display: a proxy in front of a Referer-gated CDN",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "streaming",
         "hls",
         "proxy",
         "wearables"
       ],
-      "bodyLen": 4698
+      "body_len": 4698,
+      "verified": true
     },
     {
       "slug": "gold-spot-explorer",
       "id": 4864871,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/gold-spot-explorer-ranking-historical-gold-ground-against-bare-earth-lidar-j78-temp-slug-984874",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/gold-spot-explorer.html",
       "title": "Gold Spot Explorer: ranking historical gold ground against bare-earth LiDAR",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "geospatial",
         "lidar",
         "goldprospecting",
         "3dterrain"
       ],
-      "bodyLen": 4880
+      "body_len": 4880,
+      "verified": true
     },
     {
       "slug": "ai-consulting",
       "id": 4864854,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/ai-consulting-the-commercial-half-of-the-portfolio-built-on-the-same-board-2eo-temp-slug-1023725",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/ai-consulting.html",
       "title": "AI Consulting: the commercial half of the portfolio, built on the same board",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "consulting",
         "automation",
         "pricing",
         "intake"
       ],
-      "bodyLen": 3620
+      "body_len": 3620,
+      "verified": true
     },
     {
       "slug": "openclaw",
       "id": 4864872,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/openclaw-a-local-agent-gateway-configured-in-one-auditable-file-1f62-temp-slug-5691914",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/openclaw.html",
       "title": "OpenClaw: a local agent gateway, configured in one auditable file",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "gateway",
         "agents",
         "messaging",
         "configuration"
       ],
-      "bodyLen": 3964
+      "body_len": 3964,
+      "verified": true
     },
     {
       "slug": "muse-prototypes",
       "id": 4864873,
+      "edit_url": "https://dev.to/dashboard",
       "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/muse-prototypes-the-same-3d-world-packaged-to-be-opened-rather-than-deployed-2h94-temp-slug-7400802",
+      "canonical_url": "https://sport.taila73942.ts.net/portfolio/project/muse-prototypes.html",
       "title": "Muse Prototypes: the same 3D world, packaged to be opened rather than deployed",
-      "titleMatch": true,
-      "bodyMatch": true,
-      "isDraft": true,
-      "canonicalOK": true,
-      "tags": [
+      "published": false,
+      "tag_list": [
         "prototypes",
         "3d",
         "aiagents",
         "shareabledemos"
       ],
-      "bodyLen": 3186
+      "body_len": 3186,
+      "verified": true
     }
   ]
 }
