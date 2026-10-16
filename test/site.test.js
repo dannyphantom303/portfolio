@@ -123,6 +123,30 @@ test('router: /portfolio handler exists and is traversal-guarded', () => {
   assert.match(src, /startsWith\('\/Users\/dan\/portfolio\/dist'\)/, 'dist containment guard present');
 });
 
+test('publish: review dashboard lists every draft and leaks no token into the file', () => {
+  const out = execFileSync('node', ['publish-dashboard.js'], { cwd: ROOT, encoding: 'utf8' });
+  assert.match(out, /publish-dashboard: wrote/, 'generator reports a write');
+  const html = fs.readFileSync(path.join(ROOT, 'publish', 'index.html'), 'utf8');
+  const state = JSON.parse(fs.readFileSync(path.join(ROOT, 'publish', 'state.json'), 'utf8'));
+  const pub = reg.projects.filter(p => p.publicSafe !== false);
+  for (const p of pub) {
+    assert.ok(html.includes(`id="p-${p.slug}"`), `${p.slug} card present`);
+    assert.ok(state.posts[p.slug], `${p.slug} present in approval state`);
+  }
+  // The page is served on the Funnel, so the approval token is injected at serve time by the
+  // router — it must never be baked into the on-disk file.
+  assert.ok(!/hermes-command-token/.test(html), 'no token file path in the page');
+  assert.match(html, /__PUBLISH_TOKEN__ = window\.__PUBLISH_TOKEN__ \|\| null/, 'token placeholder survives for router injection');
+});
+
+test('router: /publish is served + slash-redirected and the approve endpoint is token-gated', () => {
+  const src = fs.readFileSync('/Users/dan/Scripts/tmg-router.js', 'utf8');
+  assert.match(src, /pathname === '\/publish'\)[\s\S]*?301[\s\S]*?Location: '\/publish\/'/, 'slash redirect present');
+  assert.match(src, /pathname === '\/publish\/'[\s\S]{0,200}?PUBLISH_DIR[\s\S]{0,200}?'index\.html'/, 'dashboard served at trailing slash');
+  assert.match(src, /PUBLISH_DIR = '\/Users\/dan\/portfolio\/publish'/, 'dashboard served from the portfolio publish dir');
+  assert.match(src, /pathname === '\/publish\/api\/approve'[\s\S]{0,200}?hwAuth\(req, res\)/, 'approve endpoint is token-gated');
+});
+
 // ── project write-up pages (v3 restyle) ─────────────────────────────────────────────
 test('detail: every project has an authored write-up with all sections', () => {
   const detail = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'projects-detail.json'), 'utf8'));

@@ -16,6 +16,7 @@ node "$PWD/discover.js" >> "$LOG" 2>&1 || true
 python3 "$PWD/make-video.py" all >> "$LOG" 2>&1 || true
 node build.js >> "$LOG" 2>&1
 node syndicate.js >> "$LOG" 2>&1 || true
+node publish-dashboard.js >> "$LOG" 2>&1 || true
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git add -A >> "$LOG" 2>&1 || true
   if ! git diff --cached --quiet; then

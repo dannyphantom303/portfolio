@@ -32,6 +32,9 @@ const ALIAS = {
   '/hermes-home': 'smart-home-hub',
 };
 
+// Internal dashboards that must never become a portfolio project (no public artifact).
+const IGNORE = new Set(['/publish']);
+
 const pathOf = href => {
   try { return new URL(href, 'https://local.invalid').pathname.replace(/\/+$/, '') || '/'; }
   catch { return ''; }
@@ -72,6 +75,7 @@ function main() {
   const added = [];
 
   for (const c of cards) {
+    if (IGNORE.has(c.pathname)) continue;
     const slug = ALIAS[c.pathname] || slugify(c.name);
     if (existingSlugs.has(slug)) continue;
     const sensitive = SENSITIVE.test(c.href);

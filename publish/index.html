@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Publish Queue — Daniel Daymude portfolio write-ups</title>
+<meta name="robots" content="noindex">
+<style>/* Project write-up page stylesheet — shares the v3 design language with src/index.html
+   (same tokens, nav, ink band, neumorphic wells, pills, footer). build.js inlines this file
+   into every dist/project/*.html page. Keep the token block identical to index.html's :root. */
+:root{
+  --page:#f1f1f3;
+  --ink-900:#111214; --ink-800:#1e1f21; --ink-700:#2a2b2e; --ink-600:#3d3f43;
+  --ink-500:#5c5e63; --ink-400:#7c7f85; --ink-300:#a3a5aa; --ink-200:#bcbec2;
+  --hairline:rgba(17,18,20,.13);
+  --neu-light:rgba(255,255,255,.92); --neu-dark:rgba(17,18,20,.16);
+  --raised:-2px -2px 4px var(--neu-light), 3px 4px 7px var(--neu-dark);
+  --raised-lg:-6px -6px 14px var(--neu-light), 8px 10px 22px var(--neu-dark);
+  --pushed:inset 2px 3px 5px var(--neu-dark), inset -2px -2px 4px var(--neu-light);
+  --live:#4dffa3; --info:#54daff; --stop:#ff5f5f;
+  --ease:cubic-bezier(.2,0,0,1);
+  --font-sans:"Geist",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--page);color:var(--ink-700);font:400 16px/1.55 var(--font-sans);
+  letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:min(1160px,100vw - 40px);margin:0 auto}
+.mono{font-family:var(--font-mono)}
+.eyebrow{font:700 12px/1 var(--font-mono);letter-spacing:2.5px;color:var(--ink-400);margin-bottom:16px}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:20;background:rgba(241,241,243,.86);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--hairline)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:700;font-size:15px;letter-spacing:-.01em}
+.brand small{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-400);letter-spacing:1.5px;margin-left:10px}
+.navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink-500)}
+.navlinks a:hover{color:var(--ink-900)}
+.nav-cta{font-size:13.5px;font-weight:700;background:var(--page);border-radius:999px;
+  padding:10px 20px;box-shadow:var(--raised);transition:box-shadow .2s var(--ease)}
+.nav-cta:hover{box-shadow:var(--raised-lg)}
+.nav-cta:active{box-shadow:var(--pushed)}
+
+/* ---------- HERO / INK ---------- */
+.hero{padding:40px 0 8px}
+.ink{background:var(--ink-900);border-radius:28px;color:#fff;padding:clamp(40px,6vw,84px) clamp(28px,5vw,72px);
+  box-shadow:var(--raised-lg);position:relative;overflow:hidden}
+.ink .eyebrow{color:var(--ink-300)}
+.ink h1{font-size:clamp(38px,6.5vw,66px);font-weight:700;letter-spacing:-.035em;line-height:1.02;max-width:20ch}
+.ink h1 .soft{color:var(--ink-300)}
+.ink .sub{color:var(--ink-200);font-size:clamp(16px,2.2vw,19px);max-width:62ch;margin:26px 0 38px}
+.ink .sub b{color:#fff;font-weight:600}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 30px;border-radius:999px;font-weight:700;font-size:15px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.btn.light{background:#fff;color:var(--ink-900)}
+.btn.light:hover{transform:translateY(-2px)}
+.btn.ghostd{border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn.ghostd:hover{border-color:rgba(255,255,255,.6)}
+.btn.dark{background:var(--ink-900);color:#fff}
+.btn.dark:hover{transform:translateY(-2px)}
+.btn.line{border:1px solid var(--hairline);color:var(--ink-700);background:var(--page);box-shadow:var(--raised)}
+.hero-stats{display:flex;gap:clamp(24px,5vw,64px);margin-top:52px;flex-wrap:wrap}
+.hstat .v{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.hstat .v em{font-style:normal;color:var(--live)}
+.hstat .k{font:700 10.5px var(--font-mono);letter-spacing:2px;color:var(--ink-400);margin-top:4px}
+
+/* ---------- SECTIONS ---------- */
+section{padding:72px 0 8px}
+.sec-head{margin-bottom:34px;max-width:760px}
+.sec-head h2{font-size:clamp(30px,4.5vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.sec-head h2 .soft{color:var(--ink-300)}
+.sec-head p{color:var(--ink-500);font-size:16px}
+.prose{max-width:74ch;color:var(--ink-600);font-size:17px}
+
+/* ---------- WELLS (neu pressed media frame) ---------- */
+.well{margin:0;border-radius:20px;box-shadow:var(--pushed);overflow:hidden;position:relative;
+  aspect-ratio:16/9;background:var(--page)}
+.well svg{width:100%;height:100%;display:block}
+.well.wide{aspect-ratio:16/9}
+.well.quad{aspect-ratio:16/8}
+.reel-chip{position:absolute;top:10px;left:10px;z-index:2;display:flex;align-items:center;gap:7px;
+  background:var(--ink-900);color:#fff;border-radius:999px;font:700 10px var(--font-mono);
+  letter-spacing:1.5px;padding:6px 12px 6px 9px}
+.reel-chip i{width:7px;height:7px;border-radius:50%;background:var(--live);animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.demo-frame{display:grid;grid-template-columns:1.35fr .85fr;gap:26px;align-items:start}
+.demo-side{background:var(--page);border-radius:20px;box-shadow:var(--raised);padding:24px 26px}
+.demo-side h3{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:12px}
+.demo-side ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.demo-side li{font-size:13.5px;color:var(--ink-500);padding-left:16px;position:relative}
+.demo-side li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--ink-300)}
+.demo-side .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:8px 0;border-bottom:1px solid var(--hairline)}
+.demo-side .kv:last-of-type{border-bottom:0}
+.demo-side .kv b{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.4px;font-weight:700;color:var(--ink-700)}
+
+/* ---------- PILLS / TAGS ---------- */
+.pill{font:700 10.5px var(--font-mono);letter-spacing:1.4px;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.st-live{background:#e2f6e9;color:#15803d}
+.st-int{background:#e8eaee;color:var(--ink-500)}
+.st-done{background:var(--ink-900);color:#fff}
+.st-build{background:#fdf0d9;color:#b45309}
+.st-online{background:#e0f3fc;color:#0369a1}
+.st-free{background:#efe8fb;color:#7c3aed}
+.tstack{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+.tstack span{font:600 11.5px var(--font-mono);color:var(--ink-500);background:var(--page);
+  border-radius:999px;padding:4px 11px;box-shadow:var(--raised)}
+
+/* ---------- STEPS (how it works / how to build) ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:26px}
+.step{background:var(--page);border-radius:20px;box-shadow:var(--raised);padding:24px 26px}
+.step .n{font:700 11px var(--font-mono);letter-spacing:1.6px;color:var(--ink-400)}
+.step h3{font-size:16.5px;font-weight:700;letter-spacing:-.015em;margin:10px 0 8px}
+.step p{font-size:14px;color:var(--ink-500)}
+.steps.ordered .step .n::before{content:"STEP "}
+.step code{font-family:var(--font-mono);font-size:12.5px;background:rgba(17,18,20,.06);border-radius:6px;padding:2px 6px}
+
+/* ---------- COST TABLE ---------- */
+.cost-card{background:var(--page);border-radius:24px;box-shadow:var(--raised);padding:clamp(22px,3vw,34px);margin-top:26px}
+table.cost{width:100%;border-collapse:collapse;font-size:14px}
+table.cost th{font:700 10.5px var(--font-mono);letter-spacing:1.6px;color:var(--ink-400);
+  text-align:left;padding:0 12px 12px 0;border-bottom:1px solid var(--hairline);white-space:nowrap}
+table.cost td{padding:14px 12px 14px 0;border-bottom:1px solid var(--hairline);vertical-align:top;color:var(--ink-500)}
+table.cost td b{color:var(--ink-800);font-weight:700}
+table.cost td.model{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-700)}
+table.cost tr:last-child td{border-bottom:0}
+.cost-note{margin-top:22px;padding-top:20px;border-top:1px solid var(--hairline);font-size:14.5px;color:var(--ink-600);max-width:78ch}
+.rate-tag{display:inline-block;font:700 10.5px var(--font-mono);letter-spacing:1px;border-radius:999px;padding:4px 10px;margin-top:2px}
+.rate-free{background:#e2f6e9;color:#15803d}
+.rate-local{background:#e0f3fc;color:#0369a1}
+.rate-paid{background:#fdecec;color:#b91c1c}
+.rate-credit{background:#fdf0d9;color:#b45309}
+.price-table{width:100%;border-collapse:collapse;font:13px/1.5 var(--font-mono);margin-top:18px}
+.price-table th{font:700 10.5px var(--font-mono);letter-spacing:1.6px;color:var(--ink-400);text-align:left;
+  padding:0 12px 10px 0;border-bottom:1px solid var(--hairline)}
+.price-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--hairline);color:var(--ink-600)}
+.price-table td.num{text-align:right;white-space:nowrap}
+
+/* ---------- LESSONS ---------- */
+.lessons{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;margin-top:26px}
+.lesson{background:var(--ink-900);color:#fff;border-radius:20px;padding:24px 26px;font-size:15px;line-height:1.5}
+.lesson span{display:block;font:700 10.5px var(--font-mono);letter-spacing:2px;color:var(--live);margin-bottom:10px}
+
+/* ---------- MEDIA / GALLERY ---------- */
+.vid{margin:22px 0;max-width:860px}
+.vid video{width:100%;border-radius:18px;display:block;box-shadow:var(--raised-lg);background:#000}
+.gif{margin:22px 0;max-width:860px}
+.gif img{width:100%;border-radius:18px;display:block;box-shadow:var(--raised-lg)}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:22px 0}
+.shots img{width:100%;border-radius:16px;display:block;box-shadow:var(--raised)}
+.fine-note{margin-top:22px;font:600 12px var(--font-mono);letter-spacing:.5px;color:var(--ink-400)}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.stack span{font:600 12px var(--font-mono);color:var(--ink-600);background:var(--page);
+  border-radius:999px;padding:5px 13px;box-shadow:var(--raised)}
+.hl{margin:18px 0 0;list-style:none;display:grid;gap:12px;max-width:80ch}
+.hl li{position:relative;padding-left:22px;color:var(--ink-600);font-size:15.5px}
+.hl li::before{content:"—";position:absolute;left:0;color:var(--ink-300)}
+
+/* ---------- FOOTER ---------- */
+footer{padding:64px 0 40px}
+.foot-card{background:var(--page);border-radius:28px;box-shadow:var(--raised);padding:clamp(36px,5vw,64px);text-align:center}
+.foot-card h2{font-size:clamp(30px,4.5vw,44px);font-weight:700;letter-spacing:-.03em;margin-bottom:12px}
+.foot-card p{color:var(--ink-500);max-width:52ch;margin:0 auto 30px}
+.fine{margin-top:44px;padding-top:24px;border-top:1px solid var(--hairline);display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font:600 12px var(--font-mono);letter-spacing:.5px;color:var(--ink-400)}
+
+/* ---------- SVG DEMO ANIMATIONS (shared with index.html cards) ---------- */
+.drawline{stroke-dasharray:600;stroke-dashoffset:600;animation:draw 9s ease-in-out infinite}
+@keyframes draw{0%{stroke-dashoffset:600}55%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+.pulse-ring{opacity:0;transform-origin:center;transform-box:fill-box;animation:pring 2.6s ease-out infinite}
+@keyframes pring{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(1.5)}}
+.wave rect{animation:wv 1.1s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes wv{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.npc-dot{animation:npcwalk 10s linear infinite}
+@keyframes npcwalk{0%{offset-distance:0%;opacity:0}6%{opacity:1}88%{opacity:1}96%,100%{offset-distance:100%;opacity:0}}
+.terml{opacity:0;animation:tl 14s infinite}
+@keyframes tl{0%{opacity:0}3%,80%{opacity:1}92%,100%{opacity:0}}
+.cursorblink{animation:blink 1s steps(1) infinite}
+.bub{opacity:0;animation:bubIn 18s infinite}
+@keyframes bubIn{0%{opacity:0;transform:translateY(8px)}3%,84%{opacity:1;transform:translateY(0)}93%,100%{opacity:0}}
+.typing circle{animation:tp 1.2s infinite}
+.typing circle:nth-child(2){animation-delay:.2s}.typing circle:nth-child(3){animation-delay:.4s}
+@keyframes tp{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.bar{transform-origin:left center;transform-box:fill-box;animation:bg 6s ease-in-out infinite}
+@keyframes bg{0%{transform:scaleX(.06);opacity:0}10%{opacity:1}50%,80%{transform:scaleX(1);opacity:1}95%,100%{transform:scaleX(1);opacity:0}}
+.barv{transform-origin:bottom center;transform-box:fill-box;animation:bv 5s ease-in-out infinite}
+@keyframes bv{0%{transform:scaleY(.15);opacity:0}12%{opacity:1}50%,82%{transform:scaleY(1);opacity:1}94%,100%{transform:scaleY(1);opacity:0}}
+.checkmark{stroke-dasharray:40;stroke-dashoffset:40;animation:ck 7s ease-in-out infinite}
+@keyframes ck{0%,15%{stroke-dashoffset:40}40%,80%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:0;opacity:0}}
+.recdot{animation:blink 1.4s infinite}
+.docline{opacity:0;animation:tl 12s infinite}
+@media (prefers-reduced-motion:reduce){
+  .drawline,.pulse-ring,.wave rect,.npc-dot,.terml,.cursorblink,.bub,.typing circle,
+  .bar,.barv,.checkmark,.recdot,.docline,.reel-chip i{animation:none!important;opacity:1!important}
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){.demo-frame{grid-template-columns:1fr}}
+@media(max-width:680px){
+  .navlinks{display:none}
+  section{padding:52px 0 8px}
+  table.cost td.hide-sm,table.cost th.hide-sm{display:none}
+}
+
+/* ── publish review dashboard ─────────────────────────────── */
+.pwrap{max-width:min(1120px,100vw - 32px);margin:0 auto;padding:28px 0 80px}
+.phero{background:var(--ink-900);color:#fff;border-radius:24px;padding:26px 28px;margin-bottom:22px}
+.phero h1{font-size:26px;letter-spacing:-.02em;margin-bottom:8px;color:#fff}
+.phero p{color:#c9cbd0;font-size:14.5px;max-width:70ch}
+.phero .stats{display:flex;gap:26px;margin-top:18px;flex-wrap:wrap}
+.phero .stat b{display:block;font:700 24px/1 var(--font-mono);color:var(--live)}
+.phero .stat span{font:600 10.5px/1 var(--font-mono);letter-spacing:1.5px;color:#8f9298}
+.pnote{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.06);
+  font-size:13px;color:#c9cbd0;line-height:1.5}
+.pplatforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-bottom:22px}
+.ppanel{background:var(--page);border-radius:18px;padding:16px 18px;box-shadow:var(--raised)}
+.ppanel.ok .dot{background:var(--live)}.ppanel.warn .dot{background:var(--stop)}
+.ppanel-h{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;margin-bottom:8px}
+.ppanel-h .mono{margin-left:auto;font-size:11px;color:var(--ink-400);letter-spacing:1px}
+.ppanel .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.ppanel p{font-size:13px;color:var(--ink-500);line-height:1.5;margin-bottom:8px}
+.phow{font-size:11.5px;background:var(--ink-900);color:#d7d9de;padding:10px 12px;border-radius:10px;
+  overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+.pcard{background:var(--page);border-radius:20px;padding:18px 20px;box-shadow:var(--raised);margin-bottom:14px}
+.phead{display:flex;align-items:flex-start;gap:14px}
+.picon{font-size:26px;line-height:1;width:44px;height:44px;flex:0 0 44px;display:flex;align-items:center;justify-content:center;
+  border-radius:13px;box-shadow:var(--pushed)}
+.ptitle{flex:1;min-width:0}
+.ptitle h2{font-size:16.5px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pslug{font-size:10.5px;color:var(--ink-400);letter-spacing:.5px}
+.ptag{font-size:13.5px;color:var(--ink-500);margin-top:3px}
+.plink{font-size:11.5px;color:var(--ink-400);white-space:nowrap;padding-top:4px}
+.plink:hover{color:var(--ink-900)}
+.pchips{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+.pchip{display:flex;align-items:center;gap:8px;border:0;cursor:pointer;font:inherit;
+  padding:7px 12px;border-radius:999px;background:var(--page);box-shadow:var(--raised);transition:box-shadow .15s var(--ease)}
+.pchip:hover{box-shadow:var(--raised-lg)}
+.pchip:active{box-shadow:var(--pushed)}
+.pchip .pname{font-size:12.5px;font-weight:700}
+.pchip .pval{font:600 10.5px/1 var(--font-mono);letter-spacing:.5px;padding:3px 6px;border-radius:6px;background:rgba(17,18,20,.06);color:var(--ink-400)}
+.pchip.approved .pval{background:rgba(77,255,163,.28);color:#0d5c35}
+.pchip.published .pval{background:var(--ink-900);color:var(--live)}
+.pchip.blocked .pval{background:rgba(255,95,95,.2);color:#a12626}
+.pdraft{margin-top:6px}
+.pdraft summary{cursor:pointer;font-size:12.5px;color:var(--ink-400);font-weight:600;padding:6px 0}
+.pdraft summary .mono{font-weight:400;color:var(--ink-300)}
+.psrc{font:11.5px/1.5 var(--font-mono);white-space:pre-wrap;word-break:break-word;background:var(--ink-900);color:#d7d9de;
+  padding:14px;border-radius:12px;margin:8px 0}
+.prender{font-size:13.5px;color:var(--ink-600);border-left:2px solid var(--hairline);padding-left:14px}
+.prender h3{font-size:14px;margin:10px 0 4px}
+.prender p{margin:6px 0}
+.prender ul{margin:6px 0 6px 18px}
+.pbar{position:fixed;left:0;right:0;bottom:0;background:rgba(241,241,243,.92);backdrop-filter:blur(12px);
+  border-top:1px solid var(--hairline);padding:10px 18px;display:flex;gap:14px;align-items:center;font-size:13px;z-index:30}
+.pbar .grow{flex:1}
+.pbar button{font:600 12.5px inherit;padding:9px 16px;border:0;border-radius:999px;background:var(--page);
+  box-shadow:var(--raised);cursor:pointer}
+.pbar button:active{box-shadow:var(--pushed)}
+</style></head>
+<body>
+<div class="pwrap">
+  <nav class="wrap" style="max-width:none">
+    <div class="brand">Publish Queue <small>PORTFOLIO WRITE-UPS</small></div>
+    <div class="navlinks"><a href="/portfolio/">← portfolio</a><a href="/">command center</a></div>
+  </nav>
+
+  <section class="phero" style="margin-top:18px">
+    <h1>Review the 18 publish drafts</h1>
+    <p>Every draft below is generated from the live write-up. Tap a platform chip to cycle it
+       <b>pending → approved → blocked</b>; approvals are saved to the server. Nothing publishes itself —
+       a draft only goes out when its platform reads <b>approved</b> and the platform is reachable.</p>
+    <div class="stats">
+      <div class="stat"><b>18</b><span>DRAFTS</span></div>
+      <div class="stat"><b>3</b><span>PLATFORMS</span></div>
+      <div class="stat"><b id="n-approved">0</b><span>APPROVALS</span></div>
+      <div class="stat"><b id="n-ready">0/3</b><span>PLATFORMS READY</span></div>
+    </div>
+    <div class="pnote">House rule: posts land as drafts for review. Blogger drafts never auto-publish;
+      dev.to/GitHub only fire on an approved chip. Credentials this machine is still missing are listed right below.</div>
+  </section>
+
+  <section class="pplatforms">
+  <div class="ppanel warn">
+    <div class="ppanel-h"><span class="dot"></span>Blogger <span class="mono">needs-login</span></div>
+    <p>Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing).</p>
+    <pre class="phow mono">Sign in to blogger.com as ddaymude.ai@gmail.com in the browser, then run: node publish-run.js --platforms blogger</pre>
+  </div>
+  <div class="ppanel warn">
+    <div class="ppanel-h"><span class="dot"></span>dev.to <span class="mono">needs-key</span></div>
+    <p>DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval.</p>
+    <pre class="phow mono">Add DEVTO_API_KEY=… to /Users/dan/portfolio/.env, then: node publish-run.js --platforms devto</pre>
+  </div>
+  <div class="ppanel warn">
+    <div class="ppanel-h"><span class="dot"></span>GitHub <span class="mono">needs-auth</span></div>
+    <p>No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists.</p>
+    <pre class="phow mono">Create the repo as ddaymude.ai, then: git remote add origin &lt;url&gt; &amp;&amp; bash deploy-github-pages.sh</pre>
+  </div></section>
+
+  <section id="cards"><article class="pcard" id="p-sport-command-center">
+  <header class="phead">
+    <div class="picon">🚀</div>
+    <div class="ptitle">
+      <h2>Sport — Multi-Agent AI Operations System <span class="pslug mono">sport-command-center</span></h2>
+      <p class="ptag">A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.</p>
+    </div>
+    <a class="plink mono" href="project/sport-command-center.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="sport-command-center" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="sport-command-center" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="sport-command-center" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">1278 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Sport — Multi-Agent AI Operations System: A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.&quot;
+published: false
+tags: [&quot;hermesagent&quot;,&quot;nodejs&quot;,&quot;sqlite&quot;,&quot;tailscale&quot;]
+---
+# Sport — Multi-Agent AI Operations System
+
+**A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.**
+
+Sport is the operating system for a portfolio of AI ventures. It runs a hierarchy of agents — an executive coordinator, venture CEOs, and specialists — over a shared kanban/task bus, with approval gates on anything that leaves the machine. Built to remove the human bottleneck from repetitive operations: monitoring, research, drafting, and reporting all run as scheduled agent jobs.
+
+## Highlights
+- Multi-agent orchestration with role hierarchy and task routing
+- Approval-gated outbound actions (nothing posts or sends without sign-off)
+- Scheduled autonomous jobs + realtime status dashboard
+
+## Stack
+Hermes Agent, Node.js, SQLite, Tailscale
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/sport-command-center.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Sport — Multi-Agent AI Operations System: A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;hermesagent&quot;,&quot;nodejs&quot;,&quot;sqlite&quot;,&quot;tailscale&quot;]</p>
+<hr>
+<h3>Sport — Multi-Agent AI Operations System</h3>
+
+<p><strong>A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.</strong></p>
+
+<p>Sport is the operating system for a portfolio of AI ventures. It runs a hierarchy of agents — an executive coordinator, venture CEOs, and specialists — over a shared kanban/task bus, with approval gates on anything that leaves the machine. Built to remove the human bottleneck from repetitive operations: monitoring, research, drafting, and reporting all run as scheduled agent jobs.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Multi-agent orchestration with role hierarchy and task routing</li>
+<li>Approval-gated outbound actions (nothing posts or sends without sign-off)</li>
+<li>Scheduled autonomous jobs + realtime status dashboard</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Hermes Agent, Node.js, SQLite, Tailscale</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/sport-command-center.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/sport-command-center.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-smart-home-hub">
+  <header class="phead">
+    <div class="picon">🏠</div>
+    <div class="ptitle">
+      <h2>Smart Home Hub — Home Assistant on a Raspberry Pi <span class="pslug mono">smart-home-hub</span></h2>
+      <p class="ptag">Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.</p>
+    </div>
+    <a class="plink mono" href="project/smart-home-hub.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="smart-home-hub" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="smart-home-hub" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="smart-home-hub" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">2200 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Smart Home Hub — Home Assistant on a Raspberry Pi: Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.&quot;
+published: false
+tags: [&quot;homeassistant&quot;,&quot;raspberrypi5&quot;,&quot;docker&quot;,&quot;tailscale&quot;]
+---
+# Smart Home Hub — Home Assistant on a Raspberry Pi
+
+**Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.**
+
+A Raspberry Pi 5 running Home Assistant in Docker, with Mosquitto and ESPHome alongside it, reachable over a private tailnet instead of the public internet — the house is never exposed. On top of it sits a plain-English automation builder: describe the automation you want in one sentence, from a text box on the dashboard or by voice, and a scheduled agent picks it up, writes the real Home Assistant automation, validates it through the config API, reloads the config, and writes the outcome back to the dashboard. The chain is event-driven and silent when idle, so it costs nothing until there is something to build. A nightly job mirrors the Home Assistant configuration to a second machine and the restore drill has been run, so a bad automation cannot take the house down.
+
+## Highlights
+- Plain-English to working automation: type or speak a request and a scheduled agent writes, validates and deploys it, then reports the result back
+- Custom dashboard rather than the stock overview — the builder, the live automation list, hub health and backup status on one page, served over a private tailnet and never the public internet
+- Nightly configuration mirror to a second machine with a tested restore path
+- Running today: morning weather and sunrise briefing, shopping-list reminder, a left-on watchdog for the media player, and an automatic-backup staleness alert
+
+## Stack
+Home Assistant, Raspberry Pi 5, Docker, Tailscale, Python, YAML, Hermes Agent
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/smart-home-hub.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Smart Home Hub — Home Assistant on a Raspberry Pi: Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;homeassistant&quot;,&quot;raspberrypi5&quot;,&quot;docker&quot;,&quot;tailscale&quot;]</p>
+<hr>
+<h3>Smart Home Hub — Home Assistant on a Raspberry Pi</h3>
+
+<p><strong>Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.</strong></p>
+
+<p>A Raspberry Pi 5 running Home Assistant in Docker, with Mosquitto and ESPHome alongside it, reachable over a private tailnet instead of the public internet — the house is never exposed. On top of it sits a plain-English automation builder: describe the automation you want in one sentence, from a text box on the dashboard or by voice, and a scheduled agent picks it up, writes the real Home Assistant automation, validates it through the config API, reloads the config, and writes the outcome back to the dashboard. The chain is event-driven and silent when idle, so it costs nothing until there is something to build. A nightly job mirrors the Home Assistant configuration to a second machine and the restore drill has been run, so a bad automation cannot take the house down.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Plain-English to working automation: type or speak a request and a scheduled agent writes, validates and deploys it, then reports the result back</li>
+<li>Custom dashboard rather than the stock overview — the builder, the live automation list, hub health and backup status on one page, served over a private tailnet and never the public internet</li>
+<li>Nightly configuration mirror to a second machine with a tested restore path</li>
+<li>Running today: morning weather and sunrise briefing, shopping-list reminder, a left-on watchdog for the media player, and an automatic-backup staleness alert</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Home Assistant, Raspberry Pi 5, Docker, Tailscale, Python, YAML, Hermes Agent</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/smart-home-hub.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/smart-home-hub.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-track-my-gold">
+  <header class="phead">
+    <div class="picon">⛏️</div>
+    <div class="ptitle">
+      <h2>Track My Gold <span class="pslug mono">track-my-gold</span></h2>
+      <p class="ptag">A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.</p>
+    </div>
+    <a class="plink mono" href="project/track-my-gold.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="track-my-gold" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="track-my-gold" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="track-my-gold" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">1133 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Track My Gold: A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.&quot;
+published: false
+tags: [&quot;nodejs&quot;,&quot;youtubeapi&quot;,&quot;instagramapi&quot;,&quot;seotooling&quot;]
+---
+# Track My Gold
+
+**A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.**
+
+Track My Gold is a content-operation dashboard: it surfaces video performance, manages an approval queue for comments and engagement, tracks affiliate revenue, and runs SEO checks — all in one panel. It shows how I turn a creator workflow into a measurable, automatable pipeline rather than a pile of spreadsheets.
+
+## Highlights
+- Unified metrics across YouTube, Instagram, and affiliate channels
+- Approval queue for outbound engagement (review, edit, approve)
+- SEO + content-strategy panels driving weekly decisions
+
+## Stack
+Node.js, YouTube API, Instagram API, SEO tooling
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/track-my-gold.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Track My Gold: A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;nodejs&quot;,&quot;youtubeapi&quot;,&quot;instagramapi&quot;,&quot;seotooling&quot;]</p>
+<hr>
+<h3>Track My Gold</h3>
+
+<p><strong>A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.</strong></p>
+
+<p>Track My Gold is a content-operation dashboard: it surfaces video performance, manages an approval queue for comments and engagement, tracks affiliate revenue, and runs SEO checks — all in one panel. It shows how I turn a creator workflow into a measurable, automatable pipeline rather than a pile of spreadsheets.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Unified metrics across YouTube, Instagram, and affiliate channels</li>
+<li>Approval queue for outbound engagement (review, edit, approve)</li>
+<li>SEO + content-strategy panels driving weekly decisions</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Node.js, YouTube API, Instagram API, SEO tooling</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/track-my-gold.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/track-my-gold.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-content-autopilot">
+  <header class="phead">
+    <div class="picon">📝</div>
+    <div class="ptitle">
+      <h2>Content Autopilot <span class="pslug mono">content-autopilot</span></h2>
+      <p class="ptag">An AI content pipeline: draft, review, approve, and publish on a schedule.</p>
+    </div>
+    <a class="plink mono" href="project/content-autopilot.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="content-autopilot" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="content-autopilot" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="content-autopilot" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">997 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Content Autopilot: An AI content pipeline: draft, review, approve, and publish on a schedule.&quot;
+published: false
+tags: [&quot;nodejs&quot;,&quot;llmdrafting&quot;,&quot;bufferapi&quot;]
+---
+# Content Autopilot
+
+**An AI content pipeline: draft, review, approve, and publish on a schedule.**
+
+Content Autopilot generates draft posts, routes them through a human review step, and publishes approved content automatically. It&#39;s a clean example of human-in-the-loop automation: the machine does the volume, the human keeps the judgment.
+
+## Highlights
+- AI-drafted posts with review/edit/redo controls
+- One-click publish to social scheduling (Buffer)
+- Built for wearable/AR review surfaces (Meta Ray-Ban, Quest)
+
+## Stack
+Node.js, LLM drafting, Buffer API
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/content-autopilot.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Content Autopilot: An AI content pipeline: draft, review, approve, and publish on a schedule.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;nodejs&quot;,&quot;llmdrafting&quot;,&quot;bufferapi&quot;]</p>
+<hr>
+<h3>Content Autopilot</h3>
+
+<p><strong>An AI content pipeline: draft, review, approve, and publish on a schedule.</strong></p>
+
+<p>Content Autopilot generates draft posts, routes them through a human review step, and publishes approved content automatically. It&#39;s a clean example of human-in-the-loop automation: the machine does the volume, the human keeps the judgment.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>AI-drafted posts with review/edit/redo controls</li>
+<li>One-click publish to social scheduling (Buffer)</li>
+<li>Built for wearable/AR review surfaces (Meta Ray-Ban, Quest)</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Node.js, LLM drafting, Buffer API</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/content-autopilot.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/content-autopilot.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-token-killers">
+  <header class="phead">
+    <div class="picon">💸</div>
+    <div class="ptitle">
+      <h2>Token Killers — LLM Cost Optimization <span class="pslug mono">token-killers</span></h2>
+      <p class="ptag">A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.</p>
+    </div>
+    <a class="plink mono" href="project/token-killers.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="token-killers" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="token-killers" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="token-killers" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">1203 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Token Killers — LLM Cost Optimization: A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.&quot;
+published: false
+tags: [&quot;llmapis&quot;,&quot;localllmsollamalmstudio&quot;,&quot;promptengineering&quot;]
+---
+# Token Killers — LLM Cost Optimization
+
+**A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.**
+
+Token Killers is an audit-and-rebuild service for teams bleeding money on AI APIs. It combines prompt/context compression, model routing, caching, and local-model offload — then proves the savings with a before/after calculator. The differentiator is that I run the same stack on my own hardware, so the claims are verifiable, not theoretical.
+
+## Highlights
+- Interactive savings calculator (public lead magnet)
+- Local-LLM offload for privacy + zero marginal cost
+- Playbook productized as a paid PDF
+
+## Stack
+LLM APIs, Local LLMs (Ollama/LM Studio), Prompt engineering
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/token-killers.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Token Killers — LLM Cost Optimization: A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;llmapis&quot;,&quot;localllmsollamalmstudio&quot;,&quot;promptengineering&quot;]</p>
+<hr>
+<h3>Token Killers — LLM Cost Optimization</h3>
+
+<p><strong>A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.</strong></p>
+
+<p>Token Killers is an audit-and-rebuild service for teams bleeding money on AI APIs. It combines prompt/context compression, model routing, caching, and local-model offload — then proves the savings with a before/after calculator. The differentiator is that I run the same stack on my own hardware, so the claims are verifiable, not theoretical.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Interactive savings calculator (public lead magnet)</li>
+<li>Local-LLM offload for privacy + zero marginal cost</li>
+<li>Playbook productized as a paid PDF</li>
+</ul>
+
+<h3>Stack</h3>
+<p>LLM APIs, Local LLMs (Ollama/LM Studio), Prompt engineering</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/token-killers.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/token-killers.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-hermes-vision">
+  <header class="phead">
+    <div class="picon">👓</div>
+    <div class="ptitle">
+      <h2>Hermes Vision — AI on Phone &amp; Glasses <span class="pslug mono">hermes-vision</span></h2>
+      <p class="ptag">A mobile/wearable client that connects a device to a running AI agent session.</p>
+    </div>
+    <a class="plink mono" href="project/hermes-vision.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="hermes-vision" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="hermes-vision" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="hermes-vision" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">1069 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Hermes Vision — AI on Phone &amp; Glasses: A mobile/wearable client that connects a device to a running AI agent session.&quot;
+published: false
+tags: [&quot;pwa&quot;,&quot;ssestreaming&quot;,&quot;serviceworkers&quot;]
+---
+# Hermes Vision — AI on Phone &amp; Glasses
+
+**A mobile/wearable client that connects a device to a running AI agent session.**
+
+Hermes Vision puts a live AI agent session on your phone or smart glasses: pick up a session, choose a model, and stream replies in real time. The interesting engineering is the realtime streaming layer and the wearable-first UI (grid navigation, focus modes, wheel/swipe input).
+
+## Highlights
+- Server-sent-event streaming of agent replies
+- Wearable-first input model (2-D grid nav, focus paging)
+- Installable PWA with offline app shell
+
+## Stack
+PWA, SSE streaming, Service workers
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/hermes-vision.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Hermes Vision — AI on Phone &amp; Glasses: A mobile/wearable client that connects a device to a running AI agent session.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;pwa&quot;,&quot;ssestreaming&quot;,&quot;serviceworkers&quot;]</p>
+<hr>
+<h3>Hermes Vision — AI on Phone &amp; Glasses</h3>
+
+<p><strong>A mobile/wearable client that connects a device to a running AI agent session.</strong></p>
+
+<p>Hermes Vision puts a live AI agent session on your phone or smart glasses: pick up a session, choose a model, and stream replies in real time. The interesting engineering is the realtime streaming layer and the wearable-first UI (grid navigation, focus modes, wheel/swipe input).</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Server-sent-event streaming of agent replies</li>
+<li>Wearable-first input model (2-D grid nav, focus paging)</li>
+<li>Installable PWA with offline app shell</li>
+</ul>
+
+<h3>Stack</h3>
+<p>PWA, SSE streaming, Service workers</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/hermes-vision.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/hermes-vision.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-hermes-worlds">
+  <header class="phead">
+    <div class="picon">🥽</div>
+    <div class="ptitle">
+      <h2>Hermes Worlds &amp; Game — 3D AI Agent Playgrounds <span class="pslug mono">hermes-worlds</span></h2>
+      <p class="ptag">Browser 3D worlds where you walk up to AI characters and talk to them.</p>
+    </div>
+    <a class="plink mono" href="project/hermes-worlds.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="hermes-worlds" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="hermes-worlds" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="hermes-worlds" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">1065 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Hermes Worlds &amp; Game — 3D AI Agent Playgrounds: Browser 3D worlds where you walk up to AI characters and talk to them.&quot;
+published: false
+tags: [&quot;webglthreejs&quot;,&quot;ssechat&quot;,&quot;nodejs&quot;]
+---
+# Hermes Worlds &amp; Game — 3D AI Agent Playgrounds
+
+**Browser 3D worlds where you walk up to AI characters and talk to them.**
+
+Hermes Worlds is a series of explorable 3D scenes (a western frontier town, a gold mine, a saloon) populated by AI characters you can converse with and take quests from. It demonstrates realtime agent chat inside a game loop — the same named-SSE event stream that powers the other clients.
+
+## Highlights
+- Interactive 3D environments with AI NPCs
+- Realtime agent dialogue over streaming events
+- Quest/objective system driven by the agent
+
+## Stack
+WebGL/Three.js, SSE chat, Node.js
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/hermes-worlds.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Hermes Worlds &amp; Game — 3D AI Agent Playgrounds: Browser 3D worlds where you walk up to AI characters and talk to them.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;webglthreejs&quot;,&quot;ssechat&quot;,&quot;nodejs&quot;]</p>
+<hr>
+<h3>Hermes Worlds &amp; Game — 3D AI Agent Playgrounds</h3>
+
+<p><strong>Browser 3D worlds where you walk up to AI characters and talk to them.</strong></p>
+
+<p>Hermes Worlds is a series of explorable 3D scenes (a western frontier town, a gold mine, a saloon) populated by AI characters you can converse with and take quests from. It demonstrates realtime agent chat inside a game loop — the same named-SSE event stream that powers the other clients.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Interactive 3D environments with AI NPCs</li>
+<li>Realtime agent dialogue over streaming events</li>
+<li>Quest/objective system driven by the agent</li>
+</ul>
+
+<h3>Stack</h3>
+<p>WebGL/Three.js, SSE chat, Node.js</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/hermes-worlds.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/hermes-worlds.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-autolisting">
+  <header class="phead">
+    <div class="picon">🏠</div>
+    <div class="ptitle">
+      <h2>Autolisting — AI Listing Generator <span class="pslug mono">autolisting</span></h2>
+      <p class="ptag">Upload a video + details, get a finished, formatted listing in a 10-step pipeline.</p>
+    </div>
+    <a class="plink mono" href="project/autolisting.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="autolisting" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="autolisting" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="autolisting" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">992 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Autolisting — AI Listing Generator: Upload a video + details, get a finished, formatted listing in a 10-step pipeline.&quot;
+published: false
+tags: [&quot;nodejs&quot;,&quot;llm&quot;,&quot;mediaprocessing&quot;]
+---
+# Autolisting — AI Listing Generator
+
+**Upload a video + details, get a finished, formatted listing in a 10-step pipeline.**
+
+Autolisting turns raw property video and a few fields into a polished, publish-ready listing. It runs a visible 10-step pipeline so the user can see exactly where the machine is and step in when needed — automation with transparency.
+
+## Highlights
+- Video upload → structured listing
+- Visible multi-step processing pipeline
+- Reduces a manual copywriting task to a review
+
+## Stack
+Node.js, LLM, Media processing
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/autolisting.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Autolisting — AI Listing Generator: Upload a video + details, get a finished, formatted listing in a 10-step pipeline.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;nodejs&quot;,&quot;llm&quot;,&quot;mediaprocessing&quot;]</p>
+<hr>
+<h3>Autolisting — AI Listing Generator</h3>
+
+<p><strong>Upload a video + details, get a finished, formatted listing in a 10-step pipeline.</strong></p>
+
+<p>Autolisting turns raw property video and a few fields into a polished, publish-ready listing. It runs a visible 10-step pipeline so the user can see exactly where the machine is and step in when needed — automation with transparency.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Video upload → structured listing</li>
+<li>Visible multi-step processing pipeline</li>
+<li>Reduces a manual copywriting task to a review</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Node.js, LLM, Media processing</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/autolisting.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/autolisting.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-obsidian-brain">
+  <header class="phead">
+    <div class="picon">🧠</div>
+    <div class="ptitle">
+      <h2>Obsidian Brain — Knowledge Graph Dashboard <span class="pslug mono">obsidian-brain</span></h2>
+      <p class="ptag">A live 3D visualization of a personal knowledge vault.</p>
+    </div>
+    <a class="plink mono" href="project/obsidian-brain.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="obsidian-brain" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="obsidian-brain" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="obsidian-brain" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">947 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Obsidian Brain — Knowledge Graph Dashboard: A live 3D visualization of a personal knowledge vault.&quot;
+published: false
+tags: [&quot;python&quot;,&quot;nodejs&quot;,&quot;webgl&quot;]
+---
+# Obsidian Brain — Knowledge Graph Dashboard
+
+**A live 3D visualization of a personal knowledge vault.**
+
+Obsidian Brain renders a personal knowledge base as an interactive 3D graph, regenerating from the vault so it&#39;s always current. It&#39;s a study in turning unstructured notes into navigable structure — the same skill behind the finance tracking systems.
+
+## Highlights
+- Live regeneration from source notes
+- Interactive 3D graph navigation
+- Search + drill-down into connected ideas
+
+## Stack
+Python, Node.js, WebGL
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/obsidian-brain.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Obsidian Brain — Knowledge Graph Dashboard: A live 3D visualization of a personal knowledge vault.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;python&quot;,&quot;nodejs&quot;,&quot;webgl&quot;]</p>
+<hr>
+<h3>Obsidian Brain — Knowledge Graph Dashboard</h3>
+
+<p><strong>A live 3D visualization of a personal knowledge vault.</strong></p>
+
+<p>Obsidian Brain renders a personal knowledge base as an interactive 3D graph, regenerating from the vault so it&#39;s always current. It&#39;s a study in turning unstructured notes into navigable structure — the same skill behind the finance tracking systems.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Live regeneration from source notes</li>
+<li>Interactive 3D graph navigation</li>
+<li>Search + drill-down into connected ideas</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Python, Node.js, WebGL</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/obsidian-brain.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/obsidian-brain.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-net-worth-ledger">
+  <header class="phead">
+    <div class="picon">💰</div>
+    <div class="ptitle">
+      <h2>Net Worth Ledger <span class="pslug mono">net-worth-ledger</span></h2>
+      <p class="ptag">A live personal-finance tracker with web-refreshable balances.</p>
+    </div>
+    <a class="plink mono" href="project/net-worth-ledger.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="net-worth-ledger" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="net-worth-ledger" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="net-worth-ledger" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">928 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Net Worth Ledger: A live personal-finance tracker with web-refreshable balances.&quot;
+published: false
+tags: [&quot;nodejs&quot;,&quot;sqlite&quot;,&quot;websearchrefresh&quot;]
+---
+# Net Worth Ledger
+
+**A live personal-finance tracker with web-refreshable balances.**
+
+A net-worth ledger that aggregates assets and liabilities into a single live number, with on-demand refresh. It&#39;s the same &#39;clean numbers from messy inputs&#39; discipline I used managing commissions and financial reporting earlier in my career — now automated.
+
+## Highlights
+- Aggregated live net-worth total
+- Manual + web-search-driven balance refresh
+- Auditable history
+
+## Stack
+Node.js, SQLite, Web search refresh
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/net-worth-ledger.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Net Worth Ledger: A live personal-finance tracker with web-refreshable balances.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;nodejs&quot;,&quot;sqlite&quot;,&quot;websearchrefresh&quot;]</p>
+<hr>
+<h3>Net Worth Ledger</h3>
+
+<p><strong>A live personal-finance tracker with web-refreshable balances.</strong></p>
+
+<p>A net-worth ledger that aggregates assets and liabilities into a single live number, with on-demand refresh. It&#39;s the same &#39;clean numbers from messy inputs&#39; discipline I used managing commissions and financial reporting earlier in my career — now automated.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Aggregated live net-worth total</li>
+<li>Manual + web-search-driven balance refresh</li>
+<li>Auditable history</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Node.js, SQLite, Web search refresh</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/net-worth-ledger.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/net-worth-ledger.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-insta360-x4">
+  <header class="phead">
+    <div class="picon">📷</div>
+    <div class="ptitle">
+      <h2>Insta360 X4 Control Dashboard <span class="pslug mono">insta360-x4</span></h2>
+      <p class="ptag">A local control + live-view panel for a 360 camera.</p>
+    </div>
+    <a class="plink mono" href="project/insta360-x4.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="insta360-x4" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="insta360-x4" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="insta360-x4" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">806 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Insta360 X4 Control Dashboard: A local control + live-view panel for a 360 camera.&quot;
+published: false
+tags: [&quot;nodejs&quot;,&quot;cameraapi&quot;]
+---
+# Insta360 X4 Control Dashboard
+
+**A local control + live-view panel for a 360 camera.**
+
+A dashboard that connects to an Insta360 X4 for live view and control from the desktop. Small, practical hardware-integration work — bridging a device API into a clean web UI.
+
+## Highlights
+- Live camera preview in the browser
+- Remote capture controls
+- Device API → web UI bridge
+
+## Stack
+Node.js, Camera API
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/insta360-x4.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Insta360 X4 Control Dashboard: A local control + live-view panel for a 360 camera.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;nodejs&quot;,&quot;cameraapi&quot;]</p>
+<hr>
+<h3>Insta360 X4 Control Dashboard</h3>
+
+<p><strong>A local control + live-view panel for a 360 camera.</strong></p>
+
+<p>A dashboard that connects to an Insta360 X4 for live view and control from the desktop. Small, practical hardware-integration work — bridging a device API into a clean web UI.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Live camera preview in the browser</li>
+<li>Remote capture controls</li>
+<li>Device API → web UI bridge</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Node.js, Camera API</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/insta360-x4.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/insta360-x4.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-agentic-ai-course">
+  <header class="phead">
+    <div class="picon">⚡</div>
+    <div class="ptitle">
+      <h2>Applied Agentic AI — Course Project <span class="pslug mono">agentic-ai-course</span></h2>
+      <p class="ptag">A completed 11-module program on agentic AI systems, design, and impact.</p>
+    </div>
+    <a class="plink mono" href="project/agentic-ai-course.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="agentic-ai-course" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="agentic-ai-course" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="agentic-ai-course" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">910 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Applied Agentic AI — Course Project: A completed 11-module program on agentic AI systems, design, and impact.&quot;
+published: false
+tags: [&quot;agenticai&quot;,&quot;systemsdesign&quot;]
+---
+# Applied Agentic AI — Course Project
+
+**A completed 11-module program on agentic AI systems, design, and impact.**
+
+Virginia Tech × Simplilearn&#39;s Applied Agentic AI program (11 modules: systems, design, and impact), applied directly to the real agent platform I run. Structured, current, and immediately put to work.
+
+## Highlights
+- 11 modules covering agent systems, design, and impact
+- Applied to a live multi-agent platform
+
+## Stack
+Agentic AI, Systems design
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/agentic-ai-course.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Applied Agentic AI — Course Project: A completed 11-module program on agentic AI systems, design, and impact.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;agenticai&quot;,&quot;systemsdesign&quot;]</p>
+<hr>
+<h3>Applied Agentic AI — Course Project</h3>
+
+<p><strong>A completed 11-module program on agentic AI systems, design, and impact.</strong></p>
+
+<p>Virginia Tech × Simplilearn&#39;s Applied Agentic AI program (11 modules: systems, design, and impact), applied directly to the real agent platform I run. Structured, current, and immediately put to work.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>11 modules covering agent systems, design, and impact</li>
+<li>Applied to a live multi-agent platform</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Agentic AI, Systems design</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/agentic-ai-course.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/agentic-ai-course.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-project-showcase-engine">
+  <header class="phead">
+    <div class="picon">🛠️</div>
+    <div class="ptitle">
+      <h2>Project Showcase &amp; Income Engine <span class="pslug mono">project-showcase-engine</span></h2>
+      <p class="ptag">This site: every project auto-turned into a published write-up, résumé update, and income channel.</p>
+    </div>
+    <a class="plink mono" href="project/project-showcase-engine.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="project-showcase-engine" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="project-showcase-engine" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="project-showcase-engine" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">1077 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Project Showcase &amp; Income Engine: This site: every project auto-turned into a published write-up, résumé update, and income channel.&quot;
+published: false
+tags: [&quot;nodejs&quot;,&quot;githubpages&quot;,&quot;devtoapi&quot;,&quot;hashnodeapi&quot;]
+---
+# Project Showcase &amp; Income Engine
+
+**This site: every project auto-turned into a published write-up, résumé update, and income channel.**
+
+The engine behind this portfolio: a project registry drives automatic write-ups, screenshots, and a self-updating résumé, then syndicates them across publishing platforms and feeds a scored job/client pipeline. If you&#39;re reading this, it&#39;s working.
+
+## Highlights
+- Registry-driven site generation
+- Daily refresh + multi-platform syndication
+- Résumé regenerated from real project data
+
+## Stack
+Node.js, GitHub Pages, Dev.to API, Hashnode API
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/project-showcase-engine.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Project Showcase &amp; Income Engine: This site: every project auto-turned into a published write-up, résumé update, and income channel.&quot;</p>
+<p>published: false</p>
+<p>tags: [&quot;nodejs&quot;,&quot;githubpages&quot;,&quot;devtoapi&quot;,&quot;hashnodeapi&quot;]</p>
+<hr>
+<h3>Project Showcase &amp; Income Engine</h3>
+
+<p><strong>This site: every project auto-turned into a published write-up, résumé update, and income channel.</strong></p>
+
+<p>The engine behind this portfolio: a project registry drives automatic write-ups, screenshots, and a self-updating résumé, then syndicates them across publishing platforms and feeds a scored job/client pipeline. If you&#39;re reading this, it&#39;s working.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Registry-driven site generation</li>
+<li>Daily refresh + multi-platform syndication</li>
+<li>Résumé regenerated from real project data</li>
+</ul>
+
+<h3>Stack</h3>
+<p>Node.js, GitHub Pages, Dev.to API, Hashnode API</p>
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/project-showcase-engine.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/project-showcase-engine.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-cnbc-live-on-glasses">
+  <header class="phead">
+    <div class="picon">📺</div>
+    <div class="ptitle">
+      <h2>CNBC Live on Glasses <span class="pslug mono">cnbc-live-on-glasses</span></h2>
+      <p class="ptag">Watch CNBC live on Meta Ray-Ban Display glasses.</p>
+    </div>
+    <a class="plink mono" href="project/cnbc-live-on-glasses.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="cnbc-live-on-glasses" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="cnbc-live-on-glasses" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="cnbc-live-on-glasses" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">647 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building CNBC Live on Glasses: Watch CNBC live on Meta Ray-Ban Display glasses.&quot;
+published: false
+tags: []
+---
+# CNBC Live on Glasses
+
+**Watch CNBC live on Meta Ray-Ban Display glasses.**
+
+CNBC Live on Glasses is one of the systems in my AI portfolio. Watch CNBC live on Meta Ray-Ban Display glasses.
+
+## Highlights
+- Watch CNBC live on Meta Ray-Ban Display glasses.
+
+## Stack
+
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/cnbc-live-on-glasses.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building CNBC Live on Glasses: Watch CNBC live on Meta Ray-Ban Display glasses.&quot;</p>
+<p>published: false</p>
+<p>tags: []</p>
+<hr>
+<h3>CNBC Live on Glasses</h3>
+
+<p><strong>Watch CNBC live on Meta Ray-Ban Display glasses.</strong></p>
+
+<p>CNBC Live on Glasses is one of the systems in my AI portfolio. Watch CNBC live on Meta Ray-Ban Display glasses.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Watch CNBC live on Meta Ray-Ban Display glasses.</li>
+</ul>
+
+<h3>Stack</h3>
+
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/cnbc-live-on-glasses.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/cnbc-live-on-glasses.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-gold-spot-explorer">
+  <header class="phead">
+    <div class="picon">🗺️</div>
+    <div class="ptitle">
+      <h2>Gold Spot Explorer <span class="pslug mono">gold-spot-explorer</span></h2>
+      <p class="ptag">Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w</p>
+    </div>
+    <a class="plink mono" href="project/gold-spot-explorer.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="gold-spot-explorer" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="gold-spot-explorer" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="gold-spot-explorer" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">2429 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Gold Spot Explorer: Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w&quot;
+published: false
+tags: []
+---
+# Gold Spot Explorer
+
+**Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w**
+
+Gold Spot Explorer is one of the systems in my AI portfolio. Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source. Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in. A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline. Tells you whether ground is claimed, BLM, National Forest, state or private — and shades the public land on every basemap and at every zoom, in a custom overlay where green means federal ground you can generally stake a claim on and red means federal ground closed to mineral entry, so you know at a glance whether you may mine before you drive out. Includes a free AI guide that runs on this machine — ask it about the ground on screen and it points the map at its answer. Scores 0–100, walkable target zones, satellite + terrain overlay, GPX export. Free public data.
+
+## Highlights
+- Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source.
+- Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in.
+- A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline.
+
+## Stack
+
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/gold-spot-explorer.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Gold Spot Explorer: Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w&quot;</p>
+<p>published: false</p>
+<p>tags: []</p>
+<hr>
+<h3>Gold Spot Explorer</h3>
+
+<p><strong>Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score w</strong></p>
+
+<p>Gold Spot Explorer is one of the systems in my AI portfolio. Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source. Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in. A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline. Tells you whether ground is claimed, BLM, National Forest, state or private — and shades the public land on every basemap and at every zoom, in a custom overlay where green means federal ground you can generally stake a claim on and red means federal ground closed to mineral entry, so you know at a glance whether you may mine before you drive out. Includes a free AI guide that runs on this machine — ask it about the ground on screen and it points the map at its answer. Scores 0–100, walkable target zones, satellite + terrain overlay, GPX export. Free public data.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is your source.</li>
+<li>Overlays active BLM claims, private property lines and public streams, and re-renders the terrain at every zoom so old diggings stay readable close in.</li>
+<li>A 3D button lifts the map into a real elevation mesh you can tilt, spin and exaggerate — every overlay drapes onto the actual ground, so a bench or a creek bed reads as real relief instead of a flat outline.</li>
+</ul>
+
+<h3>Stack</h3>
+
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/gold-spot-explorer.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/gold-spot-explorer.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-ai-consulting">
+  <header class="phead">
+    <div class="picon">🤖</div>
+    <div class="ptitle">
+      <h2>AI Consulting <span class="pslug mono">ai-consulting</span></h2>
+      <p class="ptag">AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.</p>
+    </div>
+    <a class="plink mono" href="project/ai-consulting.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="ai-consulting" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="ai-consulting" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="ai-consulting" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">759 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building AI Consulting: AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.&quot;
+published: false
+tags: []
+---
+# AI Consulting
+
+**AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.**
+
+AI Consulting is one of the systems in my AI portfolio. AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.
+
+## Highlights
+- AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.
+
+## Stack
+
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/ai-consulting.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building AI Consulting: AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.&quot;</p>
+<p>published: false</p>
+<p>tags: []</p>
+<hr>
+<h3>AI Consulting</h3>
+
+<p><strong>AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.</strong></p>
+
+<p>AI Consulting is one of the systems in my AI portfolio. AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.</li>
+</ul>
+
+<h3>Stack</h3>
+
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/ai-consulting.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/ai-consulting.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-openclaw">
+  <header class="phead">
+    <div class="picon">🦅</div>
+    <div class="ptitle">
+      <h2>OpenClaw <span class="pslug mono">openclaw</span></h2>
+      <p class="ptag">OpenClaw gateway — AI agent orchestration and tools.</p>
+    </div>
+    <a class="plink mono" href="project/openclaw.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="openclaw" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="openclaw" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="openclaw" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">615 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building OpenClaw: OpenClaw gateway — AI agent orchestration and tools.&quot;
+published: false
+tags: []
+---
+# OpenClaw
+
+**OpenClaw gateway — AI agent orchestration and tools.**
+
+OpenClaw is one of the systems in my AI portfolio. OpenClaw gateway — AI agent orchestration and tools.
+
+## Highlights
+- OpenClaw gateway — AI agent orchestration and tools.
+
+## Stack
+
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/openclaw.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building OpenClaw: OpenClaw gateway — AI agent orchestration and tools.&quot;</p>
+<p>published: false</p>
+<p>tags: []</p>
+<hr>
+<h3>OpenClaw</h3>
+
+<p><strong>OpenClaw gateway — AI agent orchestration and tools.</strong></p>
+
+<p>OpenClaw is one of the systems in my AI portfolio. OpenClaw gateway — AI agent orchestration and tools.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>OpenClaw gateway — AI agent orchestration and tools.</li>
+</ul>
+
+<h3>Stack</h3>
+
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/openclaw.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/openclaw.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article>
+<article class="pcard" id="p-muse-prototypes">
+  <header class="phead">
+    <div class="picon">🤠</div>
+    <div class="ptitle">
+      <h2>Muse Prototypes <span class="pslug mono">muse-prototypes</span></h2>
+      <p class="ptag">TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.</p>
+    </div>
+    <a class="plink mono" href="project/muse-prototypes.html" target="_blank" rel="noopener">open page →</a>
+  </header>
+  <div class="pchips"><button class="pchip pending" data-slug="muse-prototypes" data-platform="blogger" title="Needs OAuth refresh token, or Dan signed into Blogger in the local Chrome profile so the editor can be driven (skill: blogger-publishing)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="muse-prototypes" data-platform="devto" title="DEVTO_API_KEY missing from .env. Add it (dev.to/settings/extensions) and drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="muse-prototypes" data-platform="github" title="No git remote, no gh CLI, no GitHub token/SSH key on this machine. Portfolio site + posts deploy via deploy-github-pages.sh once a remote exists."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
+  <details class="pdraft"><summary>Preview draft <span class="mono">783 B</span></summary>
+    <pre class="psrc">---
+title: &quot;Building Muse Prototypes: TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.&quot;
+published: false
+tags: []
+---
+# Muse Prototypes
+
+**TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.**
+
+Muse Prototypes is one of the systems in my AI portfolio. TrackMyGold Frontier — western town, gold mine, saloon &amp; forge. Find Goldie, accept quests, explore the realm.
+
+## Highlights
+- TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.
+- Find Goldie, accept quests, explore the realm.
+
+## Stack
+
+
+## Live project
+See the write-up, screenshots, and demo at https://sport.taila73942.ts.net/portfolio/project/muse-prototypes.html
+
+---
+*I build AI systems that turn messy operations into clean numbers. Need something like this?
+ddaymude.ai@gmail.com*
+</pre>
+    <div class="prender"><hr>
+<p>title: &quot;Building Muse Prototypes: TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.&quot;</p>
+<p>published: false</p>
+<p>tags: []</p>
+<hr>
+<h3>Muse Prototypes</h3>
+
+<p><strong>TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.</strong></p>
+
+<p>Muse Prototypes is one of the systems in my AI portfolio. TrackMyGold Frontier — western town, gold mine, saloon &amp; forge. Find Goldie, accept quests, explore the realm.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.</li>
+<li>Find Goldie, accept quests, explore the realm.</li>
+</ul>
+
+<h3>Stack</h3>
+
+
+<h3>Live project</h3>
+<p>See the write-up, screenshots, and demo at <a href="https://sport.taila73942.ts.net/portfolio/project/muse-prototypes.html" target="_blank" rel="noopener">https://sport.taila73942.ts.net/portfolio/project/muse-prototypes.html</a></p>
+
+<hr>
+<p>*I build AI systems that turn messy operations into clean numbers. Need something like this?</p>
+<p>ddaymude.ai@gmail.com*</p>
+</div>
+  </details>
+</article></section>
+</div>
+
+<div class="pbar">
+  <span class="grow mono" id="save-status">loaded</span>
+  <button id="expand-all">expand all drafts</button>
+  <button id="approve-all">approve all ready-platform drafts</button>
+</div>
+
+<script>
+window.__PUBLISH_TOKEN__ = window.__PUBLISH_TOKEN__ || null;
+const STATE_URL = '/publish/api/state';
+const APPROVE_URL = '/publish/api/approve';
+const ORDER = { pending: 'approved', approved: 'blocked', blocked: 'pending' };
+
+function setStatus(slug, platform, val) {
+  const el = document.querySelector('.pchip[data-slug="' + slug + '"][data-platform="' + platform + '"]');
+  if (el) { el.className = 'pchip ' + val; el.querySelector('.pval').textContent = val; }
+  recalc();
+  save(slug, platform, val);
+}
+function recalc() {
+  const n = document.querySelectorAll('.pchip.approved').length;
+  const t = document.getElementById('n-approved'); if (t) t.textContent = n;
+}
+async function save(slug, platform, val) {
+  const s = document.getElementById('save-status');
+  s.textContent = 'saving…';
+  try {
+    const r = await fetch(APPROVE_URL, {
+      method: 'POST', headers: { 'content-type': 'application/json',
+        ...(window.__PUBLISH_TOKEN__ ? { authorization: 'Bearer ' + window.__PUBLISH_TOKEN__ } : {}) },
+      body: JSON.stringify({ slug, platform, value: val }),
+    });
+    const j = await r.json().catch(() => ({}));
+    s.textContent = r.ok ? ('saved ' + (j.updated || '')) : ('not saved: ' + (j.error || r.status));
+  } catch (e) { s.textContent = 'not saved: ' + e.message; }
+}
+document.addEventListener('click', (e) => {
+  const chip = e.target.closest('.pchip');
+  if (chip) { setStatus(chip.dataset.slug, chip.dataset.platform, ORDER[chip.querySelector('.pval').textContent] || 'pending'); }
+});
+document.getElementById('expand-all').addEventListener('click', (e) => {
+  const ds = document.querySelectorAll('details.pdraft');
+  const open = [...ds].some(d => !d.open);
+  ds.forEach(d => { d.open = open; });
+  e.target.textContent = open ? 'collapse all drafts' : 'expand all drafts';
+});
+document.getElementById('approve-all').addEventListener('click', () => {
+  document.querySelectorAll('.pchip.pending').forEach((c, i) => setTimeout(() =>
+    setStatus(c.dataset.slug, c.dataset.platform, 'approved'), i * 60));
+});
+fetch(STATE_URL).then(r => r.json()).then(j => {
+  if (!j || !j.posts) return;
+  for (const [slug, plats] of Object.entries(j.posts)) for (const [plat, val] of Object.entries(plats))
+    setStatus(slug, plat, val);
+  const s = document.getElementById('save-status'); s.textContent = 'state ' + (j.updated || 'loaded');
+}).catch(() => {});
+</script>
+</body></html>
