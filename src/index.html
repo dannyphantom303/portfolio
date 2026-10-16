@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daniel Daymude — AI Systems Portfolio</title>
+<meta name="description" content="Daniel Daymude builds AI systems: multi-agent operations, wearable AI, playable business worlds, and live products.">
+<style>
+:root{
+  --page:#f1f1f3;
+  --ink-900:#111214; --ink-800:#1e1f21; --ink-700:#2a2b2e; --ink-600:#3d3f43;
+  --ink-500:#5c5e63; --ink-400:#7c7f85; --ink-300:#a3a5aa; --ink-200:#bcbec2;
+  --hairline:rgba(17,18,20,.13);
+  --neu-light:rgba(255,255,255,.92); --neu-dark:rgba(17,18,20,.16);
+  --raised:-2px -2px 4px var(--neu-light), 3px 4px 7px var(--neu-dark);
+  --raised-lg:-6px -6px 14px var(--neu-light), 8px 10px 22px var(--neu-dark);
+  --pushed:inset 2px 3px 5px var(--neu-dark), inset -2px -2px 4px var(--neu-light);
+  --live:#4dffa3; --info:#54daff; --stop:#ff5f5f;
+  --ease:cubic-bezier(.2,0,0,1);
+  --font-sans:"Geist",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--page);color:var(--ink-700);font:400 16px/1.55 var(--font-sans);
+  letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:min(1160px,100vw - 40px);margin:0 auto}
+.mono{font-family:var(--font-mono)}
+.eyebrow{font:700 12px/1 var(--font-mono);letter-spacing:2.5px;color:var(--ink-400);margin-bottom:16px}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:20;background:rgba(241,241,243,.86);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--hairline)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:700;font-size:15px;letter-spacing:-.01em}
+.brand small{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-400);letter-spacing:1.5px;margin-left:10px}
+.navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink-500)}
+.navlinks a:hover{color:var(--ink-900)}
+.nav-cta{font-size:13.5px;font-weight:700;background:var(--page);border-radius:999px;
+  padding:10px 20px;box-shadow:var(--raised);transition:box-shadow .2s var(--ease)}
+.nav-cta:hover{box-shadow:var(--raised-lg)}
+.nav-cta:active{box-shadow:var(--pushed)}
+
+/* ---------- HERO ---------- */
+.hero{padding:40px 0 8px}
+.ink{background:var(--ink-900);border-radius:28px;color:#fff;padding:clamp(40px,6vw,84px) clamp(28px,5vw,72px);
+  box-shadow:var(--raised-lg);position:relative;overflow:hidden}
+.ink .eyebrow{color:var(--ink-300)}
+.ink h1{font-size:clamp(44px,8vw,76px);font-weight:700;letter-spacing:-.035em;line-height:.98;max-width:14ch}
+.ink h1 .soft{color:var(--ink-300)}
+.ink .sub{color:var(--ink-200);font-size:clamp(16px,2.2vw,19px);max-width:60ch;margin:26px 0 38px}
+.ink .sub b{color:#fff;font-weight:600}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 30px;border-radius:999px;font-weight:700;font-size:15px;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.btn.light{background:#fff;color:var(--ink-900)}
+.btn.light:hover{transform:translateY(-2px)}
+.btn.ghostd{border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn.ghostd:hover{border-color:rgba(255,255,255,.6)}
+.hero-stats{display:flex;gap:clamp(24px,5vw,64px);margin-top:52px;flex-wrap:wrap}
+.hstat .v{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.hstat .v em{font-style:normal;color:var(--live)}
+.hstat .k{font:700 10.5px var(--font-mono);letter-spacing:2px;color:var(--ink-400);margin-top:4px}
+
+/* ---------- SECTIONS ---------- */
+section{padding:72px 0 8px}
+.sec-head{margin-bottom:34px;max-width:720px}
+.sec-head h2{font-size:clamp(30px,4.5vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.sec-head h2 .soft{color:var(--ink-300)}
+.sec-head p{color:var(--ink-500);font-size:16px}
+
+/* ---------- REEL ---------- */
+.reel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.ncard{background:var(--page);border-radius:20px;box-shadow:var(--raised);overflow:hidden;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.ncard:hover{transform:translateY(-4px);box-shadow:var(--raised-lg)}
+.well{margin:18px 18px 0;border-radius:14px;box-shadow:var(--pushed);overflow:hidden;position:relative;
+  aspect-ratio:16/9;background:var(--page)}
+.well svg{width:100%;height:100%;display:block}
+.reel-chip{position:absolute;top:10px;left:10px;z-index:2;display:flex;align-items:center;gap:7px;
+  background:var(--ink-900);color:#fff;border-radius:999px;font:700 10px var(--font-mono);
+  letter-spacing:1.5px;padding:6px 12px 6px 9px}
+.reel-chip i{width:7px;height:7px;border-radius:50%;background:var(--live);animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.ncard-body{padding:20px 24px 24px}
+.ncard-body h3{font-size:17px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px}
+.ncard-body p{font-size:13.5px;color:var(--ink-500)}
+
+/* ---------- PROJECTS ---------- */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+.pcard{display:flex;flex-direction:column}
+.pcard .well{aspect-ratio:16/8}
+.pcard-body{padding:20px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pcard-top{display:flex;justify-content:space-between;align-items:center}
+.pill{font:700 10.5px var(--font-mono);letter-spacing:1.4px;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.st-live{background:#e2f6e9;color:#15803d}
+.st-int{background:#e8eaee;color:var(--ink-500)}
+.st-done{background:var(--ink-900);color:#fff}
+.st-build{background:#fdf0d9;color:#b45309}
+.st-online{background:#e0f3fc;color:#0369a1}
+.st-free{background:#efe8fb;color:#7c3aed}
+.svc-tag{font:700 10px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400)}
+.pcard h3{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.pcard p{font-size:14px;color:var(--ink-500);flex:1}
+.tstack{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+.tstack span{font:600 11.5px var(--font-mono);color:var(--ink-500);background:var(--page);
+  border-radius:999px;padding:4px 11px;box-shadow:var(--raised)}
+
+/* ---------- SVG DEMO ANIMATIONS ---------- */
+.drawline{stroke-dasharray:600;stroke-dashoffset:600;animation:draw 9s ease-in-out infinite}
+@keyframes draw{0%{stroke-dashoffset:600}55%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+.pulse-ring{opacity:0;transform-origin:center;transform-box:fill-box;animation:pring 2.6s ease-out infinite}
+@keyframes pring{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(1.5)}}
+.wave rect{animation:wv 1.1s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes wv{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.npc-dot{animation:npcwalk 10s linear infinite}
+@keyframes npcwalk{0%{offset-distance:0%;opacity:0}6%{opacity:1}88%{opacity:1}96%,100%{offset-distance:100%;opacity:0}}
+.terml{opacity:0;animation:tl 14s infinite}
+@keyframes tl{0%{opacity:0}3%,80%{opacity:1}92%,100%{opacity:0}}
+.cursorblink{animation:blink 1s steps(1) infinite}
+.bub{opacity:0;animation:bubIn 18s infinite}
+@keyframes bubIn{0%{opacity:0;transform:translateY(8px)}3%,84%{opacity:1;transform:translateY(0)}93%,100%{opacity:0}}
+.typing circle{animation:tp 1.2s infinite}
+.typing circle:nth-child(2){animation-delay:.2s}.typing circle:nth-child(3){animation-delay:.4s}
+@keyframes tp{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.bar{transform-origin:left center;transform-box:fill-box;animation:bg 6s ease-in-out infinite}
+@keyframes bg{0%{transform:scaleX(.06);opacity:0}10%{opacity:1}50%,80%{transform:scaleX(1);opacity:1}95%,100%{transform:scaleX(1);opacity:0}}
+.barv{transform-origin:bottom center;transform-box:fill-box;animation:bv 5s ease-in-out infinite}
+@keyframes bv{0%{transform:scaleY(.15);opacity:0}12%{opacity:1}50%,82%{transform:scaleY(1);opacity:1}94%,100%{transform:scaleY(1);opacity:0}}
+.checkmark{stroke-dasharray:40;stroke-dashoffset:40;animation:ck 7s ease-in-out infinite}
+@keyframes ck{0%,15%{stroke-dashoffset:40}40%,80%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:0;opacity:0}}
+.recdot{animation:blink 1.4s infinite}
+.docline{opacity:0;animation:tl 12s infinite}
+@media (prefers-reduced-motion:reduce){
+  .drawline,.pulse-ring,.wave rect,.npc-dot,.terml,.cursorblink,.bub,.typing circle,
+  .bar,.barv,.checkmark,.recdot,.docline,.reel-chip i{animation:none!important;opacity:1!important}
+}
+
+/* ---------- SERVICES ---------- */
+.services{padding:72px 0}
+.services .ink .eyebrow{color:var(--ink-300)}
+.svc-list{margin-top:30px;border-top:1px solid rgba(255,255,255,.14)}
+.svc-row{display:flex;align-items:baseline;gap:18px;padding:17px 4px;border-bottom:1px solid rgba(255,255,255,.14)}
+.svc-row .n{font:700 11px var(--font-mono);color:var(--ink-400);flex:none;width:34px}
+.svc-row b{font-weight:700;font-size:16px;letter-spacing:-.01em}
+.svc-row span{color:var(--ink-300);font-size:14px;margin-left:auto;text-align:right}
+
+/* ---------- FOOTER ---------- */
+footer{padding:64px 0 40px}
+.foot-card{background:var(--page);border-radius:28px;box-shadow:var(--raised);padding:clamp(36px,5vw,64px);
+  text-align:center}
+.foot-card h2{font-size:clamp(30px,4.5vw,44px);font-weight:700;letter-spacing:-.03em;margin-bottom:12px}
+.foot-card p{color:var(--ink-500);max-width:52ch;margin:0 auto 30px}
+.fine{margin-top:44px;padding-top:24px;border-top:1px solid var(--hairline);display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font:600 12px var(--font-mono);letter-spacing:.5px;color:var(--ink-400)}
+
+@media(max-width:680px){.navlinks{display:none}section{padding:52px 0 8px}.svc-row span{display:none}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand">Daniel Daymude<small>AI SYSTEMS</small></div>
+  <div class="navlinks"><a href="#reel">Reel</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+  <a class="nav-cta" href="mailto:ddaymude.ai@gmail.com">Work with me</a>
+</div></nav>
+
+<div class="wrap">
+<header class="hero">
+  <div class="ink">
+    <div class="eyebrow">PORTFOLIO — 18 BUILDS SHIPPED</div>
+    <h1>Daniel Daymude <span class="soft">builds AI systems that run businesses.</span></h1>
+    <p class="sub">Business-finance operator turned AI systems builder. I design and ship <b>tracking systems, custom calculators, automations, and multi-agent AI platforms</b> that turn messy operations into clean, forecastable numbers.</p>
+    <div class="cta-row">
+      <a class="btn light" href="mailto:ddaymude.ai@gmail.com">Work with me</a>
+      <a class="btn ghostd" href="resume.html">Résumé</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="v">18</div><div class="k">PROJECTS LIVE</div></div>
+      <div class="hstat"><div class="v"><em>●</em> 15</div><div class="k">RUNNING NOW</div></div>
+      <div class="hstat"><div class="v">7</div><div class="k">AI AGENTS</div></div>
+      <div class="hstat"><div class="v">600+</div><div class="k">NOTE VAULT</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="reel">
+  <div class="sec-head">
+    <div class="eyebrow">SHOWCASE REEL</div>
+    <h2>Real demos, <span class="soft">playing now.</span></h2>
+    <p>Write-ups and demos, refreshed as I ship. Every preview below is a live animated demo — not a screenshot.</p>
+  </div>
+  <div class="reel-grid">
+    <div class="ncard">
+      <div class="well"><span class="reel-chip"><i></i>DEPLOY</span>
+        <svg viewBox="0 0 320 180" role="img" aria-label="Animated demo: deploying from the terminal">
+          <rect x="26" y="22" width="268" height="136" rx="12" fill="#111214"/>
+          <circle cx="44" cy="38" r="4" fill="#ff5f5f"/><circle cx="58" cy="38" r="4" fill="#b45309"/><circle cx="72" cy="38" r="4" fill="#4dffa3"/>
+          <g font-family="ui-monospace,monospace" font-size="10.5" fill="#a3a5aa">
+            <text class="terml" x="40" y="66" style="animation-delay:0s">$ hermes deploy vision v33</text>
+            <text class="terml" x="40" y="88" fill="#4dffa3" style="animation-delay:2.6s">✓ 24 checks passed</text>
+            <text class="terml" x="40" y="110" fill="#4dffa3" style="animation-delay:5.2s">✓ zipped · ready to download</text>
+            <text class="terml" x="40" y="132" style="animation-delay:7.8s">$ <tspan class="cursorblink">▍</tspan></text>
+          </g>
+        </svg>
+      </div>
+      <div class="ncard-body"><h3>Shipping Hermes Vision v33</h3><p>From code to the glasses in one session.</p></div>
+    </div>
+    <div class="ncard">
+      <div class="well"><span class="reel-chip"><i></i>VOICE</span>
+        <svg viewBox="0 0 320 180" role="img" aria-label="Animated demo: voice command on glasses">
+          <rect x="112" y="30" width="96" height="58" rx="29" fill="#111214"/>
+          <rect x="124" y="42" width="72" height="34" rx="17" fill="#54daff" opacity=".3"/>
+          <g class="wave" transform="translate(118,128)">
+            <rect x="0" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:0s"/>
+            <rect x="13" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.1s"/>
+            <rect x="26" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.2s"/>
+            <rect x="39" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.3s"/>
+            <rect x="52" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.4s"/>
+            <rect x="65" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.5s"/>
+          </g>
+          <text x="160" y="166" font-size="10" font-weight="700" fill="#7c7f85" text-anchor="middle" font-family="inherit">"HEY META, TELL HERMES…"</text>
+        </svg>
+      </div>
+      <div class="ncard-body"><h3>Voice on the glasses</h3><p>Talking to the AI team hands-free.</p></div>
+    </div>
+    <div class="ncard">
+      <div class="well"><span class="reel-chip"><i></i>GRAPH</span>
+        <svg viewBox="0 0 320 180" role="img" aria-label="Animated demo: knowledge graph">
+          <g stroke="#bcbec2" stroke-width="1.2">
+            <line x1="160" y1="90" x2="55" y2="40"/><line x1="160" y1="90" x2="265" y2="40"/>
+            <line x1="160" y1="90" x2="55" y2="140"/><line x1="160" y1="90" x2="265" y2="140"/>
+          </g>
+          <g fill="#3d3f43"><circle cx="55" cy="40" r="8"/><circle cx="265" cy="40" r="8"/><circle cx="55" cy="140" r="8"/><circle cx="265" cy="140" r="8"/></g>
+          <circle cx="160" cy="90" r="15" fill="#111214"/>
+          <text x="160" y="94" font-size="9" font-weight="800" fill="#fff" text-anchor="middle" font-family="inherit">600</text>
+          <g fill="#15803d">
+            <circle r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M160,90 L55,40"/></circle>
+            <circle r="3.5"><animateMotion dur="3.1s" repeatCount="indefinite" path="M160,90 L265,140"/></circle>
+            <circle r="3.5"><animateMotion dur="2.8s" begin=".8s" repeatCount="indefinite" path="M160,90 L265,40"/></circle>
+          </g>
+        </svg>
+      </div>
+      <div class="ncard-body"><h3>The 600-note brain</h3><p>An Obsidian vault, visualized live.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-head">
+    <div class="eyebrow">ALL WORK</div>
+    <h2>Projects <span class="soft">(18)</span></h2>
+    <p>Shipped by me, most running right now. Hover any card — the demos never stop.</p>
+  </div>
+  <div class="pgrid">
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: agent network">
+        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
+        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
+        <circle cx="160" cy="72" r="16" fill="#111214"/>
+        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-int">LIVE · INTERNAL</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Sport — Multi-Agent AI Operations System</h3>
+        <p>A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.</p>
+        <div class="tstack"><span>AI agents</span><span>orchestration</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: smart home signal">
+        <g fill="none" stroke="#3d3f43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M120,78 L160,44 L200,78"/><path d="M130,72 L130,104 L190,104 L190,72"/>
+        </g>
+        <circle cx="160" cy="88" r="6" fill="#15803d"/>
+        <circle class="pulse-ring" cx="160" cy="88" r="18" fill="none" stroke="#15803d" stroke-width="2"/>
+        <circle class="pulse-ring" cx="160" cy="88" r="18" fill="none" stroke="#15803d" stroke-width="2" style="animation-delay:1.3s"/>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-int">LIVE · PRIVATE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Smart Home Hub — Home Assistant on a Raspberry Pi</h3>
+        <p>Type what you want your house to do in plain English; a scheduled agent writes, validates and deploys the real Home Assistant automation.</p>
+        <div class="tstack"><span>Home Assistant</span><span>Raspberry Pi</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: gold price chart">
+        <g stroke="#e0e2e7" stroke-width="1"><line x1="24" y1="40" x2="296" y2="40"/><line x1="24" y1="76" x2="296" y2="76"/><line x1="24" y1="112" x2="296" y2="112"/></g>
+        <path class="drawline" d="M24,108 C60,100 84,84 116,86 C148,88 168,60 204,62 C236,64 262,44 296,40" fill="none" stroke="#b45309" stroke-width="3" stroke-linecap="round"/>
+        <circle r="5" fill="#b45309" stroke="#f1f1f3" stroke-width="2"><animateMotion dur="9s" repeatCount="indefinite" path="M24,108 C60,100 84,84 116,86 C148,88 168,60 204,62 C236,64 262,44 296,40"/></circle>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
+        <h3>Track My Gold</h3>
+        <p>A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.</p>
+        <div class="tstack"><span>SaaS</span><span>YouTube</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: content pipeline">
+        <rect x="96" y="22" width="128" height="100" rx="10" fill="#fff" stroke="#7c7f85" stroke-width="1.5"/>
+        <g stroke="#3d3f43" stroke-width="5" stroke-linecap="round">
+          <line class="docline" x1="116" y1="52" x2="204" y2="52" style="animation-delay:0s"/>
+          <line class="docline" x1="116" y1="72" x2="186" y2="72" style="animation-delay:1.5s"/>
+          <line class="docline" x1="116" y1="92" x2="196" y2="92" style="animation-delay:3s"/>
+        </g>
+        <path class="checkmark" d="M232,96 l10,10 l18,-20" fill="none" stroke="#15803d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Content Autopilot</h3>
+        <p>An AI content pipeline: draft, review, approve, and publish on a schedule.</p>
+        <div class="tstack"><span>AI pipeline</span><span>publishing</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: falling API costs">
+        <g>
+          <rect class="barv" x="70" y="30" width="26" height="80" rx="5" fill="#dc2626" opacity=".8" style="animation-delay:0s"/>
+          <rect class="barv" x="110" y="50" width="26" height="60" rx="5" fill="#dc2626" opacity=".6" style="animation-delay:.7s"/>
+          <rect class="barv" x="150" y="70" width="26" height="40" rx="5" fill="#b45309" opacity=".7" style="animation-delay:1.4s"/>
+          <rect class="barv" x="190" y="88" width="26" height="22" rx="5" fill="#15803d" style="animation-delay:2.1s"/>
+          <rect class="barv" x="230" y="96" width="26" height="14" rx="5" fill="#15803d" style="animation-delay:2.8s"/>
+        </g>
+        <text x="160" y="130" font-size="10" font-weight="700" fill="#7c7f85" text-anchor="middle" font-family="inherit">API SPEND → DOWN 70%</text>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">LIVE · CONSULTING</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Token Killers — LLM Cost Optimization</h3>
+        <p>A measurable service that cuts AI API spend by re-architecting prompts, context, and routing.</p>
+        <div class="tstack"><span>LLM ops</span><span>cost</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: glasses with voice">
+        <g fill="none" stroke="#111214" stroke-width="6" stroke-linecap="round">
+          <path d="M96,62 h56 a18,18 0 0 1 18,18 a18,18 0 0 1 -18,18 h-56 a18,18 0 0 1 -18,-18 a18,18 0 0 1 18,-18"/>
+          <path d="M224,62 h-56 a18,18 0 0 0 -18,18 a18,18 0 0 0 18,18 h56 a18,18 0 0 0 18,-18 a18,18 0 0 0 -18,-18"/>
+          <path d="M152,72 q8,-6 16,0"/>
+        </g>
+        <g class="wave" transform="translate(128,118)">
+          <rect x="0" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:0s"/>
+          <rect x="11" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.15s"/>
+          <rect x="22" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.3s"/>
+          <rect x="33" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.45s"/>
+          <rect x="44" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.6s"/>
+          <rect x="55" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.75s"/>
+        </g>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Hermes Vision — AI on Phone &amp; Glasses <span style="color:#b45309">★</span></h3>
+        <p>A mobile/wearable client that connects a device to a running AI agent session.</p>
+        <div class="tstack"><span>Wearables</span><span>white-label</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: walking the 3D world">
+        <g stroke="#bcbec2" stroke-width="1">
+          <polygon points="160,22 226,60 160,98 94,60" fill="#fff"/>
+          <polygon points="94,60 160,98 160,126 94,88" fill="#e4e7ec"/>
+          <polygon points="226,60 160,98 160,126 226,88" fill="#d3d7de"/>
+        </g>
+        <rect x="150" y="40" width="22" height="30" fill="#b45309" opacity=".85" transform="skewY(-26) translate(0,28)"/>
+        <circle class="npc-dot" r="6" fill="#0369a1" stroke="#fff" stroke-width="2" style="offset-path:path('M104,84 L160,110 L216,84 L160,58 Z')"/>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-build">PROTOTYPE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Hermes Worlds &amp; Game — 3D AI Agent Playgrounds</h3>
+        <p>Browser 3D worlds where you walk up to AI characters and talk to them.</p>
+        <div class="tstack"><span>WebXR</span><span>AI NPCs</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: listing generator">
+        <rect x="70" y="26" width="90" height="92" rx="10" fill="#fff" stroke="#7c7f85" stroke-width="1.5"/>
+        <polygon points="115,52 115,84 143,68" fill="#dc2626"/>
+        <g stroke="#3d3f43" stroke-width="5" stroke-linecap="round">
+          <line class="docline" x1="180" y1="52" x2="252" y2="52" style="animation-delay:.8s"/>
+          <line class="docline" x1="180" y1="72" x2="236" y2="72" style="animation-delay:2.2s"/>
+          <line class="docline" x1="180" y1="92" x2="246" y2="92" style="animation-delay:3.6s"/>
+        </g>
+        <path class="checkmark" d="M256,100 l9,9 l16,-18" fill="none" stroke="#15803d" stroke-width="5" stroke-linecap="round" style="animation-delay:1s"/>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Autolisting — AI Listing Generator</h3>
+        <p>Upload a video + details, get a finished, formatted listing in a 10-step pipeline.</p>
+        <div class="tstack"><span>AI pipeline</span><span>video</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: knowledge graph">
+        <g stroke="#bcbec2" stroke-width="1.2"><line x1="160" y1="72" x2="80" y2="34"/><line x1="160" y1="72" x2="240" y2="34"/><line x1="160" y1="72" x2="80" y2="110"/><line x1="160" y1="72" x2="240" y2="110"/></g>
+        <g fill="#3d3f43"><circle cx="80" cy="34" r="8"/><circle cx="240" cy="34" r="8"/><circle cx="80" cy="110" r="8"/><circle cx="240" cy="110" r="8"/></g>
+        <circle cx="160" cy="72" r="14" fill="#111214"/>
+        <g fill="#7c3aed"><circle r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M160,72 L80,34"/></circle><circle r="3.5"><animateMotion dur="3s" begin=".6s" repeatCount="indefinite" path="M160,72 L240,110"/></circle></g>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
+        <h3>Obsidian Brain — Knowledge Graph Dashboard</h3>
+        <p>A live 3D visualization of a personal knowledge vault.</p>
+        <div class="tstack"><span>Data-viz</span><span>knowledge</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: net worth growth">
+        <g stroke="#e0e2e7" stroke-width="1"><line x1="24" y1="40" x2="296" y2="40"/><line x1="24" y1="76" x2="296" y2="76"/><line x1="24" y1="112" x2="296" y2="112"/></g>
+        <path class="drawline" d="M24,100 C70,96 100,70 140,72 C180,74 210,50 250,48 C272,47 286,40 296,38" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" style="animation-delay:1s"/>
+        <text x="24" y="30" font-size="11" font-weight="800" fill="#3d3f43" font-family="inherit">$ NET WORTH</text>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
+        <h3>Net Worth Ledger</h3>
+        <p>A live personal-finance tracker with web-refreshable balances.</p>
+        <div class="tstack"><span>Fintech</span><span>tracker</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: 360 camera live">
+        <rect x="120" y="44" width="80" height="56" rx="26" fill="#111214"/>
+        <circle cx="160" cy="72" r="16" fill="#2a2b2e" stroke="#3d3f43" stroke-width="2"/>
+        <circle cx="160" cy="72" r="7" fill="#54daff" opacity=".8"/>
+        <circle class="recdot" cx="188" cy="52" r="5" fill="#ff5f5f"/>
+        <text x="160" y="124" font-size="10" font-weight="700" fill="#7c7f85" text-anchor="middle" font-family="inherit">● REC · 360° LIVE</text>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
+        <h3>Insta360 X4 Control Dashboard</h3>
+        <p>A local control + live-view panel for a 360 camera.</p>
+        <div class="tstack"><span>Hardware</span><span>camera</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: course checklist">
+        <g font-family="inherit" font-size="11" fill="#5c5e63">
+          <text x="90" y="46">01 · Agents 101</text><text x="90" y="74">02 · Tool design</text><text x="90" y="102">03 · Multi-agent</text>
+        </g>
+        <g fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round">
+          <path class="checkmark" d="M62,40 l6,6 l11,-12"/>
+          <path class="checkmark" d="M62,68 l6,6 l11,-12" style="animation-delay:1.2s"/>
+          <path class="checkmark" d="M62,96 l6,6 l11,-12" style="animation-delay:2.4s"/>
+        </g>
+        <text x="230" y="74" font-size="12" font-weight="800" fill="#3d3f43" font-family="inherit">11/11</text>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-done">COMPLETED</span></div>
+        <h3>Applied Agentic AI — Course Project</h3>
+        <p>A completed 11-module program on agentic AI systems, design, and impact.</p>
+        <div class="tstack"><span>Course</span><span>agentic AI</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: auto-publishing engine">
+        <rect x="60" y="26" width="200" height="92" rx="10" fill="#fff" stroke="#7c7f85" stroke-width="1.5"/>
+        <rect x="60" y="26" width="200" height="22" rx="10" fill="#eef0f3"/>
+        <g><rect class="barv" x="84" y="70" width="20" height="30" rx="4" fill="#3d3f43" style="animation-delay:0s"/><rect class="barv" x="112" y="60" width="20" height="40" rx="4" fill="#3d3f43" style="animation-delay:.5s"/><rect class="barv" x="140" y="78" width="20" height="22" rx="4" fill="#3d3f43" style="animation-delay:1s"/><rect class="barv" x="168" y="52" width="20" height="48" rx="4" fill="#15803d" style="animation-delay:1.5s"/><rect class="barv" x="196" y="66" width="20" height="34" rx="4" fill="#3d3f43" style="animation-delay:2s"/></g>
+        <path class="drawline" d="M84,66 C120,60 160,58 236,48" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" style="animation-delay:.6s"/>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-build">BUILDING</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Project Showcase &amp; Income Engine</h3>
+        <p>This site: every project auto-turned into a published write-up, résumé update, and income channel.</p>
+        <div class="tstack"><span>Automation</span><span>publishing</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: live TV feed">
+        <rect x="70" y="30" width="180" height="84" rx="10" fill="#111214"/>
+        <text x="160" y="58" font-size="13" font-weight="800" fill="#fff" text-anchor="middle" font-family="inherit">CNBC</text>
+        <g class="wave" transform="translate(104,86)">
+          <rect x="0" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:0s"/>
+          <rect x="14" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.12s"/>
+          <rect x="28" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.24s"/>
+          <rect x="42" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.36s"/>
+          <rect x="56" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.48s"/>
+          <rect x="70" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.6s"/>
+          <rect x="84" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.72s"/>
+          <rect x="98" y="-9" width="6" height="18" rx="3" fill="#4dffa3" style="animation-delay:.84s"/>
+        </g>
+        <text x="160" y="130" font-size="10" font-weight="700" fill="#7c7f85" text-anchor="middle" font-family="inherit">LIVE · ON GLASSES</text>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
+        <h3>CNBC Live on Glasses</h3>
+        <p>Watch CNBC live on Meta Ray-Ban Display glasses.</p>
+        <div class="tstack"><span>Wearables</span><span>media</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: terrain scoring">
+        <path d="M24,110 C60,90 90,100 120,80 C150,60 180,84 210,66 C240,48 268,60 296,44" fill="none" stroke="#7c7f85" stroke-width="2"/>
+        <path class="drawline" d="M24,110 C60,90 90,100 120,80 C150,60 180,84 210,66 C240,48 268,60 296,44" fill="none" stroke="#b45309" stroke-width="3" stroke-linecap="round" style="animation-delay:.8s"/>
+        <g fill="#b45309"><circle cx="120" cy="80" r="5"><animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/></circle><circle cx="210" cy="66" r="5"><animate attributeName="r" values="5;8;5" dur="2s" begin="1s" repeatCount="indefinite"/></circle></g>
+        <text x="24" y="130" font-size="10" font-weight="700" fill="#7c7f85" font-family="inherit">USGS LiDAR · CREEK-BED SCORING</text>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-free">FREE DATA</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>Gold Spot Explorer</h3>
+        <p>Ranks historical gold ground against where you actually find it — then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score them.</p>
+        <div class="tstack"><span>GIS</span><span>gold</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: client chat">
+        <g class="bub" style="animation-delay:0s"><rect x="60" y="30" width="120" height="26" rx="13" fill="#111214"/><text x="74" y="47" font-size="11" fill="#fff" font-family="inherit">Need an agent build…</text></g>
+        <g class="bub" style="animation-delay:3s"><rect x="140" y="62" width="120" height="26" rx="13" fill="#fff" stroke="#7c7f85"/><text x="154" y="79" font-size="11" fill="#3d3f43" font-family="inherit">Shipped. It's live ✓</text></g>
+        <g class="bub" style="animation-delay:6s"><rect x="60" y="94" width="110" height="26" rx="13" fill="#111214"/><text x="74" y="111" font-size="11" fill="#fff" font-family="inherit">That was fast.</text></g>
+        <g class="bub" style="animation-delay:9s"><g class="typing"><circle cx="152" cy="75" r="4" fill="#7c7f85"/><circle cx="164" cy="75" r="4" fill="#7c7f85"/><circle cx="176" cy="75" r="4" fill="#7c7f85"/></g></g>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>AI Consulting</h3>
+        <p>AI consulting project management — Fiverr, Upwork, kanban, intake, client accounts.</p>
+        <div class="tstack"><span>Consulting</span><span>clients</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: orchestration hub">
+        <circle cx="160" cy="72" r="18" fill="#111214"/>
+        <circle class="pulse-ring" cx="160" cy="72" r="26" fill="none" stroke="#0369a1" stroke-width="2"/>
+        <circle class="pulse-ring" cx="160" cy="72" r="26" fill="none" stroke="#0369a1" stroke-width="2" style="animation-delay:1.3s"/>
+        <g fill="#3d3f43"><circle cx="80" cy="72" r="10"/><circle cx="240" cy="72" r="10"/><circle cx="160" cy="28" r="10"/><circle cx="160" cy="116" r="10"/></g>
+        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="80" y2="72"/><line x1="160" y1="72" x2="240" y2="72"/><line x1="160" y1="72" x2="160" y2="28"/><line x1="160" y1="72" x2="160" y2="116"/></g>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
+        <h3>OpenClaw</h3>
+        <p>OpenClaw gateway — AI agent orchestration and tools.</p>
+        <div class="tstack"><span>Agents</span><span>gateway</span></div>
+      </div>
+    </div>
+
+    <div class="ncard pcard">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: frontier town">
+        <g stroke="#bcbec2" stroke-width="1">
+          <polygon points="110,40 160,68 110,96 60,68" fill="#fff"/>
+          <polygon points="60,68 110,96 110,118 60,90" fill="#e4e7ec"/>
+          <polygon points="160,68 110,96 110,118 160,90" fill="#d3d7de"/>
+          <polygon points="210,40 260,68 210,96 160,68" fill="#fff"/>
+          <polygon points="160,68 210,96 210,118 160,90" fill="#e4e7ec"/>
+          <polygon points="260,68 210,96 210,118 260,90" fill="#d3d7de"/>
+        </g>
+        <rect x="102" y="30" width="16" height="24" fill="#b45309" opacity=".85" transform="skewY(-26) translate(0,22)"/>
+        <rect x="202" y="30" width="16" height="24" fill="#3d3f43" opacity=".85" transform="skewY(-26) translate(0,22)"/>
+        <circle class="npc-dot" r="6" fill="#b45309" stroke="#fff" stroke-width="2" style="offset-path:path('M70,104 L160,132 L250,104 L160,76 Z')"/>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill st-online">ONLINE</span></div>
+        <h3>Muse Prototypes</h3>
+        <p>TrackMyGold Frontier — western town, gold mine, saloon &amp; forge.</p>
+        <div class="tstack"><span>Game</span><span>prototype</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="ink">
+    <div class="eyebrow">SERVICES</div>
+    <h2 style="font-size:clamp(30px,4.5vw,40px);font-weight:700;letter-spacing:-.03em;margin-bottom:12px">Services I can <span style="color:var(--ink-300)">run for you.</span></h2>
+    <p style="color:var(--ink-200);max-width:60ch">Delivered as AI-run services — you get the outcome, the agents do the work:</p>
+    <div class="svc-list">
+      <div class="svc-row"><span class="n">01</span><b>Sport — Multi-Agent AI Operations System</b><span>Chief-of-staff AI</span></div>
+      <div class="svc-row"><span class="n">02</span><b>Smart Home Hub</b><span>plain-English automation</span></div>
+      <div class="svc-row"><span class="n">03</span><b>Content Autopilot</b><span>draft → publish</span></div>
+      <div class="svc-row"><span class="n">04</span><b>Token Killers — LLM Cost Optimization</b><span>cut API spend</span></div>
+      <div class="svc-row"><span class="n">05</span><b>Hermes Vision — AI on Phone &amp; Glasses</b><span>white-label ready</span></div>
+      <div class="svc-row"><span class="n">06</span><b>Hermes Worlds &amp; Game</b><span>playable dashboards</span></div>
+      <div class="svc-row"><span class="n">07</span><b>Autolisting — AI Listing Generator</b><span>video → listing</span></div>
+      <div class="svc-row"><span class="n">08</span><b>Project Showcase &amp; Income Engine</b><span>auto write-ups</span></div>
+      <div class="svc-row"><span class="n">09</span><b>Gold Spot Explorer</b><span>LiDAR scoring</span></div>
+      <div class="svc-row"><span class="n">10</span><b>AI Consulting</b><span>done-for-you builds</span></div>
+      <div class="svc-row"><span class="n">11</span><b>OpenClaw</b><span>agent gateway</span></div>
+    </div>
+    <div class="cta-row" style="margin-top:36px">
+      <a class="btn light" href="mailto:ddaymude.ai@gmail.com">Start a project</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-card">
+    <div class="eyebrow">CONTACT</div>
+    <h2>Have a business that should run on AI?</h2>
+    <p>White-label Vision deployment, an agent command center for your team, or a product you want built — let's talk.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a>
+      <a class="btn ghostd" style="border-color:var(--hairline);color:var(--ink-700)" href="resume.html">Résumé</a>
+    </div>
+    <div class="fine">
+      <span>© 2026 DANIEL DAYMUDE</span>
+      <span>18 PROJECTS · 7 AGENTS · SHIPPING WEEKLY</span>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  // Stagger card entrances
+  var cards = document.querySelectorAll('.pcard, .reel-grid .ncard');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='none'; io.unobserve(e.target); }
+      });
+    }, {threshold:.08});
+    cards.forEach(function(c,i){
+      c.style.opacity='0'; c.style.transform='translateY(18px)';
+      c.style.transition='opacity .5s cubic-bezier(.2,0,0,1), transform .5s cubic-bezier(.2,0,0,1)';
+      c.style.transitionDelay = Math.min(i%3,2)*70 + 'ms';
+      io.observe(c);
+    });
+  }
+})();
+</script>
+</body>
+</html>

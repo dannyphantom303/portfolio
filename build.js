@@ -7,6 +7,11 @@ const path = require('path');
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
 const VIDEOS = path.join(DIST, 'videos');
+// Hand-authored landing page (v3 restyle, 2026-10-16). build.js wipes dist/ on every run and
+// the daily launchd refresh rebuilds it, so the index MUST live here as a source file —
+// editing dist/index.html by hand is reverted by the next refresh. When this file exists it
+// is rendered verbatim; delete it to fall back to the generated index below.
+const SRC_INDEX = path.join(ROOT, 'src', 'index.html');
 const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'projects.json'), 'utf8'));
 
 const esc = (s = '') => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -115,6 +120,8 @@ ${cover(p, '')}
 }
 
 function indexHtml() {
+  // Authored landing page wins over generation — see SRC_INDEX above.
+  if (fs.existsSync(SRC_INDEX)) return fs.readFileSync(SRC_INDEX, 'utf8');
   const body = `
 <main class="wrap">
   <section class="hero">
@@ -219,4 +226,4 @@ if (fs.existsSync(path.join(ROOT, 'resume.pdf'))) fs.copyFileSync(path.join(ROOT
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 
 console.log(`Built ${projects.length} projects (+ résumé) → ${DIST}`);
-console.log(`  index.html, resume.html, ${projects.length} project pages, ${projects.reduce((n, p) => n + shots(p.slug).length, 0)} screenshots`);
+console.log(`  index.html${fs.existsSync(SRC_INDEX) ? ' [src/index.html]' : ' [generated]'}, resume.html, ${projects.length} project pages, ${projects.reduce((n, p) => n + shots(p.slug).length, 0)} screenshots`);

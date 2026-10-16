@@ -3,7 +3,9 @@
 Public-safe portfolio site for the **Project Showcase & Income Engine**.
 Separate from the internal Sport Command Center (which holds sensitive data and must never be public).
 
-- **Source of truth:** `projects.json` (edit here; everything else is generated)
+- **Source of truth:** `projects.json` (edit here; everything else is generated) — **except the
+  landing page**, which is hand-authored in `src/index.html` and rendered verbatim by `build.js`.
+  Editing `dist/index.html` directly is pointless: the daily refresh overwrites it.
 - **Generator:** `node build.js` → writes `dist/`
 - **Live (interim):** https://sport.taila73942.ts.net/portfolio
 - **Free domain (target):** https://<username>.github.io/<repo>/ via GitHub Pages
@@ -12,6 +14,7 @@ Separate from the internal Sport Command Center (which holds sensitive data and 
 | Path | Purpose |
 |---|---|
 | `projects.json` | Owner, skills, income goal, and the project registry |
+| `src/index.html` | Hand-authored landing page (v3 restyle) — rendered verbatim as `dist/index.html` |
 | `build.js` | Static site generator (no dependencies) |
 | `screenshots/<slug>/` | Per-project screenshots (published) |
 | `dist/` | Generated site — do not edit by hand |

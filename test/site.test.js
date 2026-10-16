@@ -63,10 +63,18 @@ test('build: preserves dist/posts across a rebuild (regression)', () => {
   fs.rmSync(path.join(pdir, '_regression-stub.md'), { force: true });
 });
 
-test('output: AI-runnable projects are badged, and the services section exists', () => {
+test('output: services section renders and the served index matches its source', () => {
+  // The landing page is hand-authored in src/index.html (v3 restyle) and rendered verbatim by
+  // build.js, so a rebuild/refresh keeps the design instead of reverting it. Assert the
+  // services band survived the restyle and the built index is byte-identical to the source.
   const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
-  assert.match(html, /Services I can run for you/);
-  assert.match(html, /AI-runnable service/);
+  assert.match(html, /id="services"/, 'services section present');
+  assert.match(html, /Services I can[\s\S]{0,80}run for you\./, 'services headline renders');
+  assert.match(html, /AI-run services/, 'AI-run services copy present');
+  const srcPath = path.join(ROOT, 'src', 'index.html');
+  if (fs.existsSync(srcPath)) {
+    assert.equal(html, fs.readFileSync(srcPath, 'utf8'), 'dist/index.html must be src/index.html verbatim');
+  }
 });
 
 test('build: embeds the local demo video on a project page when the asset exists (regression)', () => {
