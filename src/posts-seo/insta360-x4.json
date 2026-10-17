@@ -1,0 +1,31 @@
+{
+  "slug": "insta360-x4",
+  "title": "Insta360 X4: a local dashboard for a 360 camera, mounted behind a path prefix",
+  "metaDescription": "Live view and capture controls for an Insta360 X4 in the browser, bridged by one thin local service — a worked example of prefix mounting without breaking asset URLs.",
+  "labels": [
+    "hardware",
+    "insta360",
+    "local dashboard",
+    "web ui",
+    "integration",
+    "python"
+  ],
+  "dek": "A local browser panel for an Insta360 X4 360 camera: live view and capture controls, bridged from the device API by the thinnest possible service.",
+  "intro": "This is a local dashboard for an Insta360 X4 360 camera: live view and capture controls, in the browser. The interesting part is not the camera but the mounting. The device exposes an HTTP API, so one small service sits between the device and the browser and renders a panel; then the whole app is mounted behind a path prefix on the private router, which is where vendor web apps usually break, because their asset URLs are absolute and their fetches assume they own the root.",
+  "why": "Most hardware projects turn out to be integration problems rather than device problems, and this one is a clean example of the smaller half of that: write the thinnest bridge you can, then plan for the prefix. When you mount an app under a route you have to rewrite url(), src(), action() and fetch() — the assets are what break first — and you should test it at every step of the mount rather than at the end. Device control also stays local by default: a camera control panel has no business on the public internet.",
+  "faq": [
+    {
+      "q": "What does it cost to run?",
+      "a": "$0. There are no model calls and no hosted service in the path — just the camera and the machine it is talking to."
+    },
+    {
+      "q": "What is the hard part of a project like this?",
+      "a": "Mounting the app under a path prefix. Rewriting url(), src(), action() and fetch() is what keeps a vendor UI working when it no longer lives at the root — the stylesheets and scripts are what break first, not the page itself."
+    },
+    {
+      "q": "Is the camera panel public?",
+      "a": "No. It is local device control, deliberately not published: a panel that can start and stop a camera belongs on the private network, not on the open internet."
+    }
+  ],
+  "cta": "Local device control, deliberately not published; the mounting technique is the reusable part."
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "track-my-gold",
+  "title": "Track My Gold: a YouTube engagement and affiliate dashboard",
+  "metaDescription": "A content-ops dashboard for a gold-prospecting channel: video metrics, an approval queue for comments, affiliate revenue tracking and a live SEO panel.",
+  "labels": ["youtube", "content operations", "seo", "dashboard", "affiliate", "approval workflow"],
+  "dek": "A content-operation dashboard that surfaces video performance, queues comments and engagement for review, tracks affiliate revenue and drives the content calendar.",
+  "intro": "Track My Gold is the operating dashboard behind a gold-prospecting content channel. It surfaces video performance, runs an approval queue for comments and engagement, tracks affiliate revenue, checks search performance and feeds the weekly content calendar. The single most important design decision is where the post actually happens: comments go out through the YouTube API from the approve button itself, not from a scheduled session that may already have finished. Search Console feeds a live SEO tab under a read-only OAuth scope, so the view of search is never more stale than the last refresh. The public product side is trackmygold.net.",
+  "why": "Building it answered a question I had been assuming the answer to. The bottleneck for the channel was never integration, it was acquisition, and the dashboard proved that quickly and honestly. That is worth more than a prettier metrics page. The second lesson was discipline: a dashboard that silently drifts from the underlying data is worse than no dashboard, so every number is reconciled against the raw record rather than trusted because it was cached.",
+  "faq": [
+    {
+      "q": "Why post comments from a button instead of a scheduled job?",
+      "a": "Because the scheduled session may already have ended by the time the decision is made. Putting the API call inside the approve button means the action happens in the same context as the approval, so it either really posted or it visibly failed at the moment I clicked."
+    },
+    {
+      "q": "How is the SEO data kept current?",
+      "a": "Search Console feeds a live tab under a read-only OAuth scope, and the panels are refreshed on a schedule. Read-only matters: the reporting side never needs write access to the search property to be useful."
+    },
+    {
+      "q": "What does the approval queue actually hold?",
+      "a": "Outbound engagement that needs a human decision, comment replies and similar actions, presented so they can be reviewed, edited and approved in one pass. It is the reason the channel can be worked in batches instead of being babysat."
+    }
+  ],
+  "cta": "The dashboard itself is private, but the product it runs, trackmygold.net, is public."
+}

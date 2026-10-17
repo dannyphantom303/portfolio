@@ -1,0 +1,31 @@
+{
+  "slug": "ai-consulting",
+  "title": "AI Consulting: the commercial half of the portfolio, built on the same board",
+  "metaDescription": "A landing page with a live token-savings calculator and email capture, templated proposals and scopes, structured intake, and client work tracked on the same board as product work.",
+  "labels": [
+    "consulting",
+    "automation",
+    "pricing",
+    "intake",
+    "sales ops",
+    "ai"
+  ],
+  "dek": "The business side of the portfolio: a landing page with a live pricing calculator, templated proposals, structured intake, and delivery tracked on the same board as everything else.",
+  "intro": "AI Consulting is the commercial half of this portfolio: a landing page with a pricing calculator and email capture, gig listings and proposal templates for the freelance platforms, a structured intake step, and a board that tracks client work and accounts alongside everything else. It exists so that “can you build this for me?” has somewhere to go. The calculator is the public front door — no login, it runs the numbers live.",
+  "why": "The same automation that runs a business can run the business that sells the automation, and the two rules that make it work are unglamorous. First, one board for both kinds of work: client commitments and product work sit in the same queue, so over-commitment is visible early rather than at the deadline. Second, template the paperwork — proposals, scopes and hand-off notes should be assembled, not written from scratch. Structured intake removes most of the back-and-forth that makes small projects unprofitable, and keeping products and consulting both alive makes sense: products pay later, consulting pays now, and the one that pays now should be priced properly.",
+  "faq": [
+    {
+      "q": "What is the public entry point?",
+      "a": "The token-savings calculator: no login, it runs the numbers live on the landing page. That page also captures email, so a conversation can start there."
+    },
+    {
+      "q": "What does the tooling cost?",
+      "a": "Effectively zero — free-tier models for drafting proposals and a local board for tracking and intake. The cost that actually matters is time, which is why the proposals are templated and the intake is structured."
+    },
+    {
+      "q": "How do you avoid over-committing?",
+      "a": "Client commitments and product work run on the same board, in the same queue. Over-commitment becomes visible early, when it can still be fixed, instead of showing up as a missed date."
+    }
+  ],
+  "cta": "Open the token-savings calculator on the landing page; no login required."
+}

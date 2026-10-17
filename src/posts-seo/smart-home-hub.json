@@ -1,0 +1,24 @@
+{
+  "slug": "smart-home-hub",
+  "title": "Home Assistant on a Raspberry Pi, driven by plain English",
+  "metaDescription": "A Raspberry Pi 5 hub running Home Assistant in Docker, plus a plain-English builder where an agent writes, validates and deploys the real automation YAML.",
+  "labels": ["home assistant", "raspberry pi", "smart home", "docker", "automation", "yaml"],
+  "dek": "A private edge hub where you type what you want the house to do, and a scheduled agent writes, validates and deploys the genuine Home Assistant automation.",
+  "intro": "This is a Raspberry Pi 5 running Home Assistant in Docker, with Mosquitto and ESPHome alongside it, reachable only over a private tailnet and never from the public internet. The hub itself is ordinary. What is not ordinary is the layer on top of it: a plain-English automation builder. You type or dictate what you want the house to do, the request becomes a job, and a scheduled agent writes the real Home Assistant automation, validates it against the config API, reloads Home Assistant, and writes the outcome back to a dashboard so you can see whether it actually took. It is event-driven, so it does nothing and costs nothing until you ask it for something.",
+  "why": "The interesting constraint here is trust. A house is a hard boundary: it should be private by default and validated before anything goes live. That is why the agent never writes a half-formed automation straight into the running config. It writes YAML, the YAML is checked against the API first, and only then is Home Assistant reloaded. The result is that an AI can touch the house without the house becoming a science experiment.",
+  "faq": [
+    {
+      "q": "Why a Raspberry Pi instead of a cloud service?",
+      "a": "Because the hub is a one-off box and the control path is local. Home Assistant, Mosquitto and ESPHome all run on the Pi, so the house keeps working when the internet does not, and nothing about the house is exposed to the public internet at all."
+    },
+    {
+      "q": "What happens if the agent writes a broken automation?",
+      "a": "It is never loaded. The generated YAML is validated against the Home Assistant config API before the reload step, so a bad automation fails at validation and is reported back on the dashboard rather than taking the hub down."
+    },
+    {
+      "q": "What is actually running on it today?",
+      "a": "A morning weather and sunrise briefing, a shopping-list reminder, a left-on watchdog for the media player, and an automatic-backup staleness alert. Alongside those, the config is mirrored to a second machine every night with a restore path that has been tested rather than assumed."
+    }
+  ],
+  "cta": "The hub is tailnet-only by design, so there is no public link. The reusable idea, validate before you reload, is the part worth stealing."
+}

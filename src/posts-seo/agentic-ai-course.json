@@ -1,0 +1,31 @@
+{
+  "slug": "agentic-ai-course",
+  "title": "Applied Agentic AI: what survived contact with a real agent fleet",
+  "metaDescription": "Virginia Tech × Simplilearn's Applied Agentic AI programme — eleven modules on agent systems, design and impact, tested against agents I actually run.",
+  "labels": [
+    "agentic ai",
+    "training",
+    "agent design",
+    "guardrails",
+    "systems design",
+    "ai"
+  ],
+  "dek": "Formal training in agent systems — eleven modules on systems, design and impact — applied to a live fleet rather than to toy exercises.",
+  "intro": "The Applied Agentic AI programme from Virginia Tech and Simplilearn is eleven modules covering agent systems, design and impact. I took it while building the platform in this portfolio, and applied the coursework directly to it rather than to exercises. That is the difference that matters: every claim in the material could be tested against something already running, so the parts that survived contact with a real fleet are the parts worth keeping — how agents fail, how to bound them, and how to decide what should not be an agent at all.",
+  "why": "Agent reliability is mostly a boundary problem. It is not about making the model smarter; it is about what the agent may touch and what checks it first. An agent with three sharp tools outperforms one with thirty vague ones, and validating output against the system it will change before allowing a side effect catches most of the damage early. The most useful lesson of the whole programme is deciding what should not be an agent: deterministic code is cheaper, faster and more trustworthy for anything that is only arithmetic or routing.",
+  "faq": [
+    {
+      "q": "What did the programme cover?",
+      "a": "Eleven modules on agent systems, design and impact — taken while the platform in this portfolio was being built, and applied to it directly rather than to isolated exercises."
+    },
+    {
+      "q": "How much did the coursework cost in inference?",
+      "a": "Nothing to report: it was tuition, not tokens. The value is the design vocabulary, and it is already reflected in how the rest of these projects are built."
+    },
+    {
+      "q": "What is the most useful thing it taught?",
+      "a": "Deciding what should not be an agent. Preferring narrow, sharp tools, and validating output before any side effect, matters more than any prompt technique — and deterministic code beats an agent for anything that is only arithmetic or routing."
+    }
+  ],
+  "cta": "It is a completed programme; the certificate is available on request."
+}

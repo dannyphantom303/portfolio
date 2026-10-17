@@ -1,0 +1,31 @@
+{
+  "slug": "autolisting",
+  "title": "Autolisting: a visible ten-step pipeline that turns property video into a finished listing",
+  "metaDescription": "Chunked upload, ffmpeg frame extraction, straightening and tone-mapping, then one short generation for the copy — ten named steps with live state and a verdict on every job.",
+  "labels": [
+    "media pipeline",
+    "ffmpeg",
+    "video processing",
+    "real estate",
+    "llm",
+    "automation"
+  ],
+  "dek": "Upload a property video and a few fields, get back a finished, formatted listing — with every one of the ten pipeline steps visible while it runs.",
+  "intro": "Autolisting takes a property walkthrough video and a handful of fields and returns a finished, formatted listing. The pipeline is deliberately visible: ten named steps with live state, so the user can see exactly where the machine is and step in when needed. Under the hood it is a chunked uploader that survives an interrupted tunnel, a local ffmpeg and Python worker that probes the media before touching it, a framing and enhancement pass that straightens shots and maps their tone, and an LLM writing the copy from what the frames actually show.",
+  "why": "Most of the failures in a pipeline like this are silent. A job that never writes its verdict looks like a hang rather than an error, an interrupted upload leaves a clean prefix that is indistinguishable from a bad source file, and an unprobed video without its index looks identical to a stalled worker. Designing the failure state first and instrumenting the upload itself is what makes the rest of it debuggable. Straightening and tone-mapping are also what make a phone walkthrough look like a listing rather than raw footage.",
+  "faq": [
+    {
+      "q": "What does one finished listing cost?",
+      "a": "The expensive half of this pipeline is compute, not tokens: frame extraction and enhancement run locally on my machine, so a listing costs local machine time plus a single short generation — nothing is billed per uploaded megabyte."
+    },
+    {
+      "q": "Why is every step shown to the user?",
+      "a": "Because a job that never writes a terminal state looks like a hang, not an error. Ten named steps with live state, and an explicit ready-or-failed verdict, mean the UI never polls forever and the user can see where to intervene."
+    },
+    {
+      "q": "How does the video get in and out?",
+      "a": "Anything over a few megabytes over a tunnel goes up as resumable chunks with explicit offsets; the worker probes the file before processing, extracts frames, straightens and enhances them, and one low-cost catalogue model writes the listing copy in a single generation."
+    }
+  ],
+  "cta": "Autolisting runs inside the dashboard; the input is a private video, so the pipeline itself is not published."
+}

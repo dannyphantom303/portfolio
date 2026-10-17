@@ -168,6 +168,21 @@ a.pcard:hover .pcard-more{color:var(--ink-900)}
 a.pcard:hover .pcard-more::after{transform:translateX(4px)}
 
 @media(max-width:680px){.navlinks{display:none}section{padding:52px 0 8px}.svc-row span{display:none}}
+
+/* contact form — posts to the Sport AI Consulting mail API */
+.cform{max-width:560px;margin:22px auto 0;text-align:left}
+.cform .crow{margin:0 0 10px}
+.cform input,.cform textarea{width:100%;box-sizing:border-box;padding:12px 14px;font:400 15px var(--font-sans);
+  color:var(--ink-900);background:#fff;border:1px solid var(--hairline);border-radius:10px;outline:none}
+.cform input:focus,.cform textarea:focus{border-color:var(--ink-400)}
+.cform textarea{resize:vertical;min-height:104px}
+.cform button{width:100%;margin-top:4px;cursor:pointer;border:0}
+.cform button[disabled]{opacity:.6;cursor:default}
+.cnote{font:400 12px var(--font-mono);letter-spacing:.4px;color:var(--ink-400);text-align:center;margin:12px 0 0}
+.cnote a{color:var(--ink-700)}
+.cmsg{display:none;margin:10px 0 0;padding:11px 14px;border-radius:10px;font:400 14px var(--font-sans)}
+.cmsg.ok{display:block;background:#e7f4ea;color:#1c5b2c;border:1px solid #bfe0c7}
+.cmsg.bad{display:block;background:#fdeaea;color:#7a1f1f;border:1px solid #f0c2c2}
 </style>
 </head>
 <body>
@@ -633,9 +648,15 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     <div class="eyebrow">CONTACT</div>
     <h2>Have a business that should run on AI?</h2>
     <p>White-label Vision deployment, an agent command center for your team, or a product you want built — let's talk.</p>
-    <div class="cta-row" style="justify-content:center">
-      <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a>
-      <a class="btn ghostd" style="border-color:var(--hairline);color:var(--ink-700)" href="resume.html">Résumé</a>
+    <div class="cform">
+      <form id="contact-form" novalidate>
+        <div class="crow"><input name="name" type="text" placeholder="Your name" autocomplete="name" required></div>
+        <div class="crow"><input name="email" type="email" placeholder="Email" autocomplete="email" required></div>
+        <div class="crow"><textarea name="message" placeholder="What is eating your week?" required></textarea></div>
+        <button class="btn light" type="submit" style="background:var(--ink-900);color:#fff">Send message</button>
+      </form>
+      <div class="cmsg" id="cmsg" role="status" aria-live="polite"></div>
+      <p class="cnote">Or email <a href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a> · <a href="resume.html">Résumé</a></p>
     </div>
     <div class="fine">
       <span>© 2026 DANIEL DAYMUDE</span>
@@ -646,6 +667,30 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
 </div>
 
 <script>
+(function(){
+  // Contact form -> Sport AI Consulting mail API (same origin as the funnel host)
+  var f=document.getElementById('contact-form'), box=document.getElementById('cmsg');
+  if(!f) return;
+  var btn=f.querySelector('button[type=submit]');
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=f.name.value.trim(), email=f.email.value.trim(), message=f.message.value.trim();
+    function say(cls, txt){ box.className='cmsg '+(cls||''); box.textContent=txt; }
+    if(!name||!email||!message||email.indexOf('@')<1){ say('bad','Please fill in your name, a valid email, and a message.'); return; }
+    btn.disabled=true; box.className='cmsg'; btn.textContent='Sending…';
+    fetch(location.origin+'/api/contact',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:name,email:email,message:message})
+    }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok&&j.success}; }); })
+      .then(function(res){
+        if(res.ok){ f.reset(); say('ok','Thanks — your message is on its way. I usually reply within a day.'); }
+        else { say('bad','Could not send just now. Email me directly at ddaymude.ai@gmail.com.'); }
+      })
+      .catch(function(){ say('bad','Network problem — email me directly at ddaymude.ai@gmail.com.'); })
+      .then(function(){ btn.disabled=false; btn.textContent='Send message'; });
+  });
+})();
+
 (function(){
   // Stagger card entrances
   var cards = document.querySelectorAll('.pcard, .reel-grid .ncard');

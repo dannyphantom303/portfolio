@@ -295,11 +295,18 @@ const html = `<!DOCTYPE html>
 window.__PUBLISH_TOKEN__ = window.__PUBLISH_TOKEN__ || null;
 const STATE_URL = '/publish/api/state';
 const APPROVE_URL = '/publish/api/approve';
-const ORDER = { pending: 'approved', approved: 'blocked', blocked: 'pending', draft: 'pending' };
+const ORDER = { pending: 'approved', approved: 'blocked', blocked: 'pending', draft: 'approved' };
 
-function setStatus(slug, platform, val) {
+// paint() only updates the DOM. Every state change must go through
+// setStatus -> save (the token-gated endpoint). The page-load sync calls
+// paint() only: a render must never POST, or opening the dashboard fires one
+// write per chip and races them against each other (it wrecked state.json once).
+function paint(slug, platform, val) {
   const el = document.querySelector('.pchip[data-slug="' + slug + '"][data-platform="' + platform + '"]');
   if (el) { el.className = 'pchip ' + val; el.querySelector('.pval').textContent = val; }
+}
+function setStatus(slug, platform, val) {
+  paint(slug, platform, val);
   recalc();
   save(slug, platform, val);
 }
@@ -331,13 +338,14 @@ document.getElementById('expand-all').addEventListener('click', (e) => {
   e.target.textContent = open ? 'collapse all drafts' : 'expand all drafts';
 });
 document.getElementById('approve-all').addEventListener('click', () => {
-  document.querySelectorAll('.pchip.pending').forEach((c, i) => setTimeout(() =>
+  document.querySelectorAll('.pchip.pending, .pchip.draft').forEach((c, i) => setTimeout(() =>
     setStatus(c.dataset.slug, c.dataset.platform, 'approved'), i * 60));
 });
 fetch(STATE_URL).then(r => r.json()).then(j => {
   if (!j || !j.posts) return;
   for (const [slug, plats] of Object.entries(j.posts)) for (const [plat, val] of Object.entries(plats))
-    setStatus(slug, plat, val);
+    paint(slug, plat, val);
+  recalc();
   const s = document.getElementById('save-status'); s.textContent = 'state ' + (j.updated || 'loaded');
 }).catch(() => {});
 </script>

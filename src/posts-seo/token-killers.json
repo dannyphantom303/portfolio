@@ -1,0 +1,24 @@
+{
+  "slug": "token-killers",
+  "title": "Token Killers: cutting AI API spend without cutting quality",
+  "metaDescription": "Prompt and context compression, task-based model routing, caching and local-model offload, with a before-and-after calculator that proves the delta.",
+  "labels": ["llm cost", "token optimization", "model routing", "local llm", "ollama", "prompt engineering"],
+  "dek": "An audit-and-rebuild service for teams bleeding money on AI APIs, where the numbers come from a stack that is already running rather than from a spreadsheet.",
+  "intro": "Token Killers is the cost-engineering side of this portfolio: an audit and rebuild service for teams whose AI bill has outgrown the value they get from it. The method is unglamorous. Baseline what is actually being spent, find the fat, compress the prompts and the context, route each task to a model that is big enough rather than to a model that is impressive, and offload the boring majority of the traffic to local weights. The credibility comes from the fact that the same stack runs on this machine, so the deltas are measured rather than theorised.",
+  "why": "Most of an AI bill is context that was never needed plus a model that was too large for the job. Routing is the highest-leverage single change, because the spread between tiers is not a percentage, it is an order of magnitude. Local offload is the other half, and it is a privacy feature as much as a cost feature: the traffic that can leave is the traffic you have decided may leave. Instrumenting before optimising is what keeps the whole exercise honest.",
+  "faq": [
+    {
+      "q": "What does the savings actually look like?",
+      "a": "A worked example at one million input and a quarter of a million output tokens a month: on gpt-5.5 that is $12.50; the same volume on deepseek-v4-pro is about $0.45; routed to the free catalogue or a local model it is $0. Those are the providers' published per-million-token rates read on 2026-10-16."
+    },
+    {
+      "q": "Do you have to give up quality to get the saving?",
+      "a": "No, and that is the point of routing by task rather than by habit. Extraction and structured decisions do not need the frontier tier, long-context writing does. The saving comes from matching the model to the job, not from using a worse model for everything."
+    },
+    {
+      "q": "Why does a public calculator matter to the service?",
+      "a": "Because the argument should be checkable before anyone hires anyone. The calculator runs the numbers live with no login, so the same arithmetic that justifies the rebuild is available to whoever wants to sanity-check it."
+    }
+  ],
+  "cta": "The savings calculator and the playbook are available on request; the calculator is the public front door of the project and runs the numbers live."
+}

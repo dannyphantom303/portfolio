@@ -1,0 +1,31 @@
+{
+  "slug": "cnbc-live-on-glasses",
+  "title": "CNBC live on the Meta Ray-Ban Display: a proxy in front of a Referer-gated CDN",
+  "metaDescription": "Live CNBC on 600x600 glasses with a D-pad: the interesting engineering is the local proxy that re-arbitrates the CDN host and rewrites the playlist to same-origin URLs.",
+  "labels": [
+    "streaming",
+    "hls",
+    "proxy",
+    "wearables",
+    "meta ray-ban",
+    "edge cases"
+  ],
+  "dek": "A live CNBC stream on 600x600 glasses with D-pad navigation only — and a local proxy that exists because the upstream CDN only serves its playlist to the right Referer.",
+  "intro": "This project puts a live CNBC feed on the Meta Ray-Ban Display glasses: a 600x600 viewport, D-pad only, streaming from a free feed that needs no login. The player is not the interesting part. The upstream CDN only serves its playlist when the request carries the right Referer header, which a glasses webview cannot fake, so a small local proxy sits in front of it: it re-arbitrates the best CDN host and caches that choice with a long TTL, rewrites the playlist so every segment URL is same-origin, and streams the bytes through without ever buffering a whole segment in memory.",
+  "why": "On a wearable, the buffering is the product: time-to-first-frame is the feature, which forces a streaming design rather than a download-then-play one. Understanding the constraint before optimising the code is what made the proxy small — an upstream Referer gate is the entire reason it exists. The tuning is all on a weak link: prewarm the host arbitration at startup so the cold path is not the startup delay, and never hard-seek on a stall, because jumping back to the live edge throws the buffer away and turns a dip into a loop. The wrong watchdog can make playback measurably worse than no watchdog at all.",
+  "faq": [
+    {
+      "q": "Why is there a proxy at all?",
+      "a": "Because the upstream CDN only serves its playlist when the request carries the right Referer header, which a glasses webview cannot fake. A local proxy stands in front, re-arbitrates and caches the best CDN host, rewrites the playlist to same-origin URLs and streams the bytes through."
+    },
+    {
+      "q": "What does it cost to run?",
+      "a": "$0 for the feed and the code — there are no model calls and the stream is free. The only billable resource is the machine running the proxy."
+    },
+    {
+      "q": "What was the hard part on a wearable?",
+      "a": "Time-to-first-frame. Streaming the bytes instead of reading a whole segment into memory, prewarming host arbitration, and not hard-seeking on a stall: the wrong watchdog measurably worsens playback compared with leaving it alone."
+    }
+  ],
+  "cta": "Watch it on the glasses at https://sport.taila73942.ts.net/cnbc/"
+}

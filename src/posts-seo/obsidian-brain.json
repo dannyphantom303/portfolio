@@ -1,0 +1,31 @@
+{
+  "slug": "obsidian-brain",
+  "title": "Obsidian Brain: a live 3D graph of a note vault, built without a single model call",
+  "metaDescription": "A Python pass walks the notes and their links and writes one graph payload; a WebGL viewer renders it as an explorable structure with search and drill-down.",
+  "labels": [
+    "knowledge graph",
+    "obsidian",
+    "webgl",
+    "python",
+    "dataviz",
+    "note taking"
+  ],
+  "dek": "A live 3D visualization of a personal knowledge vault, derived deterministically from the notes themselves and regenerated on demand.",
+  "intro": "Obsidian Brain renders a personal knowledge vault as a live 3D graph you can search and drill into. A Python pass walks the notes and their links and writes one graph payload; a WebGL viewer turns that into an explorable structure. The deliberate choice is that no model is involved anywhere in the build or the viewer: the graph is derived deterministically from the source notes, so it is always current and never invented. Connection count, folders and links are already sitting in the vault as free metadata, and they turn out to be a surprisingly good relevance signal.",
+  "why": "Not every problem is a prompt. Some of them are structure problems, and calling a language model at them mostly adds noise and a bill. A graph a human has to update by hand is a graph that is wrong within a week, so the rule here is generate and never hand-maintain: one JSON payload, written by the walker, keeps the viewer static and portable, and the whole thing regenerates itself on demand. The result is a genuinely $0 AI bill for a project that is still useful every day.",
+  "faq": [
+    {
+      "q": "Does this project use an LLM at all?",
+      "a": "No. Pure Python walks the vault and builds the graph, and the browser renders it with WebGL. That is zero model calls and zero per-token spend in both the build and the viewer — the point of the project is that a deterministic build beats a prompt here."
+    },
+    {
+      "q": "Why visualize notes instead of just searching them?",
+      "a": "Because connection count is a free relevance signal, and a graph makes structure you already have — folders and links — visible. It is only useful if it regenerates itself, which is why nothing in it is hand-maintained."
+    },
+    {
+      "q": "How does the graph stay current?",
+      "a": "A walker rewrites a single JSON payload from the notes and links on demand, and the viewer is static over that file. Clusters come from folders and links rather than invented embeddings, so the graph never drifts from the vault it describes."
+    }
+  ],
+  "cta": "The viewer shows the contents of a private vault, so it stays private; the deterministic build is the shareable part."
+}

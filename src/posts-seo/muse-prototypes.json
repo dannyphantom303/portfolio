@@ -1,0 +1,31 @@
+{
+  "slug": "muse-prototypes",
+  "title": "Muse Prototypes: the same 3D world, packaged to be opened rather than deployed",
+  "metaDescription": "The TrackMyGold Frontier world — western town, gold mine, saloon and forge — packaged as a shareable prototype link, with the same agents inside.",
+  "labels": [
+    "prototypes",
+    "3d",
+    "ai agents",
+    "shareable demos",
+    "feedback loops",
+    "webgl"
+  ],
+  "dek": "A shareable link to the TrackMyGold Frontier world: find the character, accept quests, explore the realm — the same content as the live 3D world, in the form easiest to send.",
+  "intro": "Muse Prototypes packages the TrackMyGold Frontier world — western town, gold mine, saloon and forge — as a shareable prototype you can open from a link. Find the character, accept quests, explore the realm. It is the same world definition as the live 3D build, shipped in the form that is easiest to send to someone for feedback, with the same agents inside and the same dialogue path as the tailnet version.",
+  "why": "Prototypes exist to shorten the feedback loop, so optimise for opening rather than for fidelity: a link gets opened, a deploy gets deferred. The economics work because one world definition ships to several surfaces — game, VR entry point, prototype link — which is far cheaper than rebuilding the content for each. Hosting and rendering stay $0, since the assets are static and the browser does the rendering; the only metered part is character dialogue, exactly as in the live world.",
+  "faq": [
+    {
+      "q": "What is in the prototype?",
+      "a": "The TrackMyGold Frontier world: a western town, a gold mine, a saloon and a forge, with the same characters and agents as the live build. Find the character, accept quests, explore."
+    },
+    {
+      "q": "What does it cost to host?",
+      "a": "$0 to host and $0 to render — static assets in the browser. The only metered part is character dialogue, which runs through the same selectable agent provider as the live world."
+    },
+    {
+      "q": "Why ship a prototype instead of the live build?",
+      "a": "Because a link gets opened and a deploy gets deferred. Shipping one world definition to a share link, the game and the VR entry point is the cheap way to get feedback, rather than rebuilding content per surface."
+    }
+  ],
+  "cta": "Open the prototype link and tell me what the characters should do next."
+}

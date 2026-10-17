@@ -1,0 +1,629 @@
+{
+  "verified": "2026-10-16 22:47:37",
+  "blogId": "6379488244824949695",
+  "draftsOnBlog": 18,
+  "mapped": 18,
+  "reachable": 18,
+  "rows": [
+    {
+      "slug": "sport-command-center",
+      "postId": "6432375665139586318",
+      "onBlog": true,
+      "title": "Sport: a multi-agent AI operations system for a one-person company",
+      "status": "DRAFT",
+      "contentLen": 5909,
+      "labels": [
+        "ai-agents",
+        "automation",
+        "hermes",
+        "multi-agent-systems",
+        "orchestration",
+        "sqlite"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:47:01-07:00"
+    },
+    {
+      "slug": "smart-home-hub",
+      "postId": "52546650911618731",
+      "onBlog": true,
+      "title": "Home Assistant on a Raspberry Pi, driven by plain English",
+      "status": "DRAFT",
+      "contentLen": 4349,
+      "labels": [
+        "automation",
+        "docker",
+        "home-assistant",
+        "raspberry-pi",
+        "smart-home",
+        "yaml"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:37:15-07:00"
+    },
+    {
+      "slug": "track-my-gold",
+      "postId": "3186882185116295605",
+      "onBlog": true,
+      "title": "Track My Gold: a YouTube engagement and affiliate dashboard",
+      "status": "DRAFT",
+      "contentLen": 3947,
+      "labels": [
+        "affiliate",
+        "approval-workflow",
+        "content-operations",
+        "dashboard",
+        "seo",
+        "youtube"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:37:28-07:00"
+    },
+    {
+      "slug": "content-autopilot",
+      "postId": "1127088944285100249",
+      "onBlog": true,
+      "title": "Content Autopilot: draft, review, approve, publish on a schedule",
+      "status": "DRAFT",
+      "contentLen": 3753,
+      "labels": [
+        "buffer",
+        "content-automation",
+        "human-in-the-loop",
+        "llm",
+        "wearables",
+        "workflow"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:37:42-07:00"
+    },
+    {
+      "slug": "token-killers",
+      "postId": "8504994569040036265",
+      "onBlog": true,
+      "title": "Token Killers: cutting AI API spend without cutting quality",
+      "status": "DRAFT",
+      "contentLen": 3801,
+      "labels": [
+        "llm-cost",
+        "local-llm",
+        "model-routing",
+        "ollama",
+        "prompt-engineering",
+        "token-optimization"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:37:55-07:00"
+    },
+    {
+      "slug": "hermes-vision",
+      "postId": "316235701774564946",
+      "onBlog": true,
+      "title": "Hermes Vision: a live AI agent session on phone and glasses",
+      "status": "DRAFT",
+      "contentLen": 3990,
+      "labels": [
+        "meta-ray-ban",
+        "pwa",
+        "server-sent-events",
+        "service-workers",
+        "streaming",
+        "wearables"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:38:09-07:00"
+    },
+    {
+      "slug": "hermes-worlds",
+      "postId": "4798882649252461327",
+      "onBlog": true,
+      "title": "Hermes Worlds: an explorable 3D frontier where the agents are characters",
+      "status": "DRAFT",
+      "contentLen": 3835,
+      "labels": [
+        "3d",
+        "ai-agents",
+        "browser-games",
+        "ollama",
+        "sse",
+        "webgl"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:38:22-07:00"
+    },
+    {
+      "slug": "autolisting",
+      "postId": "5399092927239940014",
+      "onBlog": true,
+      "title": "Autolisting: a visible ten-step pipeline that turns property video into a finished listing",
+      "status": "DRAFT",
+      "contentLen": 4207,
+      "labels": [
+        "automation",
+        "ffmpeg",
+        "llm",
+        "media-pipeline",
+        "real-estate",
+        "video-processing"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:38:36-07:00"
+    },
+    {
+      "slug": "obsidian-brain",
+      "postId": "1140082833818721520",
+      "onBlog": true,
+      "title": "Obsidian Brain: a live 3D graph of a note vault, built without a single model call",
+      "status": "DRAFT",
+      "contentLen": 3354,
+      "labels": [
+        "dataviz",
+        "knowledge-graph",
+        "note-taking",
+        "obsidian",
+        "python",
+        "webgl"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:38:50-07:00"
+    },
+    {
+      "slug": "net-worth-ledger",
+      "postId": "2544810466239849706",
+      "onBlog": true,
+      "title": "Net Worth Ledger: one number, computed from entries a human can audit",
+      "status": "DRAFT",
+      "contentLen": 2760,
+      "labels": [
+        "audit-trail",
+        "automation",
+        "finance-ops",
+        "ledger",
+        "net-worth",
+        "sql"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:39:04-07:00"
+    },
+    {
+      "slug": "insta360-x4",
+      "postId": "2129925173948631849",
+      "onBlog": true,
+      "title": "Insta360 X4: a local dashboard for a 360 camera, mounted behind a path prefix",
+      "status": "DRAFT",
+      "contentLen": 2717,
+      "labels": [
+        "hardware",
+        "insta360",
+        "integration",
+        "local-dashboard",
+        "python",
+        "web-ui"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:39:17-07:00"
+    },
+    {
+      "slug": "agentic-ai-course",
+      "postId": "3415345338006946215",
+      "onBlog": true,
+      "title": "Applied Agentic AI: what survived contact with a real agent fleet",
+      "status": "DRAFT",
+      "contentLen": 2919,
+      "labels": [
+        "agent-design",
+        "agentic-ai",
+        "ai",
+        "guardrails",
+        "systems-design",
+        "training"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:39:31-07:00"
+    },
+    {
+      "slug": "project-showcase-engine",
+      "postId": "3050935208222458927",
+      "onBlog": true,
+      "title": "Project Showcase Engine: the daily pipeline that generates this portfolio",
+      "status": "DRAFT",
+      "contentLen": 4284,
+      "labels": [
+        "automation",
+        "cron",
+        "generator",
+        "portfolio",
+        "publishing",
+        "static-site"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:39:44-07:00"
+    },
+    {
+      "slug": "cnbc-live-on-glasses",
+      "postId": "6121554914202452996",
+      "onBlog": true,
+      "title": "CNBC live on the Meta Ray-Ban Display: a proxy in front of a Referer-gated CDN",
+      "status": "DRAFT",
+      "contentLen": 4083,
+      "labels": [
+        "edge-cases",
+        "hls",
+        "meta-ray-ban",
+        "proxy",
+        "streaming",
+        "wearables"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:39:58-07:00"
+    },
+    {
+      "slug": "gold-spot-explorer",
+      "postId": "7616987405383239434",
+      "onBlog": true,
+      "title": "Gold Spot Explorer: ranking historical gold ground against bare-earth LiDAR",
+      "status": "DRAFT",
+      "contentLen": 4112,
+      "labels": [
+        "3d-terrain",
+        "geospatial",
+        "gold-prospecting",
+        "gpx",
+        "lidar",
+        "local-llm"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:40:11-07:00"
+    },
+    {
+      "slug": "ai-consulting",
+      "postId": "929876904650607255",
+      "onBlog": true,
+      "title": "AI Consulting: the commercial half of the portfolio, built on the same board",
+      "status": "DRAFT",
+      "contentLen": 3049,
+      "labels": [
+        "ai",
+        "automation",
+        "consulting",
+        "intake",
+        "pricing",
+        "sales-ops"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:40:25-07:00"
+    },
+    {
+      "slug": "openclaw",
+      "postId": "5862084000199435627",
+      "onBlog": true,
+      "title": "OpenClaw: a local agent gateway, configured in one auditable file",
+      "status": "DRAFT",
+      "contentLen": 3348,
+      "labels": [
+        "agents",
+        "configuration",
+        "gateway",
+        "local-first",
+        "messaging",
+        "plumbing"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:40:38-07:00"
+    },
+    {
+      "slug": "muse-prototypes",
+      "postId": "8516080112000688611",
+      "onBlog": true,
+      "title": "Muse Prototypes: the same 3D world, packaged to be opened rather than deployed",
+      "status": "DRAFT",
+      "contentLen": 2540,
+      "labels": [
+        "3d",
+        "ai-agents",
+        "feedback-loops",
+        "prototypes",
+        "shareable-demos",
+        "webgl"
+      ],
+      "url": "https://danieldaymude.blogspot.com/",
+      "updated": "2026-10-16T15:40:52-07:00"
+    }
+  ],
+  "orphanDrafts": [],
+  "posts": {
+    "sport-command-center": {
+      "postId": "6432375665139586318",
+      "title": "Sport: a multi-agent AI operations system for a one-person company",
+      "labels": [
+        "ai-agents",
+        "automation",
+        "hermes",
+        "multi-agent-systems",
+        "orchestration",
+        "sqlite"
+      ],
+      "contentLen": 6086,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:54:30-07:00",
+      "at": "2026-10-16 22:54:30"
+    },
+    "smart-home-hub": {
+      "postId": "52546650911618731",
+      "title": "Home Assistant on a Raspberry Pi, driven by plain English",
+      "labels": [
+        "automation",
+        "docker",
+        "home-assistant",
+        "raspberry-pi",
+        "smart-home",
+        "yaml"
+      ],
+      "contentLen": 5477,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:54:43-07:00",
+      "at": "2026-10-16 22:54:44"
+    },
+    "track-my-gold": {
+      "postId": "3186882185116295605",
+      "title": "Track My Gold: a YouTube engagement and affiliate dashboard",
+      "labels": [
+        "affiliate",
+        "approval-workflow",
+        "content-operations",
+        "dashboard",
+        "seo",
+        "youtube"
+      ],
+      "contentLen": 5030,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:54:57-07:00",
+      "at": "2026-10-16 22:54:57"
+    },
+    "content-autopilot": {
+      "postId": "1127088944285100249",
+      "title": "Content Autopilot: draft, review, approve, publish on a schedule",
+      "labels": [
+        "buffer",
+        "content-automation",
+        "human-in-the-loop",
+        "llm",
+        "wearables",
+        "workflow"
+      ],
+      "contentLen": 4804,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:55:10-07:00",
+      "at": "2026-10-16 22:55:11"
+    },
+    "token-killers": {
+      "postId": "8504994569040036265",
+      "title": "Token Killers: cutting AI API spend without cutting quality",
+      "labels": [
+        "llm-cost",
+        "local-llm",
+        "model-routing",
+        "ollama",
+        "prompt-engineering",
+        "token-optimization"
+      ],
+      "contentLen": 4961,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:55:24-07:00",
+      "at": "2026-10-16 22:55:24"
+    },
+    "hermes-vision": {
+      "postId": "316235701774564946",
+      "title": "Hermes Vision: a live AI agent session on phone and glasses",
+      "labels": [
+        "meta-ray-ban",
+        "pwa",
+        "server-sent-events",
+        "service-workers",
+        "streaming",
+        "wearables"
+      ],
+      "contentLen": 5091,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:55:37-07:00",
+      "at": "2026-10-16 22:55:38"
+    },
+    "hermes-worlds": {
+      "postId": "4798882649252461327",
+      "title": "Hermes Worlds: an explorable 3D frontier where the agents are characters",
+      "labels": [
+        "3d",
+        "ai-agents",
+        "browser-games",
+        "ollama",
+        "sse",
+        "webgl"
+      ],
+      "contentLen": 4880,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:55:51-07:00",
+      "at": "2026-10-16 22:55:51"
+    },
+    "autolisting": {
+      "postId": "5399092927239940014",
+      "title": "Autolisting: a visible ten-step pipeline that turns property video into a finished listing",
+      "labels": [
+        "automation",
+        "ffmpeg",
+        "llm",
+        "media-pipeline",
+        "real-estate",
+        "video-processing"
+      ],
+      "contentLen": 5280,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:56:05-07:00",
+      "at": "2026-10-16 22:56:05"
+    },
+    "obsidian-brain": {
+      "postId": "1140082833818721520",
+      "title": "Obsidian Brain: a live 3D graph of a note vault, built without a single model call",
+      "labels": [
+        "dataviz",
+        "knowledge-graph",
+        "note-taking",
+        "obsidian",
+        "python",
+        "webgl"
+      ],
+      "contentLen": 4428,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:56:18-07:00",
+      "at": "2026-10-16 22:56:19"
+    },
+    "net-worth-ledger": {
+      "postId": "2544810466239849706",
+      "title": "Net Worth Ledger: one number, computed from entries a human can audit",
+      "labels": [
+        "audit-trail",
+        "automation",
+        "finance-ops",
+        "ledger",
+        "net-worth",
+        "sql"
+      ],
+      "contentLen": 3666,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:56:32-07:00",
+      "at": "2026-10-16 22:56:32"
+    },
+    "insta360-x4": {
+      "postId": "2129925173948631849",
+      "title": "Insta360 X4: a local dashboard for a 360 camera, mounted behind a path prefix",
+      "labels": [
+        "hardware",
+        "insta360",
+        "integration",
+        "local-dashboard",
+        "python",
+        "web-ui"
+      ],
+      "contentLen": 3550,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:56:45-07:00",
+      "at": "2026-10-16 22:56:46"
+    },
+    "agentic-ai-course": {
+      "postId": "3415345338006946215",
+      "title": "Applied Agentic AI: what survived contact with a real agent fleet",
+      "labels": [
+        "agent-design",
+        "agentic-ai",
+        "ai",
+        "guardrails",
+        "systems-design",
+        "training"
+      ],
+      "contentLen": 3851,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:56:59-07:00",
+      "at": "2026-10-16 22:56:59"
+    },
+    "project-showcase-engine": {
+      "postId": "3050935208222458927",
+      "title": "Project Showcase Engine: the daily pipeline that generates this portfolio",
+      "labels": [
+        "automation",
+        "cron",
+        "generator",
+        "portfolio",
+        "publishing",
+        "static-site"
+      ],
+      "contentLen": 5164,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:50:57-07:00",
+      "at": "2026-10-16 22:50:57"
+    },
+    "cnbc-live-on-glasses": {
+      "postId": "6121554914202452996",
+      "title": "CNBC live on the Meta Ray-Ban Display: a proxy in front of a Referer-gated CDN",
+      "labels": [
+        "edge-cases",
+        "hls",
+        "meta-ray-ban",
+        "proxy",
+        "streaming",
+        "wearables"
+      ],
+      "contentLen": 4898,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:51:10-07:00",
+      "at": "2026-10-16 22:51:11"
+    },
+    "gold-spot-explorer": {
+      "postId": "7616987405383239434",
+      "title": "Gold Spot Explorer: ranking historical gold ground against bare-earth LiDAR",
+      "labels": [
+        "3d-terrain",
+        "geospatial",
+        "gold-prospecting",
+        "gpx",
+        "lidar",
+        "local-llm"
+      ],
+      "contentLen": 5086,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:51:24-07:00",
+      "at": "2026-10-16 22:51:24"
+    },
+    "ai-consulting": {
+      "postId": "929876904650607255",
+      "title": "AI Consulting: the commercial half of the portfolio, built on the same board",
+      "labels": [
+        "ai",
+        "automation",
+        "consulting",
+        "intake",
+        "pricing",
+        "sales-ops"
+      ],
+      "contentLen": 3758,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:51:37-07:00",
+      "at": "2026-10-16 22:51:38"
+    },
+    "openclaw": {
+      "postId": "5862084000199435627",
+      "title": "OpenClaw: a local agent gateway, configured in one auditable file",
+      "labels": [
+        "agents",
+        "configuration",
+        "gateway",
+        "local-first",
+        "messaging",
+        "plumbing"
+      ],
+      "contentLen": 4115,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:51:51-07:00",
+      "at": "2026-10-16 22:51:51"
+    },
+    "muse-prototypes": {
+      "postId": "8516080112000688611",
+      "title": "Muse Prototypes: the same 3D world, packaged to be opened rather than deployed",
+      "labels": [
+        "3d",
+        "ai-agents",
+        "feedback-loops",
+        "prototypes",
+        "shareable-demos",
+        "webgl"
+      ],
+      "contentLen": 3278,
+      "status": "DRAFT",
+      "updated": "2026-10-16T15:52:04-07:00",
+      "at": "2026-10-16 22:52:05"
+    }
+  },
+  "started": "2026-10-16 22:48:14",
+  "mode": "patch",
+  "ok": 12,
+  "fail": 0,
+  "updated": "2026-10-16 22:56:59"
+}

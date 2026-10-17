@@ -22,6 +22,10 @@ const projects = reg.projects.filter(p => p.publicSafe !== false);
 fs.mkdirSync(path.join(ROOT, 'dist', 'posts'), { recursive: true });
 
 function markdown(p) {
+  // Prefer the authored long-form post (src/posts-seo/<slug>.json + src/projects-detail.json).
+  // The short registry template below is only the fallback for projects with no SEO layer.
+  const longform = require('./src/longform');
+  if (longform.has(p.slug)) return longform.buildMarkdown(p.slug);
   // Only emit sections that have content: an empty "## Stack" heading reads as a
   // broken post on the blog (5 projects have no stack recorded yet).
   const highlights = (p.highlights || []).filter(h => h && String(h).trim());

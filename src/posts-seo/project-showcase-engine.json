@@ -1,0 +1,31 @@
+{
+  "slug": "project-showcase-engine",
+  "title": "Project Showcase Engine: the daily pipeline that generates this portfolio",
+  "metaDescription": "A project registry drives the write-ups, the resume, the demo videos and the per-project post drafts; a scheduled job rebuilds and publishes the whole site every morning.",
+  "labels": [
+    "static site",
+    "generator",
+    "automation",
+    "cron",
+    "publishing",
+    "portfolio"
+  ],
+  "dek": "The system that builds the site you are reading: one registry, one generator, a video step, a syndication step, and a scheduled rebuild every morning.",
+  "intro": "This portfolio is generated, not hand-written. A project registry drives the write-ups, one page per project and a self-updating résumé. A discovery step syncs new projects in from the working dashboard so the site cannot drift from reality; a video step renders the demos; a syndication step drafts a per-project post for the publishing platforms; and a scheduled job rebuilds and publishes the whole thing every morning. The page you are reading is the output of a daily pipeline, which is the only reason an eighteen-project portfolio stays current.",
+  "why": "The build directory is disposable, and that rule shapes everything: authored files live in a source layer or the next rebuild eats them. One JSON registry plus one build script producing static output is all the structure this needs — anything more elaborate is a liability at this scale. Publishing from the generator is what keeps a portfolio from rotting, and the regressions worth testing are the ones actually hit: there is a test for each, including that generated output survives a rebuild. A scheduled job that fails silently is worse than no job at all, which I learned the first time a cron run died on a minimal PATH and looked exactly like nothing had changed.",
+  "faq": [
+    {
+      "q": "How is this site built?",
+      "a": "One JSON project registry drives a generator that writes the write-ups, per-project pages and the résumé. A discovery step syncs new projects from the working dashboard, a video step renders demos, and a syndication step drafts the per-project posts."
+    },
+    {
+      "q": "What does it cost to host?",
+      "a": "Hosting is free — a static directory behind the existing private router — and the build is machine time measured in seconds. The only real cost of the project is the discipline of keeping one source of truth."
+    },
+    {
+      "q": "Why automate the publishing?",
+      "a": "Because a portfolio that is updated by hand rots. A scheduled job rebuilds and publishes from the registry every morning, so the site reflects current work without anyone remembering to redeploy it — and the first cron failure taught me to check that the job actually fires."
+    }
+  ],
+  "cta": "The site rebuilds and republishes itself every morning from the project registry."
+}

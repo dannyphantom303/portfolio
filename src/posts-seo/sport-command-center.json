@@ -1,0 +1,24 @@
+{
+  "slug": "sport-command-center",
+  "title": "Sport: a multi-agent AI operations system for a one-person company",
+  "metaDescription": "How I run a one-person software company on a fleet of named agents: separate memories, a shared SQLite task bus, and approval gates on anything outbound.",
+  "labels": ["ai agents", "multi-agent systems", "orchestration", "sqlite", "automation", "hermes"],
+  "dek": "A Chief-of-Staff layer that coordinates venture leads and specialist workers across every project, with a human approval gate on anything that leaves the machine.",
+  "intro": "Most people try to make one model smarter. I went the other way and split the work across named agents that each keep their own memory, their own skills and their own conversation history, then made them coordinate through a shared task bus. Sport is the orchestration layer on top: an executive coordinator that decomposes a goal into cards, assigns each card to the specialist that should own it, and expresses the dependencies between them as edges rather than as polite requests in a prompt. It is the part of this portfolio that keeps the rest of it moving when nobody is watching.",
+  "why": "The reason this matters is failure shape. One giant prompt plus one giant tool list fails globally and opaquely. A hierarchy of narrow agents fails locally, in a place you can name, and it can be retried without re-running everything around it. Once you have a durable task bus in the middle, the agents stop being a conversation and start being a system, and a system is something you can actually leave running overnight.",
+  "faq": [
+    {
+      "q": "Why use several agents instead of one assistant with more tools?",
+      "a": "Because of blast radius. A generalist with every tool loaded can break anything it touches and its failures are hard to trace. Narrow agents own small surfaces, keep their own context, and can be replaced or retried individually. The hierarchy also means an agent that is good at research never has to hold the credentials for publishing."
+    },
+    {
+      "q": "How do the agents hand work to each other?",
+      "a": "Through a shared task bus, in this case a SQLite board on the same machine. A card carries the goal, the assignee and its dependencies. Dependencies are modelled as edges, so a card promotes to ready only when its parents are actually done. That is what lets an orchestrator fan work out and fan results back in."
+    },
+    {
+      "q": "What stops an agent from posting or emailing something wrong?",
+      "a": "An approval gate. Anything with an external side effect, publishing, outbound messages, account changes, stops and waits for a human decision that arrives in a surface I actually read. The gate is not a brake on the automation, it is the reason the automation is acceptable to run unattended."
+    }
+  ],
+  "cta": "This one is internal by design, so there is no public link to hand out. If you are building the same kind of operating layer and want to compare notes on the design, the portfolio page is the place to start."
+}

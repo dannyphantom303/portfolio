@@ -1,0 +1,24 @@
+{
+  "slug": "hermes-vision",
+  "title": "Hermes Vision: a live AI agent session on phone and glasses",
+  "metaDescription": "A wearable-first PWA that streams an agent session over named server-sent events, with a 2-D grid input model designed for arrows alone.",
+  "labels": ["pwa", "server-sent events", "wearables", "meta ray-ban", "streaming", "service workers"],
+  "dek": "A progressive web app that puts a running agent session on a phone or on display glasses, and treats model choice as a client-side switch.",
+  "intro": "Hermes Vision is a progressive web app that takes a live agent session and puts it on a phone or on display glasses: pick up or start a session, choose a model, stream the reply. The engineering that matters is the realtime layer, server-sent events with named event types, and the input model. On glasses there is no pointer and the viewport is fixed, so every control has to be reachable with arrows alone. That constraint produced a 2-D grid you navigate with a D-pad, focus paging, and a T9-style keyboard, none of which I would have designed if I had started from the phone.",
+  "why": "Two decisions paid for themselves immediately. First, building the transport once and using it for chat, tools and status removed an entire class of bugs, because there is a single definition of how an event looks and every surface reads the same one. Second, versioning the app and its cache together, because a stale service worker can make a working deploy look broken and send you chasing a ghost in code that was never the problem.",
+  "faq": [
+    {
+      "q": "Why server-sent events rather than WebSockets?",
+      "a": "The traffic is server-to-client streaming of a reply, which is exactly what SSE is for, and named event types let one stream carry chat, tool calls and status updates in the same channel. That single event stream replaced a set of separate channels and removed a whole category of bugs."
+    },
+    {
+      "q": "How does model choice work in the client?",
+      "a": "It is a switch in the app, which turns cost control into a user-facing feature. The fast hosted tier is the default and the local runtime is one selection away when privacy or offline use matters more than speed."
+    },
+    {
+      "q": "What broke first on the wearable?",
+      "a": "The input model, predictably. A fixed viewport with no pointer makes a layout that feels fine on a phone unusable. Designing for arrows only, with focus paging, is what made the glasses path actually navigable rather than technically present."
+    }
+  ],
+  "cta": "It is live on phone and glasses but token-gated, so ask and a link can be sent rather than published here."
+}

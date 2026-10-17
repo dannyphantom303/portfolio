@@ -1,0 +1,31 @@
+{
+  "slug": "openclaw",
+  "title": "OpenClaw: a local agent gateway, configured in one auditable file",
+  "metaDescription": "A multi-channel AI gateway running locally behind the Command Center router, with agents, tools, plugins, channels and bindings declared in one config file that is the single place to audit access.",
+  "labels": [
+    "gateway",
+    "agents",
+    "messaging",
+    "configuration",
+    "local first",
+    "plumbing"
+  ],
+  "dek": "A multi-channel AI gateway that runs as a local process, mounts behind the Command Center router, and declares its agents, tools, plugins, channels and bindings in one file.",
+  "intro": "OpenClaw is a multi-channel AI gateway with extensible messaging integrations. It runs locally as a gateway process and is served through the Command Center router, which rewrites the control UI's base path and starts the gateway on demand if it is not already running. Its configuration declares agents, tools, plugins, channels and bindings in one file, which is what makes it the plumbing layer that connects agents to messaging surfaces: reachability is a configuration fact rather than something scattered across code.",
+  "why": "The gateway itself is plumbing; the product is which agent is reachable from where. That is why one config file matters — it means one place to audit what an agent can reach, instead of a hunt through services. Two habits from getting it served make the pattern reusable: mount a local UI under a prefix by setting the app's own base path and rewriting asset URLs, because a pure URL rewrite gets you a page that loads and a stylesheet that 404s; and start on demand, so the route request launches the gateway rather than a daemon idling for nothing. Numbered config backups keep the one file easy to read and easy to roll back.",
+  "faq": [
+    {
+      "q": "Where does it run?",
+      "a": "Locally, as a gateway process served through the Command Center router. The router rewrites the control UI's base path and starts the gateway on demand if it is not already running, so nothing idles waiting for a request."
+    },
+    {
+      "q": "What does it cost to run?",
+      "a": "The gateway is free to run locally. Spend only appears through the model providers its bound agents are configured to use, which keeps the routing decision — and the bill — in one explicit config file."
+    },
+    {
+      "q": "Why keep configuration in one file?",
+      "a": "Because it is the single place to audit what an agent can reach. Agents, tools, plugins, channels and bindings are declared together, with numbered backups, rather than spread across the platform."
+    }
+  ],
+  "cta": "The control UI exposes agent internals, so the gateway stays on the private tailnet."
+}

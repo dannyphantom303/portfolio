@@ -1,0 +1,31 @@
+{
+  "slug": "net-worth-ledger",
+  "title": "Net Worth Ledger: one number, computed from entries a human can audit",
+  "metaDescription": "Assets and liabilities aggregate into a single live number with on-demand refresh and a dated history. The arithmetic happens in SQL, not in a model.",
+  "labels": [
+    "finance ops",
+    "sql",
+    "net worth",
+    "ledger",
+    "audit trail",
+    "automation"
+  ],
+  "dek": "A net-worth ledger that adds up assets and liabilities into one live number, with a deliberate refresh and an append-only history you can audit line by line.",
+  "intro": "The Net Worth Ledger aggregates assets and liabilities into one live figure, refreshed on demand, with a dated history behind it. It is the same discipline as commission and financial reporting work: one number, computed from entries a human can audit. The arithmetic is done in code rather than by a model — totals and history are SQL, and the only model call in the picture is an occasional free-tier web lookup when a balance needs refreshing, confirmed by a human before it lands.",
+  "why": "One number computed from dated entries beats a spreadsheet nobody trusts. The two rules that make that work are to store facts and compute totals rather than caching a total a model produced, and to make history append-only: if a value can be overwritten silently, the trend it sits in cannot be trusted. Refresh is a button rather than a background job precisely because these are numbers decisions get made with, so a change should be deliberate and traceable. The valuable part of finance automation is the audit trail, not the total.",
+  "faq": [
+    {
+      "q": "What does it cost to run?",
+      "a": "Effectively nothing: an occasional free-tier model call for a balance lookup and a local database for everything else. The running cost stays near zero, which is what you want under a number you make decisions with."
+    },
+    {
+      "q": "Does a model do the arithmetic?",
+      "a": "No. Totals and history are computed in SQL against stored entries. Never let a model do arithmetic you can do in SQL — the model's only job here is the occasional lookup, and a human confirms it."
+    },
+    {
+      "q": "How is the history handled?",
+      "a": "Append, never overwrite. Every refresh adds dated entries, so the same figure can be recomputed and audited later instead of overwriting the value that was there before."
+    }
+  ],
+  "cta": "This one carries personal financial data, so it is never published — the design rules are the shareable part."
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "content-autopilot",
+  "title": "Content Autopilot: draft, review, approve, publish on a schedule",
+  "metaDescription": "An AI content pipeline where drafts arrive with review, edit and redo controls, approved items hand off to scheduling, and deterministic gates catch mistakes free.",
+  "labels": ["content automation", "human in the loop", "llm", "buffer", "workflow", "wearables"],
+  "dek": "A pipeline that has the machine do the volume and the human keep the judgement, with the quality gates running offline before any model time is spent.",
+  "intro": "Content Autopilot drafts, reviews, approves and publishes on a schedule. Drafts arrive with review, edit and redo controls, approved items hand off to social scheduling, and the review surfaces include wearable targets rather than only a browser tab. The same engine runs the blog job that produces one post on a fixed cadence, which is why the pipeline is built the way it is: everything that can be checked mechanically is checked mechanically, and the model is only asked for the part that genuinely needs judgement.",
+  "why": "The design principle here is that guard rails are cheaper than re-editing. Structure checks and similarity scoring run as deterministic scripts before a draft ever reaches a human, so the expensive mistakes are caught for free and the review pass is about taste rather than about catching a missing heading. The phrase human in the loop only counts if the human edits survive the next run, and mirroring editor-side changes back into the source file is what makes that true.",
+  "faq": [
+    {
+      "q": "What does the deterministic gate actually check?",
+      "a": "Format and duplicate detection, run as plain scripts with zero tokens involved. Similarity scoring is done offline and the house footer is stripped before scoring so the site's own boilerplate does not make every post look alike."
+    },
+    {
+      "q": "Why build review for wearables as well as a browser?",
+      "a": "Because the review surface you actually use decides whether approval happens. Designing the controls so they work in a constrained viewport with arrows rather than a pointer means the queue gets cleared wherever I happen to be, not only when I am at a desk."
+    },
+    {
+      "q": "What happens after a post is approved?",
+      "a": "It hands off to social scheduling and stays a draft until it is explicitly published, so approval and publication remain two separate decisions rather than one button that does both."
+    }
+  ],
+  "cta": "The review app is token-gated and shows unpublished work, so there is no public link, but the gate-before-review pattern is the reusable part."
+}

@@ -438,6 +438,26 @@
       ],
       "screenshots": [],
       "video": ""
+    },
+    {
+      "slug": "tradedeck",
+      "name": "TradeDeck",
+      "tagline": "Multi-agent sports & market desk.",
+      "icon": "📈",
+      "status": "Live",
+      "aiDoable": true,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "TradeDeck is one of the systems in my AI portfolio. Multi-agent sports & market desk. A team of specialist agents (scout, news, quant, risk, execution, journal) share one server-side model router that picks the best installed model for each task and records which model handled it and why — no agent hard-codes its own model. Live charts, screener, signals, macro, portfolio, risk, backtest, alerts, journal, jobs and approvals.",
+      "highlights": [
+        "Multi-agent sports & market desk.",
+        "A team of specialist agents (scout, news, quant, risk, execution, journal) share one server-side model router that picks the best installed model for each task and records which model handled it and why — no agent hard-codes its own model.",
+        "Live charts, screener, signals, macro, portfolio, risk, backtest, alerts, journal, jobs and approvals."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/tradedeck/"
     }
   ]
 }

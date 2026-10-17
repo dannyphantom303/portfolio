@@ -1,0 +1,31 @@
+{
+  "slug": "hermes-worlds",
+  "title": "Hermes Worlds: an explorable 3D frontier where the agents are characters",
+  "metaDescription": "A browser 3D frontier town, gold mine, saloon and forge, populated by AI characters that talk over the same named event stream as the rest of the stack.",
+  "labels": [
+    "webgl",
+    "3d",
+    "ai agents",
+    "sse",
+    "browser games",
+    "ollama"
+  ],
+  "dek": "A WebGL playground for what an agent feels like when it is not a chat box: walk up to a character in a frontier town, a gold mine, a saloon or a forge and talk to it.",
+  "intro": "Hermes Worlds is an explorable 3D scene that runs in the browser: a western frontier town, a gold mine, a saloon and a forge, populated by AI characters you can walk up to and talk with. Rendering costs the server nothing, because the scene is static assets and JavaScript and the browser does the work with WebGL. Dialogue runs over the same named event stream that powers the other clients, which is the part that matters technically: a tool call or a status change can be rendered inside the world, so the agent is visible in the scene rather than in a side panel.",
+  "why": "Chat inside a 3D scene is a different product from a chat box. Latency is visible, and proximity turns out to be a better trigger than a text box. Keeping one transport across web, wearable and game removed duplicated work three times over, and separating world content from the renderer is what made a shareable prototype cheap to produce. The design also keeps per-token spend proportional to how much the player actually talks, because those dialogue turns are short and bursty rather than long-context.",
+  "faq": [
+    {
+      "q": "What does the 3D world cost to run?",
+      "a": "Rendering costs the server nothing: it serves static assets and the browser renders WebGL client-side. The only metered component is NPC dialogue, and those turns are short by design, so spend stays proportional to how much a player actually talks."
+    },
+    {
+      "q": "How do the characters get their lines?",
+      "a": "NPC dialogue runs through a selectable agent provider over ollama-cloud, tuned for short, bursty, latency-sensitive generations. Lines stream in-world over the same named SSE events that carry tool activity and status elsewhere in the stack."
+    },
+    {
+      "q": "Can the same world ship as something else?",
+      "a": "Yes. Scene, characters and quests live in one world definition, which is why the same content can ship as a game, a VR entry point or a shareable prototype link without rebuilding it for each surface."
+    }
+  ],
+  "cta": "The frontier district runs on the tailnet: walk up to a character and start talking."
+}
