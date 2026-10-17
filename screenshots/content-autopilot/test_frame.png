@@ -1,0 +1,51 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#070b14;color:#cbd5e1;font:13px/1.5 -apple-system,Inter,sans-serif}
+w{font-size:15px;padding:16px 18px;letter-spacing:-.3px;color:#e2e8f0}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.g{background:#111722;border:1px solid #1c2a44;border-radius:14px;padding:16px}
+.g .h{font-size:11px;color:#64748b;letter-spacing:1px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;font-size:12px;margin:7px 0}
+.brb{width:100%;padding:11px 12px;border-radius:10px;border:none;font-weight:700;cursor:pointer;color:#fff;margin:8px 0 4px 0;background:#2563eb}
+.modes{display:flex;gap:6px;margin:6px 0 12px;flex-wrap:wrap}
+.tag{font-size:10px;padding:3px 8px;border-radius:999px;background:#1e293b;color:#93c5fd;border:1px solid #2f4a7a}
+.pos{color:#34d399}.neg{color:#f87171}.dim{color:#64748b}
+.bar{height:6px;border-radius:6px;background:#1e293b;overflow:hidden}
+.bar>i{display:block;height:100%;background:#3b82f6}
+</style></head><body>
+<div id="w">Content Autopilot — Sample Content Pipeline (Demo User) · DEMO PANEL</div>
+<div class="wrap">
+  <div class="g">
+    <div class="h">STAGE · DRAFTING (sample flow)</div>
+    <div class="modes">
+      <span class="tag">draft</span><span class="tag">review</span><span class="tag">approve</span><span class="tag">schedule</span><span class="tag">publish</span>
+    </div>
+    <div style="font-size:11px;color:#64748b">SEO short-paragraph generator · scheduled agent · no real tokens</div>
+  </div>
+  <div class="g">
+    <div class="h">QUEUE</div>
+    <div class="row"><span>Draft</span><b>Queued 28%</b><div class="bar"><i style="width:28%"></i></div></div>
+    <div class="row"><span>Review</span><b>Draft reply</b></div>
+    <div class="row"><span>Approve</span><b class="pos">Pending sign-off</b></div>
+    <div class="row"><span>Publish</span><b class="dim">On next schedule</b></div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="g">
+    <div class="h">RUN LOG (sample)</div>
+    <div class="row"><span class="pos">● running</span><span>drafts-1 · SEO summary · v0.3</span></div>
+    <div class="row"><span class="pos">● running</span><span>reviewer · style + links</span></div>
+    <div class="row"><span class="dim">idle</span><span>approver · awaiting user</span></div>
+    <div class="row"><span class="dim">idle</span><span>publisher · queued 2h</span></div>
+  </div>
+  <div class="g">
+    <div class="h">SUMMARY</div>
+    <div class="row"><span>Words in queue</span><b>0 (demo)</b></div>
+    <div class="row"><span>Platforms</span><b class="dim">dev.to · blog</b></div>
+    <div class="row"><span>Cron mode</span><b class="pos">scheduled</b></div>
+    <button class="brb">Run demo pass</button>
+    <div style="font-size:10px;color:#64748b;margin-top:6px">on-demand · sample text only · no real source</div>
+  </div>
+</div>
+</body></html>
