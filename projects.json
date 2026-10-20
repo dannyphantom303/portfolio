@@ -458,6 +458,26 @@
       "screenshots": [],
       "video": "",
       "url": "/tradedeck/"
+    },
+    {
+      "slug": "peril-adventure-wear",
+      "name": "Peril Adventure Wear",
+      "tagline": "Content autopilot for the shirt line — the same approve-first flow as Track My Gold, but for @peril_adventures.",
+      "icon": "🏔️",
+      "status": "Live",
+      "aiDoable": false,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "Peril Adventure Wear is one of the systems in my AI portfolio. Content autopilot for the shirt line — the same approve-first flow as Track My Gold, but for @peril_adventures. Drafts alternate product shots, trail ethos and camp scenes across three layouts and six print palettes, in a minimal vintage outdoor-brand look: condensed uppercase headlines, tracked small caps, topographic contour lines and low-contrast ridges, cream/forest/rust paper. Copy is generated against verified brand facts only — no invented prices or claims — and the images are drawn locally, never diffusion-generated. Review, edit, approve, publish to Buffer.",
+      "highlights": [
+        "Content autopilot for the shirt line — the same approve-first flow as Track My Gold, but for @peril_adventures.",
+        "Drafts alternate product shots, trail ethos and camp scenes across three layouts and six print palettes, in a minimal vintage outdoor-brand look: condensed uppercase headlines, tracked small caps, topographic contour lines and low-contrast ridges, cream/forest/rust paper.",
+        "Copy is generated against verified brand facts only — no invented prices or claims — and the images are drawn locally, never diffusion-generated."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/peril/"
     }
   ]
 }
