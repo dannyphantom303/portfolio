@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sport Command Center — v2 Mockup</title>
+<style>
+  :root{
+    --bg:#F6F3ED; --panel:#FFFFFF; --panel2:#FBF9F4; --ink:#1A1510; --muted:#7B7069;
+    --line:#E6DED1; --line2:#EFE9DE; --gold:#A9781F; --gold-soft:#F6ECD6; --gold-ink:#7A5514;
+    --green:#2E7D4F; --green-soft:#E4F1E9; --red:#B23A2E; --red-soft:#FAE8E4;
+    --amber:#A97400; --amber-soft:#FCF1D6; --blue:#2F5AA8; --blue-soft:#E7EEFA;
+    --tmg:#C9911A; --peril:#3F6B4A; --deck:#2F5AA8; --film:#7A4FA0; --port:#0E7C86;
+    --shadow:0 1px 2px rgba(26,21,16,.05), 0 8px 24px rgba(26,21,16,.05);
+    --radius:14px;
+  }
+  body[data-theme="dark"]{
+    --bg:#0E1012; --panel:#16191C; --panel2:#1B1F23; --ink:#EDEAE4; --muted:#8B949C;
+    --line:#262B31; --line2:#1F2429; --gold:#D8A54A; --gold-soft:#2A2317; --gold-ink:#E7C27F;
+    --green:#5FBF8A; --green-soft:#16281F; --red:#E4796A; --red-soft:#2A1A18;
+    --amber:#DDAE55; --amber-soft:#2A2317; --blue:#7EA6E8; --blue-soft:#182236;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+    background:var(--bg); color:var(--ink); font-size:14px; line-height:1.45;
+    display:flex; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  ::-webkit-scrollbar{width:9px;height:9px}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+
+  /* ---------------- sidebar ---------------- */
+  .sidebar{
+    width:246px; flex:0 0 246px; height:100vh; background:var(--panel);
+    border-right:1px solid var(--line); display:flex; flex-direction:column; padding:16px 12px 12px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;padding:4px 8px 18px}
+  .mark{
+    width:32px;height:32px;border-radius:9px;background:linear-gradient(150deg,var(--gold),#7d5514);
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;letter-spacing:-.5px;
+  }
+  .brand .bt{font-weight:750;font-size:15px;letter-spacing:-.2px;line-height:1.15}
+  .brand .bs{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .nav{flex:1;overflow-y:auto;padding-right:2px}
+  .nav-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--muted); padding:14px 10px 7px;
+  }
+  .nav-item{
+    display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:9px;
+    color:var(--ink);cursor:pointer;font-size:13.5px;font-weight:520;position:relative;
+  }
+  .nav-item:hover{background:var(--panel2)}
+  .nav-item.on{background:var(--gold-soft);color:var(--gold-ink);font-weight:650}
+  .nav-item.on::before{
+    content:"";position:absolute;left:-12px;top:7px;bottom:7px;width:3px;border-radius:0 3px 3px 0;background:var(--gold);
+  }
+  .ni{width:17px;text-align:center;font-size:14px;opacity:.9}
+  .dot{width:7px;height:7px;border-radius:50%;flex:0 0 7px;background:var(--gold)}
+  .badge{
+    margin-left:auto;font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;
+    background:var(--gold-soft);color:var(--gold-ink);min-width:22px;text-align:center;
+  }
+  .badge.red{background:var(--red-soft);color:var(--red)}
+  .badge.grey{background:var(--line2);color:var(--muted)}
+  .side-foot{border-top:1px solid var(--line2);padding:10px 8px 4px;display:flex;align-items:center;gap:9px}
+  .avatar{width:28px;height:28px;border-radius:50%;background:var(--gold-soft);color:var(--gold-ink);display:grid;place-items:center;font-weight:750;font-size:12px}
+  .side-foot .nm{font-size:12.5px;font-weight:650}
+  .side-foot .rl{font-size:11px;color:var(--muted)}
+
+  /* ---------------- shell ---------------- */
+  .app{flex:1;display:flex;flex-direction:column;height:100vh;min-width:0}
+  .topbar{
+    height:60px;flex:0 0 60px;border-bottom:1px solid var(--line);background:var(--panel);
+    display:flex;align-items:center;gap:14px;padding:0 22px;
+  }
+  .crumb{font-size:13px;color:var(--muted)}
+  .crumb b{color:var(--ink);font-weight:650}
+  .ask{
+    margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--panel2);
+    border:1px solid var(--line);border-radius:10px;padding:7px 12px;width:330px;color:var(--muted);font-size:13px;
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:650;
+    padding:5px 11px;border-radius:20px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);
+  }
+  .pill.ok{background:var(--green-soft);border-color:transparent;color:var(--green)}
+  .pill.warn{background:var(--amber-soft);border-color:transparent;color:var(--amber)}
+  .pill.bad{background:var(--red-soft);border-color:transparent;color:var(--red)}
+  .main{flex:1;overflow-y:auto;padding:26px 26px 40px}
+  .wrap{max-width:1240px;margin:0 auto}
+
+  h1{font-size:25px;font-weight:780;letter-spacing:-.5px}
+  .sub{color:var(--muted);font-size:13.5px;margin-top:3px}
+  .hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .btn{
+    border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:9px;
+    padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  }
+  .btn:hover{border-color:var(--muted)}
+  .btn.primary{background:var(--gold);border-color:var(--gold);color:#fff}
+  .btn.primary:hover{filter:brightness(1.05)}
+  .btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+  .btn.danger{color:var(--red);border-color:var(--line)}
+  .btn.sm{padding:4px 9px;font-size:12px;border-radius:7px}
+  .chip{
+    display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:650;
+    padding:2px 8px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);
+  }
+
+  /* ---------------- today ---------------- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;box-shadow:var(--shadow)}
+  .kpi .kl{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kpi .kv{font-size:26px;font-weight:780;letter-spacing:-1px;margin:5px 0 2px}
+  .kpi .kn{font-size:12px;color:var(--muted)}
+  .kpi.alert .kv{color:var(--red)}
+  .focus{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;margin-bottom:20px}
+  .panel-h{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line2)}
+  .panel-h h3{font-size:14px;font-weight:720;letter-spacing:-.1px}
+  .focus-item{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line2);align-items:flex-start}
+  .focus-item:last-child{border-bottom:0}
+  .fi-ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:15px;flex:0 0 32px}
+  .fi-t{font-weight:660;font-size:13.5px}
+  .fi-d{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .sport-note{padding:16px;background:linear-gradient(150deg,var(--gold-soft),transparent 70%);border-radius:0}
+  .sport-note p{font-size:13px;line-height:1.6}
+  .sport-note .q{color:var(--muted);font-size:12.5px;margin-top:8px}
+  .ventures{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .vcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px;box-shadow:var(--shadow);cursor:pointer;position:relative;overflow:hidden}
+  .vcard:hover{border-color:var(--gold)}
+  .vcard .vtop{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .vico{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:15px}
+  .vname{font-weight:700;font-size:13.5px;letter-spacing:-.1px}
+  .vsub{font-size:11.5px;color:var(--muted)}
+  .vfoot{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:11.5px;color:var(--muted)}
+  .bar{height:3px;border-radius:3px;background:var(--line2);flex:1;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:3px;background:var(--gold)}
+
+  /* ---------------- approvals ---------------- */
+  .appr{display:grid;grid-template-columns:196px 1fr 380px;gap:16px;align-items:start}
+  .filters{padding:8px}
+  .f-label{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:10px 10px 5px}
+  .f-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;font-size:13px;cursor:pointer;color:var(--ink)}
+  .f-item:hover{background:var(--panel2)}
+  .f-item.on{background:var(--gold-soft);color:var(--gold-ink);font-weight:650}
+  .f-item .c{margin-left:auto;font-size:11.5px;color:var(--muted);font-weight:650}
+  .f-item.on .c{color:var(--gold-ink)}
+  .qlist{padding:0;overflow:hidden}
+  .qhead{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line2);background:var(--panel2)}
+  .qhead .sel{font-size:12.5px;color:var(--muted)}
+  .arow{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line2);cursor:pointer;align-items:center}
+  .arow:hover{background:var(--panel2)}
+  .arow.on{background:var(--gold-soft)}
+  .arow:last-child{border-bottom:0}
+  .cb{width:15px;height:15px;border-radius:4px;border:1.5px solid var(--line);flex:0 0 15px;background:var(--panel)}
+  .thumb{width:44px;height:44px;border-radius:8px;flex:0 0 44px;background:linear-gradient(140deg,#d8b46a,#8a5f22);position:relative;overflow:hidden}
+  .thumb.b{background:linear-gradient(140deg,#7ba98a,#2f5540)}
+  .thumb.c{background:linear-gradient(140deg,#9db3d8,#2f5aa8)}
+  .thumb.d{background:linear-gradient(140deg,#c7a6d8,#5b3a7a)}
+  .arow .amain{min-width:0;flex:1}
+  .arow .at{font-size:13px;font-weight:620;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .arow .am{font-size:11.5px;color:var(--muted);display:flex;gap:7px;align-items:center;margin-top:2px;flex-wrap:wrap}
+  .vdot{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .preview{padding:0;overflow:hidden;position:sticky;top:0}
+  .pimg{height:196px;background:linear-gradient(150deg,#e2c07a,#9a6b22);position:relative}
+  .pimg::after{content:"1080 × 1350";position:absolute;right:8px;bottom:8px;font-size:10px;color:#fff;background:rgba(0,0,0,.42);padding:2px 6px;border-radius:4px}
+  .pbody{padding:15px 16px}
+  .pbody .pt{font-weight:720;font-size:14px;margin-bottom:6px}
+  .pcap{font-size:12.5px;line-height:1.55;color:var(--ink);opacity:.9}
+  .phash{font-size:12px;color:var(--blue);margin-top:8px;word-break:break-word}
+  .mrow{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+  .pact{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--line2);background:var(--panel2);flex-wrap:wrap}
+  .pact .btn{flex:1;justify-content:center}
+  .batch{
+    margin:0 16px 14px;padding:10px 12px;border-radius:10px;background:var(--blue-soft);
+    font-size:12px;color:var(--blue);display:flex;align-items:center;gap:8px;justify-content:space-between;
+  }
+
+  /* ---------------- health ---------------- */
+  .health-top{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  .htile{padding:14px 16px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+  .htile .hl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .htile .hv{font-size:22px;font-weight:780;letter-spacing:-.6px;margin-top:4px}
+  .htile .hs{font-size:12px;color:var(--muted);margin-top:1px}
+  .hgrid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+  .attn{padding:0}
+  .attn-row{display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line2);align-items:flex-start}
+  .attn-row:last-child{border-bottom:0}
+  .sev{width:6px;align-self:stretch;border-radius:6px;background:var(--amber);flex:0 0 6px}
+  .sev.red{background:var(--red)}
+  .attn-t{font-size:13px;font-weight:660}
+  .attn-d{font-size:12px;color:var(--muted);margin-top:2px}
+  .svc{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--line2);font-size:12.5px}
+  .svc:last-child{border-bottom:0}
+  .svc .sname{flex:1;font-weight:560}
+  .uptime{display:flex;gap:2px}
+  .uptime i{width:3px;height:14px;border-radius:1px;background:var(--green);opacity:.85}
+  .uptime i.miss{background:var(--red);opacity:.8}
+  table.jobs{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.jobs th{
+    text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line2);background:var(--panel2);
+  }
+  table.jobs td{padding:9px 14px;border-bottom:1px solid var(--line2);vertical-align:middle}
+  table.jobs tr:last-child td{border-bottom:0}
+  .st{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:650}
+  .st.ok{color:var(--green)} .st.bad{color:var(--red)} .st.pause{color:var(--muted)} .st.warn{color:var(--amber)}
+
+  /* ---------------- chat ---------------- */
+  .chatwrap{display:grid;grid-template-columns:1fr 296px;gap:18px;height:calc(100vh - 130px);min-height:520px}
+  .chat{display:flex;flex-direction:column;overflow:hidden}
+  .chat-h{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line2)}
+  .msgs{flex:1;overflow-y:auto;padding:18px 18px 8px;display:flex;flex-direction:column;gap:14px}
+  .msg{display:flex;gap:10px;max-width:88%}
+  .msg.me{align-self:flex-end;flex-direction:row-reverse}
+  .mav{width:26px;height:26px;border-radius:50%;flex:0 0 26px;display:grid;place-items:center;font-size:11px;font-weight:750;background:var(--gold-soft);color:var(--gold-ink)}
+  .msg.me .mav{background:var(--line2);color:var(--muted)}
+  .bub{background:var(--panel2);border:1px solid var(--line2);padding:11px 13px;border-radius:12px;font-size:13px;line-height:1.6}
+  .msg.me .bub{background:var(--gold);color:#fff;border-color:transparent}
+  .bub ul{margin:7px 0 0 16px}
+  .bub li{margin-bottom:5px}
+  .tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+  .tool{font-size:11px;font-family:ui-monospace,Menlo,monospace;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--muted)}
+  .composer{border-top:1px solid var(--line2);padding:12px 14px;display:flex;gap:9px;align-items:center}
+  .composer .box{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px 12px;color:var(--muted);font-size:13px;background:var(--panel2);display:flex;align-items:center;gap:8px}
+  .profs{padding:0;overflow:hidden}
+  .prof{display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line2);cursor:pointer;align-items:center}
+  .prof:hover{background:var(--panel2)}
+  .prof.on{background:var(--gold-soft)}
+  .prof:last-child{border-bottom:0}
+  .pav{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:750;flex:0 0 28px}
+  .prof .pn{font-size:12.5px;font-weight:650}
+  .prof .pr{font-size:11px;color:var(--muted);line-height:1.35}
+  .prof .live{width:6px;height:6px;border-radius:50%;background:var(--green);margin-left:auto;flex:0 0 6px}
+
+  /* ---------------- project ---------------- */
+  .phead{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
+  .pico{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:24px;flex:0 0 52px}
+  .ptabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px;overflow-x:auto}
+  .ptab{padding:9px 13px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-weight:560}
+  .ptab.on{color:var(--gold-ink);border-bottom-color:var(--gold);font-weight:680}
+  .pcols{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start}
+  .act{display:flex;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line2);font-size:12.5px;align-items:flex-start}
+  .act:last-child{border-bottom:0}
+  .act .tm{color:var(--muted);font-size:11px;margin-left:auto;white-space:nowrap}
+  .mini{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line2);font-size:12.5px}
+  .mini:last-child{border-bottom:0}
+  .mini a{color:var(--gold-ink);font-weight:600}
+  .note{font-size:11.5px;color:var(--muted);padding:12px 16px;background:var(--panel2);border-top:1px solid var(--line2)}
+
+  /* ---------------- phone / glasses-width ---------------- */
+  @media (max-width:760px){
+    .sidebar{display:none}
+    .topbar{height:52px;flex:0 0 52px;padding:0 14px}
+    .ask{display:none}
+    .main{padding:16px 14px 60px}
+    h1{font-size:21px}
+    .kpis,.ventures,.health-top{grid-template-columns:1fr 1fr}
+    .focus,.hgrid,.pcols,.appr,.chatwrap{grid-template-columns:1fr;height:auto}
+    .preview{position:static}
+    .filters{display:none}
+    .profs{display:none}
+    .pact .btn{flex:1 1 44%}
+    .hrow{align-items:flex-start}
+    .hrow > div:last-child{flex-wrap:wrap;gap:6px}
+    .hrow .pill{white-space:nowrap}
+    .arow{gap:8px;align-items:center}
+    .arow .at{white-space:normal;font-size:12.5px;line-height:1.35}
+    .arow .am{white-space:normal;font-size:11px;gap:4px}
+    .arow .am .vdot{display:none}
+    .thumb{width:38px;height:38px;flex:0 0 38px}
+    .arow > span:last-child{display:none}
+    .arow > .chip{font-size:10px;padding:1px 5px}
+    .qhead .chip{display:none}
+  }
+
+</style>
+</head>
+<body data-theme="light">
+<aside class="sidebar">
+  <div class="brand">
+    <div class="mark">S</div>
+    <div><div class="bt">Sport</div><div class="bs">Command Center</div></div>
+  </div>
+  <div class="nav" id="nav"></div>
+  <div class="side-foot">
+    <div class="avatar">DD</div>
+    <div><div class="nm">Dan</div><div class="rl">Owner</div></div>
+  </div>
+</aside>
+
+<div class="app">
+  <div class="topbar">
+    <div class="crumb" id="crumb"></div>
+    <div class="ask">🔎&nbsp; Ask Sport about anything… <span style="margin-left:auto;font-size:11px;opacity:.7">⌘K</span></div>
+    <span class="pill ok" id="healthpill">● 11/11 services up</span>
+    <span class="pill bad">100 approvals</span>
+    <button class="btn sm" id="themeBtn" onclick="toggleTheme()">◐ Dark</button>
+  </div>
+  <div class="main"><div class="wrap" id="screen"></div></div>
+</div>
+
+<script>
+const T = new URLSearchParams(location.search);
+const SCREEN = T.get('s') || 'today';
+if (T.get('theme')) document.body.dataset.theme = T.get('theme');
+
+/* ---------------- data (real counts, Oct 21 2026) ---------------- */
+const VENT = {
+  tmg:    {name:'Track My Gold',      color:'var(--tmg)',   icon:'⛏️', sub:'Gold tracking · $2.99/mo'},
+  peril:  {name:'Peril Adventure Wear',color:'var(--peril)',icon:'🏔️', sub:'Apparel · @peril_adventures'},
+  deck:   {name:'TradeDeck',          color:'var(--deck)',  icon:'📈', sub:'Market desk · paper'},
+  port:   {name:'Portfolio Engine',    color:'var(--port)',  icon:'🌐', sub:'Public showcase'},
+  film:   {name:'Film Room',          color:'var(--film)',  icon:'🎬', sub:'Short-film desk'},
+  gold:   {name:'Gold Spot Explorer', color:'var(--tmg)',   icon:'🗺️', sub:'LiDAR ground scoring'},
+  home:   {name:'Smart Home',         color:'var(--green)', icon:'🏠', sub:'Home Assistant · Pi'},
+  money:  {name:'Net Worth',          color:'var(--deck)',  icon:'💰', sub:'Personal ledger'}
+};
+
+const navHTML = `
+  <div class="nav-label">Command Center</div>
+  <div class="nav-item ${SCREEN==='today'?'on':''}" onclick="go('today')"><span class="ni">◉</span> Today <span class="badge">3</span></div>
+  <div class="nav-item ${SCREEN==='approvals'?'on':''}" onclick="go('approvals')"><span class="ni">✓</span> Approvals <span class="badge">100</span></div>
+  <div class="nav-item ${SCREEN==='health'?'on':''}" onclick="go('health')"><span class="ni">◈</span> Health <span class="badge red">4</span></div>
+  <div class="nav-item ${SCREEN==='chat'?'on':''}" onclick="go('chat')"><span class="ni">✦</span> Ask Sport</div>
+  <div class="nav-label">Ventures</div>
+  <div class="nav-item ${SCREEN==='project'?'on':''}" onclick="go('project')"><span class="dot" style="background:var(--tmg)"></span> Track My Gold <span class="badge">26</span></div>
+  <div class="nav-item"><span class="dot" style="background:var(--peril)"></span> Peril Wear <span class="badge">13</span></div>
+  <div class="nav-item"><span class="dot" style="background:var(--deck)"></span> TradeDeck <span class="badge grey">2</span></div>
+  <div class="nav-item"><span class="dot" style="background:var(--port)"></span> Portfolio <span class="badge">57</span></div>
+  <div class="nav-item"><span class="dot" style="background:var(--film)"></span> Film Room</div>
+  <div class="nav-item"><span class="dot" style="background:var(--tmg)"></span> Gold Spot Explorer</div>
+  <div class="nav-label">Studio &amp; Tools</div>
+  <div class="nav-item"><span class="ni">👓</span> Hermes Vision</div>
+  <div class="nav-item"><span class="ni">🤖</span> Hermes Agent</div>
+  <div class="nav-item"><span class="ni">🧠</span> Obsidian Brain</div>
+  <div class="nav-item"><span class="ni">📤</span> Publish Queue</div>
+  <div class="nav-item"><span class="ni">🎮</span> Worlds &amp; Game</div>
+  <div class="nav-item"><span class="ni">📺</span> CNBC on Glasses</div>
+  <div class="nav-item"><span class="ni">📷</span> Insta360 X4</div>
+  <div class="nav-item"><span class="ni">⛏️</span> Autolisting</div>
+  <div class="nav-item"><span class="ni">🏠</span> Smart Home</div>
+  <div class="nav-item"><span class="ni">💰</span> Net Worth</div>
+`;
+document.getElementById('nav').innerHTML = navHTML;
+
+const CRUMBS = {
+  today:['Sport','Today'], approvals:['Sport','Approvals'], health:['Sport','Health'],
+  chat:['Sport','Ask Sport'], project:['Ventures','Track My Gold']
+};
+document.getElementById('crumb').innerHTML = '<b>'+CRUMBS[SCREEN][1]+'</b><span style="opacity:.55"> / '+CRUMBS[SCREEN][0]+'</span>';
+function go(s){ location.search = '?s='+s+'&theme='+document.body.dataset.theme; }
+function toggleTheme(){
+  const next = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.body.dataset.theme = next;
+  document.getElementById('themeBtn').textContent = next === 'dark' ? '◑ Light' : '◐ Dark';
+}
+if (document.body.dataset.theme === 'dark') document.getElementById('themeBtn').textContent = '◑ Light';
+
+/* ---------------- screens ---------------- */
+const S = {};
+
+S.today = `
+  <div class="hrow">
+    <div><h1>Good afternoon, Dan</h1><div class="sub">Wednesday, 21 October · 4 things are waiting on you, 3 projects are running clean.</div></div>
+    <div style="display:flex;gap:8px"><button class="btn">Open classic dashboard ↗</button><button class="btn primary">Ask Sport</button></div>
+  </div>
+
+  <div class="kpis">
+    <div class="card kpi alert"><div class="kl">Approvals waiting</div><div class="kv">100</div><div class="kn">26 TMG · 13 Peril · 57 portfolio · 4 YouTube</div></div>
+    <div class="card kpi"><div class="kl">Services online</div><div class="kv">11 / 11</div><div class="kn">Router, dashboard, 5 apps, gateway</div></div>
+    <div class="card kpi alert"><div class="kl">Jobs not landing</div><div class="kv">4</div><div class="kn">Ran fine, delivery failed — goldie ×3, tradedeck ×1</div></div>
+    <div class="card kpi"><div class="kl">Public route</div><div class="kv">OK</div><div class="kn">Funnel → router :8082 · 3 layers green</div></div>
+  </div>
+
+  <div class="focus">
+    <div class="card">
+      <div class="panel-h"><h3>Needs your call</h3><span class="chip">4 blocked threads</span></div>
+      <div class="focus-item">
+        <div class="fi-ic" style="background:var(--gold-soft);color:var(--gold-ink)">✓</div>
+        <div style="flex:1"><div class="fi-t">26 Track My Gold posts are drafted and waiting</div>
+        <div class="fi-d">Instagram feed posts via Buffer · oldest 6 days · captions + images ready</div></div>
+        <button class="btn sm primary">Review</button>
+      </div>
+      <div class="focus-item">
+        <div class="fi-ic" style="background:var(--red-soft);color:var(--red)">⚠</div>
+        <div style="flex:1"><div class="fi-t">Four scheduled jobs ran but never reached you</div>
+        <div class="fi-d">Weekly Metrics, Instagram Outreach, Gold Events → bot-chat:goldie · TradeDeck briefs timed out at 600s</div></div>
+        <button class="btn sm">Diagnose</button>
+      </div>
+      <div class="focus-item">
+        <div class="fi-ic" style="background:var(--amber-soft);color:var(--amber)">🔗</div>
+        <div style="flex:1"><div class="fi-t">Blogger is disconnected — blog approvals are frozen</div>
+        <div class="fi-d">no_token · 3 posts queued behind it · reconnect takes one consent</div></div>
+        <button class="btn sm">Reconnect</button>
+      </div>
+      <div class="focus-item">
+        <div class="fi-ic" style="background:var(--blue-soft);color:var(--blue)">📤</div>
+        <div style="flex:1"><div class="fi-t">57 portfolio publishes unapproved</div>
+        <div class="fi-d">20 projects × Blogger / dev.to / GitHub · nothing publishes itself</div></div>
+        <button class="btn sm">Batch</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="panel-h"><h3>Sport's morning read</h3><span class="chip">✦ auto 07:00</span></div>
+      <div class="sport-note">
+        <p>Nothing is broken. Two things are <b>invisible</b>, which is worse.</p>
+        <p style="margin-top:10px">The 4 failing jobs are not errors — every one of them completed. They just delivered into a bot-chat target that isn't there, so the work evaporated. And Peril has 13 drafts ageing behind TMG's 26 because there's no shared queue to see them side by side.</p>
+        <p style="margin-top:10px">If you give me 20 minutes today, I'd clear the 4 oldest TMG drafts, repoint two delivery targets, and reconnect Blogger. That takes the queue from 100 to 74 and stops the silent losses.</p>
+        <div class="q">Read from /api/health, cron jobs.json ×2 profiles, /api/status, /publish/api/state</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-h" style="padding-left:0;border:0"><h3 style="font-size:15px">Ventures</h3><span class="chip">8 active</span></div>
+  <div class="ventures">
+    ${[['tmg','26 waiting','3 days since last publish',72],['peril','13 waiting','queue idle 2 days',48],['deck','2 markets armed','brief delivery failing',85],['port','57 waiting','refreshed 07:15',30],['film','1 film in flight','spend $12.40 / $40',60],['gold','public beta','LiDAR tiles cached',92],['home','tailnet only','2 automations live',100],['money','synced','last edit 3 days ago',78]].map(([k,c,d,p])=>`
+      <div class="vcard">
+        <div class="vtop"><div class="vico" style="background:var(--panel2);color:${VENT[k].color}">${VENT[k].icon}</div>
+          <div><div class="vname">${VENT[k].name}</div><div class="vsub">${VENT[k].sub}</div></div></div>
+        <div style="font-size:12.5px;font-weight:620;color:var(--ink)">${c}</div>
+        <div class="vsub" style="margin-top:2px">${d}</div>
+        <div class="vfoot"><div class="bar"><i style="width:${p}%;background:${VENT[k].color}"></i></div><span>${p}%</span></div>
+      </div>`).join('')}
+  </div>
+`;
+
+const APPR = [
+  {v:'tmg', t:'Gold Spot Explorer — single image', c:'Instagram · Feed Post', b:'Buffer', a:'2h', cap:'It is coming. Gold Spot Explorer takes the finds you have already logged and reads them against LiDAR terrain to show you the next best place to look. Not a blank map. Not a hunch. Nobody else builds the map out of your own gold.', h:'#GoldProspecting #TrackMyGold #LiDAR #GoldPanning #GoldMining', cls:''},
+  {v:'tmg', t:'Motivation & Lifestyle — single image', c:'Instagram · Feed Post', b:'Buffer', a:'2h', cap:'Turn your hobby into an organized catalog of physical wealth. Map your finds, track their value live, and know exactly what the season added.', h:'#GoldProspecting #GoldPanning', cls:''},
+  {v:'peril', t:'Trail ethos — 3 layouts', c:'Instagram · Carousel', b:'Buffer', a:'1d', cap:'Short and chill. Plain talk, no hype. Printed to order in Richmond, Virginia since 2023.', h:'#PerilAdventureWear #TrailLife', cls:'b'},
+  {v:'tmg', t:'Busted Knuckles — "3 grammer in the creek"', c:'YouTube · comment', b:'YouTube', a:'5h', cap:'Great recovery — that creek has been worked hard and still giving up colour. Logging finds like this is exactly how you learn where the next one is hiding.', h:'', cls:'c'},
+  {v:'port', t:'Sport Command Center — project write-up', c:'Blogger · dev.to · GitHub', b:'Blog', a:'3d', cap:'A single pane of glass for 20 projects: approvals in one inbox, health from one probe, and an agent you can talk to from anywhere.', h:'', cls:'d'},
+  {v:'tmg', t:'Community Spotlight — single image', c:'Instagram · Feed Post', b:'Buffer', a:'6d', cap:'Have questions about tracking your gold? Our platform supports weight, purity and live spot value in one place.', h:'#TrackMyGold', cls:''},
+  {v:'peril', t:'Camp scene — 3 layouts', c:'Instagram · Feed Post', b:'Buffer', a:'1d', cap:'Leave it better than you found it. That is the whole brand.', h:'#CampLife', cls:'b'},
+  {v:'port', t:'Hermes Vision — project write-up', c:'Blogger · dev.to · GitHub', b:'Blog', a:'3d', cap:'Glasses, phone and desktop talking to the same agent session.', h:'', cls:'d'},
+];
+
+S.approvals = `
+  <div class="hrow">
+    <div><h1>Approvals</h1><div class="sub">Everything waiting on a human, in one queue — 100 items across 4 projects. Nothing publishes itself.</div></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="pill">Newest first ▾</span>
+      <button class="btn">Approve selected (0)</button>
+      <button class="btn primary">Review next →</button>
+    </div>
+  </div>
+
+  <div class="appr">
+    <div class="card filters">
+      <div class="f-label">Queue</div>
+      <div class="f-item on">All items <span class="c">100</span></div>
+      <div class="f-item">Ready to approve <span class="c">96</span></div>
+      <div class="f-item">Needs an edit <span class="c">4</span></div>
+      <div class="f-label">By venture</div>
+      <div class="f-item"><span class="vdot" style="background:var(--tmg)"></span> Track My Gold <span class="c">30</span></div>
+      <div class="f-item"><span class="vdot" style="background:var(--peril)"></span> Peril Wear <span class="c">13</span></div>
+      <div class="f-item"><span class="vdot" style="background:var(--port)"></span> Portfolio <span class="c">57</span></div>
+      <div class="f-label">By channel</div>
+      <div class="f-item">Instagram / Buffer <span class="c">39</span></div>
+      <div class="f-item">YouTube comments <span class="c">4</span></div>
+      <div class="f-item">Blogger / dev.to <span class="c">57</span></div>
+      <div class="f-label">Age</div>
+      <div class="f-item">Older than 3 days <span class="c">61</span></div>
+    </div>
+
+    <div class="card qlist">
+      <div class="qhead"><span class="cb"></span><span class="sel">Select all on this page</span><span style="margin-left:auto" class="chip">1–8 of 100</span></div>
+      <div class="batch" style="margin:10px 14px"><span>💡 24 of these are the same Instagram feed batch from one day.</span><button class="btn sm">Approve that batch</button></div>
+      ${APPR.map((x,i)=>`
+        <div class="arow ${i===0?'on':''}">
+          <span class="cb"></span>
+          <div class="thumb ${x.cls}"></div>
+          <div class="amain">
+            <div class="at">${x.t}</div>
+            <div class="am"><span class="vdot" style="background:${VENT[x.v].color}"></span>${VENT[x.v].name} · ${x.c}</div>
+          </div>
+          <span class="chip">${x.b}</span>
+          <span style="font-size:11.5px;color:var(--muted);width:26px;text-align:right">${x.a}</span>
+        </div>`).join('')}
+    </div>
+
+    <div class="card preview">
+      <div class="pimg"></div>
+      <div class="pbody">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
+          <span class="vdot" style="background:var(--tmg)"></span>
+          <span style="font-size:11.5px;font-weight:650">Track My Gold</span>
+          <span class="chip" style="margin-left:auto">Buffer · scheduled</span>
+        </div>
+        <div class="pt">Gold Spot Explorer — single image</div>
+        <div class="pcap">${APPR[0].cap}</div>
+        <div class="phash">${APPR[0].h}</div>
+        <div class="mrow"><span>📅 Instagram · Feed</span><span>·</span><span>day 31 of plan</span><span>·</span><span>drafted 2h ago</span></div>
+        <div class="mrow"><span class="chip">3 channels connected</span><span class="chip">image 1080×1350</span><span class="chip">quota OK</span></div>
+      </div>
+      <div class="pact">
+        <button class="btn primary">Approve</button>
+        <button class="btn">Edit</button>
+        <button class="btn">Redo</button>
+        <button class="btn danger">Reject</button>
+      </div>
+      <div class="note">Approve writes to Buffer immediately. Redo asks the agent to regenerate the image + caption; the draft stays in this queue.</div>
+    </div>
+  </div>
+`;
+
+S.health = `
+  <div class="hrow">
+    <div><h1>Health</h1><div class="sub">Every service, every scheduled job, every connected account — one page, honest numbers.</div></div>
+    <div style="display:flex;gap:8px"><span class="pill">Last scan 30s ago</span><button class="btn">Scan now</button><button class="btn primary">Fix all safe</button></div>
+  </div>
+
+  <div class="health-top">
+    <div class="card htile"><div class="hl">Services</div><div class="hv" style="color:var(--green)">11 / 11</div><div class="hs">all listening · 0 restarts today</div></div>
+    <div class="card htile"><div class="hl">Scheduled jobs</div><div class="hv" style="color:var(--red)">4 / 11</div><div class="hs">active jobs whose last run failed to land</div></div>
+    <div class="card htile"><div class="hl">Connected accounts</div><div class="hv" style="color:var(--amber)">5 / 7</div><div class="hs">Blogger missing · RefCampaign key rejected</div></div>
+    <div class="card htile"><div class="hl">Public route</div><div class="hv" style="color:var(--green)">OK</div><div class="hs">funnel → :8082 → app · guard armed</div></div>
+  </div>
+
+  <div class="hgrid">
+    <div>
+      <div class="card" style="margin-bottom:18px">
+        <div class="panel-h"><h3>Needs attention</h3><span class="chip">6 items · 3 safe to auto-fix</span></div>
+        <div class="attn">
+          <div class="attn-row"><div class="sev red"></div><div style="flex:1"><div class="attn-t">Weekly Metrics Report — job errored, no output</div><div class="attn-d">profile mark · Mon 09:00 · <code>HTTP 404: Couldn't find that, sorry.</code> · model route retired</div></div><button class="btn sm">Repoint model</button></div>
+          <div class="attn-row"><div class="sev red"></div><div style="flex:1"><div class="attn-t">3 jobs deliver to <code>bot-chat:goldie</code> and fail</div><div class="attn-d">Instagram Outreach, Gold Events, Weekly Metrics · the run completes, the result is dropped</div></div><button class="btn sm">Fix delivery</button></div>
+          <div class="attn-row"><div class="sev red"></div><div style="flex:1"><div class="attn-t">TradeDeck briefs — delivery timed out after 600s</div><div class="attn-d">profile dev · 09:00/12:00/13:00 ET · job itself succeeds</div></div><button class="btn sm">Inspect</button></div>
+          <div class="attn-row"><div class="sev"></div><div style="flex:1"><div class="attn-t">Blogger is not connected</div><div class="attn-d">no_token · blog approvals and publishing are blocked</div></div><button class="btn sm">Reconnect</button></div>
+          <div class="attn-row"><div class="sev"></div><div style="flex:1"><div class="attn-t">RefCampaign affiliate key rejected</div><div class="attn-d">UNAUTHORIZED: invalid or expired · 2 affiliates carried over</div></div><button class="btn sm">Update key</button></div>
+          <div class="attn-row"><div class="sev" style="background:var(--line)"></div><div style="flex:1"><div class="attn-t">6 paused jobs carry stale errors (no action needed)</div><div class="attn-d">left paused on purpose — hidden from the count above</div></div><span class="chip">ignored</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="panel-h"><h3>Scheduled jobs</h3><span class="chip">17 total · 11 active</span></div>
+        <table class="jobs">
+          <tr><th>Job</th><th>Profile</th><th>Schedule</th><th>Last run</th><th>Status</th></tr>
+          <tr><td>TradeDeck — market open brief</td><td>dev</td><td>06:30 M–F</td><td>today</td><td><span class="st ok">● ok</span></td></tr>
+          <tr><td>TradeDeck — 12:00 / 15:00 / 16:00 ET</td><td>dev</td><td>09,12,13 M–F</td><td>today</td><td><span class="st bad">● not delivered</span></td></tr>
+          <tr><td>[bot:mark] YouTube Daily Engagement</td><td>mark</td><td>09:00, 21:00</td><td>today</td><td><span class="st ok">● ok</span></td></tr>
+          <tr><td>[bot:mark] Daily TMG Instagram Outreach</td><td>mark</td><td>07:00, 19:00</td><td>today</td><td><span class="st bad">● not delivered</span></td></tr>
+          <tr><td>[bot:mark] Weekly Metrics Report</td><td>mark</td><td>Mon 09:00</td><td>6d ago</td><td><span class="st bad">● error</span></td></tr>
+          <tr><td>[bot:mark] Second Brain Maintenance</td><td>mark</td><td>02:00 daily</td><td>today</td><td><span class="st ok">● ok</span></td></tr>
+          <tr><td>[bot:mark] Monthly gold events scan</td><td>mark</td><td>1st 09:00</td><td>20d ago</td><td><span class="st bad">● not delivered</span></td></tr>
+          <tr><td>TMG Blog — new post every 3 days</td><td>dev</td><td>every 3 days</td><td>2d ago</td><td><span class="st ok">● ok</span></td></tr>
+          <tr><td>TMG YouTube Comment Watchdog</td><td>dev</td><td>09:00 daily</td><td>paused</td><td><span class="st pause">● paused</span></td></tr>
+        </table>
+        <div class="note">Jobs are read live from every profile's <code>cron/jobs.json</code> — no board sync, no 15-minute lag.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="panel-h"><h3>Services</h3><span class="chip">24h uptime</span></div>
+        ${[['Router :8082',24,0],['TMG dashboard :8787',24,0],['Hermes gateway :8642',24,0],['Content Autopilot :8092',24,0],['Peril autopilot :5300',24,0],['Film Room :8904',24,0],['Obsidian Brain :8091',24,0],['CNBC glasses :8902',24,0],['Email server :3000',23,1],['Insta360 X4 :8001',24,0],['Gold Map :8099',24,0]].map(([n,u,m])=>`
+          <div class="svc"><span class="sname">${n}</span>
+            <div class="uptime">${Array.from({length:24},(_,i)=>`<i class="${i>=24-m && m? 'miss':''}"></i>`).join('')}</div>
+            <span class="st ok" style="width:52px;justify-content:flex-end">● up</span>
+          </div>`).join('')}
+        <div class="note">Home Assistant on the Pi is tailnet-only — checked separately, not from this Mac.</div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <div class="panel-h"><h3>Data freshness</h3></div>
+        <div class="mini"><span>Approval queues polled</span><span class="st ok">● 12s ago</span></div>
+        <div class="mini"><span>Buffer quota</span><span class="st ok">● within budget</span></div>
+        <div class="mini"><span>Google Search Console</span><span class="st ok">● token valid</span></div>
+        <div class="mini"><span>Blogger token</span><span class="st bad">● missing</span></div>
+        <div class="mini"><span>Affiliate (RefCampaign)</span><span class="st warn">● rejected</span></div>
+        <div class="mini"><span>Funnel guard</span><span class="st ok">● armed, last heal 3d ago</span></div>
+      </div>
+    </div>
+  </div>
+`;
+
+S.chat = `
+  <div class="chatwrap">
+    <div class="card chat">
+      <div class="chat-h">
+        <div class="pav" style="background:var(--gold-soft);color:var(--gold-ink)">S</div>
+        <div><div style="font-weight:700;font-size:13.5px">Sport</div><div style="font-size:11.5px;color:var(--muted)">Executive coordinator · reading: Health page context + all cron jobs</div></div>
+        <span class="pill ok" style="margin-left:auto">● live</span>
+        <button class="btn sm">New chat</button>
+      </div>
+      <div class="msgs">
+        <div class="msg me"><div class="mav">DD</div><div class="bub">How's the week actually looking? I keep getting pulled into each project.</div></div>
+        <div class="msg"><div class="mav">S</div><div class="bub">
+          <div class="tools"><span class="tool">cron.list(profile=dev,mark)</span><span class="tool">approvals.summary()</span><span class="tool">services.probe()</span></div>
+          Short version: nothing is broken, and two things are invisible.
+          <ul>
+            <li><b>100 approvals</b> waiting — 30 Track My Gold (26 Buffer drafts + 4 YouTube comments), 13 Peril, 57 portfolio publishes. 61 of them are older than 3 days.</li>
+            <li><b>4 active jobs completed but never delivered.</b> Three post to <code>bot-chat:goldie</code>, which isn't resolving; TradeDeck's briefs time out at 600s. You did the work and never saw it — that's why it feels like babysitting.</li>
+            <li><b>Blogger is disconnected</b>, so blog approvals are frozen behind it. The RefCampaign affiliate key is also rejected.</li>
+            <li>Everything else is green: 11/11 services, funnel → router → app all 200.</li>
+          </ul>
+          Want me to take the four oldest TMG drafts, repoint the two delivery targets, and reconnect Blogger? I'd hold off on the 57 portfolio posts — those are the ones worth reading yourself.
+        </div></div>
+        <div class="msg me"><div class="mav">DD</div><div class="bub">Do the delivery fix. Leave blogger until I'm at the desk.</div></div>
+        <div class="msg"><div class="mav">S</div><div class="bub">
+          <div class="tools"><span class="tool">cron.edit(88c8…, deliver=session:sport)</span><span class="tool">cron.edit(tradedeck, deliver=session:tradedeck)</span><span class="tool">verify.delivery(dry_run)</span></div>
+          Done — two targets repointed, and a dry-run delivery came back in 4s instead of timing out. Blogger is queued for when you're back; it needs one consent click.
+        </div></div>
+      </div>
+      <div class="composer">
+        <div class="box">Message Sport… <span style="margin-left:auto;font-size:11px;color:var(--gold-ink)">context: Health ▾</span></div>
+        <button class="btn">📎</button><button class="btn primary">Send</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card profs">
+        <div class="panel-h"><h3>Talk to</h3><span class="chip">7 profiles</span></div>
+        ${[['S','Sport','Executive coordinator · reads across ventures',1,1,'var(--gold-soft)','var(--gold-ink)'],
+           ['G','Goldie','CEO, Track My Gold',0,1,'var(--gold-soft)','var(--gold-ink)'],
+           ['M','Mark','CMO, Track My Gold · channels & content',0,1,'var(--panel2)','var(--ink)'],
+           ['F','Fin','CFO, Track My Gold · numbers',0,0,'var(--panel2)','var(--ink)'],
+           ['D','Dev','Developer · builds, fixes, deploys',0,1,'var(--panel2)','var(--ink)'],
+           ['T','TradeDeck','CEO, TradeDeck · markets',0,1,'var(--panel2)','var(--ink)'],
+           ['B','BudgetByCheck','CEO, BudgetByCheck',0,0,'var(--panel2)','var(--ink)']].map(([a,n,r,sel,live,bg,fg])=>`
+          <div class="prof ${sel?'on':''}"><div class="pav" style="background:${bg};color:${fg}">${a}</div>
+            <div style="min-width:0"><div class="pn">${n}</div><div class="pr">${r}</div></div>
+            ${live?'<span class="live" title="recent activity"></span>':''}</div>`).join('')}
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="panel-h"><h3>Give Sport context</h3></div>
+        <div class="mini"><span>This page's data</span><span class="chip">on</span></div>
+        <div class="mini"><span>Cron jobs &amp; services</span><span class="chip">on</span></div>
+        <div class="mini"><span>Obsidian vault</span><span class="chip">on</span></div>
+        <div class="mini"><span>Approval queues</span><span class="chip">on</span></div>
+        <div class="note">Same gateway the glasses use — start a thread on your phone, finish it here or on the Ray-Bans.</div>
+      </div>
+    </div>
+  </div>
+`;
+
+S.project = `
+  <div class="phead">
+    <div class="pico" style="background:var(--gold-soft);color:var(--gold-ink)">⛏️</div>
+    <div style="flex:1">
+      <h1>Track My Gold</h1>
+      <div class="sub">10k email subscribers / $10k MRR · Month 2, week 7 · trackmygold.net</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="pill ok">● 11/11 up</span>
+      <button class="btn">Open classic dashboard ↗</button>
+      <button class="btn primary">Ask Goldie</button>
+    </div>
+  </div>
+
+  <div class="ptabs">
+    <div class="ptab on">Overview</div>
+    <div class="ptab">Approvals <span class="chip" style="margin-left:4px">30</span></div>
+    <div class="ptab">Content plan</div>
+    <div class="ptab">Instagram</div>
+    <div class="ptab">SEO / GSC</div>
+    <div class="ptab">Affiliate</div>
+    <div class="ptab">Signups</div>
+    <div class="ptab">Health</div>
+  </div>
+
+  <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+    <div class="card kpi"><div class="kl">Waiting on you</div><div class="kv">30</div><div class="kn">26 Buffer drafts · 4 YouTube comments</div></div>
+    <div class="card kpi"><div class="kl">Posted all-time</div><div class="kv">339</div><div class="kn">18 in tracking log · last 5h ago</div></div>
+    <div class="card kpi"><div class="kl">Queued content</div><div class="kv">7</div><div class="kn">approved, not yet published</div></div>
+    <div class="card kpi alert"><div class="kl">Blocked</div><div class="kv">2</div><div class="kn">Blogger token · affiliate key</div></div>
+  </div>
+
+  <div class="pcols">
+    <div class="card">
+      <div class="panel-h"><h3>Next in the queue</h3><button class="btn sm">Open approvals</button></div>
+      ${APPR.filter(x=>x.v==='tmg').slice(0,5).map(x=>`
+        <div class="arow" style="padding:11px 16px">
+          <div class="thumb ${x.cls}"></div>
+          <div class="amain"><div class="at">${x.t}</div><div class="am">${x.c}</div></div>
+          <span class="chip">${x.a}</span>
+        </div>`).join('')}
+      <div class="note">This is the same queue as the master Approvals page, filtered to this venture. Approving here moves it everywhere.</div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="panel-h"><h3>Recent activity</h3></div>
+        <div class="act"><span>✅</span><div><b>YouTube Daily Engagement</b> posted 5 comments<div style="color:var(--muted);font-size:11.5px">Busted Knuckles, GoldNoob, 802 Outdoor</div></div><span class="tm">09:02</span></div>
+        <div class="act"><span>📝</span><div><b>Content Autopilot</b> drafted 3 posts<div style="color:var(--muted);font-size:11.5px">Gold Spot Explorer pillar</div></div><span class="tm">07:15</span></div>
+        <div class="act"><span>⚠</span><div><b>Blogger</b> token missing<div style="color:var(--muted);font-size:11.5px">blog approvals frozen</div></div><span class="tm">2d</span></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="panel-h"><h3>Jump to a tab</h3></div>
+        <div class="mini"><span>Approvals (YouTube)</span><a href="#">open</a></div>
+        <div class="mini"><span>Blog approvals</span><a href="#">blocked</a></div>
+        <div class="mini"><span>Content strategy</span><a href="#">open</a></div>
+        <div class="mini"><span>SEO (GSC)</span><a href="#">open</a></div>
+        <div class="mini"><span>Task board</span><a href="#">open</a></div>
+        <div class="note">Venture pages keep the tabs you already know — they just live inside the new shell instead of a separate app.</div>
+      </div>
+    </div>
+  </div>
+`;
+
+document.getElementById('screen').innerHTML = S[SCREEN] || S.today;
+</script>
+</body>
+</html>
