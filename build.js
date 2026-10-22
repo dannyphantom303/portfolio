@@ -128,8 +128,44 @@ ${cover(p, '')}
 }
 
 function indexHtml() {
-  // Authored landing page wins over generation — see SRC_INDEX above.
-  if (fs.existsSync(SRC_INDEX)) return fs.readFileSync(SRC_INDEX, 'utf8');
+  // Authored landing page wins over generation — see SRC_INDEX above. But its
+  // cards are hand-written, so a project discovered later would never appear
+  // (tradedeck + peril-adventure-wear were invisible for days this way). Append
+  // any public project the authored grid does not already list.
+  if (fs.existsSync(SRC_INDEX)) {
+    const authored = fs.readFileSync(SRC_INDEX, 'utf8');
+    const listed = new Set([...authored.matchAll(/data-slug="([a-z0-9-]+)"/g)].map(m => m[1]));
+    const missing = projects.filter(p => !listed.has(p.slug));
+    if (!missing.length) return authored;
+    const pill = (s) => /internal/i.test(s) ? 'st-int">LIVE · INTERNAL'
+      : /private|token|gate/i.test(s) ? 'st-int">LIVE · PRIVATE'
+      : /live|online/i.test(s) ? 'st-live">● LIVE' : 'st-online">ONLINE';
+    const card = (p) => {
+      const escP = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const tags = (p.stack && p.stack.length ? p.stack.slice(0, 2) : [p.tagline.split(' ').slice(0, 2).join(' ')])
+        .map(escP).join('</span><span>');
+      return `    <a class="ncard pcard" href="project/${p.slug}.html" id="card-${p.slug}" data-slug="${p.slug}">
+      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: ${escP(p.name)}">
+        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
+        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
+        <circle cx="160" cy="72" r="16" fill="#111214"/>
+        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
+      </svg></div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pill ${pill(p.status)}</span></div>
+        <h3>${escP(p.name)}</h3>
+        <p>${escP(p.tagline)}</p>
+        <div class="tstack"><span>${tags}</span></div>
+      <div class="pcard-more"><span>FULL WRITE-UP · MODELS · HOW TO BUILD</span></div>
+      </div>
+    </a>`;
+    };
+    const gridEnd = authored.lastIndexOf('  </div>\n</section>');
+    if (gridEnd < 0) return authored;
+    let out = authored.slice(0, gridEnd) + '\n' + missing.map(card).join('\n') + '\n' + authored.slice(gridEnd);
+    out = out.replace(/(<h2>Projects <span class="soft">)\(\d+\)(<\/span><\/h2>)/, `$1(${projects.length})$2`);
+    return out;
+  }
   const body = `
 <main class="wrap">
   <section class="hero">

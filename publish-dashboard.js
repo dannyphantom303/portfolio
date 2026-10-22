@@ -62,6 +62,11 @@ const bloggerResults = (() => {
   try { return JSON.parse(fs.readFileSync(path.join(OUT_DIR, 'blogger-results.json'), 'utf8')); } catch (e) { return { posts: {} }; }
 })();
 const bloggerDrafts = Object.values(bloggerResults.posts || {}).filter(p => p.postId).length;
+// The portfolio grew past 18 posts (tradedeck, peril-adventure-wear were added
+// after the Blogger run froze), so derive the denominator from the drafts on
+// disk instead of hardcoding it.
+const postCount = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'projects.json'), 'utf8')).projects
+  .reduce((acc, p) => (p.publicSafe !== false ? (acc[p.slug] = 1, acc) : acc), {})).length;
 const bloggerToken = (() => {
   try {
     const p = process.env.BLOGGER_TOKEN_FILE || path.join(os.homedir(), '.hermes', 'profiles', 'dev', 'blog', 'blogger-token.json');
@@ -77,7 +82,7 @@ const platforms = {
     ready: hasBlogger,
     status: hasBlogger ? (bloggerDrafts ? 'drafts-ready' : 'ready') : 'needs-login',
     note: hasBlogger
-      ? `${bloggerDrafts}/18 drafts created as Blogger drafts on danieldaymude.blogspot.com (blog ${process.env.BLOGGER_BLOG_ID || '6379488244824949695'}). Review + publish each one in the Blogger editor.`
+      ? `${bloggerDrafts}/${postCount} drafts created as Blogger drafts on danieldaymude.blogspot.com (blog ${process.env.BLOGGER_BLOG_ID || '6379488244824949695'}). Review + publish each one in the Blogger editor.`
       : 'Needs an OAuth access token (BLOGGER_ACCESS_TOKEN, or ~/.hermes/profiles/dev/blog/blogger-token.json).',
     howto: 'node blogger-publish.js --live  (creates/refreshes the drafts — never publishes them)',
   },
@@ -266,7 +271,7 @@ const html = `<!DOCTYPE html>
   </nav>
 
   <section class="phero" style="margin-top:18px">
-    <h1>Review the 18 publish drafts</h1>
+    <h1>Review the ${postCount} publish drafts</h1>
     <p>Every draft below is generated from the live write-up. Tap a platform chip to cycle it
        <b>pending → approved → blocked</b>; approvals are saved to the server. Nothing publishes itself —
        a draft only goes out when its platform reads <b>approved</b> and the platform is reachable.</p>

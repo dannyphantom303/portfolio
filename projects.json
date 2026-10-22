@@ -478,6 +478,46 @@
       "screenshots": [],
       "video": "",
       "url": "/peril/"
+    },
+    {
+      "slug": "film-room",
+      "name": "Film Room",
+      "tagline": "Short-film production desk.",
+      "icon": "🎬",
+      "status": "Token-gated",
+      "aiDoable": true,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "Film Room is one of the systems in my AI portfolio. Short-film production desk. Type an idea, set a budget, and it prices the film against a live Higgsfield rate card measured straight from the API — every model's real $/second, cost-versus-quality trade, and how many minutes of finished picture your money actually buys. The project board tracks every shot: the still that becomes its first frame, whether the clip is rendered, per-shot cost and total spend against the ledger. Chat panel talks to the agent that owns the project, so it can rewrite a prompt, regenerate a frame or start a render from here.",
+      "highlights": [
+        "Short-film production desk.",
+        "Type an idea, set a budget, and it prices the film against a live Higgsfield rate card measured straight from the API — every model's real $/second, cost-versus-quality trade, and how many minutes of finished picture your money actually buys.",
+        "The project board tracks every shot: the still that becomes its first frame, whether the clip is rendered, per-shot cost and total spend against the ledger."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/film"
+    },
+    {
+      "slug": "ip-competitor-watch",
+      "name": "IP & Competitor Watch",
+      "tagline": "One page that answers \"can anyone steal this, and who is already doing it?\" — every venture scored for how defensible it actually is, the direct competitors in each lane, whether the code proves when…",
+      "icon": "⚖️",
+      "status": "6 projects · 52 competitors",
+      "aiDoable": true,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "IP & Competitor Watch is one of the systems in my AI portfolio. One page that answers \"can anyone steal this, and who is already doing it?\" — every venture scored for how defensible it actually is, the direct competitors in each lane, whether the code proves when Dan built it, and the questions only a lawyer can answer. The law agent sweeps competitors, trademark filings and copycats on the 1st of every month and reports only what changed. Dossiers and data are key-gated because they spell out what is not protected.",
+      "highlights": [
+        "One page that answers \"can anyone steal this, and who is already doing it?\" — every venture scored for how defensible it actually is, the direct competitors in each lane, whether the code proves when Dan built it, and the questions only a lawyer can answer.",
+        "The law agent sweeps competitors, trademark filings and copycats on the 1st of every month and reports only what changed.",
+        "Dossiers and data are key-gated because they spell out what is not protected."
+      ],
+      "screenshots": [],
+      "video": "",
+      "url": "/law"
     }
   ]
 }

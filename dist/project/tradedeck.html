@@ -211,7 +211,7 @@ footer{padding:64px 0 40px}
 <div class="wrap">
 <header class="hero">
   <div class="ink">
-    <div class="eyebrow">Live — FULL WRITE-UP</div>
+    <div class="eyebrow">MULTI-AGENT DESK — FULL WRITE-UP</div>
     <h1>TradeDeck</h1>
     <p class="sub">Multi-agent sports &amp; market desk.</p>
     <div class="cta-row"><a class="btn light" href="mailto:ddaymude.ai@gmail.com?subject=TradeDeck">Ask me for a walkthrough</a>
@@ -219,8 +219,8 @@ footer{padding:64px 0 40px}
     </div>
     <div class="hero-stats">
       <div class="hstat"><div class="v">Live</div><div class="k">CURRENT STATE</div></div>
-      <div class="hstat"><div class="v"><em>$0</em></div><div class="k">MARGINAL RUNNING COST</div></div>
-      <div class="hstat"><div class="v">0</div><div class="k">MODELS / ENGINES</div></div>
+      <div class="hstat"><div class="v"><em>Metered</em></div><div class="k">MARGINAL RUNNING COST</div></div>
+      <div class="hstat"><div class="v">4</div><div class="k">MODELS / ENGINES</div></div>
       <div class="hstat"><div class="v">0</div><div class="k">STACK COMPONENTS</div></div>
     </div>
   </div>
@@ -230,12 +230,17 @@ footer{padding:64px 0 40px}
   <div class="demo-frame">
     <div class="well quad">
       <div class="reel-chip"><i></i>LIVE DEMO</div>
-      <div style="display:flex;height:100%;align-items:center;justify-content:center;font:700 12px var(--font-mono);letter-spacing:2px;color:var(--ink-400)">TRADEDECK</div>
+      <svg viewBox="0 0 320 144" role="img" aria-label="Animated: TradeDeck">
+        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
+        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
+        <circle cx="160" cy="72" r="16" fill="#111214"/>
+        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
+      </svg>
     </div>
     <aside class="demo-side">
       <h3>At a glance</h3>
-      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
-      
+      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>4</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>Metered only on escalation</b></div><div class="kv"><span>STACK</span><b>—</b></div>
+      <div class="fine-note" style="margin-top:18px">The desk holds portfolio and positions, so it stays on the private tailnet.</div>
     </aside>
   </div>
   
@@ -247,7 +252,7 @@ footer{padding:64px 0 40px}
     <div class="eyebrow">THE PROJECT</div>
     <h2>What it is <span class="soft">and why it exists</span></h2>
   </div>
-  <p class="prose">TradeDeck is one of the systems in my AI portfolio. Multi-agent sports &amp; market desk. A team of specialist agents (scout, news, quant, risk, execution, journal) share one server-side model router that picks the best installed model for each task and records which model handled it and why — no agent hard-codes its own model. Live charts, screener, signals, macro, portfolio, risk, backtest, alerts, journal, jobs and approvals.</p>
+  <p class="prose">TradeDesk is a multi-agent sports and market desk: a team of specialist agents — scout, news, quant, risk, execution and journal — share one server-side model router instead of each hard-coding a model. The router picks the best installed model per task and records which model handled it and why, so the desk can be read as an audit trail rather than a black box. The panel surfaces live charts, a screener, signals, macro context, portfolio, risk, backtest, alerts, a journal, jobs and approvals.</p>
   <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>Multi-agent sports &amp; market desk.</li><li>A team of specialist agents (scout, news, quant, risk, execution, journal) share one server-side model router that picks the best installed model for each task and records which model handled it and why — no agent hard-codes its own model.</li><li>Live charts, screener, signals, macro, portfolio, risk, backtest, alerts, journal, jobs and approvals.</li></ul></div>
 </section>
 
@@ -257,7 +262,14 @@ footer{padding:64px 0 40px}
     <h2>The mechanism <span class="soft">end to end</span></h2>
     <p>No hand-waving: this is the actual chain, in the order it runs.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>Specialist agents</h3><p>Scout, news, quant, risk, execution and journal each own one job; none of them decides which model answers.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>Shared model router</h3><p>One server-side router selects the best installed model per task and logs the choice plus the reason.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>Desk panels</h3><p>Charts, screener, signals, macro, portfolio, risk and backtest read from the same state so they cannot disagree.</p></article>
+<article class="step">
+      <div class="n">04</div><h3>Journal and approvals</h3><p>Every decision lands in the journal, and outbound actions wait on an approval rather than firing themselves.</p></article></div>
 </section>
 
 <section id="models">
@@ -269,9 +281,32 @@ footer{padding:64px 0 40px}
   <div class="cost-card">
     <table class="cost">
       <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
-      <tbody></tbody>
+      <tbody><tr>
+      <td><b>Scout / news summarising</b><div class="fine-note" style="margin-top:6px">Nous Portal — free tier</div></td>
+      <td class="model hide-sm">poolside/laguna-s-2.1:free</td>
+      <td class="hide-sm">high-volume reading and summarising on the free catalogue</td>
+      <td><span class="rate-tag rate-free">FREE TIER · $0</span></td>
+    </tr>
+<tr>
+      <td><b>Quant and risk reasoning</b><div class="fine-note" style="margin-top:6px">OpenRouter — paid frontier models (escalation only)</div></td>
+      <td class="model hide-sm">deepseek/deepseek-v4-pro</td>
+      <td class="hide-sm">cheap reasoning tier for numeric work</td>
+      <td><span class="rate-tag rate-paid">METERED</span></td>
+    </tr>
+<tr>
+      <td><b>Escalation for hard calls</b><div class="fine-note" style="margin-top:6px">OpenRouter — paid frontier models (escalation only)</div></td>
+      <td class="model hide-sm">openai/gpt-5.5</td>
+      <td class="hide-sm">used only when a task is routed up, not by default</td>
+      <td><span class="rate-tag rate-paid">METERED</span></td>
+    </tr>
+<tr>
+      <td><b>Local fallback</b><div class="fine-note" style="margin-top:6px">Local — Ollama on the Mac mini (M4, 24 GB)</div></td>
+      <td class="model hide-sm">ornith-1.5:9b</td>
+      <td class="hide-sm">keeps the desk usable when the hosted providers are unreachable</td>
+      <td><span class="rate-tag rate-local">LOCAL · $0</span></td>
+    </tr></tbody>
     </table>
-    
+    <div class="cost-note">Spend is a routing decision, not a per-agent setting: the free catalogue absorbs the high-volume reading jobs, and the paid tiers are reached only when a task is explicitly routed up. The router records the choice, so the bill can be read back as a list of decisions rather than a surprise.</div>
     <div class="cost-note"><b>The full model price list.</b> Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates.</div>
     <table class="price-table">
       <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>
@@ -301,10 +336,25 @@ footer{padding:64px 0 40px}
     <h2>The steps <span class="soft">in order, with the traps</span></h2>
     <p>This is the short version of what I would do again — including the parts that bit me first.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>Put the router between agents and models</h3><p>No agent hard-codes a model; one shared router makes the choice and records it.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>Make the router log why</h3><p>Recording the reason per task is what turns model spend into an auditable list.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>Read every panel from one state</h3><p>Charts, screener, risk and journal must share state or the desk shows contradictory numbers.</p></article>
+<article class="step">
+      <div class="n">04</div><h3>Gate the outbound actions</h3><p>Execution and alerts wait on approval, so a signal never fires by itself.</p></article></div>
 </section>
 
-
+<section id="notes">
+  <div class="sec-head">
+    <div class="eyebrow">WHAT I LEARNED</div>
+    <h2>Notes from the build</h2>
+  </div>
+  <div class="lessons"><article class="lesson"><span>NOTE 01</span>A shared router is what makes a multi-agent desk auditable — per-agent model choices are untraceable.</article>
+<article class="lesson"><span>NOTE 02</span>Routing is a cost decision, so the router belongs in front of every agent, not inside one.</article>
+<article class="lesson"><span>NOTE 03</span>One shared state is what keeps the panels from disagreeing.</article></div>
+</section>
 
 <section id="stack">
   <div class="sec-head">
@@ -323,6 +373,6 @@ footer{padding:64px 0 40px}
     <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a>
     <a class="btn line" href="../index.html#projects">Back to all work</a>
   </div>
-  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-10-21 · 20 BUILDS · 7 AGENTS</span></div>
+  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-10-22 · 22 BUILDS · 7 AGENTS</span></div>
 </div></div></footer>
 </body></html>

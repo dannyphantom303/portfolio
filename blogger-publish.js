@@ -37,7 +37,39 @@ const MAX_PER_RUN = (() => {
 
 function token() {
   if (process.env.BLOGGER_ACCESS_TOKEN) return process.env.BLOGGER_ACCESS_TOKEN;
-  try { return JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8')).access_token || ''; } catch (e) { return ''; }
+  try {
+    const t = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
+    return t.access_token || t.token || '';
+  } catch (e) { return ''; }
+}
+
+// The stored access token expires in ~1h; without this every live run dies with
+// 401 invalid_token the moment the token goes stale. Refresh via the client's own
+// OAuth credentials (same client_id/secret tmg_google_token.json uses).
+async function freshToken() {
+  let t;
+  try { t = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8')); } catch (e) { return ''; }
+  if (t.expiry) {
+    const ms = Date.parse(t.expiry) - Date.now();
+    if (ms > 60_000) return t.access_token || t.token || '';
+  }
+  if (!t.refresh_token || !t.client_id || !t.client_secret) return t.access_token || t.token || '';
+  const r = await fetch(t.token_uri || 'https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: t.client_id,
+      client_secret: t.client_secret,
+      refresh_token: t.refresh_token,
+      grant_type: 'refresh_token',
+    }).toString(),
+  });
+  if (!r.ok) return t.access_token || t.token || '';
+  const j = await r.json();
+  t.access_token = t.token = j.access_token;
+  t.expiry = new Date(Date.now() + (j.expires_in || 3600) * 1000).toISOString();
+  try { fs.writeFileSync(TOKEN_FILE, JSON.stringify(t, null, 2) + '\n'); } catch (e) { /* read-only ok */ }
+  return t.access_token;
 }
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -87,13 +119,20 @@ function readDraft(slug) {
 }
 
 async function api(method, url, body) {
-  const t = token();
+  let t = await freshToken();
   if (!t) throw new Error(`no access token (set BLOGGER_ACCESS_TOKEN or write ${TOKEN_FILE})`);
-  const r = await fetch(url, {
+  const call = (tok) => fetch(url, {
     method,
-    headers: { authorization: `Bearer ${t}`, 'content-type': 'application/json' },
+    headers: { authorization: `Bearer ${tok}`, 'content-type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined,
   });
+  let r = await call(t);
+  // One retry on a stale token — the refresh above is best-effort and can be
+  // raced by another process writing the same file.
+  if (r.status === 401) {
+    t = token();
+    r = await call(t);
+  }
   const text = await r.text();
   if (!r.ok) throw new Error(`${r.status} ${text.slice(0, 300)}`);
   return text ? JSON.parse(text) : {};
