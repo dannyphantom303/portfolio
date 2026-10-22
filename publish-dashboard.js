@@ -160,6 +160,17 @@ function readDraft(slug) {
   try { return fs.readFileSync(f, 'utf8'); } catch (e) { return ''; }
 }
 
+// When the draft was first written (birthtime) with mtime as the fallback —
+// refresh.sh rewrites every post, so mtime alone would always read "today".
+function draftCreated(slug) {
+  const f = path.join(POSTS, slug + '.md');
+  try {
+    const st = fs.statSync(f);
+    const t = st.birthtime && st.birthtime.getTime() > 0 ? st.birthtime : st.mtime;
+    return t.toISOString().slice(0, 10);
+  } catch (e) { return ''; }
+}
+
 const state = loadState();
 writeState(state);
 
@@ -174,12 +185,14 @@ const CARDS = pub.map(p => {
       + `<span class="pname">${esc(v.label)}</span><span class="pval">${esc(val)}</span></button>`;
   }).join('');
   const liveLink = `project/${p.slug}.html`;
+  const created = draftCreated(p.slug);
   return `<article class="pcard" id="p-${esc(p.slug)}">
   <header class="phead">
     <div class="picon">${esc(p.icon || '📦')}</div>
     <div class="ptitle">
       <h2>${esc(p.name)} <span class="pslug mono">${esc(p.slug)}</span></h2>
       <p class="ptag">${esc(p.tagline || '')}</p>
+      ${created ? `<p class="pcreated mono">draft created ${esc(created)}</p>` : ''}
     </div>
     <a class="plink mono" href="${esc(liveLink)}" target="_blank" rel="noopener">open page →</a>
   </header>
@@ -234,6 +247,8 @@ const html = `<!DOCTYPE html>
 .ptitle h2{font-size:16.5px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .pslug{font-size:10.5px;color:var(--ink-400);letter-spacing:.5px}
 .ptag{font-size:13.5px;color:var(--ink-500);margin-top:3px}
+/* when the draft was written — approval cards are judged by age too */
+.pcreated{font-size:11px;color:var(--ink-400);letter-spacing:.4px;margin-top:5px}
 .plink{font-size:11.5px;color:var(--ink-400);white-space:nowrap;padding-top:4px}
 .plink:hover{color:var(--ink-900)}
 .pchips{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
