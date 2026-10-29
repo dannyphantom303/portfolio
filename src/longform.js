@@ -61,6 +61,10 @@ function buildMarkdown(slug) {
   out.push(`**${seo.dek}**`);
   out.push(seo.intro);
   if (d.overview) out.push(`## What it is\n${d.overview}`);
+  if (bullets(d.timeline).length) {
+    out.push('## The progression');
+    for (const e of bullets(d.timeline)) out.push(`- **${e.date} — ${e.t}** — ${e.d}`);
+  }
   if (bullets(d.howItWorks).length) {
     out.push('## How it works');
     for (const s of bullets(d.howItWorks)) out.push(`- **${s.t}** — ${s.d}`);
@@ -104,6 +108,10 @@ function buildHtml(slug) {
   out.push(`<p><em>${esc(seo.dek)}</em></p>`);
   out.push(`<p>${inline(seo.intro)}</p>`);
   if (d.overview) out.push(`<h2>What it is</h2>\n<p>${inline(d.overview)}</p>`);
+  if (bullets(d.timeline).length) {
+    out.push('<h2>The progression</h2>\n<ul>\n' +
+      bullets(d.timeline).map(e => `  <li><strong>${esc(e.date)} — ${esc(e.t)}</strong> — ${inline(e.d)}</li>`).join('\n') + '\n</ul>');
+  }
   if (bullets(d.howItWorks).length) {
     out.push('<h2>How it works</h2>\n<ul>\n' +
       bullets(d.howItWorks).map(s => `  <li><strong>${esc(s.t)}</strong> — ${inline(s.d)}</li>`).join('\n') + '\n</ul>');

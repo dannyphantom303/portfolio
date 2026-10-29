@@ -1,65 +1,65 @@
 {
-  "_note": "Authored detail content for the per-project write-up pages. projects.json stays the auto-discovered registry (discover.js writes it); this file is hand-authored and is never overwritten by discovery. build.js merges the two by slug. Keep every claim here verifiable — no invented metrics, prices or handles.",
+  "_note": "Authored detail content for the per-project write-up pages. projects.json stays the auto-discovered registry (discover.js writes it); this file is hand-authored and is never overwritten by discovery. build.js merges the two by slug. Keep every claim here verifiable \u2014 no invented metrics, prices or handles.",
   "costModel": {
     "asOf": "2026-10-16",
     "sources": [
-      "https://openrouter.ai/api/v1/models — published per-million-token rates, read 2026-10-16",
-      "https://ollama.com/pricing and https://ollama.com/blog/transparent-pricing — Ollama Cloud base tier is free with starter credits; paid plans use a monthly credit pool (Pro $20/mo -> $60 of credits)",
-      "https://portal.nousresearch.com/manage-subscription — Nous Portal free tier is $0/month with the free-model catalogue and standard rate limits"
+      "https://openrouter.ai/api/v1/models \u2014 published per-million-token rates, read 2026-10-16",
+      "https://ollama.com/pricing and https://ollama.com/blog/transparent-pricing \u2014 Ollama Cloud base tier is free with starter credits; paid plans use a monthly credit pool (Pro $20/mo -> $60 of credits)",
+      "https://portal.nousresearch.com/manage-subscription \u2014 Nous Portal free tier is $0/month with the free-model catalogue and standard rate limits"
     ],
     "runtimes": {
       "local-ollama": {
-        "label": "Local — Ollama on the Mac mini (M4, 24 GB)",
+        "label": "Local \u2014 Ollama on the Mac mini (M4, 24 GB)",
         "where": "127.0.0.1:11434",
-        "rate": "no per-token fee — the machine is already on",
+        "rate": "no per-token fee \u2014 the machine is already on",
         "marginal": "$0"
       },
       "local-lmstudio": {
-        "label": "Local — LM Studio on the Mac mini",
+        "label": "Local \u2014 LM Studio on the Mac mini",
         "where": "127.0.0.1:1234",
         "rate": "no per-token fee",
         "marginal": "$0"
       },
       "local-llama": {
-        "label": "Local — llama.cpp weights on the Mac mini",
+        "label": "Local \u2014 llama.cpp weights on the Mac mini",
         "where": "on-disk GGUF",
         "rate": "no per-token fee",
         "marginal": "$0"
       },
       "ollama-cloud": {
-        "label": "Ollama Cloud — pay-as-you-go credits",
+        "label": "Ollama Cloud \u2014 pay-as-you-go credits",
         "where": "cloud, same Ollama models",
         "rate": "free base tier with starter credits; paid plans carry a monthly credit pool (Pro $20/mo = $60 of credits), metered per model at published per-token rates",
         "marginal": "$0 until the credit pool is drawn down"
       },
       "nous-free": {
-        "label": "Nous Portal — free tier",
+        "label": "Nous Portal \u2014 free tier",
         "where": "hosted API",
         "rate": "$0/month; free-model catalogue with standard rate limits",
         "marginal": "$0"
       },
       "openrouter-paid": {
-        "label": "OpenRouter — paid frontier models (escalation only)",
+        "label": "OpenRouter \u2014 paid frontier models (escalation only)",
         "where": "hosted API",
         "rate": "per-million-token, published: see the price table below",
         "marginal": "only when a paid model is explicitly selected"
       },
       "local": {
-        "label": "Local — this machine (Mac mini)",
+        "label": "Local \u2014 this machine (Mac mini)",
         "where": "on-device services / scripts",
         "rate": "no per-token fee",
         "marginal": "$0"
       },
       "client-side": {
-        "label": "Client-side — the visitor's browser",
+        "label": "Client-side \u2014 the visitor's browser",
         "where": "WebGL / static files",
         "rate": "no server cost",
         "marginal": "$0"
       },
       "n-a": {
-        "label": "Not applicable — no model in this project",
-        "where": "—",
-        "rate": "—",
+        "label": "Not applicable \u2014 no model in this project",
+        "where": "\u2014",
+        "rate": "\u2014",
         "marginal": "$0"
       },
       "per-agent": {
@@ -134,13 +134,13 @@
         "model": "ornith-1.5:9b",
         "in": 0,
         "out": 0,
-        "note": "runs locally under Ollama — no per-token fee"
+        "note": "runs locally under Ollama \u2014 no per-token fee"
       },
       {
         "model": "google/gemma-4-12b-qat",
         "in": 0,
         "out": 0,
-        "note": "runs locally under LM Studio — no per-token fee"
+        "note": "runs locally under LM Studio \u2014 no per-token fee"
       }
     ],
     "reading": "Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates."
@@ -148,7 +148,7 @@
   "projects": {
     "sport-command-center": {
       "kicker": "AGENT FLEET",
-      "overview": "Sport is the operating layer over a fleet of named agents rather than one big prompt. Each agent keeps its own memory, skills and conversation history, and they coordinate through a shared task bus — a SQLite kanban board on this machine. Anything that leaves the machine (posting, email, publishing) stops at an approval gate first. It is the thing that lets the other projects keep running when nobody is watching.",
+      "overview": "Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state \u2014 every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy \u2014 while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.",
       "howItWorks": [
         {
           "t": "A fleet, not a monolith",
@@ -198,7 +198,7 @@
           "job": "Escalation for hard reasoning",
           "runtime": "openrouter-paid",
           "model": "openai/gpt-5.5, anthropic/claude-opus-4.8",
-          "note": "opt-in only — $5/M in, $30/$25/M out"
+          "note": "opt-in only \u2014 $5/M in, $30/$25/M out"
         },
         {
           "job": "Offline / private fallback",
@@ -211,7 +211,7 @@
       "howto": [
         {
           "t": "Give each agent its own context",
-          "d": "One profile per role — memory, skills and config — instead of one prompt trying to be everything. Specialist context is what makes a specialist agent good."
+          "d": "One profile per role \u2014 memory, skills and config \u2014 instead of one prompt trying to be everything. Specialist context is what makes a specialist agent good."
         },
         {
           "t": "Put a durable task bus in the middle",
@@ -231,12 +231,59 @@
         }
       ],
       "lessons": [
-        "A hierarchy of narrow agents beats one generalist prompt — and it fails locally instead of globally.",
+        "A hierarchy of narrow agents beats one generalist prompt \u2014 and it fails locally instead of globally.",
         "Approval gates are the enabling feature, not the brake: they are what make unattended work acceptable.",
         "Heartbeats and stale-run recovery are the difference between 'runs unattended' and 'sometimes just stops'."
       ],
       "live": null,
-      "linkNote": "Internal — the coordinator and its dashboard expose personal finances, the vault and live agent state, so this one is not published."
+      "linkNote": "Internal \u2014 the coordinator and its dashboard expose personal finances, the vault and live agent state, so this one is not published.",
+      "timeline": [
+        {
+          "date": "Sep 20, 2026",
+          "t": "The first Command Center",
+          "d": "An Obsidian brain: a live graph of the vault, served from localhost with tabs to flip between dashboards. It was a view of the notes \u2014 not yet a view of the machine."
+        },
+        {
+          "date": "Oct 3, 2026",
+          "t": "One page, every project",
+          "d": "The classic dashboard: a single card wall of every project, each card opening its own live app instead of a description of it."
+        },
+        {
+          "date": "Oct 18, 2026",
+          "t": "On the glass",
+          "d": "A Raspberry Pi 5 and a touch panel running the status board \u2014 every agent session and cron job on a screen, with a silently-dead job shown as failed rather than 'ok'."
+        },
+        {
+          "date": "Oct 21-22, 2026",
+          "t": "The shell is rebuilt",
+          "d": "The whole thing is re-written as one SPA around a persistent shell: a static top bar, a drag-to-reorder sidebar that saves your order, a Health page that doubles as the job-run reader, and per-project facades."
+        },
+        {
+          "date": "Oct 23, 2026",
+          "t": "Talk to it, and ship from it",
+          "d": "Voice arrives: chat with queueing and steering, and a microphone that knows when the machine has none instead of failing silently. The deploy pipeline lands too \u2014 back up, copy, check, restart, verify, roll back on a dead build \u2014 with a one-click test/prod switch."
+        },
+        {
+          "date": "Oct 24, 2026",
+          "t": "The turn, step by step",
+          "d": "Chat stops saying 'used terminal' and shows what each step actually is, with a live clock and step count; chat threads restore after a reload; dictation runs on a warm local model (about 0.3s to first words versus 6.8s cold)."
+        },
+        {
+          "date": "Oct 25, 2026",
+          "t": "Dictation that survives a long sentence",
+          "d": "The mic used to stop at 45 seconds. It now reopens on its own and follows you until you stop talking, and the phone layout was pulled back inside the viewport at 390, 360 and 320px."
+        },
+        {
+          "date": "Oct 27, 2026",
+          "t": "The whole reply on the lock screen",
+          "d": "A finished chat turn pushes its entire answer to the phone, not a teaser. A Passwords & logins page lands over the real encrypted vault \u2014 the browser never receives a stored secret."
+        },
+        {
+          "date": "Oct 28, 2026",
+          "t": "A fleet you can leave running",
+          "d": "Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green."
+        }
+      ]
     },
     "smart-home-hub": {
       "kicker": "EDGE / IoT",
@@ -244,7 +291,7 @@
       "howItWorks": [
         {
           "t": "Ask in plain English",
-          "d": "A text box on the custom dashboard, or dictation — 'when the front door camera sees a person after 10pm, flash the porch light and tell me'."
+          "d": "A text box on the custom dashboard, or dictation \u2014 'when the front door camera sees a person after 10pm, flash the porch light and tell me'."
         },
         {
           "t": "Queued as a job",
@@ -256,7 +303,7 @@
         },
         {
           "t": "Validated before it is live",
-          "d": "The automation is checked through Home Assistant's config API first. Only a passing config is reloaded — a bad automation never reaches the running house."
+          "d": "The automation is checked through Home Assistant's config API first. Only a passing config is reloaded \u2014 a bad automation never reaches the running house."
         },
         {
           "t": "Result reported back",
@@ -272,7 +319,7 @@
           "job": "Plain-English -> automation YAML",
           "runtime": "ollama-cloud",
           "model": "free-tier catalogue models",
-          "note": "short, structured generations — cheap by construction"
+          "note": "short, structured generations \u2014 cheap by construction"
         },
         {
           "job": "Idle time",
@@ -287,7 +334,7 @@
           "note": "Home Assistant + Mosquitto + ESPHome on the Pi; no model in the control path"
         }
       ],
-      "costNote": "This is the cheapest project in the portfolio to run: the hub is a one-off Raspberry Pi, the model is touched only when you ask for an automation, and the house itself is controlled locally. One genuine third-party cost exists if Nest cameras come in — Google's Device Access programme is a $5 one-time fee.",
+      "costNote": "This is the cheapest project in the portfolio to run: the hub is a one-off Raspberry Pi, the model is touched only when you ask for an automation, and the house itself is controlled locally. One genuine third-party cost exists if Nest cameras come in \u2014 Google's Device Access programme is a $5 one-time fee.",
       "howto": [
         {
           "t": "Keep the house off the internet",
@@ -299,7 +346,7 @@
         },
         {
           "t": "Make the agent idempotent",
-          "d": "Re-running a request should either do nothing or fix the automation — not append a second copy."
+          "d": "Re-running a request should either do nothing or fix the automation \u2014 not append a second copy."
         },
         {
           "t": "Mirror the config nightly",
@@ -312,15 +359,15 @@
       ],
       "lessons": [
         "The house is a hard boundary: private by default, validated before it goes live.",
-        "Event-driven beats always-on — silence is both the security posture and the cost model.",
+        "Event-driven beats always-on \u2014 silence is both the security posture and the cost model.",
         "A backup you have never restored is a hope, not a backup."
       ],
       "live": null,
-      "linkNote": "Tailnet only, by design — the hub is deliberately not reachable from the public internet."
+      "linkNote": "Tailnet only, by design \u2014 the hub is deliberately not reachable from the public internet."
     },
     "track-my-gold": {
       "kicker": "CONTENT OPS",
-      "overview": "A content-operation dashboard for a gold-prospecting channel: it surfaces video performance, runs an approval queue for comments and engagement, tracks affiliate revenue, checks SEO and drives the content calendar. Comments are posted through the YouTube API from the approve button itself — not from a cron session that may already have finished. Search Console feeds a live SEO tab under a read-only OAuth scope. The product side is trackmygold.net.",
+      "overview": "A content-operation dashboard for a gold-prospecting channel: it surfaces video performance, runs an approval queue for comments and engagement, tracks affiliate revenue, checks SEO and drives the content calendar. Comments are posted through the YouTube API from the approve button itself \u2014 not from a cron session that may already have finished. Search Console feeds a live SEO tab under a read-only OAuth scope. The product side is trackmygold.net.",
       "howItWorks": [
         {
           "t": "Discovery",
@@ -328,7 +375,7 @@
         },
         {
           "t": "Review queue",
-          "d": "Nothing goes out unreviewed. Comments are edited, approved or discarded on the dashboard — the human step is the product decision, and it is enforced by design."
+          "d": "Nothing goes out unreviewed. Comments are edited, approved or discarded on the dashboard \u2014 the human step is the product decision, and it is enforced by design."
         },
         {
           "t": "Approve = post",
@@ -348,7 +395,7 @@
           "job": "Video discovery + comment drafting",
           "runtime": "nous-free",
           "model": "nvidia/nemotron-3-ultra-550b-a55b and the free catalogue",
-          "note": "high-volume, low-stakes generation — exactly what the free tier is for"
+          "note": "high-volume, low-stakes generation \u2014 exactly what the free tier is for"
         },
         {
           "job": "Weekly metrics / SEO narrative",
@@ -363,7 +410,7 @@
           "note": "YouTube and Search Console calls are plain HTTP; no model in the API path"
         }
       ],
-      "costNote": "The recurring work runs on the free tier, and the platform APIs used (YouTube data, Search Console read-only) add nothing to the bill. The real cost of this project is attention — which is why the approval queue exists.",
+      "costNote": "The recurring work runs on the free tier, and the platform APIs used (YouTube data, Search Console read-only) add nothing to the bill. The real cost of this project is attention \u2014 which is why the approval queue exists.",
       "howto": [
         {
           "t": "Put the API call inside the button",
@@ -387,7 +434,7 @@
         }
       ],
       "lessons": [
-        "The bottleneck was acquisition, not integration — the dashboard proved that quickly and honestly.",
+        "The bottleneck was acquisition, not integration \u2014 the dashboard proved that quickly and honestly.",
         "A dashboard that silently drifts from the underlying data is worse than no dashboard.",
         "Approvals in a web surface the person actually uses beat a webhook nobody reads."
       ],
@@ -399,11 +446,11 @@
     },
     "content-autopilot": {
       "kicker": "HUMAN-IN-THE-LOOP",
-      "overview": "An AI content pipeline that drafts, reviews, approves and publishes on a schedule — built so the machine does the volume and the human keeps the judgement. Drafts arrive with review/edit/redo controls, approved items hand off to scheduling, and the review surfaces include wearable targets (Meta Ray-Ban Display, Quest). The same engine runs the blog job that drafts one post every three days.",
+      "overview": "An AI content pipeline that drafts, reviews, approves and publishes on a schedule \u2014 built so the machine does the volume and the human keeps the judgement. Drafts arrive with review/edit/redo controls, approved items hand off to scheduling, and the review surfaces include wearable targets (Meta Ray-Ban Display, Quest). The same engine runs the blog job that drafts one post every three days.",
       "howItWorks": [
         {
           "t": "Topic queue",
-          "d": "A roadmap file holds the queue. The job takes the next item and flips it to drafted, recording the resulting post id — so the same topic cannot be picked twice."
+          "d": "A roadmap file holds the queue. The job takes the next item and flips it to drafted, recording the resulting post id \u2014 so the same topic cannot be picked twice."
         },
         {
           "t": "Draft",
@@ -419,7 +466,7 @@
         },
         {
           "t": "Publish",
-          "d": "Only approved content ships — to the scheduling API or as a blog draft. Publishing is a separate, explicit step."
+          "d": "Only approved content ships \u2014 to the scheduling API or as a blog draft. Publishing is a separate, explicit step."
         }
       ],
       "models": [
@@ -433,7 +480,7 @@
           "job": "Format + duplicate gates",
           "runtime": "local",
           "model": "none",
-          "note": "deterministic Node scripts — zero tokens, and they catch the expensive mistakes"
+          "note": "deterministic Node scripts \u2014 zero tokens, and they catch the expensive mistakes"
         }
       ],
       "costNote": "Cost is dominated by drafting tokens, which is why the guard rails are deterministic: the checks that protect quality run for free, offline, before any model time is spent.",
@@ -444,7 +491,7 @@
         },
         {
           "t": "Gate before review",
-          "d": "Format and duplicate checks are cheap and deterministic — run them so a human never reviews something structurally broken."
+          "d": "Format and duplicate checks are cheap and deterministic \u2014 run them so a human never reviews something structurally broken."
         },
         {
           "t": "Mirror every editor-side edit back",
@@ -462,14 +509,14 @@
       "lessons": [
         "Guard rails are cheaper than re-editing: measure similarity and structure offline, not with a model.",
         "'Human in the loop' only counts if the human's edits survive the next run.",
-        "Design for the review surface you will actually use — glasses and tablets included."
+        "Design for the review surface you will actually use \u2014 glasses and tablets included."
       ],
       "live": null,
       "linkNote": "The review app is token-gated and shows unpublished work, so it is not linked publicly."
     },
     "token-killers": {
       "kicker": "COST ENGINEERING",
-      "overview": "An audit-and-rebuild service for teams bleeding money on AI APIs: prompt and context compression, model routing, caching, and local-model offload — with a before/after calculator that proves the delta. The credibility comes from the fact that the same stack runs on this machine, so the numbers are measured rather than theorised.",
+      "overview": "An audit-and-rebuild service for teams bleeding money on AI APIs: prompt and context compression, model routing, caching, and local-model offload \u2014 with a before/after calculator that proves the delta. The credibility comes from the fact that the same stack runs on this machine, so the numbers are measured rather than theorised.",
       "howItWorks": [
         {
           "t": "Baseline",
@@ -500,22 +547,22 @@
           "note": "the top of the range"
         },
         {
-          "job": "—",
+          "job": "\u2014",
           "runtime": "openrouter-paid",
           "model": "anthropic/claude-opus-4.8 $5.00 / $25.00",
           "note": "long-context writing"
         },
         {
-          "job": "—",
+          "job": "\u2014",
           "runtime": "openrouter-paid",
           "model": "openai/gpt-6-astra $10.00 / $50.00",
-          "note": "the ceiling — reference only"
+          "note": "the ceiling \u2014 reference only"
         },
         {
           "job": "Cheap reasoning tier",
           "runtime": "openrouter-paid",
           "model": "deepseek/deepseek-v4-pro $0.2972 / $0.5944",
-          "note": "≈17x cheaper on input than the frontier tier"
+          "note": "\u224817x cheaper on input than the frontier tier"
         },
         {
           "job": "Structured output tier",
@@ -552,7 +599,7 @@
         },
         {
           "t": "Offload the boring 80%",
-          "d": "High-volume classification and formatting belong on local weights — that also keeps the data home."
+          "d": "High-volume classification and formatting belong on local weights \u2014 that also keeps the data home."
         },
         {
           "t": "Re-measure, then publish",
@@ -562,22 +609,22 @@
       "lessons": [
         "Most of an AI bill is context you did not need and a model that was too big for the job.",
         "Local offload is a privacy feature as much as a cost feature.",
-        "Routing is the highest-leverage single change — the spread between tiers is an order of magnitude."
+        "Routing is the highest-leverage single change \u2014 the spread between tiers is an order of magnitude."
       ],
       "live": null,
       "linkNote": "The savings calculator and the playbook are available on request."
     },
     "hermes-vision": {
       "kicker": "WEARABLE CLIENT",
-      "overview": "A progressive web app that puts a live agent session on a phone or on Meta Ray-Ban Display glasses: pick up a session, choose a model, stream the reply. The engineering that matters is the realtime layer — server-sent events with named event types — plus a wearable-first input model: a 2-D grid you navigate with arrows alone, focus paging, and a T9-style keyboard.",
+      "overview": "A progressive web app that puts a live agent session on a phone or on Meta Ray-Ban Display glasses: pick up a session, choose a model, stream the reply. The engineering that matters is the realtime layer \u2014 server-sent events with named event types \u2014 plus a wearable-first input model: a 2-D grid you navigate with arrows alone, focus paging, and a T9-style keyboard.",
       "howItWorks": [
         {
           "t": "Start or resume a session",
-          "d": "The client starts a session against the API and sends the model kind explicitly — hosted provider for speed, local runtime for privacy. An unqualified request must never silently fall back to a local runtime that may not be running."
+          "d": "The client starts a session against the API and sends the model kind explicitly \u2014 hosted provider for speed, local runtime for privacy. An unqualified request must never silently fall back to a local runtime that may not be running."
         },
         {
           "t": "Stream with named events",
-          "d": "The server emits discrete typed events — token deltas, tool start, commentary, message updates, final, close. One transport carries chat, tool calls and status, so the UI can render each differently."
+          "d": "The server emits discrete typed events \u2014 token deltas, tool start, commentary, message updates, final, close. One transport carries chat, tool calls and status, so the UI can render each differently."
         },
         {
           "t": "Guard the session",
@@ -616,7 +663,7 @@
       "howto": [
         {
           "t": "Build the transport once",
-          "d": "Named SSE events give you chat, tool activity and status on a single stream — a single stream is much less code than three."
+          "d": "Named SSE events give you chat, tool activity and status on a single stream \u2014 a single stream is much less code than three."
         },
         {
           "t": "Never default to local by accident",
@@ -638,14 +685,14 @@
       "lessons": [
         "Wearable constraints are real engineering: a fixed viewport and no pointer change the whole UI.",
         "One event stream for chat, tools and status removed an entire class of bugs.",
-        "A stale service worker can make a working deploy look broken — version the cache or chase ghosts."
+        "A stale service worker can make a working deploy look broken \u2014 version the cache or chase ghosts."
       ],
       "live": null,
-      "linkNote": "Live on phone and glasses, token-gated — ask me and I will send a link."
+      "linkNote": "Live on phone and glasses, token-gated \u2014 ask me and I will send a link."
     },
     "hermes-worlds": {
       "kicker": "3D / AGENTS IN-WORLD",
-      "overview": "Explorable browser 3D scenes — a western frontier town, a gold mine, a saloon, a forge — populated by AI characters you can walk up to and talk with. Dialogue runs over the same named event stream that powers the other clients, so a tool call or a status change can be rendered inside the world. It is the playground for what an agent feels like when it is not a chat box.",
+      "overview": "Explorable browser 3D scenes \u2014 a western frontier town, a gold mine, a saloon, a forge \u2014 populated by AI characters you can walk up to and talk with. Dialogue runs over the same named event stream that powers the other clients, so a tool call or a status change can be rendered inside the world. It is the playground for what an agent feels like when it is not a chat box.",
       "howItWorks": [
         {
           "t": "Scene loads in the browser",
@@ -657,7 +704,7 @@
         },
         {
           "t": "Dialogue streams in-world",
-          "d": "Replies arrive as typed events — deltas, tool starts, final — and are rendered as speech in the scene as they stream."
+          "d": "Replies arrive as typed events \u2014 deltas, tool starts, final \u2014 and are rendered as speech in the scene as they stream."
         },
         {
           "t": "Quests come from the agent",
@@ -679,10 +726,10 @@
           "job": "Scene rendering",
           "runtime": "client-side",
           "model": "none",
-          "note": "WebGL in the browser — the server only serves static files"
+          "note": "WebGL in the browser \u2014 the server only serves static files"
         }
       ],
-      "costNote": "Rendering costs the server nothing: it is static assets and JavaScript. The only metered component is dialogue, and those turns are short — the design keeps per-token spend proportional to how much the player actually talks.",
+      "costNote": "Rendering costs the server nothing: it is static assets and JavaScript. The only metered component is dialogue, and those turns are short \u2014 the design keeps per-token spend proportional to how much the player actually talks.",
       "howto": [
         {
           "t": "Reuse the transport",
@@ -698,7 +745,7 @@
         },
         {
           "t": "Make latency visible",
-          "d": "In a game loop, a slow reply is a broken character — show that something is happening."
+          "d": "In a game loop, a slow reply is a broken character \u2014 show that something is happening."
         },
         {
           "t": "Keep dialogue short",
@@ -717,7 +764,7 @@
     },
     "autolisting": {
       "kicker": "MEDIA PIPELINE",
-      "overview": "Upload property video and a few fields, get back a finished, formatted listing. The pipeline is deliberately visible — ten named steps with live state — so the user can see exactly where the machine is and step in when needed. Under the hood it is a chunked uploader, an ffmpeg/Python worker, a framing and enhancement pass, and an LLM writing the copy.",
+      "overview": "Upload property video and a few fields, get back a finished, formatted listing. The pipeline is deliberately visible \u2014 ten named steps with live state \u2014 so the user can see exactly where the machine is and step in when needed. Under the hood it is a chunked uploader, an ffmpeg/Python worker, a framing and enhancement pass, and an LLM writing the copy.",
       "howItWorks": [
         {
           "t": "Chunked upload",
@@ -725,7 +772,7 @@
         },
         {
           "t": "Probe before processing",
-          "d": "The server verifies the file it owns before starting work — a video whose index never arrived fails immediately with a real message instead of hanging."
+          "d": "The server verifies the file it owns before starting work \u2014 a video whose index never arrived fails immediately with a real message instead of hanging."
         },
         {
           "t": "Extract frames",
@@ -741,7 +788,7 @@
         },
         {
           "t": "Always write a verdict",
-          "d": "Every job ends in a terminal state — ready or failed — and a sweeper picks up jobs that were uploaded but never started. 'Processing forever' is treated as a bug class, not a state."
+          "d": "Every job ends in a terminal state \u2014 ready or failed \u2014 and a sweeper picks up jobs that were uploaded but never started. 'Processing forever' is treated as a bug class, not a state."
         }
       ],
       "models": [
@@ -764,7 +811,7 @@
           "note": "local disk, no per-gigabyte cloud fee"
         }
       ],
-      "costNote": "The expensive half of this pipeline is compute, not tokens — frame extraction and enhancement — and it runs on this machine, so a finished listing costs local machine time plus a single short generation. Nothing is billed per uploaded megabyte.",
+      "costNote": "The expensive half of this pipeline is compute, not tokens \u2014 frame extraction and enhancement \u2014 and it runs on this machine, so a finished listing costs local machine time plus a single short generation. Nothing is billed per uploaded megabyte.",
       "howto": [
         {
           "t": "Chunk your uploads",
@@ -788,7 +835,7 @@
         }
       ],
       "lessons": [
-        "A job that never writes its verdict looks like a hang, not an error — design the failure state first.",
+        "A job that never writes its verdict looks like a hang, not an error \u2014 design the failure state first.",
         "An interrupted upload leaves a clean prefix, so you cannot tell it from a bad source file: instrument the upload itself.",
         "Straightening and tone-mapping are what make a phone walkthrough look like a listing."
       ],
@@ -797,7 +844,7 @@
     },
     "obsidian-brain": {
       "kicker": "KNOWLEDGE GRAPH",
-      "overview": "A live 3D visualization of a personal knowledge vault. A Python pass walks the notes and their links and writes a graph payload; a WebGL viewer renders it as an explorable structure with search and drill-down. The deliberate choice here is that no model is involved at all — the graph is derived deterministically from the source notes, so it is always current and never invented.",
+      "overview": "A live 3D visualization of a personal knowledge vault. A Python pass walks the notes and their links and writes a graph payload; a WebGL viewer renders it as an explorable structure with search and drill-down. The deliberate choice here is that no model is involved at all \u2014 the graph is derived deterministically from the source notes, so it is always current and never invented.",
       "howItWorks": [
         {
           "t": "Walk the vault",
@@ -809,7 +856,7 @@
         },
         {
           "t": "Render it",
-          "d": "A static WebGL viewer loads the payload — no server-side rendering, no database."
+          "d": "A static WebGL viewer loads the payload \u2014 no server-side rendering, no database."
         },
         {
           "t": "Navigate",
@@ -825,10 +872,10 @@
           "job": "Everything",
           "runtime": "local",
           "model": "none",
-          "note": "pure Python graph build + client-side WebGL — zero model calls, zero per-token spend"
+          "note": "pure Python graph build + client-side WebGL \u2014 zero model calls, zero per-token spend"
         }
       ],
-      "costNote": "This is the one project in the portfolio with a genuinely $0 AI bill: no model runs anywhere in the build or the viewer. That is the point — some problems are structure problems, and calling an LLM at them just adds noise.",
+      "costNote": "This is the one project in the portfolio with a genuinely $0 AI bill: no model runs anywhere in the build or the viewer. That is the point \u2014 some problems are structure problems, and calling an LLM at them just adds noise.",
       "howto": [
         {
           "t": "Generate, never hand-maintain",
@@ -840,7 +887,7 @@
         },
         {
           "t": "Cluster with structure you already have",
-          "d": "Folders and links are free metadata — use them before inventing embeddings."
+          "d": "Folders and links are free metadata \u2014 use them before inventing embeddings."
         },
         {
           "t": "Make search the primary control",
@@ -848,7 +895,7 @@
         }
       ],
       "lessons": [
-        "Not every problem is a prompt — the best answer is sometimes a deterministic build.",
+        "Not every problem is a prompt \u2014 the best answer is sometimes a deterministic build.",
         "A visualization of your own notes is only useful if it regenerates itself.",
         "Connection count is a surprisingly good relevance signal for free."
       ],
@@ -857,7 +904,7 @@
     },
     "net-worth-ledger": {
       "kicker": "FINANCE OPS",
-      "overview": "A net-worth ledger that aggregates assets and liabilities into one live number, with on-demand refresh and a dated history. It is the same discipline as commission and financial reporting work — one number, computed from entries a human can audit — with the arithmetic done in code rather than by a model.",
+      "overview": "A net-worth ledger that aggregates assets and liabilities into one live number, with on-demand refresh and a dated history. It is the same discipline as commission and financial reporting work \u2014 one number, computed from entries a human can audit \u2014 with the arithmetic done in code rather than by a model.",
       "howItWorks": [
         {
           "t": "Accounts as entries",
@@ -910,11 +957,11 @@
         "The valuable part of finance automation is the audit trail, not the total."
       ],
       "live": null,
-      "linkNote": "Personal financial data — never published."
+      "linkNote": "Personal financial data \u2014 never published."
     },
     "insta360-x4": {
       "kicker": "HARDWARE BRIDGE",
-      "overview": "A local dashboard for an Insta360 X4 360 camera: live view and capture controls in the browser. It is small, practical integration work — bridging a device HTTP API into a clean web panel — and it is a good example of mounting a vendor app behind a path prefix without breaking its own asset URLs.",
+      "overview": "A local dashboard for an Insta360 X4 360 camera: live view and capture controls in the browser. It is small, practical integration work \u2014 bridging a device HTTP API into a clean web panel \u2014 and it is a good example of mounting a vendor app behind a path prefix without breaking its own asset URLs.",
       "howItWorks": [
         {
           "t": "Talk to the device",
@@ -930,7 +977,7 @@
         },
         {
           "t": "Stay local",
-          "d": "Camera control is never exposed to the public internet — device control on a laptop's LAN is enough."
+          "d": "Camera control is never exposed to the public internet \u2014 device control on a laptop's LAN is enough."
         }
       ],
       "models": [
@@ -949,7 +996,7 @@
         },
         {
           "t": "Plan for the path prefix",
-          "d": "Rewrite url(), src(), action() and fetch() when you mount an app under a route — the assets are what break first."
+          "d": "Rewrite url(), src(), action() and fetch() when you mount an app under a route \u2014 the assets are what break first."
         },
         {
           "t": "Keep device control private",
@@ -958,14 +1005,14 @@
       ],
       "lessons": [
         "Most hardware projects are integration problems, not device problems.",
-        "Mounting an app under a prefix is the classic silent breakage — test it every zoom of the way."
+        "Mounting an app under a prefix is the classic silent breakage \u2014 test it every zoom of the way."
       ],
       "live": null,
       "linkNote": "Local device control, deliberately not published."
     },
     "agentic-ai-course": {
       "kicker": "FORMAL TRAINING",
-      "overview": "Virginia Tech × Simplilearn's Applied Agentic AI programme — eleven modules covering agent systems, design and impact — taken while building the platform in this portfolio, and applied to it directly rather than to toy exercises. The coursework that survived contact with a real fleet is the part worth keeping: how agents fail, how to bound them, and how to decide what should not be an agent at all.",
+      "overview": "Virginia Tech \u00d7 Simplilearn's Applied Agentic AI programme \u2014 eleven modules covering agent systems, design and impact \u2014 taken while building the platform in this portfolio, and applied to it directly rather than to toy exercises. The coursework that survived contact with a real fleet is the part worth keeping: how agents fail, how to bound them, and how to decide what should not be an agent at all.",
       "howItWorks": [
         {
           "t": "Systems",
@@ -973,7 +1020,7 @@
         },
         {
           "t": "Design",
-          "d": "Patterns for reliable agent behaviour — narrow tools, explicit state, validation before side effects."
+          "d": "Patterns for reliable agent behaviour \u2014 narrow tools, explicit state, validation before side effects."
         },
         {
           "t": "Impact",
@@ -992,7 +1039,7 @@
           "note": "tuition, not tokens"
         }
       ],
-      "costNote": "No inference cost to report — the value is the design vocabulary, and it is already reflected in how the rest of these projects are built.",
+      "costNote": "No inference cost to report \u2014 the value is the design vocabulary, and it is already reflected in how the rest of these projects are built.",
       "howto": [
         {
           "t": "Prefer narrow tools",
@@ -1004,7 +1051,7 @@
         },
         {
           "t": "Decide what should not be an agent",
-          "d": "Deterministic code is cheaper, faster and more trustworthy — use it for anything that is only arithmetic or routing."
+          "d": "Deterministic code is cheaper, faster and more trustworthy \u2014 use it for anything that is only arithmetic or routing."
         }
       ],
       "lessons": [
@@ -1012,11 +1059,11 @@
         "Formal training is worth most when you can test every claim against something you already run."
       ],
       "live": null,
-      "linkNote": "Completed programme — certificate available on request."
+      "linkNote": "Completed programme \u2014 certificate available on request."
     },
     "project-showcase-engine": {
       "kicker": "THE SYSTEM THAT BUILDS THIS SITE",
-      "overview": "This site is generated. A project registry drives the write-ups, one page per project, and a self-updating résumé; a discovery step syncs new projects in from the working dashboard; a video step renders the demos; a syndication step drafts a per-project post for the publishing platforms; and a scheduled job rebuilds and publishes the whole thing every morning. The page you are reading is the output of a daily pipeline.",
+      "overview": "This site is generated. A project registry drives the write-ups, one page per project, and a self-updating r\u00e9sum\u00e9; a discovery step syncs new projects in from the working dashboard; a video step renders the demos; a syndication step drafts a per-project post for the publishing platforms; and a scheduled job rebuilds and publishes the whole thing every morning. The page you are reading is the output of a daily pipeline.",
       "howItWorks": [
         {
           "t": "Registry is the source of truth",
@@ -1024,7 +1071,7 @@
         },
         {
           "t": "Discovery syncs reality",
-          "d": "A discovery pass reads the working dashboard and appends projects that are not in the registry yet — idempotently, and never storing a token-bearing URL."
+          "d": "A discovery pass reads the working dashboard and appends projects that are not in the registry yet \u2014 idempotently, and never storing a token-bearing URL."
         },
         {
           "t": "Videos first, then pages",
@@ -1048,7 +1095,7 @@
           "job": "Site generation",
           "runtime": "local",
           "model": "none",
-          "note": "template rendering — no model in the build path"
+          "note": "template rendering \u2014 no model in the build path"
         },
         {
           "job": "Post drafts",
@@ -1077,12 +1124,12 @@
         },
         {
           "t": "Let the schedule do the publishing",
-          "d": "A daily rebuild keeps the résumé and the project list honest without a reminder."
+          "d": "A daily rebuild keeps the r\u00e9sum\u00e9 and the project list honest without a reminder."
         }
       ],
       "lessons": [
         "The build directory is disposable: put authored files in a source layer or the next rebuild deletes them.",
-        "A scheduled job that fails silently is worse than no job — the very first cron run died on a minimal PATH and looked like nothing had changed.",
+        "A scheduled job that fails silently is worse than no job \u2014 the very first cron run died on a minimal PATH and looked like nothing had changed.",
         "Publishing from the generator is what keeps a portfolio from rotting."
       ],
       "live": {
@@ -1092,7 +1139,7 @@
     },
     "cnbc-live-on-glasses": {
       "kicker": "WEARABLE STREAMING",
-      "overview": "Live CNBC on the Meta Ray-Ban Display glasses: 600x600, D-pad only, a free no-login feed. The interesting engineering is not the player, it is the proxy in front of it — the upstream CDN only serves its playlist when the request carries the right Referer, which a glasses webview cannot fake, so a small local proxy re-arbitrates the best CDN host, rewrites the playlist to same-origin URLs and streams the bytes through.",
+      "overview": "Live CNBC on the Meta Ray-Ban Display glasses: 600x600, D-pad only, a free no-login feed. The interesting engineering is not the player, it is the proxy in front of it \u2014 the upstream CDN only serves its playlist when the request carries the right Referer, which a glasses webview cannot fake, so a small local proxy re-arbitrates the best CDN host, rewrites the playlist to same-origin URLs and streams the bytes through.",
       "howItWorks": [
         {
           "t": "A local proxy stands in front",
@@ -1100,7 +1147,7 @@
         },
         {
           "t": "Re-arbitrate and cache the host",
-          "d": "The proxy asks the provider's own server list for the best CDN host, then caches that choice — a cold first request pays a full round trip, a warm one does not."
+          "d": "The proxy asks the provider's own server list for the best CDN host, then caches that choice \u2014 a cold first request pays a full round trip, a warm one does not."
         },
         {
           "t": "Rewrite the playlist",
@@ -1124,14 +1171,14 @@
           "job": "Everything",
           "runtime": "local",
           "model": "none",
-          "note": "pure streaming plumbing — no model calls, no per-token cost"
+          "note": "pure streaming plumbing \u2014 no model calls, no per-token cost"
         }
       ],
       "costNote": "$0: no model calls and the feed is free. The only billable resource is the machine that runs the proxy.",
       "howto": [
         {
           "t": "Stream the bytes",
-          "d": "Never read a whole segment into memory before responding — that makes the first byte arrive last."
+          "d": "Never read a whole segment into memory before responding \u2014 that makes the first byte arrive last."
         },
         {
           "t": "Prewarm the arbitration",
@@ -1151,7 +1198,7 @@
         }
       ],
       "lessons": [
-        "On a wearable the buffering is the product — time-to-first-frame is the feature.",
+        "On a wearable the buffering is the product \u2014 time-to-first-frame is the feature.",
         "An upstream Referer gate is the whole reason a proxy exists; understand the constraint before optimising the code.",
         "The wrong watchdog (hard-seek to live) can make playback measurably worse than no watchdog."
       ],
@@ -1166,7 +1213,7 @@
       "howItWorks": [
         {
           "t": "Free data only",
-          "d": "USGS historical production records, BLM claim and land-status services, and USGS bare-earth LiDAR — keyless endpoints, no data bill."
+          "d": "USGS historical production records, BLM claim and land-status services, and USGS bare-earth LiDAR \u2014 keyless endpoints, no data bill."
         },
         {
           "t": "Read the terrain itself",
@@ -1174,7 +1221,7 @@
         },
         {
           "t": "Score the ground",
-          "d": "Each area gets a 0-100 score — roughly 75+ 'go check', 60-75 strong, 45-60 possible, under 45 weak — with walkable target zones."
+          "d": "Each area gets a 0-100 score \u2014 roughly 75+ 'go check', 60-75 strong, 45-60 possible, under 45 weak \u2014 with walkable target zones."
         },
         {
           "t": "Tell you if you may mine",
@@ -1211,11 +1258,11 @@
         },
         {
           "t": "Bound every remote call and mirror it",
-          "d": "Public geospatial hosts flake — one host returned a 502 inside a 200 response. Keep a second host for the same dataset and a short timeout on the primary."
+          "d": "Public geospatial hosts flake \u2014 one host returned a 502 inside a 200 response. Keep a second host for the same dataset and a short timeout on the primary."
         },
         {
           "t": "Never treat a 200 as data",
-          "d": "Parse, and raise loudly when both sources fail — an empty list reads as 'nobody ever found gold here'."
+          "d": "Parse, and raise loudly when both sources fail \u2014 an empty list reads as 'nobody ever found gold here'."
         },
         {
           "t": "Vendor the map library for the field",
@@ -1227,7 +1274,7 @@
         }
       ],
       "lessons": [
-        "Bare-earth LiDAR is the best free prospecting signal available — free data, real terrain.",
+        "Bare-earth LiDAR is the best free prospecting signal available \u2014 free data, real terrain.",
         "Public data hosts go down quietly; bound the primary, keep a mirror, and fail loudly when both are gone.",
         "An offline-capable map is a different engineering problem from a fast one."
       ],
@@ -1240,7 +1287,7 @@
       "howItWorks": [
         {
           "t": "Landing and capture",
-          "d": "A public consulting page with the services, a calculator and an email capture — the entry point for inbound work."
+          "d": "A public consulting page with the services, a calculator and an email capture \u2014 the entry point for inbound work."
         },
         {
           "t": "Tiers and templates",
@@ -1273,7 +1320,7 @@
           "note": "the same task bus as everything else"
         }
       ],
-      "costNote": "The tooling cost is effectively zero — free-tier models and a local board. The cost that matters is your own time, which is exactly why the proposals are templated and the intake is structured.",
+      "costNote": "The tooling cost is effectively zero \u2014 free-tier models and a local board. The cost that matters is your own time, which is exactly why the proposals are templated and the intake is structured.",
       "howto": [
         {
           "t": "One board for both kinds of work",
@@ -1296,11 +1343,11 @@
         "url": "https://sport.taila73942.ts.net/consulting",
         "label": "Open the token-savings calculator"
       },
-      "linkNote": "The calculator is the public front door of this project — no login, it runs the numbers live."
+      "linkNote": "The calculator is the public front door of this project \u2014 no login, it runs the numbers live."
     },
     "openclaw": {
       "kicker": "AGENT GATEWAY",
-      "overview": "OpenClaw is a multi-channel AI gateway with extensible messaging integrations, running locally as a gateway process and served through the Command Center router, which rewrites the control UI's base path and starts the gateway on demand if it is not already running. Its configuration declares agents, tools, plugins, channels and bindings in one file — it is the plumbing that connects agents to messaging surfaces.",
+      "overview": "OpenClaw is a multi-channel AI gateway with extensible messaging integrations, running locally as a gateway process and served through the Command Center router, which rewrites the control UI's base path and starts the gateway on demand if it is not already running. Its configuration declares agents, tools, plugins, channels and bindings in one file \u2014 it is the plumbing that connects agents to messaging surfaces.",
       "howItWorks": [
         {
           "t": "Gateway process",
@@ -1324,7 +1371,7 @@
           "job": "Gateway itself",
           "runtime": "local",
           "model": "none",
-          "note": "transport, orchestration and tool plumbing — no inference of its own"
+          "note": "transport, orchestration and tool plumbing \u2014 no inference of its own"
         },
         {
           "job": "Whatever the bound agents use",
@@ -1337,7 +1384,7 @@
       "howto": [
         {
           "t": "Mount a local UI under a prefix properly",
-          "d": "Set the app's own base path and rewrite asset URLs — otherwise you get a page that loads and a stylesheet that 404s."
+          "d": "Set the app's own base path and rewrite asset URLs \u2014 otherwise you get a page that loads and a stylesheet that 404s."
         },
         {
           "t": "Start on demand",
@@ -1353,7 +1400,7 @@
         }
       ],
       "lessons": [
-        "A gateway is plumbing — the product is which agent is reachable from where.",
+        "A gateway is plumbing \u2014 the product is which agent is reachable from where.",
         "Prefix mounting needs the app's own base-path setting, not just a URL rewrite.",
         "One config file means one place to audit what an agent can reach."
       ],
@@ -1362,7 +1409,7 @@
     },
     "muse-prototypes": {
       "kicker": "SHAREABLE PROTOTYPE",
-      "overview": "The TrackMyGold Frontier world — western town, gold mine, saloon and forge — packaged as a shareable prototype you can open from a link. Find the character, accept quests, explore the realm. It is the same content as the live 3D world, shipped in the form that is easiest to send to someone for feedback.",
+      "overview": "The TrackMyGold Frontier world \u2014 western town, gold mine, saloon and forge \u2014 packaged as a shareable prototype you can open from a link. Find the character, accept quests, explore the realm. It is the same content as the live 3D world, shipped in the form that is easiest to send to someone for feedback.",
       "howItWorks": [
         {
           "t": "One world definition",
@@ -1370,7 +1417,7 @@
         },
         {
           "t": "Packaged for sharing",
-          "d": "Exported as a prototype build behind a public share link — no install, no account."
+          "d": "Exported as a prototype build behind a public share link \u2014 no install, no account."
         },
         {
           "t": "Same agents inside",
@@ -1395,7 +1442,7 @@
           "note": "static assets in the browser"
         }
       ],
-      "costNote": "$0 to host and $0 to render — the only metered part is dialogue, exactly as in the live world.",
+      "costNote": "$0 to host and $0 to render \u2014 the only metered part is dialogue, exactly as in the live world.",
       "howto": [
         {
           "t": "Ship one definition to many surfaces",
@@ -1407,7 +1454,7 @@
         }
       ],
       "lessons": [
-        "Prototypes exist to shorten the feedback loop — optimise for opening, not for fidelity.",
+        "Prototypes exist to shorten the feedback loop \u2014 optimise for opening, not for fidelity.",
         "One world definition shipped to several surfaces is far cheaper than rebuilding for each."
       ],
       "live": {
@@ -1417,7 +1464,7 @@
     },
     "tradedeck": {
       "kicker": "MULTI-AGENT DESK",
-      "overview": "TradeDesk is a multi-agent sports and market desk: a team of specialist agents — scout, news, quant, risk, execution and journal — share one server-side model router instead of each hard-coding a model. The router picks the best installed model per task and records which model handled it and why, so the desk can be read as an audit trail rather than a black box. The panel surfaces live charts, a screener, signals, macro context, portfolio, risk, backtest, alerts, a journal, jobs and approvals.",
+      "overview": "TradeDesk is a multi-agent sports and market desk: a team of specialist agents \u2014 scout, news, quant, risk, execution and journal \u2014 share one server-side model router instead of each hard-coding a model. The router picks the best installed model per task and records which model handled it and why, so the desk can be read as an audit trail rather than a black box. The panel surfaces live charts, a screener, signals, macro context, portfolio, risk, backtest, alerts, a journal, jobs and approvals.",
       "howItWorks": [
         {
           "t": "Specialist agents",
@@ -1482,7 +1529,7 @@
         }
       ],
       "lessons": [
-        "A shared router is what makes a multi-agent desk auditable — per-agent model choices are untraceable.",
+        "A shared router is what makes a multi-agent desk auditable \u2014 per-agent model choices are untraceable.",
         "Routing is a cost decision, so the router belongs in front of every agent, not inside one.",
         "One shared state is what keeps the panels from disagreeing."
       ],
@@ -1491,7 +1538,7 @@
     },
     "peril-adventure-wear": {
       "kicker": "CONTENT AUTOPILOT",
-      "overview": "Peril Adventure Wear is a content autopilot for a shirt line, built on the same approve-first flow as Track My Gold: drafts alternate product shots, trail ethos and camp scenes across three layouts and six print palettes, in a minimal vintage outdoor-brand look — condensed uppercase headlines, tracked small caps, topographic contour lines and low-contrast ridges on cream, forest and rust paper. Copy is generated against verified brand facts only, with no invented prices or claims, and the images are drawn locally rather than diffusion-generated. Everything waits for review before it reaches Buffer.",
+      "overview": "Peril Adventure Wear is a content autopilot for a shirt line, built on the same approve-first flow as Track My Gold: drafts alternate product shots, trail ethos and camp scenes across three layouts and six print palettes, in a minimal vintage outdoor-brand look \u2014 condensed uppercase headlines, tracked small caps, topographic contour lines and low-contrast ridges on cream, forest and rust paper. Copy is generated against verified brand facts only, with no invented prices or claims, and the images are drawn locally rather than diffusion-generated. Everything waits for review before it reaches Buffer.",
       "howItWorks": [
         {
           "t": "Brand-fact source",
@@ -1503,7 +1550,7 @@
         },
         {
           "t": "Local image drawing",
-          "d": "Artwork is drawn locally with the brand vocabulary — contours, ridges, type — never diffusion-generated."
+          "d": "Artwork is drawn locally with the brand vocabulary \u2014 contours, ridges, type \u2014 never diffusion-generated."
         },
         {
           "t": "Approve-first queue",
@@ -1536,7 +1583,7 @@
           "note": "drawn locally, so no per-image fee and no external service"
         }
       ],
-      "costNote": "Because the images are drawn locally rather than diffusion-generated, there is no per-image fee at all. The model spend is confined to copy drafting, which runs on the free catalogue and only escalates when a campaign needs polish — so a full month of drafts can be produced without a hosted bill.",
+      "costNote": "Because the images are drawn locally rather than diffusion-generated, there is no per-image fee at all. The model spend is confined to copy drafting, which runs on the free catalogue and only escalates when a campaign needs polish \u2014 so a full month of drafts can be produced without a hosted bill.",
       "howto": [
         {
           "t": "Start from a verified fact list",
@@ -1565,7 +1612,7 @@
     },
     "film-room": {
       "kicker": "SHORT-FILM DESK",
-      "overview": "Film Room is a short-film production desk: type an idea, set a budget, and it prices the film against a live rate card measured straight from the generation API — every model’s real cost per second, the cost-versus-quality trade, and how many minutes of finished picture the budget actually buys. The project board tracks every shot: the still that becomes its first frame, whether the clip is rendered, per-shot cost and total spend against the ledger. A chat panel talks to the agent that owns the project, so a prompt can be rewritten, a frame regenerated or a render started from the desk itself.",
+      "overview": "Film Room is a short-film production desk: type an idea, set a budget, and it prices the film against a live rate card measured straight from the generation API \u2014 every model\u2019s real cost per second, the cost-versus-quality trade, and how many minutes of finished picture the budget actually buys. The project board tracks every shot: the still that becomes its first frame, whether the clip is rendered, per-shot cost and total spend against the ledger. A chat panel talks to the agent that owns the project, so a prompt can be rewritten, a frame regenerated or a render started from the desk itself.",
       "howItWorks": [
         {
           "t": "Idea to budget",
@@ -1589,7 +1636,7 @@
           "job": "Image generation",
           "runtime": "n-a",
           "model": "provider rate card",
-          "note": "priced live per second from the provider API — the cost is the input, not a fixed estimate"
+          "note": "priced live per second from the provider API \u2014 the cost is the input, not a fixed estimate"
         },
         {
           "job": "Shot planning and prompting",
@@ -1610,11 +1657,11 @@
           "note": "keeps the desk usable when hosted providers are down"
         }
       ],
-      "costNote": "The whole point of the desk is that the budget is the constraint: the rate card is measured live from the provider API, so the number shown is what the render will actually cost rather than an estimate copied from a docs page. Planning and prompt retries run on the free catalogue, which keeps the expensive part — generation — as the only line that moves.",
+      "costNote": "The whole point of the desk is that the budget is the constraint: the rate card is measured live from the provider API, so the number shown is what the render will actually cost rather than an estimate copied from a docs page. Planning and prompt retries run on the free catalogue, which keeps the expensive part \u2014 generation \u2014 as the only line that moves.",
       "howto": [
         {
           "t": "Price the film before rendering",
-          "d": "Decide the budget first, then let it choose the shot list — the reverse order is how a render bill surprises you."
+          "d": "Decide the budget first, then let it choose the shot list \u2014 the reverse order is how a render bill surprises you."
         },
         {
           "t": "Measure the rate card live",
@@ -1631,7 +1678,7 @@
       ],
       "lessons": [
         "Pricing generation live from the API is the only way the budget stays honest.",
-        "The first frame of a shot is the cheap part — the render is where the money goes.",
+        "The first frame of a shot is the cheap part \u2014 the render is where the money goes.",
         "A desk that can drive the owning agent beats a desk that can only display it."
       ],
       "live": null,
@@ -1639,7 +1686,7 @@
     },
     "ip-competitor-watch": {
       "kicker": "DEFENSIBILITY WATCH",
-      "overview": "IP & Competitor Watch is one page that answers “can anyone steal this, and who is already doing it?” — every venture is scored for how defensible it actually is, the direct competitors in each lane are listed, the record of when the code was built is checked, and the questions only a lawyer can answer are separated out. The law agent sweeps competitors, trademark filings and copycats on the first of every month and reports only what changed. Dossiers and data are key-gated because they spell out what is not protected.",
+      "overview": "IP & Competitor Watch is one page that answers \u201ccan anyone steal this, and who is already doing it?\u201d \u2014 every venture is scored for how defensible it actually is, the direct competitors in each lane are listed, the record of when the code was built is checked, and the questions only a lawyer can answer are separated out. The law agent sweeps competitors, trademark filings and copycats on the first of every month and reports only what changed. Dossiers and data are key-gated because they spell out what is not protected.",
       "howItWorks": [
         {
           "t": "Per-venture scoring",
@@ -1684,7 +1731,7 @@
           "note": "keeps the watch running when hosted providers are unreachable"
         }
       ],
-      "costNote": "The monthly sweep is the expensive shape of this work, so it runs on the free catalogue and escalates only for the ventures that actually need reasoning. Because the agent reports change-only, a quiet month costs one summary rather than a full re-sweep — which is what makes a recurring legal check affordable to keep running.",
+      "costNote": "The monthly sweep is the expensive shape of this work, so it runs on the free catalogue and escalates only for the ventures that actually need reasoning. Because the agent reports change-only, a quiet month costs one summary rather than a full re-sweep \u2014 which is what makes a recurring legal check affordable to keep running.",
       "howto": [
         {
           "t": "Separate what a lawyer must answer",

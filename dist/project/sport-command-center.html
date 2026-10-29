@@ -115,6 +115,22 @@ section{padding:72px 0 8px}
 .steps.ordered .step .n::before{content:"STEP "}
 .step code{font-family:var(--font-mono);font-size:12.5px;background:rgba(17,18,20,.06);border-radius:6px;padding:2px 6px}
 
+/* ---------- PROGRESSION TIMELINE ---------- */
+.tl{position:relative;margin-top:30px;padding-left:34px}
+.tl::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1px;background:var(--hairline)}
+.tl-item{position:relative;display:grid;grid-template-columns:132px 1fr;gap:24px;padding-bottom:30px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-30px;top:6px;width:11px;height:11px;border-radius:50%;
+  background:var(--ink-900);box-shadow:0 0 0 3px var(--page)}
+.tl-when{font:700 11px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400);padding-top:5px;white-space:nowrap}
+.tl-body h3{font-size:16.5px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px}
+.tl-body p{font-size:14px;color:var(--ink-500);max-width:64ch}
+@media(max-width:640px){
+  .tl{padding-left:26px}
+  .tl-item{grid-template-columns:1fr;gap:2px}
+  .tl-when{padding-top:0}
+}
+
 /* ---------- COST TABLE ---------- */
 .cost-card{background:var(--page);border-radius:24px;box-shadow:var(--raised);padding:clamp(22px,3vw,34px);margin-top:26px}
 table.cost{width:100%;border-collapse:collapse;font-size:14px}
@@ -213,7 +229,7 @@ footer{padding:64px 0 40px}
   <div class="ink">
     <div class="eyebrow">AGENT FLEET — FULL WRITE-UP</div>
     <h1>Sport — Multi-Agent AI Operations System</h1>
-    <p class="sub">A Chief-of-Staff AI that coordinates venture CEOs and specialist agents across every project.</p>
+    <p class="sub">A headless control surface for the Mac: one dashboard over every agent, job, service and approval on the machine.</p>
     <div class="cta-row"><a class="btn light" href="mailto:ddaymude.ai@gmail.com?subject=Sport%20%E2%80%94%20Multi-Agent%20AI%20Operations%20System">Ask me for a walkthrough</a>
       <a class="btn ghostd" href="../index.html#projects">← All projects</a>
     </div>
@@ -221,7 +237,7 @@ footer{padding:64px 0 40px}
       <div class="hstat"><div class="v">Live (internal)</div><div class="k">CURRENT STATE</div></div>
       <div class="hstat"><div class="v"><em>Metered</em></div><div class="k">MARGINAL RUNNING COST</div></div>
       <div class="hstat"><div class="v">5</div><div class="k">MODELS / ENGINES</div></div>
-      <div class="hstat"><div class="v">4</div><div class="k">STACK COMPONENTS</div></div>
+      <div class="hstat"><div class="v">6</div><div class="k">STACK COMPONENTS</div></div>
     </div>
   </div>
 </header>
@@ -239,13 +255,11 @@ footer{padding:64px 0 40px}
     </div>
     <aside class="demo-side">
       <h3>At a glance</h3>
-      <div class="kv"><span>STATUS</span><b>Live (internal)</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>5</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>Metered only on escalation</b></div><div class="kv"><span>STACK</span><b>Hermes Agent · Node.js · SQLite · Tailscale</b></div>
+      <div class="kv"><span>STATUS</span><b>Live (internal)</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>5</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>Metered only on escalation</b></div><div class="kv"><span>STACK</span><b>Hermes Agent · Node.js · SQLite · launchd · Tailscale · Local Whisper</b></div>
       <div class="fine-note" style="margin-top:18px">Internal — the coordinator and its dashboard expose personal finances, the vault and live agent state, so this one is not published.</div>
     </aside>
   </div>
-  <div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><div class="vid"><video controls preload="metadata">
-<source src="../videos/sport-command-center.mp4" type="video/mp4">
-Your browser does not support the video tag.</video></div></div>
+  
   <div style="margin-top:26px"><div class="eyebrow">ANIMATED PREVIEW</div><div class="gif"><img src="../videos/sport-command-center.gif" alt="Sport — Multi-Agent AI Operations System animated preview" loading="lazy"/></div></div>
 </section>
 
@@ -254,9 +268,45 @@ Your browser does not support the video tag.</video></div></div>
     <div class="eyebrow">THE PROJECT</div>
     <h2>What it is <span class="soft">and why it exists</span></h2>
   </div>
-  <p class="prose">Sport is the operating layer over a fleet of named agents rather than one big prompt. Each agent keeps its own memory, skills and conversation history, and they coordinate through a shared task bus — a SQLite kanban board on this machine. Anything that leaves the machine (posting, email, publishing) stops at an approval gate first. It is the thing that lets the other projects keep running when nobody is watching.</p>
-  <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>Multi-agent orchestration with role hierarchy and task routing</li><li>Approval-gated outbound actions (nothing posts or sends without sign-off)</li><li>Scheduled autonomous jobs + realtime status dashboard</li></ul></div>
+  <p class="prose">Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.</p>
+  <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>One shell over agents, jobs, services, approvals and deploys — live state, not a status page someone updates</li><li>Talk to it: chat with queueing and steering, dictation, hands-free voice, and long answers read aloud in parts</li><li>An operator console: approvals gated before anything posts or sends, and a deploy pipeline with a test build and rollback</li><li>Runs on local and free models by default; paid frontier models are an escalation you choose on purpose</li></ul></div>
 </section>
+
+<section id="timeline">
+  <div class="sec-head">
+    <div class="eyebrow">THE PROGRESSION</div>
+    <h2>Where it started <span class="soft">and how it got here</span></h2>
+    <p>Dates are real — each entry is a change that shipped and still runs.</p>
+  </div>
+  <div class="tl"><article class="tl-item">
+      <div class="tl-when">Sep 20, 2026</div>
+      <div class="tl-body"><h3>The first Command Center</h3><p>An Obsidian brain: a live graph of the vault, served from localhost with tabs to flip between dashboards. It was a view of the notes — not yet a view of the machine.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 3, 2026</div>
+      <div class="tl-body"><h3>One page, every project</h3><p>The classic dashboard: a single card wall of every project, each card opening its own live app instead of a description of it.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 18, 2026</div>
+      <div class="tl-body"><h3>On the glass</h3><p>A Raspberry Pi 5 and a touch panel running the status board — every agent session and cron job on a screen, with a silently-dead job shown as failed rather than 'ok'.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 21-22, 2026</div>
+      <div class="tl-body"><h3>The shell is rebuilt</h3><p>The whole thing is re-written as one SPA around a persistent shell: a static top bar, a drag-to-reorder sidebar that saves your order, a Health page that doubles as the job-run reader, and per-project facades.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 23, 2026</div>
+      <div class="tl-body"><h3>Talk to it, and ship from it</h3><p>Voice arrives: chat with queueing and steering, and a microphone that knows when the machine has none instead of failing silently. The deploy pipeline lands too — back up, copy, check, restart, verify, roll back on a dead build — with a one-click test/prod switch.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 24, 2026</div>
+      <div class="tl-body"><h3>The turn, step by step</h3><p>Chat stops saying 'used terminal' and shows what each step actually is, with a live clock and step count; chat threads restore after a reload; dictation runs on a warm local model (about 0.3s to first words versus 6.8s cold).</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 25, 2026</div>
+      <div class="tl-body"><h3>Dictation that survives a long sentence</h3><p>The mic used to stop at 45 seconds. It now reopens on its own and follows you until you stop talking, and the phone layout was pulled back inside the viewport at 390, 360 and 320px.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 27, 2026</div>
+      <div class="tl-body"><h3>The whole reply on the lock screen</h3><p>A finished chat turn pushes its entire answer to the phone, not a teaser. A Passwords &amp; logins page lands over the real encrypted vault — the browser never receives a stored secret.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 28, 2026</div>
+      <div class="tl-body"><h3>A fleet you can leave running</h3><p>Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green.</p></div></article></div>
+</section>
+
 
 <section id="how">
   <div class="sec-head">
@@ -375,7 +425,7 @@ Your browser does not support the video tag.</video></div></div>
     <div class="eyebrow">STACK</div>
     <h2>What it is made of</h2>
   </div>
-  <div class="stack"><span>Hermes Agent</span><span>Node.js</span><span>SQLite</span><span>Tailscale</span></div>
+  <div class="stack"><span>Hermes Agent</span><span>Node.js</span><span>SQLite</span><span>launchd</span><span>Tailscale</span><span>Local Whisper</span></div>
   <div style="margin-top:30px"><div class="eyebrow">SCREENS</div><div class="shots"><img src="../screenshots/sport-command-center/home.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/preview.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-approvals-dark.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-approvals.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-chat.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-health.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-phone-approvals.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-phone-today.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-project.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-today-dark.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v2-today.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-approvals.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-chat.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-gate.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-health.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-phone-approvals.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-project.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-today-dark.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/><img src="../screenshots/sport-command-center/v3-today.png" alt="Sport — Multi-Agent AI Operations System screenshot" loading="lazy"/></div></div>
   <p class="fine-note">Everything above is drawn from the same registry that drives the landing page, so this page regenerates itself daily.</p>
 </section>
@@ -387,6 +437,6 @@ Your browser does not support the video tag.</video></div></div>
     <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a>
     <a class="btn line" href="../index.html#projects">Back to all work</a>
   </div>
-  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-10-28 · 22 BUILDS · 7 AGENTS</span></div>
+  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-10-29 · 22 BUILDS · 7 AGENTS</span></div>
 </div></div></footer>
 </body></html>

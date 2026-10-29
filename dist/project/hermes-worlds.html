@@ -115,6 +115,22 @@ section{padding:72px 0 8px}
 .steps.ordered .step .n::before{content:"STEP "}
 .step code{font-family:var(--font-mono);font-size:12.5px;background:rgba(17,18,20,.06);border-radius:6px;padding:2px 6px}
 
+/* ---------- PROGRESSION TIMELINE ---------- */
+.tl{position:relative;margin-top:30px;padding-left:34px}
+.tl::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1px;background:var(--hairline)}
+.tl-item{position:relative;display:grid;grid-template-columns:132px 1fr;gap:24px;padding-bottom:30px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-30px;top:6px;width:11px;height:11px;border-radius:50%;
+  background:var(--ink-900);box-shadow:0 0 0 3px var(--page)}
+.tl-when{font:700 11px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400);padding-top:5px;white-space:nowrap}
+.tl-body h3{font-size:16.5px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px}
+.tl-body p{font-size:14px;color:var(--ink-500);max-width:64ch}
+@media(max-width:640px){
+  .tl{padding-left:26px}
+  .tl-item{grid-template-columns:1fr;gap:2px}
+  .tl-when{padding-top:0}
+}
+
 /* ---------- COST TABLE ---------- */
 .cost-card{background:var(--page);border-radius:24px;box-shadow:var(--raised);padding:clamp(22px,3vw,34px);margin-top:26px}
 table.cost{width:100%;border-collapse:collapse;font-size:14px}
@@ -261,6 +277,7 @@ Your browser does not support the video tag.</video></div></div>
   <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>Interactive 3D environments with AI NPCs</li><li>Realtime agent dialogue over streaming events</li><li>Quest/objective system driven by the agent</li></ul></div>
 </section>
 
+
 <section id="how">
   <div class="sec-head">
     <div class="eyebrow">HOW IT WORKS</div>
@@ -370,6 +387,6 @@ Your browser does not support the video tag.</video></div></div>
     <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a>
     <a class="btn line" href="../index.html#projects">Back to all work</a>
   </div>
-  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-10-28 · 22 BUILDS · 7 AGENTS</span></div>
+  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-10-29 · 22 BUILDS · 7 AGENTS</span></div>
 </div></div></footer>
 </body></html>

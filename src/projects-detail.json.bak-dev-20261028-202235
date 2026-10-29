@@ -1,0 +1,1715 @@
+{
+  "_note": "Authored detail content for the per-project write-up pages. projects.json stays the auto-discovered registry (discover.js writes it); this file is hand-authored and is never overwritten by discovery. build.js merges the two by slug. Keep every claim here verifiable — no invented metrics, prices or handles.",
+  "costModel": {
+    "asOf": "2026-10-16",
+    "sources": [
+      "https://openrouter.ai/api/v1/models — published per-million-token rates, read 2026-10-16",
+      "https://ollama.com/pricing and https://ollama.com/blog/transparent-pricing — Ollama Cloud base tier is free with starter credits; paid plans use a monthly credit pool (Pro $20/mo -> $60 of credits)",
+      "https://portal.nousresearch.com/manage-subscription — Nous Portal free tier is $0/month with the free-model catalogue and standard rate limits"
+    ],
+    "runtimes": {
+      "local-ollama": {
+        "label": "Local — Ollama on the Mac mini (M4, 24 GB)",
+        "where": "127.0.0.1:11434",
+        "rate": "no per-token fee — the machine is already on",
+        "marginal": "$0"
+      },
+      "local-lmstudio": {
+        "label": "Local — LM Studio on the Mac mini",
+        "where": "127.0.0.1:1234",
+        "rate": "no per-token fee",
+        "marginal": "$0"
+      },
+      "local-llama": {
+        "label": "Local — llama.cpp weights on the Mac mini",
+        "where": "on-disk GGUF",
+        "rate": "no per-token fee",
+        "marginal": "$0"
+      },
+      "ollama-cloud": {
+        "label": "Ollama Cloud — pay-as-you-go credits",
+        "where": "cloud, same Ollama models",
+        "rate": "free base tier with starter credits; paid plans carry a monthly credit pool (Pro $20/mo = $60 of credits), metered per model at published per-token rates",
+        "marginal": "$0 until the credit pool is drawn down"
+      },
+      "nous-free": {
+        "label": "Nous Portal — free tier",
+        "where": "hosted API",
+        "rate": "$0/month; free-model catalogue with standard rate limits",
+        "marginal": "$0"
+      },
+      "openrouter-paid": {
+        "label": "OpenRouter — paid frontier models (escalation only)",
+        "where": "hosted API",
+        "rate": "per-million-token, published: see the price table below",
+        "marginal": "only when a paid model is explicitly selected"
+      },
+      "local": {
+        "label": "Local — this machine (Mac mini)",
+        "where": "on-device services / scripts",
+        "rate": "no per-token fee",
+        "marginal": "$0"
+      },
+      "client-side": {
+        "label": "Client-side — the visitor's browser",
+        "where": "WebGL / static files",
+        "rate": "no server cost",
+        "marginal": "$0"
+      },
+      "n-a": {
+        "label": "Not applicable — no model in this project",
+        "where": "—",
+        "rate": "—",
+        "marginal": "$0"
+      },
+      "per-agent": {
+        "label": "Whatever the bound agent uses",
+        "where": "inherits the agent's provider",
+        "rate": "see that agent's tier",
+        "marginal": "varies"
+      }
+    },
+    "priceTable": [
+      {
+        "model": "openai/gpt-6-astra",
+        "in": 10,
+        "out": 50,
+        "note": "reachable on the Nous free catalogue; paid rate shown for reference"
+      },
+      {
+        "model": "openai/gpt-5.5",
+        "in": 5,
+        "out": 30,
+        "note": "escalation model for hard reasoning"
+      },
+      {
+        "model": "anthropic/claude-opus-4.8",
+        "in": 5,
+        "out": 25,
+        "note": "escalation model for long-context writing"
+      },
+      {
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "in": 0.6,
+        "out": 2.4,
+        "note": "the workhorse for recurring jobs when it is not on the free tier"
+      },
+      {
+        "model": "deepseek/deepseek-v4-pro",
+        "in": 0.2972,
+        "out": 0.5944,
+        "note": "cheap reasoning tier"
+      },
+      {
+        "model": "upstage/solar-pro-3",
+        "in": 0.15,
+        "out": 0.6,
+        "note": "cheap structured-output tier"
+      },
+      {
+        "model": "poolside/laguna-s-2.1:free",
+        "in": 0,
+        "out": 0,
+        "note": "free catalogue, $0"
+      },
+      {
+        "model": "upstage/solar-pro4:free",
+        "in": 0,
+        "out": 0,
+        "note": "free catalogue, $0"
+      },
+      {
+        "model": "inclusionai/ling-3.0-flash-fin:free",
+        "in": 0,
+        "out": 0,
+        "note": "free catalogue, $0"
+      },
+      {
+        "model": "stepfun/step-3.7-flash:free",
+        "in": 0,
+        "out": 0,
+        "note": "free catalogue, $0"
+      },
+      {
+        "model": "ornith-1.5:9b",
+        "in": 0,
+        "out": 0,
+        "note": "runs locally under Ollama — no per-token fee"
+      },
+      {
+        "model": "google/gemma-4-12b-qat",
+        "in": 0,
+        "out": 0,
+        "note": "runs locally under LM Studio — no per-token fee"
+      }
+    ],
+    "reading": "Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates."
+  },
+  "projects": {
+    "sport-command-center": {
+      "kicker": "AGENT FLEET",
+      "overview": "Sport is the operating layer over a fleet of named agents rather than one big prompt. Each agent keeps its own memory, skills and conversation history, and they coordinate through a shared task bus — a SQLite kanban board on this machine. Anything that leaves the machine (posting, email, publishing) stops at an approval gate first. It is the thing that lets the other projects keep running when nobody is watching.",
+      "howItWorks": [
+        {
+          "t": "A fleet, not a monolith",
+          "d": "Seven persistent agents: an executive coordinator (Sport), venture CEOs (goldie for Track My Gold, tradedeck, budgetbycheck) and specialists (dev for engineering, fin for finance, mark for marketing). Each has its own profile, skills and memory."
+        },
+        {
+          "t": "One task bus",
+          "d": "Work is claimed from a kanban board backed by SQLite. A dispatcher spawns the right worker for a card, records heartbeats while it runs, and re-queues a worker that dies without finishing."
+        },
+        {
+          "t": "Orchestrator decomposes",
+          "d": "The coordinator turns a goal into child cards with explicit dependencies, so nothing starts before its inputs exist. It routes; it does not implement."
+        },
+        {
+          "t": "Approval gates on side effects",
+          "d": "Outbound actions land in a review column and wait for a human. An audit trail records every transition, and there is a kill switch."
+        },
+        {
+          "t": "Scheduled work, visible failures",
+          "d": "Cron jobs run the recurring monitoring, research, drafting and reporting. Each one delivers into a surface a human actually reads, so a failure surfaces instead of silently no-op'ing."
+        },
+        {
+          "t": "One front door",
+          "d": "A local router fronts every service (the dashboard, the portfolio, the camera panel, the glasses apps) and is published only over a private tailnet."
+        }
+      ],
+      "models": [
+        {
+          "job": "Executive coordination",
+          "runtime": "ollama-cloud",
+          "model": "meituan/longcat-2.5-preview",
+          "note": "low-volume, high-judgement; runs on the free base tier"
+        },
+        {
+          "job": "Engineering worker (dev)",
+          "runtime": "ollama-cloud",
+          "model": "deepseek-v4.1-flash",
+          "note": "the agent that writes and fixes the code"
+        },
+        {
+          "job": "Recurring research / reporting",
+          "runtime": "nous-free",
+          "model": "upstage/solar-pro4:free, inclusionai/ling-3.0-flash-fin:free",
+          "note": "$0/month free catalogue"
+        },
+        {
+          "job": "Escalation for hard reasoning",
+          "runtime": "openrouter-paid",
+          "model": "openai/gpt-5.5, anthropic/claude-opus-4.8",
+          "note": "opt-in only — $5/M in, $30/$25/M out"
+        },
+        {
+          "job": "Offline / private fallback",
+          "runtime": "local-ollama",
+          "model": "ornith-1.5:9b",
+          "note": "no network, no per-token fee"
+        }
+      ],
+      "costNote": "The fleet's default path costs nothing per token: local weights and the free-model catalogue carry the volume, and the coordinator's own traffic is light enough to live inside the free Ollama Cloud tier. Paid frontier models exist as an escalation path that has to be chosen on purpose.",
+      "howto": [
+        {
+          "t": "Give each agent its own context",
+          "d": "One profile per role — memory, skills and config — instead of one prompt trying to be everything. Specialist context is what makes a specialist agent good."
+        },
+        {
+          "t": "Put a durable task bus in the middle",
+          "d": "SQLite is enough. Workers claim and complete through tools, never by shelling out to the board CLI."
+        },
+        {
+          "t": "Model dependencies as edges",
+          "d": "A card waits on its parents. That one rule removes most coordination bugs."
+        },
+        {
+          "t": "Gate the side effects",
+          "d": "Anything outbound stops at review, with an audit line. Unattended is only safe when the blast radius is bounded."
+        },
+        {
+          "t": "Make every scheduled job report somewhere read",
+          "d": "A cron job whose output nobody sees is a job that fails silently for a month."
+        }
+      ],
+      "lessons": [
+        "A hierarchy of narrow agents beats one generalist prompt — and it fails locally instead of globally.",
+        "Approval gates are the enabling feature, not the brake: they are what make unattended work acceptable.",
+        "Heartbeats and stale-run recovery are the difference between 'runs unattended' and 'sometimes just stops'."
+      ],
+      "live": null,
+      "linkNote": "Internal — the coordinator and its dashboard expose personal finances, the vault and live agent state, so this one is not published."
+    },
+    "smart-home-hub": {
+      "kicker": "EDGE / IoT",
+      "overview": "A Raspberry Pi 5 ('tmgedge') running Home Assistant in Docker, with Mosquitto and ESPHome alongside it, reachable over a private tailnet and never the public internet. On top of it is the interesting part: a plain-English automation builder. Type or dictate what you want the house to do and a scheduled agent writes the real Home Assistant automation, validates it against the config API, reloads, and writes the outcome back to the dashboard. Event-driven and silent when idle.",
+      "howItWorks": [
+        {
+          "t": "Ask in plain English",
+          "d": "A text box on the custom dashboard, or dictation — 'when the front door camera sees a person after 10pm, flash the porch light and tell me'."
+        },
+        {
+          "t": "Queued as a job",
+          "d": "The request becomes a card on the task bus, so the work is traceable and retryable instead of a one-shot prompt in a chat window."
+        },
+        {
+          "t": "An agent writes real YAML",
+          "d": "A scheduled agent picks it up and writes the automation against the actual entity ids on the hub, not invented ones."
+        },
+        {
+          "t": "Validated before it is live",
+          "d": "The automation is checked through Home Assistant's config API first. Only a passing config is reloaded — a bad automation never reaches the running house."
+        },
+        {
+          "t": "Result reported back",
+          "d": "Success or the validation error is written to the dashboard, so the failure mode is a message, not a light that never flashes."
+        },
+        {
+          "t": "Backups that have been tested",
+          "d": "A nightly job mirrors the Home Assistant configuration to a second machine, and the restore drill has actually been run."
+        }
+      ],
+      "models": [
+        {
+          "job": "Plain-English -> automation YAML",
+          "runtime": "ollama-cloud",
+          "model": "free-tier catalogue models",
+          "note": "short, structured generations — cheap by construction"
+        },
+        {
+          "job": "Idle time",
+          "runtime": "n-a",
+          "model": "none",
+          "note": "the chain is event-driven; nothing runs and nothing is billed until there is a request"
+        },
+        {
+          "job": "On-device control",
+          "runtime": "local",
+          "model": "none",
+          "note": "Home Assistant + Mosquitto + ESPHome on the Pi; no model in the control path"
+        }
+      ],
+      "costNote": "This is the cheapest project in the portfolio to run: the hub is a one-off Raspberry Pi, the model is touched only when you ask for an automation, and the house itself is controlled locally. One genuine third-party cost exists if Nest cameras come in — Google's Device Access programme is a $5 one-time fee.",
+      "howto": [
+        {
+          "t": "Keep the house off the internet",
+          "d": "Home Assistant on the tailnet only. Never port-forward it; the convenience is not worth the attack surface."
+        },
+        {
+          "t": "Validate before you reload",
+          "d": "Use the config API as a gate. One malformed automation can take down every other automation you own."
+        },
+        {
+          "t": "Make the agent idempotent",
+          "d": "Re-running a request should either do nothing or fix the automation — not append a second copy."
+        },
+        {
+          "t": "Mirror the config nightly",
+          "d": "And restore it once, on purpose, before you need to."
+        },
+        {
+          "t": "Watch the things you would notice",
+          "d": "The watchdog automations that earn their keep: media player left on, backup going stale, doors after dark."
+        }
+      ],
+      "lessons": [
+        "The house is a hard boundary: private by default, validated before it goes live.",
+        "Event-driven beats always-on — silence is both the security posture and the cost model.",
+        "A backup you have never restored is a hope, not a backup."
+      ],
+      "live": null,
+      "linkNote": "Tailnet only, by design — the hub is deliberately not reachable from the public internet."
+    },
+    "track-my-gold": {
+      "kicker": "CONTENT OPS",
+      "overview": "A content-operation dashboard for a gold-prospecting channel: it surfaces video performance, runs an approval queue for comments and engagement, tracks affiliate revenue, checks SEO and drives the content calendar. Comments are posted through the YouTube API from the approve button itself — not from a cron session that may already have finished. Search Console feeds a live SEO tab under a read-only OAuth scope. The product side is trackmygold.net.",
+      "howItWorks": [
+        {
+          "t": "Discovery",
+          "d": "A scheduled job finds newly published videos in the target niche and pushes candidates into the dashboard, each with a draft comment drawn from an approved library."
+        },
+        {
+          "t": "Review queue",
+          "d": "Nothing goes out unreviewed. Comments are edited, approved or discarded on the dashboard — the human step is the product decision, and it is enforced by design."
+        },
+        {
+          "t": "Approve = post",
+          "d": "The approve button calls the YouTube API directly and then writes the result into the tracking store, so the UI cannot drift from reality."
+        },
+        {
+          "t": "Measure",
+          "d": "A weekly job pulls trials, churn and channel metrics; an SEO tab reads Search Console impressions and queries; affiliate review runs weekly."
+        },
+        {
+          "t": "Publish",
+          "d": "Approved content hands off to the publishing pipeline (Buffer / the blog) instead of being copied around by hand."
+        }
+      ],
+      "models": [
+        {
+          "job": "Video discovery + comment drafting",
+          "runtime": "nous-free",
+          "model": "nvidia/nemotron-3-ultra-550b-a55b and the free catalogue",
+          "note": "high-volume, low-stakes generation — exactly what the free tier is for"
+        },
+        {
+          "job": "Weekly metrics / SEO narrative",
+          "runtime": "nous-free",
+          "model": "free catalogue",
+          "note": "$0/month"
+        },
+        {
+          "job": "The posts themselves",
+          "runtime": "n-a",
+          "model": "none",
+          "note": "YouTube and Search Console calls are plain HTTP; no model in the API path"
+        }
+      ],
+      "costNote": "The recurring work runs on the free tier, and the platform APIs used (YouTube data, Search Console read-only) add nothing to the bill. The real cost of this project is attention — which is why the approval queue exists.",
+      "howto": [
+        {
+          "t": "Put the API call inside the button",
+          "d": "Do not route an action through a session that might have exited. Clicking approve should be the same thing as posting."
+        },
+        {
+          "t": "Reconcile against the raw record",
+          "d": "The UI should re-derive posted state from the tracking file on load, so a crash mid-write cannot leave it lying."
+        },
+        {
+          "t": "Deliver jobs somewhere a human reads",
+          "d": "Not a fire-and-forget webhook."
+        },
+        {
+          "t": "Make the niche search a job, not a habit",
+          "d": "Discovery belongs on a schedule with a review gate."
+        },
+        {
+          "t": "Measure the funnel, not the toil",
+          "d": "Impressions, trials, conversions by channel. The vanity number hides the leak."
+        }
+      ],
+      "lessons": [
+        "The bottleneck was acquisition, not integration — the dashboard proved that quickly and honestly.",
+        "A dashboard that silently drifts from the underlying data is worse than no dashboard.",
+        "Approvals in a web surface the person actually uses beat a webhook nobody reads."
+      ],
+      "live": {
+        "url": "https://trackmygold.net",
+        "label": "trackmygold.net"
+      },
+      "linkNote": "The internal dashboard is private; the link goes to the public product it runs."
+    },
+    "content-autopilot": {
+      "kicker": "HUMAN-IN-THE-LOOP",
+      "overview": "An AI content pipeline that drafts, reviews, approves and publishes on a schedule — built so the machine does the volume and the human keeps the judgement. Drafts arrive with review/edit/redo controls, approved items hand off to scheduling, and the review surfaces include wearable targets (Meta Ray-Ban Display, Quest). The same engine runs the blog job that drafts one post every three days.",
+      "howItWorks": [
+        {
+          "t": "Topic queue",
+          "d": "A roadmap file holds the queue. The job takes the next item and flips it to drafted, recording the resulting post id — so the same topic cannot be picked twice."
+        },
+        {
+          "t": "Draft",
+          "d": "An agent writes the full post as HTML in a house style, from a fixed set of real links and facts."
+        },
+        {
+          "t": "Offline gates",
+          "d": "Before a human ever sees it: a format gate (structure, image sizing, link attributes) and a duplicate guard that fails the draft if it reuses too much prose from an earlier post."
+        },
+        {
+          "t": "Review, edit, redo",
+          "d": "The reviewer edits in the app or the editor; edits are mirrored back into the source file so the next regeneration cannot silently revert them."
+        },
+        {
+          "t": "Publish",
+          "d": "Only approved content ships — to the scheduling API or as a blog draft. Publishing is a separate, explicit step."
+        }
+      ],
+      "models": [
+        {
+          "job": "Drafting",
+          "runtime": "ollama-cloud",
+          "model": "free-tier and low-cost catalogue models",
+          "note": "one long generation per post, not a chat loop"
+        },
+        {
+          "job": "Format + duplicate gates",
+          "runtime": "local",
+          "model": "none",
+          "note": "deterministic Node scripts — zero tokens, and they catch the expensive mistakes"
+        }
+      ],
+      "costNote": "Cost is dominated by drafting tokens, which is why the guard rails are deterministic: the checks that protect quality run for free, offline, before any model time is spent.",
+      "howto": [
+        {
+          "t": "One source-of-truth file per post",
+          "d": "Keep the authored HTML in a durable workspace and treat the editor as a renderer."
+        },
+        {
+          "t": "Gate before review",
+          "d": "Format and duplicate checks are cheap and deterministic — run them so a human never reviews something structurally broken."
+        },
+        {
+          "t": "Mirror every editor-side edit back",
+          "d": "Changes made in a UI exist only in that UI until you write them back."
+        },
+        {
+          "t": "Strip the house footer before similarity scoring",
+          "d": "Otherwise every post looks like a duplicate of every other post."
+        },
+        {
+          "t": "Leave it a draft",
+          "d": "Draft is the correct resting state for machine-written prose."
+        }
+      ],
+      "lessons": [
+        "Guard rails are cheaper than re-editing: measure similarity and structure offline, not with a model.",
+        "'Human in the loop' only counts if the human's edits survive the next run.",
+        "Design for the review surface you will actually use — glasses and tablets included."
+      ],
+      "live": null,
+      "linkNote": "The review app is token-gated and shows unpublished work, so it is not linked publicly."
+    },
+    "token-killers": {
+      "kicker": "COST ENGINEERING",
+      "overview": "An audit-and-rebuild service for teams bleeding money on AI APIs: prompt and context compression, model routing, caching, and local-model offload — with a before/after calculator that proves the delta. The credibility comes from the fact that the same stack runs on this machine, so the numbers are measured rather than theorised.",
+      "howItWorks": [
+        {
+          "t": "Baseline",
+          "d": "Measure real tokens in and out per workload. Most teams are guessing; the bill is the only honest benchmark."
+        },
+        {
+          "t": "Find the fat",
+          "d": "Repeated context in every call, system prompts longer than the task, and frontier models selected for work a small model would do."
+        },
+        {
+          "t": "Compress and route",
+          "d": "Cut the context to what the task needs, cache the stable part, and route each call to the cheapest model that can pass its checks."
+        },
+        {
+          "t": "Offload the volume",
+          "d": "Deterministic, high-volume work (classification, extraction, formatting) moves to local weights: same result, no per-token fee, no data leaving the machine."
+        },
+        {
+          "t": "Prove it",
+          "d": "Re-measure on the same workload and publish the before/after. If the saving is not measurable, it did not happen."
+        }
+      ],
+      "models": [
+        {
+          "job": "Reference price table (published rates)",
+          "runtime": "openrouter-paid",
+          "model": "gpt-5.5 $5.00 in / $30.00 out per M",
+          "note": "the top of the range"
+        },
+        {
+          "job": "—",
+          "runtime": "openrouter-paid",
+          "model": "anthropic/claude-opus-4.8 $5.00 / $25.00",
+          "note": "long-context writing"
+        },
+        {
+          "job": "—",
+          "runtime": "openrouter-paid",
+          "model": "openai/gpt-6-astra $10.00 / $50.00",
+          "note": "the ceiling — reference only"
+        },
+        {
+          "job": "Cheap reasoning tier",
+          "runtime": "openrouter-paid",
+          "model": "deepseek/deepseek-v4-pro $0.2972 / $0.5944",
+          "note": "≈17x cheaper on input than the frontier tier"
+        },
+        {
+          "job": "Structured output tier",
+          "runtime": "openrouter-paid",
+          "model": "upstage/solar-pro-3 $0.15 / $0.60",
+          "note": "extraction and routing decisions"
+        },
+        {
+          "job": "Free catalogue",
+          "runtime": "nous-free",
+          "model": "solar-pro4:free, ling-3.0-flash-fin:free",
+          "note": "$0"
+        },
+        {
+          "job": "Offload target",
+          "runtime": "local-ollama",
+          "model": "ornith-1.5:9b",
+          "note": "$0 per token, data stays local"
+        }
+      ],
+      "costNote": "Worked example at 1M input + 0.25M output tokens a month: on gpt-5.5 that is $12.50; the same volume on deepseek-v4-pro is about $0.45; routed to the free catalogue or a local model it is $0. Prices are the providers' published per-million-token rates read on 2026-10-16.",
+      "howto": [
+        {
+          "t": "Instrument first",
+          "d": "Log tokens and model per call before changing anything. You cannot optimise a bill you have not attributed."
+        },
+        {
+          "t": "Treat context as a budget",
+          "d": "The cheapest token is the one you never send. Stable prefixes should be cached, not re-sent."
+        },
+        {
+          "t": "Route by task, not by habit",
+          "d": "Keep a cheap tier for extraction and routing and a frontier tier for judgement, and make the escalation explicit."
+        },
+        {
+          "t": "Offload the boring 80%",
+          "d": "High-volume classification and formatting belong on local weights — that also keeps the data home."
+        },
+        {
+          "t": "Re-measure, then publish",
+          "d": "A saving you cannot show on a graph is a claim, not a result."
+        }
+      ],
+      "lessons": [
+        "Most of an AI bill is context you did not need and a model that was too big for the job.",
+        "Local offload is a privacy feature as much as a cost feature.",
+        "Routing is the highest-leverage single change — the spread between tiers is an order of magnitude."
+      ],
+      "live": null,
+      "linkNote": "The savings calculator and the playbook are available on request."
+    },
+    "hermes-vision": {
+      "kicker": "WEARABLE CLIENT",
+      "overview": "A progressive web app that puts a live agent session on a phone or on Meta Ray-Ban Display glasses: pick up a session, choose a model, stream the reply. The engineering that matters is the realtime layer — server-sent events with named event types — plus a wearable-first input model: a 2-D grid you navigate with arrows alone, focus paging, and a T9-style keyboard.",
+      "howItWorks": [
+        {
+          "t": "Start or resume a session",
+          "d": "The client starts a session against the API and sends the model kind explicitly — hosted provider for speed, local runtime for privacy. An unqualified request must never silently fall back to a local runtime that may not be running."
+        },
+        {
+          "t": "Stream with named events",
+          "d": "The server emits discrete typed events — token deltas, tool start, commentary, message updates, final, close. One transport carries chat, tool calls and status, so the UI can render each differently."
+        },
+        {
+          "t": "Guard the session",
+          "d": "Per-session file locks stop two clients from writing the same conversation at once."
+        },
+        {
+          "t": "Survive a refresh",
+          "d": "A service worker caches the app shell, so the app installs to the home screen and comes back without a reload."
+        },
+        {
+          "t": "Reach every control from a D-pad",
+          "d": "Tab bar and grid navigation are keyboard-only. Up/Down moves within a column of the T9 grid; nothing depends on touch or hover."
+        }
+      ],
+      "models": [
+        {
+          "job": "Hosted path (default)",
+          "runtime": "ollama-cloud",
+          "model": "selectable in-app",
+          "note": "the model list is a client-side switch"
+        },
+        {
+          "job": "Local path",
+          "runtime": "local-lmstudio",
+          "model": "google/gemma-4-12b-qat",
+          "note": "$0 per token, nothing leaves the machine"
+        },
+        {
+          "job": "Transport itself",
+          "runtime": "local",
+          "model": "none",
+          "note": "SSE plumbing, no model cost"
+        }
+      ],
+      "costNote": "Model choice is a switch in the client, which makes cost control a UX feature: the fast hosted tier is the default and the local runtime is one selection away for private or offline use.",
+      "howto": [
+        {
+          "t": "Build the transport once",
+          "d": "Named SSE events give you chat, tool activity and status on a single stream — a single stream is much less code than three."
+        },
+        {
+          "t": "Never default to local by accident",
+          "d": "If the client does not state which runtime it wants, a request can hang against a local server that is not running."
+        },
+        {
+          "t": "Design for arrows only",
+          "d": "Fixed viewport, no scrolling, every control reachable with up/down/left/right and enter."
+        },
+        {
+          "t": "Version the app and its cache together",
+          "d": "A service worker holding a stale shell is the most common 'my fix did not ship' bug."
+        },
+        {
+          "t": "Keep deployments frontend-only",
+          "d": "Shipped update zips only touch the client; the backend carries local work that a generic zip would overwrite."
+        }
+      ],
+      "lessons": [
+        "Wearable constraints are real engineering: a fixed viewport and no pointer change the whole UI.",
+        "One event stream for chat, tools and status removed an entire class of bugs.",
+        "A stale service worker can make a working deploy look broken — version the cache or chase ghosts."
+      ],
+      "live": null,
+      "linkNote": "Live on phone and glasses, token-gated — ask me and I will send a link."
+    },
+    "hermes-worlds": {
+      "kicker": "3D / AGENTS IN-WORLD",
+      "overview": "Explorable browser 3D scenes — a western frontier town, a gold mine, a saloon, a forge — populated by AI characters you can walk up to and talk with. Dialogue runs over the same named event stream that powers the other clients, so a tool call or a status change can be rendered inside the world. It is the playground for what an agent feels like when it is not a chat box.",
+      "howItWorks": [
+        {
+          "t": "Scene loads in the browser",
+          "d": "WebGL/Three.js geometry and assets served from the router under one prefix, with the session token injected server-side on entry."
+        },
+        {
+          "t": "Walk up to a character",
+          "d": "Proximity starts an agent session for that character, so dialogue belongs to an NPC rather than to a global text box."
+        },
+        {
+          "t": "Dialogue streams in-world",
+          "d": "Replies arrive as typed events — deltas, tool starts, final — and are rendered as speech in the scene as they stream."
+        },
+        {
+          "t": "Quests come from the agent",
+          "d": "Objective state is driven by the agent, so the world can hand you something to do instead of only answering questions."
+        },
+        {
+          "t": "One world, several surfaces",
+          "d": "The same world definition is served as a VR entry point, as a game route, and packaged as a shareable prototype."
+        }
+      ],
+      "models": [
+        {
+          "job": "NPC dialogue",
+          "runtime": "ollama-cloud",
+          "model": "selectable agent provider",
+          "note": "short, bursty, latency-sensitive generations"
+        },
+        {
+          "job": "Scene rendering",
+          "runtime": "client-side",
+          "model": "none",
+          "note": "WebGL in the browser — the server only serves static files"
+        }
+      ],
+      "costNote": "Rendering costs the server nothing: it is static assets and JavaScript. The only metered component is dialogue, and those turns are short — the design keeps per-token spend proportional to how much the player actually talks.",
+      "howto": [
+        {
+          "t": "Reuse the transport",
+          "d": "Named SSE events mean in-world dialogue, tool activity and status all render from the same stream."
+        },
+        {
+          "t": "Serve every asset under one prefix",
+          "d": "One route prefix keeps the router's rewrite rules simple and the app portable."
+        },
+        {
+          "t": "Keep one world definition",
+          "d": "Scene, characters and quests in one place, so the same content can ship as a game, a VR entry point or a prototype link."
+        },
+        {
+          "t": "Make latency visible",
+          "d": "In a game loop, a slow reply is a broken character — show that something is happening."
+        },
+        {
+          "t": "Keep dialogue short",
+          "d": "Character voice is a prompt-design problem, and short replies are both better dialogue and cheaper."
+        }
+      ],
+      "lessons": [
+        "Chat inside a 3D scene is a different product: latency is visible, and proximity is a better trigger than a text box.",
+        "One transport across web, wearable and game removed duplicated work three times over.",
+        "Separating world content from the renderer is what made a shareable prototype cheap."
+      ],
+      "live": {
+        "url": "https://sport.taila73942.ts.net/vr",
+        "label": "Enter the frontier district"
+      }
+    },
+    "autolisting": {
+      "kicker": "MEDIA PIPELINE",
+      "overview": "Upload property video and a few fields, get back a finished, formatted listing. The pipeline is deliberately visible — ten named steps with live state — so the user can see exactly where the machine is and step in when needed. Under the hood it is a chunked uploader, an ffmpeg/Python worker, a framing and enhancement pass, and an LLM writing the copy.",
+      "howItWorks": [
+        {
+          "t": "Chunked upload",
+          "d": "The front end splits the file into 4 MB chunks and PUTs each one at its byte offset with retries. A single large PUT is all-or-nothing and dies on a long tunnel; chunking makes uploads resumable and survivable."
+        },
+        {
+          "t": "Probe before processing",
+          "d": "The server verifies the file it owns before starting work — a video whose index never arrived fails immediately with a real message instead of hanging."
+        },
+        {
+          "t": "Extract frames",
+          "d": "A Python worker pulls frames with ffmpeg, using absolute tool paths because a launchd environment does not have Homebrew on PATH."
+        },
+        {
+          "t": "Straighten and enhance",
+          "d": "Each frame is squared up (roll plus vertical perspective) and run through an enhancement pass, so phone footage reads like a listing rather than a walkthrough."
+        },
+        {
+          "t": "Write the copy",
+          "d": "An LLM turns the structured facts into the listing text; the images stay deterministic image processing, not generation."
+        },
+        {
+          "t": "Always write a verdict",
+          "d": "Every job ends in a terminal state — ready or failed — and a sweeper picks up jobs that were uploaded but never started. 'Processing forever' is treated as a bug class, not a state."
+        }
+      ],
+      "models": [
+        {
+          "job": "Listing copy",
+          "runtime": "ollama-cloud",
+          "model": "free-tier and low-cost catalogue models",
+          "note": "one generation per listing"
+        },
+        {
+          "job": "Frame extraction, straightening, HDR",
+          "runtime": "local",
+          "model": "none",
+          "note": "deterministic ffmpeg + Python imaging; no generative step"
+        },
+        {
+          "job": "Upload / storage",
+          "runtime": "local",
+          "model": "none",
+          "note": "local disk, no per-gigabyte cloud fee"
+        }
+      ],
+      "costNote": "The expensive half of this pipeline is compute, not tokens — frame extraction and enhancement — and it runs on this machine, so a finished listing costs local machine time plus a single short generation. Nothing is billed per uploaded megabyte.",
+      "howto": [
+        {
+          "t": "Chunk your uploads",
+          "d": "Anything over a few megabytes over a tunnel needs resumable chunks with explicit offsets."
+        },
+        {
+          "t": "Probe media before you trust it",
+          "d": "A video without its index is indistinguishable from a hang until you check."
+        },
+        {
+          "t": "Always write a terminal state",
+          "d": "Ready or failed, every job needs a verdict or the UI polls forever."
+        },
+        {
+          "t": "Sweep for orphaned jobs",
+          "d": "A periodic sweeper that resumes 'uploaded but never started' work is what turns an occasional failure into a non-event."
+        },
+        {
+          "t": "Resolve tool paths explicitly",
+          "d": "Servers started by launchd get a minimal PATH; a bare ffmpeg call fails there and works perfectly by hand."
+        }
+      ],
+      "lessons": [
+        "A job that never writes its verdict looks like a hang, not an error — design the failure state first.",
+        "An interrupted upload leaves a clean prefix, so you cannot tell it from a bad source file: instrument the upload itself.",
+        "Straightening and tone-mapping are what make a phone walkthrough look like a listing."
+      ],
+      "live": null,
+      "linkNote": "Runs inside the dashboard; the input is a private video, so it is not published."
+    },
+    "obsidian-brain": {
+      "kicker": "KNOWLEDGE GRAPH",
+      "overview": "A live 3D visualization of a personal knowledge vault. A Python pass walks the notes and their links and writes a graph payload; a WebGL viewer renders it as an explorable structure with search and drill-down. The deliberate choice here is that no model is involved at all — the graph is derived deterministically from the source notes, so it is always current and never invented.",
+      "howItWorks": [
+        {
+          "t": "Walk the vault",
+          "d": "A generator reads the note tree and parses links between notes."
+        },
+        {
+          "t": "Build the graph",
+          "d": "Nodes and edges are written to a single JSON payload, sized by how connected each note is and clustered by the structure the vault already has."
+        },
+        {
+          "t": "Render it",
+          "d": "A static WebGL viewer loads the payload — no server-side rendering, no database."
+        },
+        {
+          "t": "Navigate",
+          "d": "Search highlights a note; drill-down walks its connections, which is how you find the note you forgot you wrote."
+        },
+        {
+          "t": "Regenerate on demand",
+          "d": "Because it is a generator, running it again is the whole 'sync' story."
+        }
+      ],
+      "models": [
+        {
+          "job": "Everything",
+          "runtime": "local",
+          "model": "none",
+          "note": "pure Python graph build + client-side WebGL — zero model calls, zero per-token spend"
+        }
+      ],
+      "costNote": "This is the one project in the portfolio with a genuinely $0 AI bill: no model runs anywhere in the build or the viewer. That is the point — some problems are structure problems, and calling an LLM at them just adds noise.",
+      "howto": [
+        {
+          "t": "Generate, never hand-maintain",
+          "d": "A graph a human has to update is a graph that is wrong within a week."
+        },
+        {
+          "t": "Ship one payload",
+          "d": "A single JSON file keeps the viewer static and portable."
+        },
+        {
+          "t": "Cluster with structure you already have",
+          "d": "Folders and links are free metadata — use them before inventing embeddings."
+        },
+        {
+          "t": "Make search the primary control",
+          "d": "Exploration is the demo; finding the thing you actually wanted is the product."
+        }
+      ],
+      "lessons": [
+        "Not every problem is a prompt — the best answer is sometimes a deterministic build.",
+        "A visualization of your own notes is only useful if it regenerates itself.",
+        "Connection count is a surprisingly good relevance signal for free."
+      ],
+      "live": null,
+      "linkNote": "Shows the contents of a private vault, so the viewer stays private."
+    },
+    "net-worth-ledger": {
+      "kicker": "FINANCE OPS",
+      "overview": "A net-worth ledger that aggregates assets and liabilities into one live number, with on-demand refresh and a dated history. It is the same discipline as commission and financial reporting work — one number, computed from entries a human can audit — with the arithmetic done in code rather than by a model.",
+      "howItWorks": [
+        {
+          "t": "Accounts as entries",
+          "d": "Each asset and liability is a row with a value and a date; there is no hidden cell arithmetic."
+        },
+        {
+          "t": "Refresh deliberately",
+          "d": "A balance updates by hand, or by a web-search job that looks up a published value and proposes it."
+        },
+        {
+          "t": "Append, never overwrite",
+          "d": "Every change is a dated entry, so a wrong number is visible in the trend instead of silently replacing the old one."
+        },
+        {
+          "t": "Compute in code",
+          "d": "Totals are a query over rows. A language model never does the arithmetic."
+        }
+      ],
+      "models": [
+        {
+          "job": "Web-search balance refresh",
+          "runtime": "nous-free",
+          "model": "free-tier catalogue",
+          "note": "$0/month, low volume, human-confirmed"
+        },
+        {
+          "job": "Totals and history",
+          "runtime": "local",
+          "model": "none",
+          "note": "SQL, not inference"
+        }
+      ],
+      "costNote": "Free-tier model for the occasional lookup and a local database for everything else: the running cost is effectively zero, which is what you want under a number you make decisions with.",
+      "howto": [
+        {
+          "t": "Store facts, compute totals",
+          "d": "Never let a model do arithmetic you can do in SQL."
+        },
+        {
+          "t": "Append-only history",
+          "d": "If a value can be overwritten silently, you cannot trust the trend."
+        },
+        {
+          "t": "Make refresh explicit",
+          "d": "A button, not a background job, for numbers that matter."
+        }
+      ],
+      "lessons": [
+        "One number computed from dated entries beats a spreadsheet nobody trusts.",
+        "The valuable part of finance automation is the audit trail, not the total."
+      ],
+      "live": null,
+      "linkNote": "Personal financial data — never published."
+    },
+    "insta360-x4": {
+      "kicker": "HARDWARE BRIDGE",
+      "overview": "A local dashboard for an Insta360 X4 360 camera: live view and capture controls in the browser. It is small, practical integration work — bridging a device HTTP API into a clean web panel — and it is a good example of mounting a vendor app behind a path prefix without breaking its own asset URLs.",
+      "howItWorks": [
+        {
+          "t": "Talk to the device",
+          "d": "A small local service bridges HTTP calls to the camera."
+        },
+        {
+          "t": "Serve a panel",
+          "d": "The browser gets a live preview and capture controls, no desktop software in the middle."
+        },
+        {
+          "t": "Mount under a prefix",
+          "d": "The router rewrites the app's absolute asset, fetch and form paths so a panel written for the site root works under its own route."
+        },
+        {
+          "t": "Stay local",
+          "d": "Camera control is never exposed to the public internet — device control on a laptop's LAN is enough."
+        }
+      ],
+      "models": [
+        {
+          "job": "Everything",
+          "runtime": "local",
+          "model": "none",
+          "note": "device API + web UI; no model calls"
+        }
+      ],
+      "costNote": "$0 to run: no model calls, no hosted service, just the camera and the machine.",
+      "howto": [
+        {
+          "t": "Write the thinnest possible bridge",
+          "d": "One small service between the device API and the browser beats a custom desktop app."
+        },
+        {
+          "t": "Plan for the path prefix",
+          "d": "Rewrite url(), src(), action() and fetch() when you mount an app under a route — the assets are what break first."
+        },
+        {
+          "t": "Keep device control private",
+          "d": "A camera control panel has no business on the public internet."
+        }
+      ],
+      "lessons": [
+        "Most hardware projects are integration problems, not device problems.",
+        "Mounting an app under a prefix is the classic silent breakage — test it every zoom of the way."
+      ],
+      "live": null,
+      "linkNote": "Local device control, deliberately not published."
+    },
+    "agentic-ai-course": {
+      "kicker": "FORMAL TRAINING",
+      "overview": "Virginia Tech × Simplilearn's Applied Agentic AI programme — eleven modules covering agent systems, design and impact — taken while building the platform in this portfolio, and applied to it directly rather than to toy exercises. The coursework that survived contact with a real fleet is the part worth keeping: how agents fail, how to bound them, and how to decide what should not be an agent at all.",
+      "howItWorks": [
+        {
+          "t": "Systems",
+          "d": "How agent systems are structured: roles, handoffs, memory, and the boundaries between them."
+        },
+        {
+          "t": "Design",
+          "d": "Patterns for reliable agent behaviour — narrow tools, explicit state, validation before side effects."
+        },
+        {
+          "t": "Impact",
+          "d": "Where agents create real leverage in a business, and where they quietly add cost."
+        },
+        {
+          "t": "Applied",
+          "d": "Every module was mapped onto the live multi-agent platform running here, which is a far harsher grader than a lab exercise."
+        }
+      ],
+      "models": [
+        {
+          "job": "Coursework",
+          "runtime": "n-a",
+          "model": "n/a",
+          "note": "tuition, not tokens"
+        }
+      ],
+      "costNote": "No inference cost to report — the value is the design vocabulary, and it is already reflected in how the rest of these projects are built.",
+      "howto": [
+        {
+          "t": "Prefer narrow tools",
+          "d": "An agent with three sharp tools outperforms one with thirty vague ones."
+        },
+        {
+          "t": "Validate before side effects",
+          "d": "Check the output against the system it will change, then act."
+        },
+        {
+          "t": "Decide what should not be an agent",
+          "d": "Deterministic code is cheaper, faster and more trustworthy — use it for anything that is only arithmetic or routing."
+        }
+      ],
+      "lessons": [
+        "Agent reliability is mostly a boundary problem: what the agent may touch, and what checks it first.",
+        "Formal training is worth most when you can test every claim against something you already run."
+      ],
+      "live": null,
+      "linkNote": "Completed programme — certificate available on request."
+    },
+    "project-showcase-engine": {
+      "kicker": "THE SYSTEM THAT BUILDS THIS SITE",
+      "overview": "This site is generated. A project registry drives the write-ups, one page per project, and a self-updating résumé; a discovery step syncs new projects in from the working dashboard; a video step renders the demos; a syndication step drafts a per-project post for the publishing platforms; and a scheduled job rebuilds and publishes the whole thing every morning. The page you are reading is the output of a daily pipeline.",
+      "howItWorks": [
+        {
+          "t": "Registry is the source of truth",
+          "d": "Every project is one record: name, tagline, status, stack, write-up, links. Nothing on the site exists outside the registry (or the authored page layer)."
+        },
+        {
+          "t": "Discovery syncs reality",
+          "d": "A discovery pass reads the working dashboard and appends projects that are not in the registry yet — idempotently, and never storing a token-bearing URL."
+        },
+        {
+          "t": "Videos first, then pages",
+          "d": "The demo renderer runs before the build so the pages can embed assets that exist; the build preserves the generated directories it does not own."
+        },
+        {
+          "t": "Build is disposable",
+          "d": "The build wipes its output directory and regenerates it from sources. Hand-authored pages live in a source folder and are rendered verbatim, which is what makes a redesign survive the next rebuild."
+        },
+        {
+          "t": "Syndicate",
+          "d": "A syndication step writes a per-project post draft from the same registry and can publish to the platforms whose keys are present."
+        },
+        {
+          "t": "Publish on a schedule",
+          "d": "A launchd job runs the whole chain daily and commits the result, so the site is never more than a day stale."
+        }
+      ],
+      "models": [
+        {
+          "job": "Site generation",
+          "runtime": "local",
+          "model": "none",
+          "note": "template rendering — no model in the build path"
+        },
+        {
+          "job": "Post drafts",
+          "runtime": "local",
+          "model": "none",
+          "note": "generated from the registry, not written by a model"
+        }
+      ],
+      "costNote": "Hosting is free (a static directory behind the existing private router) and the build is machine time measured in seconds. The only real cost of this project is the discipline of keeping one source of truth.",
+      "howto": [
+        {
+          "t": "Registry -> generator",
+          "d": "One JSON file, one build script, static output. Anything more elaborate is a liability at this scale."
+        },
+        {
+          "t": "Never hand-edit generated output",
+          "d": "The build directory is disposable by design. Authored files go in the source layer or the next rebuild eats them."
+        },
+        {
+          "t": "Test the regressions you actually hit",
+          "d": "There is a test for each one: that generated directories survive a rebuild, that the served index matches its source, and that no secret-like string reaches the published output."
+        },
+        {
+          "t": "Sync discovery, do not copy-paste",
+          "d": "New work should appear on the site without anyone remembering to add it."
+        },
+        {
+          "t": "Let the schedule do the publishing",
+          "d": "A daily rebuild keeps the résumé and the project list honest without a reminder."
+        }
+      ],
+      "lessons": [
+        "The build directory is disposable: put authored files in a source layer or the next rebuild deletes them.",
+        "A scheduled job that fails silently is worse than no job — the very first cron run died on a minimal PATH and looked like nothing had changed.",
+        "Publishing from the generator is what keeps a portfolio from rotting."
+      ],
+      "live": {
+        "url": "https://sport.taila73942.ts.net/portfolio",
+        "label": "This site"
+      }
+    },
+    "cnbc-live-on-glasses": {
+      "kicker": "WEARABLE STREAMING",
+      "overview": "Live CNBC on the Meta Ray-Ban Display glasses: 600x600, D-pad only, a free no-login feed. The interesting engineering is not the player, it is the proxy in front of it — the upstream CDN only serves its playlist when the request carries the right Referer, which a glasses webview cannot fake, so a small local proxy re-arbitrates the best CDN host, rewrites the playlist to same-origin URLs and streams the bytes through.",
+      "howItWorks": [
+        {
+          "t": "A local proxy stands in front",
+          "d": "A dependency-free Python service binds to localhost and fronts the stream, so the glasses only ever see one origin."
+        },
+        {
+          "t": "Re-arbitrate and cache the host",
+          "d": "The proxy asks the provider's own server list for the best CDN host, then caches that choice — a cold first request pays a full round trip, a warm one does not."
+        },
+        {
+          "t": "Rewrite the playlist",
+          "d": "Segment URIs are rewritten to same-origin proxy URLs behind an allow-listed host check."
+        },
+        {
+          "t": "Stream, never buffer",
+          "d": "Segments are piped through as they arrive. Reading a whole segment before responding made time-to-first-byte equal to total download time; streaming cut it by roughly an order of magnitude."
+        },
+        {
+          "t": "Tune for a weak link",
+          "d": "Deep buffers, a deliberate start behind the live edge, and no speed-up catch-up: on a measured throttled link the old build stalled over half the runtime, the current one a small fraction of it."
+        },
+        {
+          "t": "Keep it alive",
+          "d": "A launchd job with keep-alive restarts the proxy, and errors from clients dropping sockets mid-stream are swallowed rather than logged as failures."
+        }
+      ],
+      "models": [
+        {
+          "job": "Everything",
+          "runtime": "local",
+          "model": "none",
+          "note": "pure streaming plumbing — no model calls, no per-token cost"
+        }
+      ],
+      "costNote": "$0: no model calls and the feed is free. The only billable resource is the machine that runs the proxy.",
+      "howto": [
+        {
+          "t": "Stream the bytes",
+          "d": "Never read a whole segment into memory before responding — that makes the first byte arrive last."
+        },
+        {
+          "t": "Prewarm the arbitration",
+          "d": "Cache the chosen host at startup with a long TTL; the cold path is the whole startup delay."
+        },
+        {
+          "t": "Do not hard-seek on a stall",
+          "d": "Jumping back to the live edge throws the buffer away and turns a dip into a loop. Let the player refill from where it is."
+        },
+        {
+          "t": "Vendor your player library",
+          "d": "A local copy removes a DNS and TLS round trip and makes the app work offline-ish."
+        },
+        {
+          "t": "Measure under throttle",
+          "d": "Real decoding Chrome plus a bandwidth cap is the only honest test of a video player."
+        }
+      ],
+      "lessons": [
+        "On a wearable the buffering is the product — time-to-first-frame is the feature.",
+        "An upstream Referer gate is the whole reason a proxy exists; understand the constraint before optimising the code.",
+        "The wrong watchdog (hard-seek to live) can make playback measurably worse than no watchdog."
+      ],
+      "live": {
+        "url": "https://sport.taila73942.ts.net/cnbc/",
+        "label": "Watch it on the glasses"
+      }
+    },
+    "gold-spot-explorer": {
+      "kicker": "GEOSPATIAL AI",
+      "overview": "Ranks historical gold ground against where you actually find it, then reads USGS bare-earth LiDAR to pick out the creek beds and ravines themselves and score which one is the source. It overlays active claims and land status, lifts the terrain into a real 3D mesh, exports targets as GPX, and includes an in-page AI guide that points the map at its answer. Every data source is free public data.",
+      "howItWorks": [
+        {
+          "t": "Free data only",
+          "d": "USGS historical production records, BLM claim and land-status services, and USGS bare-earth LiDAR — keyless endpoints, no data bill."
+        },
+        {
+          "t": "Read the terrain itself",
+          "d": "The LiDAR bare-earth model exposes creek beds, benches and inside bends that a satellite image hides under tree cover, and the renderer re-drapes the terrain at every zoom so old diggings stay readable close in."
+        },
+        {
+          "t": "Score the ground",
+          "d": "Each area gets a 0-100 score — roughly 75+ 'go check', 60-75 strong, 45-60 possible, under 45 weak — with walkable target zones."
+        },
+        {
+          "t": "Tell you if you may mine",
+          "d": "Land-status overlays distinguish claimed land from BLM, National Forest, state and private ground, so the answer to 'can I dig here' comes before the drive."
+        },
+        {
+          "t": "Lift it into 3D",
+          "d": "A real elevation mesh you can tilt, spin and exaggerate, with every overlay draped onto the actual ground."
+        },
+        {
+          "t": "Ask the guide",
+          "d": "A local-model guide answers questions about the ground on screen and moves the map to what it is talking about."
+        }
+      ],
+      "models": [
+        {
+          "job": "In-page map guide",
+          "runtime": "local-ollama",
+          "model": "ornith-1.5:9b",
+          "note": "$0 per question, and no location data leaves the machine"
+        },
+        {
+          "job": "Terrain and land lookups",
+          "runtime": "local",
+          "model": "none",
+          "note": "keyless public endpoints; no model in the data path"
+        }
+      ],
+      "costNote": "Deliberately a $0-data project: the historical, claim, land-status and LiDAR sources are free and keyless, and the guide runs on local weights. The only cost is compute you already own, which is what makes the offline field kit on the Pi possible.",
+      "howto": [
+        {
+          "t": "Prefer keyless public endpoints",
+          "d": "No API key means no quota, no billing and no expiry surprise in a canyon."
+        },
+        {
+          "t": "Bound every remote call and mirror it",
+          "d": "Public geospatial hosts flake — one host returned a 502 inside a 200 response. Keep a second host for the same dataset and a short timeout on the primary."
+        },
+        {
+          "t": "Never treat a 200 as data",
+          "d": "Parse, and raise loudly when both sources fail — an empty list reads as 'nobody ever found gold here'."
+        },
+        {
+          "t": "Vendor the map library for the field",
+          "d": "A CDN tag is a network dependency at open time, which is exactly the failure an offline map exists to survive."
+        },
+        {
+          "t": "Make the assistant read the screen",
+          "d": "A guide answering from the last scan rather than the current view is worse than no guide."
+        }
+      ],
+      "lessons": [
+        "Bare-earth LiDAR is the best free prospecting signal available — free data, real terrain.",
+        "Public data hosts go down quietly; bound the primary, keep a mirror, and fail loudly when both are gone.",
+        "An offline-capable map is a different engineering problem from a fast one."
+      ],
+      "live": null,
+      "linkNote": "Runs locally and is free for early users; ask me for access."
+    },
+    "ai-consulting": {
+      "kicker": "THE BUSINESS SIDE",
+      "overview": "The commercial half of the portfolio: a landing page with a pricing calculator and email capture, gig listings and proposal templates for the freelance platforms, an intake step, and a board that tracks client work and accounts alongside everything else. It exists so that 'can you build this for me' has somewhere to go.",
+      "howItWorks": [
+        {
+          "t": "Landing and capture",
+          "d": "A public consulting page with the services, a calculator and an email capture — the entry point for inbound work."
+        },
+        {
+          "t": "Tiers and templates",
+          "d": "Packaged service tiers plus proposal templates, so a serious enquiry costs minutes to answer, not an afternoon."
+        },
+        {
+          "t": "Intake",
+          "d": "A brief is captured as structured fields: scope, deadline, budget, access required."
+        },
+        {
+          "t": "Delivery on the same board",
+          "d": "Client work moves through the same task bus as engineering work, so commitments and capacity are visible in one place."
+        },
+        {
+          "t": "Accounts",
+          "d": "Client records and deliverables live next to the cards that produce them."
+        }
+      ],
+      "models": [
+        {
+          "job": "Proposal and scope drafting",
+          "runtime": "nous-free",
+          "model": "free-tier catalogue",
+          "note": "$0/month"
+        },
+        {
+          "job": "Tracking and intake",
+          "runtime": "local",
+          "model": "none",
+          "note": "the same task bus as everything else"
+        }
+      ],
+      "costNote": "The tooling cost is effectively zero — free-tier models and a local board. The cost that matters is your own time, which is exactly why the proposals are templated and the intake is structured.",
+      "howto": [
+        {
+          "t": "One board for both kinds of work",
+          "d": "Client commitments and product work in the same queue, so over-commitment is visible early."
+        },
+        {
+          "t": "Template the paperwork",
+          "d": "Proposals, scopes and hand-off notes should be assembled, not written from scratch."
+        },
+        {
+          "t": "Charge for outcomes",
+          "d": "Products pay later, consulting pays now; keep both, and price the one that pays now properly."
+        }
+      ],
+      "lessons": [
+        "The same automation that runs a business can run the business that sells the automation.",
+        "Structured intake removes most of the back-and-forth that makes small projects unprofitable."
+      ],
+      "live": {
+        "url": "https://sport.taila73942.ts.net/consulting",
+        "label": "Open the token-savings calculator"
+      },
+      "linkNote": "The calculator is the public front door of this project — no login, it runs the numbers live."
+    },
+    "openclaw": {
+      "kicker": "AGENT GATEWAY",
+      "overview": "OpenClaw is a multi-channel AI gateway with extensible messaging integrations, running locally as a gateway process and served through the Command Center router, which rewrites the control UI's base path and starts the gateway on demand if it is not already running. Its configuration declares agents, tools, plugins, channels and bindings in one file — it is the plumbing that connects agents to messaging surfaces.",
+      "howItWorks": [
+        {
+          "t": "Gateway process",
+          "d": "A local gateway serves the control UI and its API on its own port."
+        },
+        {
+          "t": "Configuration as one file",
+          "d": "Agents, models, tools, plugins, channels and bindings are declared in a single JSON config, kept with numbered backups."
+        },
+        {
+          "t": "Channels and bindings",
+          "d": "Messaging integrations are bound to agents, which is what turns an agent into something reachable from a chat surface."
+        },
+        {
+          "t": "Mount behind a prefix",
+          "d": "The router sets the app's base path, rewrites its asset and favicon URLs, and auto-launches the gateway when the route is first requested."
+        }
+      ],
+      "models": [
+        {
+          "job": "Gateway itself",
+          "runtime": "local",
+          "model": "none",
+          "note": "transport, orchestration and tool plumbing — no inference of its own"
+        },
+        {
+          "job": "Whatever the bound agents use",
+          "runtime": "per-agent",
+          "model": "configured per agent",
+          "note": "cost appears through the configured providers, not the gateway"
+        }
+      ],
+      "costNote": "The gateway is free to run locally; spend only appears through the model providers its agents are configured to use, which keeps the routing decision (and the bill) in one explicit config file.",
+      "howto": [
+        {
+          "t": "Mount a local UI under a prefix properly",
+          "d": "Set the app's own base path and rewrite asset URLs — otherwise you get a page that loads and a stylesheet that 404s."
+        },
+        {
+          "t": "Start on demand",
+          "d": "Auto-launching a gateway when its route is first requested avoids keeping a daemon alive for nothing."
+        },
+        {
+          "t": "Keep numbered config backups",
+          "d": "One JSON file is easy to read and easy to break; keep the last-known-good copy."
+        },
+        {
+          "t": "Treat the gateway as plumbing",
+          "d": "The value is in the bindings and tools, not the process."
+        }
+      ],
+      "lessons": [
+        "A gateway is plumbing — the product is which agent is reachable from where.",
+        "Prefix mounting needs the app's own base-path setting, not just a URL rewrite.",
+        "One config file means one place to audit what an agent can reach."
+      ],
+      "live": null,
+      "linkNote": "The control UI exposes agent internals, so it stays on the private tailnet."
+    },
+    "muse-prototypes": {
+      "kicker": "SHAREABLE PROTOTYPE",
+      "overview": "The TrackMyGold Frontier world — western town, gold mine, saloon and forge — packaged as a shareable prototype you can open from a link. Find the character, accept quests, explore the realm. It is the same content as the live 3D world, shipped in the form that is easiest to send to someone for feedback.",
+      "howItWorks": [
+        {
+          "t": "One world definition",
+          "d": "Scene, characters and quests come from the same build that serves the live 3D world, so the prototype cannot drift from it."
+        },
+        {
+          "t": "Packaged for sharing",
+          "d": "Exported as a prototype build behind a public share link — no install, no account."
+        },
+        {
+          "t": "Same agents inside",
+          "d": "Characters still talk over the agent stream; the prototype is a surface, not a mock-up."
+        },
+        {
+          "t": "Also live on the tailnet",
+          "d": "The same world is served at its own route for full-fidelity use."
+        }
+      ],
+      "models": [
+        {
+          "job": "Character dialogue",
+          "runtime": "ollama-cloud",
+          "model": "selectable agent provider",
+          "note": "short turns, bursty"
+        },
+        {
+          "job": "Rendering",
+          "runtime": "client-side",
+          "model": "none",
+          "note": "static assets in the browser"
+        }
+      ],
+      "costNote": "$0 to host and $0 to render — the only metered part is dialogue, exactly as in the live world.",
+      "howto": [
+        {
+          "t": "Ship one definition to many surfaces",
+          "d": "Game, VR entry point, prototype link: all the same content, different packaging."
+        },
+        {
+          "t": "Prefer a share link for feedback",
+          "d": "A link gets opened; a deploy gets deferred."
+        }
+      ],
+      "lessons": [
+        "Prototypes exist to shorten the feedback loop — optimise for opening, not for fidelity.",
+        "One world definition shipped to several surfaces is far cheaper than rebuilding for each."
+      ],
+      "live": {
+        "url": "https://muse.ai/s/game-prototype-xzxx5xe1xw9n6bl",
+        "label": "Open the prototype"
+      }
+    },
+    "tradedeck": {
+      "kicker": "MULTI-AGENT DESK",
+      "overview": "TradeDesk is a multi-agent sports and market desk: a team of specialist agents — scout, news, quant, risk, execution and journal — share one server-side model router instead of each hard-coding a model. The router picks the best installed model per task and records which model handled it and why, so the desk can be read as an audit trail rather than a black box. The panel surfaces live charts, a screener, signals, macro context, portfolio, risk, backtest, alerts, a journal, jobs and approvals.",
+      "howItWorks": [
+        {
+          "t": "Specialist agents",
+          "d": "Scout, news, quant, risk, execution and journal each own one job; none of them decides which model answers."
+        },
+        {
+          "t": "Shared model router",
+          "d": "One server-side router selects the best installed model per task and logs the choice plus the reason."
+        },
+        {
+          "t": "Desk panels",
+          "d": "Charts, screener, signals, macro, portfolio, risk and backtest read from the same state so they cannot disagree."
+        },
+        {
+          "t": "Journal and approvals",
+          "d": "Every decision lands in the journal, and outbound actions wait on an approval rather than firing themselves."
+        }
+      ],
+      "models": [
+        {
+          "job": "Scout / news summarising",
+          "runtime": "nous-free",
+          "model": "poolside/laguna-s-2.1:free",
+          "note": "high-volume reading and summarising on the free catalogue"
+        },
+        {
+          "job": "Quant and risk reasoning",
+          "runtime": "openrouter-paid",
+          "model": "deepseek/deepseek-v4-pro",
+          "note": "cheap reasoning tier for numeric work"
+        },
+        {
+          "job": "Escalation for hard calls",
+          "runtime": "openrouter-paid",
+          "model": "openai/gpt-5.5",
+          "note": "used only when a task is routed up, not by default"
+        },
+        {
+          "job": "Local fallback",
+          "runtime": "local-ollama",
+          "model": "ornith-1.5:9b",
+          "note": "keeps the desk usable when the hosted providers are unreachable"
+        }
+      ],
+      "costNote": "Spend is a routing decision, not a per-agent setting: the free catalogue absorbs the high-volume reading jobs, and the paid tiers are reached only when a task is explicitly routed up. The router records the choice, so the bill can be read back as a list of decisions rather than a surprise.",
+      "howto": [
+        {
+          "t": "Put the router between agents and models",
+          "d": "No agent hard-codes a model; one shared router makes the choice and records it."
+        },
+        {
+          "t": "Make the router log why",
+          "d": "Recording the reason per task is what turns model spend into an auditable list."
+        },
+        {
+          "t": "Read every panel from one state",
+          "d": "Charts, screener, risk and journal must share state or the desk shows contradictory numbers."
+        },
+        {
+          "t": "Gate the outbound actions",
+          "d": "Execution and alerts wait on approval, so a signal never fires by itself."
+        }
+      ],
+      "lessons": [
+        "A shared router is what makes a multi-agent desk auditable — per-agent model choices are untraceable.",
+        "Routing is a cost decision, so the router belongs in front of every agent, not inside one.",
+        "One shared state is what keeps the panels from disagreeing."
+      ],
+      "live": null,
+      "linkNote": "The desk holds portfolio and positions, so it stays on the private tailnet."
+    },
+    "peril-adventure-wear": {
+      "kicker": "CONTENT AUTOPILOT",
+      "overview": "Peril Adventure Wear is a content autopilot for a shirt line, built on the same approve-first flow as Track My Gold: drafts alternate product shots, trail ethos and camp scenes across three layouts and six print palettes, in a minimal vintage outdoor-brand look — condensed uppercase headlines, tracked small caps, topographic contour lines and low-contrast ridges on cream, forest and rust paper. Copy is generated against verified brand facts only, with no invented prices or claims, and the images are drawn locally rather than diffusion-generated. Everything waits for review before it reaches Buffer.",
+      "howItWorks": [
+        {
+          "t": "Brand-fact source",
+          "d": "Copy is generated from a verified fact list, so nothing can invent a price, a material or a claim."
+        },
+        {
+          "t": "Layout and palette system",
+          "d": "Three layouts and six print palettes are applied consistently instead of being improvised per post."
+        },
+        {
+          "t": "Local image drawing",
+          "d": "Artwork is drawn locally with the brand vocabulary — contours, ridges, type — never diffusion-generated."
+        },
+        {
+          "t": "Approve-first queue",
+          "d": "Drafts, images and captions sit in a queue; Buffer only ever receives an approved item."
+        }
+      ],
+      "models": [
+        {
+          "job": "Caption and copy drafting",
+          "runtime": "nous-free",
+          "model": "upstage/solar-pro4:free",
+          "note": "free catalogue for recurring copy work"
+        },
+        {
+          "job": "Brand-fact checking",
+          "runtime": "nous-free",
+          "model": "inclusionai/ling-3.0-flash-fin:free",
+          "note": "fast check that copy stays inside the verified facts"
+        },
+        {
+          "job": "Escalation for campaign copy",
+          "runtime": "openrouter-paid",
+          "model": "upstage/solar-pro-3",
+          "note": "cheap structured-output tier when a campaign needs more polish"
+        },
+        {
+          "job": "Image generation",
+          "runtime": "n-a",
+          "model": "local drawing, none",
+          "note": "drawn locally, so no per-image fee and no external service"
+        }
+      ],
+      "costNote": "Because the images are drawn locally rather than diffusion-generated, there is no per-image fee at all. The model spend is confined to copy drafting, which runs on the free catalogue and only escalates when a campaign needs polish — so a full month of drafts can be produced without a hosted bill.",
+      "howto": [
+        {
+          "t": "Start from a verified fact list",
+          "d": "Generate copy only from facts you can stand behind; otherwise the model will invent plausible-sounding claims."
+        },
+        {
+          "t": "Fix the layout and palette system first",
+          "d": "Three layouts and six palettes applied consistently read as a brand; improvisation per post reads as noise."
+        },
+        {
+          "t": "Draw images locally",
+          "d": "Local drawing keeps the look reproducible and removes the per-image cost entirely."
+        },
+        {
+          "t": "Keep the queue approve-first",
+          "d": "Buffer should only ever receive an approved item, never a generated one."
+        }
+      ],
+      "lessons": [
+        "Copy generated against a verified fact list is the difference between an autopilot and a liability.",
+        "A fixed layout and palette system is what makes generated posts look like one brand.",
+        "Approve-first only works if the queue is the single path to publishing."
+      ],
+      "live": null,
+      "linkNote": "Drafts are internal until approved; only the Buffer hand-off is public."
+    },
+    "film-room": {
+      "kicker": "SHORT-FILM DESK",
+      "overview": "Film Room is a short-film production desk: type an idea, set a budget, and it prices the film against a live rate card measured straight from the generation API — every model’s real cost per second, the cost-versus-quality trade, and how many minutes of finished picture the budget actually buys. The project board tracks every shot: the still that becomes its first frame, whether the clip is rendered, per-shot cost and total spend against the ledger. A chat panel talks to the agent that owns the project, so a prompt can be rewritten, a frame regenerated or a render started from the desk itself.",
+      "howItWorks": [
+        {
+          "t": "Idea to budget",
+          "d": "The desk prices a film before anything is rendered, so the budget decides the shot list rather than the other way round."
+        },
+        {
+          "t": "Live rate card",
+          "d": "Model pricing is measured straight from the provider API instead of being copied from a docs page that goes stale."
+        },
+        {
+          "t": "Shot board",
+          "d": "Every shot records its first-frame still, render state, per-shot cost and running total against the ledger."
+        },
+        {
+          "t": "Agent chat",
+          "d": "The chat panel reaches the agent that owns the project, so prompts, frames and renders are driven from the desk."
+        }
+      ],
+      "models": [
+        {
+          "job": "Image generation",
+          "runtime": "n-a",
+          "model": "provider rate card",
+          "note": "priced live per second from the provider API — the cost is the input, not a fixed estimate"
+        },
+        {
+          "job": "Shot planning and prompting",
+          "runtime": "nous-free",
+          "model": "stepfun/step-3.7-flash:free",
+          "note": "free catalogue for breaking a story into shots"
+        },
+        {
+          "job": "Rewrite and regeneration",
+          "runtime": "nous-free",
+          "model": "poolside/laguna-s-2.1:free",
+          "note": "fast retry loop on prompts without spending"
+        },
+        {
+          "job": "Local fallback",
+          "runtime": "local-ollama",
+          "model": "google/gemma-4-12b-qat",
+          "note": "keeps the desk usable when hosted providers are down"
+        }
+      ],
+      "costNote": "The whole point of the desk is that the budget is the constraint: the rate card is measured live from the provider API, so the number shown is what the render will actually cost rather than an estimate copied from a docs page. Planning and prompt retries run on the free catalogue, which keeps the expensive part — generation — as the only line that moves.",
+      "howto": [
+        {
+          "t": "Price the film before rendering",
+          "d": "Decide the budget first, then let it choose the shot list — the reverse order is how a render bill surprises you."
+        },
+        {
+          "t": "Measure the rate card live",
+          "d": "Pull cost per second from the provider API; a copied figure goes stale the moment the provider reprices."
+        },
+        {
+          "t": "Track cost per shot against a ledger",
+          "d": "A running total on the board is what makes the budget visible while work is still in flight."
+        },
+        {
+          "t": "Put the owning agent behind the desk",
+          "d": "Rewriting a prompt or restarting a render should not require leaving the board."
+        }
+      ],
+      "lessons": [
+        "Pricing generation live from the API is the only way the budget stays honest.",
+        "The first frame of a shot is the cheap part — the render is where the money goes.",
+        "A desk that can drive the owning agent beats a desk that can only display it."
+      ],
+      "live": null,
+      "linkNote": "The desk renders against a paid generation API, so it stays on the private tailnet."
+    },
+    "ip-competitor-watch": {
+      "kicker": "DEFENSIBILITY WATCH",
+      "overview": "IP & Competitor Watch is one page that answers “can anyone steal this, and who is already doing it?” — every venture is scored for how defensible it actually is, the direct competitors in each lane are listed, the record of when the code was built is checked, and the questions only a lawyer can answer are separated out. The law agent sweeps competitors, trademark filings and copycats on the first of every month and reports only what changed. Dossiers and data are key-gated because they spell out what is not protected.",
+      "howItWorks": [
+        {
+          "t": "Per-venture scoring",
+          "d": "Each venture is scored for defensibility on evidence, not on how the project feels about itself."
+        },
+        {
+          "t": "Competitor lane mapping",
+          "d": "Direct competitors are listed per lane so the overlap is visible rather than implied."
+        },
+        {
+          "t": "Build record check",
+          "d": "Whether the code proves when something was built is checked against the record, which is what makes a date defensible."
+        },
+        {
+          "t": "Monthly change-only sweep",
+          "d": "The law agent reports only what changed since the last sweep, so a month of nothing is one line rather than fifty."
+        }
+      ],
+      "models": [
+        {
+          "job": "Competitor and filing research",
+          "runtime": "nous-free",
+          "model": "inclusionai/ling-3.0-flash-fin:free",
+          "note": "free catalogue for high-volume monthly sweeps"
+        },
+        {
+          "job": "Defensibility reasoning",
+          "runtime": "openrouter-paid",
+          "model": "deepseek/deepseek-v4-pro",
+          "note": "cheap reasoning tier for scoring each venture"
+        },
+        {
+          "job": "Legal wording drafting",
+          "runtime": "openrouter-paid",
+          "model": "anthropic/claude-opus-4.8",
+          "note": "escalation model for long-context drafting that a human reviews"
+        },
+        {
+          "job": "Local fallback",
+          "runtime": "local-ollama",
+          "model": "ornith-1.5:9b",
+          "note": "keeps the watch running when hosted providers are unreachable"
+        }
+      ],
+      "costNote": "The monthly sweep is the expensive shape of this work, so it runs on the free catalogue and escalates only for the ventures that actually need reasoning. Because the agent reports change-only, a quiet month costs one summary rather than a full re-sweep — which is what makes a recurring legal check affordable to keep running.",
+      "howto": [
+        {
+          "t": "Separate what a lawyer must answer",
+          "d": "Scoring and research are automatable; the conclusions that carry legal risk must stay with a human."
+        },
+        {
+          "t": "Report only what changed",
+          "d": "A change-only sweep keeps a recurring check cheap enough to actually keep running."
+        },
+        {
+          "t": "Score on evidence, not confidence",
+          "d": "A defensibility score is only useful if it can point at the thing it was derived from."
+        },
+        {
+          "t": "Gate the dossiers",
+          "d": "A dossier that spells out what is not protected should not be publicly readable."
+        }
+      ],
+      "lessons": [
+        "Change-only reporting is what turns a monthly legal sweep from a chore into a standing job.",
+        "A defensibility score without its evidence is just an opinion with a number on it.",
+        "Anything that says what is not protected must sit behind a key."
+      ],
+      "live": null,
+      "linkNote": "Dossiers spell out what is not protected, so the data stays key-gated."
+    }
+  }
+}

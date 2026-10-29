@@ -293,6 +293,19 @@ Your browser does not support the video tag.</video></div>`
   const live = d.live && d.live.url
     ? `<a class="btn light" href="${esc(d.live.url)}" target="_blank" rel="noopener">${esc(d.live.label || 'Open it')}</a>`
     : `<a class="btn light" href="mailto:${esc(reg.owner.contactEmail)}?subject=${encodeURIComponent(p.name)}">Ask me for a walkthrough</a>`;
+  // Optional dated progression: rendered only for projects whose authored write-up carries one.
+  const progression = (d.timeline || []).length
+    ? `<section id="timeline">
+  <div class="sec-head">
+    <div class="eyebrow">THE PROGRESSION</div>
+    <h2>Where it started <span class="soft">and how it got here</span></h2>
+    <p>Dates are real — each entry is a change that shipped and still runs.</p>
+  </div>
+  <div class="tl">${(d.timeline || []).map(e => `<article class="tl-item">
+      <div class="tl-when">${esc(e.date)}</div>
+      <div class="tl-body"><h3>${esc(e.t)}</h3><p>${esc(e.d)}</p></div></article>`).join('\n')}</div>
+</section>\n\n`
+    : '';
   const sideRows = [
     ['STATUS', p.status],
     ['SURFACE', d.live ? 'Public link above' : 'Private — not published'],
@@ -344,6 +357,7 @@ Your browser does not support the video tag.</video></div>`
   ${highlights}
 </section>
 
+${progression}
 <section id="how">
   <div class="sec-head">
     <div class="eyebrow">HOW IT WORKS</div>

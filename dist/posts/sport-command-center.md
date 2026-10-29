@@ -1,12 +1,12 @@
 ---
 
-title: "Sport: a multi-agent AI operations system for a one-person company"
+title: "Sport: the headless control surface I run my whole Mac from"
 
 published: false
 
 tags: ["ai-agents","multi-agent-systems","orchestration","sqlite","automation","hermes"]
 
-description: "How I run a one-person software company on a fleet of named agents: separate memories, a shared SQLite task bus, and approval gates on anything outbound."
+description: "How I turned a Mac mini into a headless AI workstation I can leave running: one dashboard over every agent, job, service and approval, with a dated progression of how it got there."
 
 slug: sport-command-center
 
@@ -14,14 +14,34 @@ canonical: https://sport.taila73942.ts.net/portfolio/project/sport-command-cente
 
 ---
 
-# Sport: a multi-agent AI operations system for a one-person company
+# Sport: the headless control surface I run my whole Mac from
 
-**A Chief-of-Staff layer that coordinates venture leads and specialist workers across every project, with a human approval gate on anything that leaves the machine.**
+**A headless control surface for a Mac and a harness over the whole system — every agent, job, service and approval in one shell, with a human gate on anything that leaves the machine.**
 
-Most people try to make one model smarter. I went the other way and split the work across named agents that each keep their own memory, their own skills and their own conversation history, then made them coordinate through a shared task bus. Sport is the orchestration layer on top: an executive coordinator that decomposes a goal into cards, assigns each card to the specialist that should own it, and expresses the dependencies between them as edges rather than as polite requests in a prompt. It is the part of this portfolio that keeps the rest of it moving when nobody is watching.
+This started as a card wall of links and turned into the machine's own control surface. One shell now holds the whole system as live state: every agent session and its transcript, every scheduled job and the output it captured, every service and port, every approval waiting on a human, and every deploy. The point is not a pretty dashboard — it is that the Mac does the work unattended and the dashboard exists to report it and to ask for decisions. Anything that leaves the machine, publishing, outbound messages, account changes, stops at an approval gate first, which is what makes leaving it running acceptable.
 
 ## What it is
-Sport is the operating layer over a fleet of named agents rather than one big prompt. Each agent keeps its own memory, skills and conversation history, and they coordinate through a shared task bus — a SQLite kanban board on this machine. Anything that leaves the machine (posting, email, publishing) stops at an approval gate first. It is the thing that lets the other projects keep running when nobody is watching.
+Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.
+
+## The progression
+
+- **Sep 20, 2026 — The first Command Center** — An Obsidian brain: a live graph of the vault, served from localhost with tabs to flip between dashboards. It was a view of the notes — not yet a view of the machine.
+
+- **Oct 3, 2026 — One page, every project** — The classic dashboard: a single card wall of every project, each card opening its own live app instead of a description of it.
+
+- **Oct 18, 2026 — On the glass** — A Raspberry Pi 5 and a touch panel running the status board — every agent session and cron job on a screen, with a silently-dead job shown as failed rather than 'ok'.
+
+- **Oct 21-22, 2026 — The shell is rebuilt** — The whole thing is re-written as one SPA around a persistent shell: a static top bar, a drag-to-reorder sidebar that saves your order, a Health page that doubles as the job-run reader, and per-project facades.
+
+- **Oct 23, 2026 — Talk to it, and ship from it** — Voice arrives: chat with queueing and steering, and a microphone that knows when the machine has none instead of failing silently. The deploy pipeline lands too — back up, copy, check, restart, verify, roll back on a dead build — with a one-click test/prod switch.
+
+- **Oct 24, 2026 — The turn, step by step** — Chat stops saying 'used terminal' and shows what each step actually is, with a live clock and step count; chat threads restore after a reload; dictation runs on a warm local model (about 0.3s to first words versus 6.8s cold).
+
+- **Oct 25, 2026 — Dictation that survives a long sentence** — The mic used to stop at 45 seconds. It now reopens on its own and follows you until you stop talking, and the phone layout was pulled back inside the viewport at 390, 360 and 320px.
+
+- **Oct 27, 2026 — The whole reply on the lock screen** — A finished chat turn pushes its entire answer to the phone, not a teaser. A Passwords & logins page lands over the real encrypted vault — the browser never receives a stored secret.
+
+- **Oct 28, 2026 — A fleet you can leave running** — Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green.
 
 ## How it works
 
@@ -78,7 +98,7 @@ The full write-up, the build steps and the screenshots are on the [project page]
 
 ---
 
-This one is internal by design, so there is no public link to hand out. If you are building the same kind of operating layer and want to compare notes on the design, the portfolio page is the place to start.
+This one is internal by design, so there is no public link to hand out. If you want this kind of operating layer over your own machine, or you are building one and want to compare notes, the portfolio page is the place to start.
 
 *I build AI systems that turn messy operations into clean numbers. Need something like this?
 ddaymude.ai@gmail.com*

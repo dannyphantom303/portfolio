@@ -1,10 +1,17 @@
 {
   "slug": "sport-command-center",
-  "title": "Sport: a multi-agent AI operations system for a one-person company",
-  "metaDescription": "How I run a one-person software company on a fleet of named agents: separate memories, a shared SQLite task bus, and approval gates on anything outbound.",
-  "labels": ["ai agents", "multi-agent systems", "orchestration", "sqlite", "automation", "hermes"],
-  "dek": "A Chief-of-Staff layer that coordinates venture leads and specialist workers across every project, with a human approval gate on anything that leaves the machine.",
-  "intro": "Most people try to make one model smarter. I went the other way and split the work across named agents that each keep their own memory, their own skills and their own conversation history, then made them coordinate through a shared task bus. Sport is the orchestration layer on top: an executive coordinator that decomposes a goal into cards, assigns each card to the specialist that should own it, and expresses the dependencies between them as edges rather than as polite requests in a prompt. It is the part of this portfolio that keeps the rest of it moving when nobody is watching.",
+  "title": "Sport: the headless control surface I run my whole Mac from",
+  "metaDescription": "How I turned a Mac mini into a headless AI workstation I can leave running: one dashboard over every agent, job, service and approval, with a dated progression of how it got there.",
+  "labels": [
+    "ai agents",
+    "multi-agent systems",
+    "orchestration",
+    "sqlite",
+    "automation",
+    "hermes"
+  ],
+  "dek": "A headless control surface for a Mac and a harness over the whole system \u2014 every agent, job, service and approval in one shell, with a human gate on anything that leaves the machine.",
+  "intro": "This started as a card wall of links and turned into the machine's own control surface. One shell now holds the whole system as live state: every agent session and its transcript, every scheduled job and the output it captured, every service and port, every approval waiting on a human, and every deploy. The point is not a pretty dashboard \u2014 it is that the Mac does the work unattended and the dashboard exists to report it and to ask for decisions. Anything that leaves the machine, publishing, outbound messages, account changes, stops at an approval gate first, which is what makes leaving it running acceptable.",
   "why": "The reason this matters is failure shape. One giant prompt plus one giant tool list fails globally and opaquely. A hierarchy of narrow agents fails locally, in a place you can name, and it can be retried without re-running everything around it. Once you have a durable task bus in the middle, the agents stop being a conversation and start being a system, and a system is something you can actually leave running overnight.",
   "faq": [
     {
@@ -20,5 +27,5 @@
       "a": "An approval gate. Anything with an external side effect, publishing, outbound messages, account changes, stops and waits for a human decision that arrives in a surface I actually read. The gate is not a brake on the automation, it is the reason the automation is acceptable to run unattended."
     }
   ],
-  "cta": "This one is internal by design, so there is no public link to hand out. If you are building the same kind of operating layer and want to compare notes on the design, the portfolio page is the place to start."
+  "cta": "This one is internal by design, so there is no public link to hand out. If you want this kind of operating layer over your own machine, or you are building one and want to compare notes, the portfolio page is the place to start."
 }
