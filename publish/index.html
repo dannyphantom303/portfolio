@@ -328,7 +328,7 @@ footer{padding:64px 0 40px}
     <a class="plink mono" href="project/sport-command-center.html" target="_blank" rel="noopener">open page →</a>
   </header>
   <div class="pchips"><button class="pchip pending" data-slug="sport-command-center" data-platform="blogger" title="Needs an OAuth access token (BLOGGER_ACCESS_TOKEN, or ~/.hermes/profiles/dev/blog/blogger-token.json)."><span class="pname">Blogger</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="sport-command-center" data-platform="devto" title="DEVTO_API_KEY present — drafts post on approval."><span class="pname">dev.to</span><span class="pval">pending</span></button><button class="pchip pending" data-slug="sport-command-center" data-platform="github" title="origin https://github.com/dannyphantom303/portfolio.git — site live at https://dannyphantom303.github.io/portfolio/ (gh CLI authenticated; refresh.sh pushes the dist/ subtree to gh-pages daily)."><span class="pname">GitHub</span><span class="pval">pending</span></button></div>
-  <details class="pdraft"><summary>Preview draft <span class="mono">8782 B</span></summary>
+  <details class="pdraft"><summary>Preview draft <span class="mono">9862 B</span></summary>
     <pre class="psrc">---
 
 title: &quot;Sport: the headless control surface I run my whole Mac from&quot;
@@ -352,7 +352,7 @@ canonical: https://sport.taila73942.ts.net/portfolio/project/sport-command-cente
 This started as a card wall of links and turned into the machine&#39;s own control surface. One shell now holds the whole system as live state: every agent session and its transcript, every scheduled job and the output it captured, every service and port, every approval waiting on a human, and every deploy. The point is not a pretty dashboard — it is that the Mac does the work unattended and the dashboard exists to report it and to ask for decisions. Anything that leaves the machine, publishing, outbound messages, account changes, stops at an approval gate first, which is what makes leaving it running acceptable.
 
 ## What it is
-Sport began as a card wall of links and became the machine&#39;s own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.
+Sport began as a card wall of links and became the machine&#39;s own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable. From Oct 28 the same shell also reads and drives the hardware underneath it: the Mac&#39;s startup agents, power and security posture, the Pi&#39;s units and thermals, and an inventory of the Hermes installation the whole fleet runs on - each with the line marked clearly where a human hand or root is still required.
 
 ## The progression
 
@@ -373,6 +373,8 @@ Sport began as a card wall of links and became the machine&#39;s own control sur
 - **Oct 27, 2026 — The whole reply on the lock screen** — A finished chat turn pushes its entire answer to the phone, not a teaser. A Passwords &amp; logins page lands over the real encrypted vault — the browser never receives a stored secret.
 
 - **Oct 28, 2026 — A fleet you can leave running** — Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green.
+
+- **Oct 28, 2026 — The machine&#39;s own settings, on the page** — A Settings page reads both boxes as live state instead of describing them: all 31 startup agents with restart and stop, the power policy that decides whether this Mac returns after an outage, both volumes, network and remote access, security posture, and the exact root command for each thing the desk is not allowed to change. A second tab inventories the harness itself - eleven agent profiles, the skill trees, memory, every session database, the cron registries and their run history, the boards, the vaults, plugins and MCP servers, and the build. Nothing unreadable is dressed up as healthy: a setting that could not be read says so with the reason, and a reboot asks for the node&#39;s name typed back.
 
 ## How it works
 
@@ -457,7 +459,7 @@ ddaymude.ai@gmail.com*
 <p>This started as a card wall of links and turned into the machine&#39;s own control surface. One shell now holds the whole system as live state: every agent session and its transcript, every scheduled job and the output it captured, every service and port, every approval waiting on a human, and every deploy. The point is not a pretty dashboard — it is that the Mac does the work unattended and the dashboard exists to report it and to ask for decisions. Anything that leaves the machine, publishing, outbound messages, account changes, stops at an approval gate first, which is what makes leaving it running acceptable.</p>
 
 <h3>What it is</h3>
-<p>Sport began as a card wall of links and became the machine&#39;s own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.</p>
+<p>Sport began as a card wall of links and became the machine&#39;s own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable. From Oct 28 the same shell also reads and drives the hardware underneath it: the Mac&#39;s startup agents, power and security posture, the Pi&#39;s units and thermals, and an inventory of the Hermes installation the whole fleet runs on - each with the line marked clearly where a human hand or root is still required.</p>
 
 <h3>The progression</h3>
 
@@ -495,6 +497,10 @@ ddaymude.ai@gmail.com*
 
 <ul>
 <li><strong>Oct 28, 2026 — A fleet you can leave running</strong> — Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green.</li>
+</ul>
+
+<ul>
+<li><strong>Oct 28, 2026 — The machine&#39;s own settings, on the page</strong> — A Settings page reads both boxes as live state instead of describing them: all 31 startup agents with restart and stop, the power policy that decides whether this Mac returns after an outage, both volumes, network and remote access, security posture, and the exact root command for each thing the desk is not allowed to change. A second tab inventories the harness itself - eleven agent profiles, the skill trees, memory, every session database, the cron registries and their run history, the boards, the vaults, plugins and MCP servers, and the build. Nothing unreadable is dressed up as healthy: a setting that could not be read says so with the reason, and a reboot asks for the node&#39;s name typed back.</li>
 </ul>
 
 <h3>How it works</h3>

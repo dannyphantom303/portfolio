@@ -148,7 +148,7 @@
   "projects": {
     "sport-command-center": {
       "kicker": "AGENT FLEET",
-      "overview": "Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state \u2014 every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy \u2014 while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.",
+      "overview": "Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state \u2014 every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy \u2014 while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable. From Oct 28 the same shell also reads and drives the hardware underneath it: the Mac's startup agents, power and security posture, the Pi's units and thermals, and an inventory of the Hermes installation the whole fleet runs on - each with the line marked clearly where a human hand or root is still required.",
       "howItWorks": [
         {
           "t": "A fleet, not a monolith",
@@ -282,6 +282,11 @@
           "date": "Oct 28, 2026",
           "t": "A fleet you can leave running",
           "d": "Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green."
+        },
+        {
+          "date": "Oct 28, 2026",
+          "t": "The machine's own settings, on the page",
+          "d": "A Settings page reads both boxes as live state instead of describing them: all 31 startup agents with restart and stop, the power policy that decides whether this Mac returns after an outage, both volumes, network and remote access, security posture, and the exact root command for each thing the desk is not allowed to change. A second tab inventories the harness itself - eleven agent profiles, the skill trees, memory, every session database, the cron registries and their run history, the boards, the vaults, plugins and MCP servers, and the build. Nothing unreadable is dressed up as healthy: a setting that could not be read says so with the reason, and a reboot asks for the node's name typed back."
         }
       ]
     },
