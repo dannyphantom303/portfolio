@@ -259,7 +259,9 @@ footer{padding:64px 0 40px}
       <div class="fine-note" style="margin-top:18px">Internal — the coordinator and its dashboard expose personal finances, the vault and live agent state, so this one is not published.</div>
     </aside>
   </div>
-  
+  <div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><div class="vid"><video controls preload="metadata">
+<source src="../videos/sport-command-center.mp4" type="video/mp4">
+Your browser does not support the video tag.</video></div></div>
   <div style="margin-top:26px"><div class="eyebrow">ANIMATED PREVIEW</div><div class="gif"><img src="../videos/sport-command-center.gif" alt="Sport — Multi-Agent AI Operations System animated preview" loading="lazy"/></div></div>
 </section>
 
@@ -268,7 +270,7 @@ footer{padding:64px 0 40px}
     <div class="eyebrow">THE PROJECT</div>
     <h2>What it is <span class="soft">and why it exists</span></h2>
   </div>
-  <p class="prose">Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable.</p>
+  <p class="prose">Sport began as a card wall of links and became the machine's own control surface. Today one shell holds the entire system as live state — every agent session and transcript, every scheduled job and its captured output, every service and port, every approval waiting on a human, and every deploy — while a hierarchy of named agents coordinates through a shared task bus. It is deliberately headless: the Mac does the work unattended, and the dashboard exists to report it and to ask for the decisions. Anything that leaves the machine stops at an approval gate first, which is what makes leaving it running acceptable. From Oct 28 the same shell also reads and drives the hardware underneath it: the Mac's startup agents, power and security posture, the Pi's units and thermals, and an inventory of the Hermes installation the whole fleet runs on - each with the line marked clearly where a human hand or root is still required.</p>
   <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>One shell over agents, jobs, services, approvals and deploys — live state, not a status page someone updates</li><li>Talk to it: chat with queueing and steering, dictation, hands-free voice, and long answers read aloud in parts</li><li>An operator console: approvals gated before anything posts or sends, and a deploy pipeline with a test build and rollback</li><li>Runs on local and free models by default; paid frontier models are an escalation you choose on purpose</li></ul></div>
 </section>
 
@@ -304,7 +306,10 @@ footer{padding:64px 0 40px}
       <div class="tl-body"><h3>The whole reply on the lock screen</h3><p>A finished chat turn pushes its entire answer to the phone, not a teaser. A Passwords &amp; logins page lands over the real encrypted vault — the browser never receives a stored secret.</p></div></article>
 <article class="tl-item">
       <div class="tl-when">Oct 28, 2026</div>
-      <div class="tl-body"><h3>A fleet you can leave running</h3><p>Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green.</p></div></article></div>
+      <div class="tl-body"><h3>A fleet you can leave running</h3><p>Read-aloud reads a 6,000-character answer in parts without stopping or dropping the queue; a Chats badge counts live turns across sessions; the mobile drawer closes on any pick; separate Halloween styling folded into one year-round seasonal layer; and a Machines page for both boxes. 31 test suites green.</p></div></article>
+<article class="tl-item">
+      <div class="tl-when">Oct 28, 2026</div>
+      <div class="tl-body"><h3>The machine's own settings, on the page</h3><p>A Settings page reads both boxes as live state instead of describing them: all 31 startup agents with restart and stop, the power policy that decides whether this Mac returns after an outage, both volumes, network and remote access, security posture, and the exact root command for each thing the desk is not allowed to change. A second tab inventories the harness itself - eleven agent profiles, the skill trees, memory, every session database, the cron registries and their run history, the boards, the vaults, plugins and MCP servers, and the build. Nothing unreadable is dressed up as healthy: a setting that could not be read says so with the reason, and a reboot asks for the node's name typed back.</p></div></article></div>
 </section>
 
 
