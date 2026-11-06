@@ -227,7 +227,7 @@ footer{padding:64px 0 40px}
 <div class="wrap">
 <header class="hero">
   <div class="ink">
-    <div class="eyebrow">Live — FULL WRITE-UP</div>
+    <div class="eyebrow">PRODUCT, NOT A PROTOTYPE — FULL WRITE-UP</div>
     <h1>Resmara</h1>
     <p class="sub">Real-estate boost engine — a brand guide, a 14-day content campaign and a Meta ad launch from a single listing.</p>
     <div class="cta-row"><a class="btn light" href="mailto:ddaymude.ai@gmail.com?subject=Resmara">Ask me for a walkthrough</a>
@@ -250,8 +250,8 @@ footer{padding:64px 0 40px}
     </div>
     <aside class="demo-side">
       <h3>At a glance</h3>
-      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
-      
+      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Public link above</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
+      <div class="fine-note" style="margin-top:18px">Live on the public internet, with the campaign engine and operator console running.</div>
     </aside>
   </div>
   <div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><div class="vid"><video controls preload="metadata" poster="../videos/resmara.jpg" playsinline>
@@ -265,7 +265,7 @@ Your browser does not support the video tag.</video></div></div>
     <div class="eyebrow">THE PROJECT</div>
     <h2>What it is <span class="soft">and why it exists</span></h2>
   </div>
-  <p class="prose">Resmara is one of the systems in my AI portfolio. Real Estate Boost Engine — brand guide, 14-day content campaign and Meta ad launch for a listing. Operator console: /resmara/admin.html</p>
+  <p class="prose">Resmara is the first product I built to be sold to somebody other than me. An estate agent hands it one listing, and it returns the work an agent never has the time for: a brand guide for that property, a fourteen-day content campaign, and a Meta ad launch, all from the same brief. It runs as a hosted service with its own operator console, so it is deployed, billed and supported like software rather than demonstrated like a mock-up.</p>
   <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>Real Estate Boost Engine — brand guide, 14-day content campaign and Meta ad launch for a listing.</li><li>Operator console: /resmara/admin.html</li></ul></div>
 </section>
 
@@ -276,7 +276,14 @@ Your browser does not support the video tag.</video></div></div>
     <h2>The mechanism <span class="soft">end to end</span></h2>
     <p>No hand-waving: this is the actual chain, in the order it runs.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>One listing in, one campaign out</h3><p>The listing is the only input. Copy, palette and posting schedule are derived from it, so the agent never fills in a brief.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>A credit is the unit of work</h3><p>One credit produces a campaign for one property, which keeps the pricing legible to the person paying for it.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>Approval before publishing</h3><p>Drafts land for review before anything reaches a social feed, so the agent stays the author of their own listing.</p></article>
+<article class="step">
+      <div class="n">04</div><h3>Hosted, with an operator console</h3><p>The service runs on its own host with an admin view for accounts and usage, rather than on my laptop.</p></article></div>
 </section>
 
 <section id="models">
@@ -290,7 +297,7 @@ Your browser does not support the video tag.</video></div></div>
       <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
       <tbody></tbody>
     </table>
-    
+    <div class="cost-note">Cost tracks credits consumed, not tokens: the campaign is generated once per property and then served, so the marginal cost of a repeat visit is zero.</div>
     <div class="cost-note"><b>The full model price list.</b> Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates.</div>
     <table class="price-table">
       <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>
@@ -320,10 +327,22 @@ Your browser does not support the video tag.</video></div></div>
     <h2>The steps <span class="soft">in order, with the traps</span></h2>
     <p>This is the short version of what I would do again — including the parts that bit me first.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>Charge for the outcome, not the model call</h3><p>A credit per property is understood by the buyer in one sentence; a token count is not.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>Build the operator console in v1</h3><p>Without a place to see accounts and usage, a hosted product is a demo with a domain.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>Make the first screen the product</h3><p>The landing page shows the engine working, because the buyer is deciding whether it works at all.</p></article></div>
 </section>
 
-
+<section id="notes">
+  <div class="sec-head">
+    <div class="eyebrow">WHAT I LEARNED</div>
+    <h2>Notes from the build</h2>
+  </div>
+  <div class="lessons"><article class="lesson"><span>NOTE 01</span>A product is the billing, the console and the support path — the generation is the easy part.</article>
+<article class="lesson"><span>NOTE 02</span>Selling to a business means the output has to survive their client's approval, not just mine.</article></div>
+</section>
 
 <section id="stack">
   <div class="sec-head">

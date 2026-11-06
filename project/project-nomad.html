@@ -227,7 +227,7 @@ footer{padding:64px 0 40px}
 <div class="wrap">
 <header class="hero">
   <div class="ink">
-    <div class="eyebrow">Live — FULL WRITE-UP</div>
+    <div class="eyebrow">OFFLINE INFRASTRUCTURE — FULL WRITE-UP</div>
     <h1>Project NOMAD</h1>
     <p class="sub">An offline internet: Kiwix library, local AI chat and an admin console that keep working with no connection.</p>
     <div class="cta-row"><a class="btn light" href="mailto:ddaymude.ai@gmail.com?subject=Project%20NOMAD">Ask me for a walkthrough</a>
@@ -251,7 +251,7 @@ footer{padding:64px 0 40px}
     <aside class="demo-side">
       <h3>At a glance</h3>
       <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
-      
+      <div class="fine-note" style="margin-top:18px">Runs on the local machine only — offline internet, Kiwix library and a local AI chat. Listed text-only, no public URL.</div>
     </aside>
   </div>
   <div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><div class="vid"><video controls preload="metadata" poster="../videos/project-nomad.jpg" playsinline>
@@ -265,7 +265,7 @@ Your browser does not support the video tag.</video></div></div>
     <div class="eyebrow">THE PROJECT</div>
     <h2>What it is <span class="soft">and why it exists</span></h2>
   </div>
-  <p class="prose">Project NOMAD is an offline internet that runs on one small machine. It bundles a Kiwix library of Wikipedia, medical and survival references, a local AI chat model and an admin console, all served over the local network so everything still works when the connection does not. It was built for the case where the network is the thing that fails.</p>
+  <p class="prose">Project NOMAD is an internet that keeps working when the connection does not. A Kiwix library, a local AI chat and an admin console run on one small machine, so reference material and an assistant remain available during an outage, in a remote place, or on a network that is intentionally cut. It is the one project here built for the case where the network itself is the thing that fails.</p>
   <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>Works with no internet: the library, the AI chat and the admin console are all served locally.</li><li>Kiwix library of Wikipedia, medical and reference material, searched from the same page.</li><li>A local AI chat that keeps answering when the cloud is unreachable.</li><li>One machine, one launch: the whole stack comes up together.</li></ul></div>
 </section>
 
@@ -276,7 +276,14 @@ Your browser does not support the video tag.</video></div></div>
     <h2>The mechanism <span class="soft">end to end</span></h2>
     <p>No hand-waving: this is the actual chain, in the order it runs.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>A library that ships with the machine</h3><p>Wikipedia, Wikivoyage, Wiktionary, Wikibooks and a full medical reference are served locally and searched from one page.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>A local model, not a cloud call</h3><p>The chat runs against a model on the same machine, so answers do not depend on an uplink.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>One admin surface</h3><p>Installing, updating and checking the library happens from a single admin console served over the local network.</p></article>
+<article class="step">
+      <div class="n">04</div><h3>Data on real disks, not in a bucket</h3><p>The library and models live on an external drive, so the whole install is portable and survives a rebuild.</p></article></div>
 </section>
 
 <section id="models">
@@ -290,7 +297,7 @@ Your browser does not support the video tag.</video></div></div>
       <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
       <tbody></tbody>
     </table>
-    
+    <div class="cost-note">No recurring bill: the machine is already on, the library is a disk, and the model runs locally. The cost is storage and electricity.</div>
     <div class="cost-note"><b>The full model price list.</b> Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates.</div>
     <table class="price-table">
       <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>
@@ -320,10 +327,22 @@ Your browser does not support the video tag.</video></div></div>
     <h2>The steps <span class="soft">in order, with the traps</span></h2>
     <p>This is the short version of what I would do again — including the parts that bit me first.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>Assume the uplink is gone</h3><p>Every dependency has to resolve locally or the system fails at the moment it is needed.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>Ship the library as data, not a service</h3><p>Files on disk survive a rebuild; a hosted corpus does not exist offline.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>Re-run the host patches after every update</h3><p>The upstream installer overwrites host config, so the patch step belongs in the update itself.</p></article></div>
 </section>
 
-
+<section id="notes">
+  <div class="sec-head">
+    <div class="eyebrow">WHAT I LEARNED</div>
+    <h2>Notes from the build</h2>
+  </div>
+  <div class="lessons"><article class="lesson"><span>NOTE 01</span>Offline-first is a storage decision before it is a software decision.</article>
+<article class="lesson"><span>NOTE 02</span>An install you cannot rebuild from scratch is not an install, it is a pet.</article></div>
+</section>
 
 <section id="stack">
   <div class="sec-head">
