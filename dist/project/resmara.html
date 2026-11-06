@@ -235,8 +235,8 @@ footer{padding:64px 0 40px}
     </div>
     <div class="hero-stats">
       <div class="hstat"><div class="v">Live</div><div class="k">CURRENT STATE</div></div>
-      <div class="hstat"><div class="v"><em>$0</em></div><div class="k">MARGINAL RUNNING COST</div></div>
-      <div class="hstat"><div class="v">0</div><div class="k">MODELS / ENGINES</div></div>
+      <div class="hstat"><div class="v"><em>Metered</em></div><div class="k">MARGINAL RUNNING COST</div></div>
+      <div class="hstat"><div class="v">4</div><div class="k">MODELS / ENGINES</div></div>
       <div class="hstat"><div class="v">0</div><div class="k">STACK COMPONENTS</div></div>
     </div>
   </div>
@@ -246,11 +246,16 @@ footer{padding:64px 0 40px}
   <div class="demo-frame">
     <div class="well quad">
       <div class="reel-chip"><i></i>LIVE DEMO</div>
-      <div style="display:flex;height:100%;align-items:center;justify-content:center;font:700 12px var(--font-mono);letter-spacing:2px;color:var(--ink-400)">RESMARA</div>
+      <svg viewBox="0 0 320 144" role="img" aria-label="Animated: Resmara">
+        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
+        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
+        <circle cx="160" cy="72" r="16" fill="#111214"/>
+        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
+      </svg>
     </div>
     <aside class="demo-side">
       <h3>At a glance</h3>
-      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Public link above</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
+      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Public link above</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>4</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>Metered only on escalation</b></div><div class="kv"><span>STACK</span><b>—</b></div>
       <div class="fine-note" style="margin-top:18px">Live on the public internet, with the campaign engine and operator console running.</div>
     </aside>
   </div>
@@ -295,9 +300,32 @@ Your browser does not support the video tag.</video></div></div>
   <div class="cost-card">
     <table class="cost">
       <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
-      <tbody></tbody>
+      <tbody><tr>
+      <td><b>Research + plan (R1/R3/R4)</b><div class="fine-note" style="margin-top:6px">OpenRouter — paid frontier models (escalation only)</div></td>
+      <td class="model hide-sm">openai/gpt-5.5</td>
+      <td class="hide-sm">The listing is researched and the 14-day plan is written on the big model; the engine talks to any OpenAI-compatible base URL, so the same code points at the local Ollama box during development.</td>
+      <td><span class="rate-tag rate-paid">METERED</span></td>
+    </tr>
+<tr>
+      <td><b>Brand guide + quality check (R2/R5)</b><div class="fine-note" style="margin-top:6px">OpenRouter — paid frontier models (escalation only)</div></td>
+      <td class="model hide-sm">openai/gpt-5.4-mini</td>
+      <td class="hide-sm">Cheap tier for the brand palette/voice pass and the pre-publish check, which run on every property.</td>
+      <td><span class="rate-tag rate-paid">METERED</span></td>
+    </tr>
+<tr>
+      <td><b>Post imagery</b><div class="fine-note" style="margin-top:6px">OpenRouter — paid frontier models (escalation only)</div></td>
+      <td class="model hide-sm">openai/gpt-image-1</td>
+      <td class="hide-sm">Generates the campaign visuals from the listing photos and the brand guide.</td>
+      <td><span class="rate-tag rate-paid">METERED</span></td>
+    </tr>
+<tr>
+      <td><b>Build-box engine</b><div class="fine-note" style="margin-top:6px">Local — Ollama on the Mac mini (M4, 24 GB)</div></td>
+      <td class="model hide-sm">local model via RESMARA_ENGINE_BASE_URL</td>
+      <td class="hide-sm">With no hosted endpoint configured the engine reports source=unavailable and generates nothing, rather than inventing copy — the honest failure the hosted service ships with.</td>
+      <td><span class="rate-tag rate-local">LOCAL · $0</span></td>
+    </tr></tbody>
     </table>
-    <div class="cost-note">Cost tracks credits consumed, not tokens: the campaign is generated once per property and then served, so the marginal cost of a repeat visit is zero.</div>
+    <div class="cost-note">One credit buys one property's campaign: the listing is read once, the plan and the visuals are generated once, and then the posts are served. Repeat views cost nothing, and the model choice per step is a config value (R1/R3/R4 on the big model, R2/R5 on the mini) so the bill follows the work rather than the traffic.</div>
     <div class="cost-note"><b>The full model price list.</b> Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates.</div>
     <table class="price-table">
       <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>

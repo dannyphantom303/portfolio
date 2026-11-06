@@ -67,6 +67,12 @@
         "where": "inherits the agent's provider",
         "rate": "see that agent's tier",
         "marginal": "varies"
+      },
+      "local-disk": {
+        "label": "Local — reference files on disk (Kiwix ZIM), no model",
+        "where": "same machine, no network",
+        "rate": "no per-token fee — retrieval, not inference",
+        "marginal": "$0"
       }
     },
     "priceTable": [
@@ -1784,8 +1790,33 @@
           "d": "The service runs on its own host with an admin view for accounts and usage, rather than on my laptop."
         }
       ],
-      "models": [],
-      "costNote": "Cost tracks credits consumed, not tokens: the campaign is generated once per property and then served, so the marginal cost of a repeat visit is zero.",
+      "models": [
+        {
+          "job": "Research + plan (R1/R3/R4)",
+          "runtime": "openrouter-paid",
+          "model": "openai/gpt-5.5",
+          "note": "The listing is researched and the 14-day plan is written on the big model; the engine talks to any OpenAI-compatible base URL, so the same code points at the local Ollama box during development."
+        },
+        {
+          "job": "Brand guide + quality check (R2/R5)",
+          "runtime": "openrouter-paid",
+          "model": "openai/gpt-5.4-mini",
+          "note": "Cheap tier for the brand palette/voice pass and the pre-publish check, which run on every property."
+        },
+        {
+          "job": "Post imagery",
+          "runtime": "openrouter-paid",
+          "model": "openai/gpt-image-1",
+          "note": "Generates the campaign visuals from the listing photos and the brand guide."
+        },
+        {
+          "job": "Build-box engine",
+          "runtime": "local-ollama",
+          "model": "local model via RESMARA_ENGINE_BASE_URL",
+          "note": "With no hosted endpoint configured the engine reports source=unavailable and generates nothing, rather than inventing copy — the honest failure the hosted service ships with."
+        }
+      ],
+      "costNote": "One credit buys one property's campaign: the listing is read once, the plan and the visuals are generated once, and then the posts are served. Repeat views cost nothing, and the model choice per step is a config value (R1/R3/R4 on the big model, R2/R5 on the mini) so the bill follows the work rather than the traffic.",
       "howto": [
         {
           "t": "Charge for the outcome, not the model call",
@@ -1828,8 +1859,21 @@
           "d": "The library and models live on an external drive, so the whole install is portable and survives a rebuild."
         }
       ],
-      "models": [],
-      "costNote": "No recurring bill: the machine is already on, the library is a disk, and the model runs locally. The cost is storage and electricity.",
+      "models": [
+        {
+          "job": "Offline chat",
+          "runtime": "local-ollama",
+          "model": "on-device GGUF served through Open WebUI",
+          "note": "No cloud call in the path: the model loads from disk on the same machine, so the assistant answers with the uplink unplugged."
+        },
+        {
+          "job": "Reference lookup",
+          "runtime": "local-disk",
+          "model": "Kiwix ZIM library (no model)",
+          "note": "Wikipedia, Wikivoyage, Wiktionary, Wikibooks and a medical reference are searched from local ZIM files — retrieval with no inference at all."
+        }
+      ],
+      "costNote": "Nothing is metered: the library is a disk, the model runs on the machine that is already on, and the only ongoing cost is storage and electricity. That is the point — an offline system with a subscription is not offline.",
       "howto": [
         {
           "t": "Assume the uplink is gone",

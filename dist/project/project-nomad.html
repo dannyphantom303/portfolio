@@ -236,7 +236,7 @@ footer{padding:64px 0 40px}
     <div class="hero-stats">
       <div class="hstat"><div class="v">Live</div><div class="k">CURRENT STATE</div></div>
       <div class="hstat"><div class="v"><em>$0</em></div><div class="k">MARGINAL RUNNING COST</div></div>
-      <div class="hstat"><div class="v">0</div><div class="k">MODELS / ENGINES</div></div>
+      <div class="hstat"><div class="v">2</div><div class="k">MODELS / ENGINES</div></div>
       <div class="hstat"><div class="v">0</div><div class="k">STACK COMPONENTS</div></div>
     </div>
   </div>
@@ -246,11 +246,16 @@ footer{padding:64px 0 40px}
   <div class="demo-frame">
     <div class="well quad">
       <div class="reel-chip"><i></i>LIVE DEMO</div>
-      <div style="display:flex;height:100%;align-items:center;justify-content:center;font:700 12px var(--font-mono);letter-spacing:2px;color:var(--ink-400)">PROJECT NOMAD</div>
+      <svg viewBox="0 0 320 144" role="img" aria-label="Animated: Project NOMAD">
+        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
+        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
+        <circle cx="160" cy="72" r="16" fill="#111214"/>
+        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
+      </svg>
     </div>
     <aside class="demo-side">
       <h3>At a glance</h3>
-      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
+      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>2</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
       <div class="fine-note" style="margin-top:18px">Runs on the local machine only — offline internet, Kiwix library and a local AI chat. Listed text-only, no public URL.</div>
     </aside>
   </div>
@@ -295,9 +300,20 @@ Your browser does not support the video tag.</video></div></div>
   <div class="cost-card">
     <table class="cost">
       <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
-      <tbody></tbody>
+      <tbody><tr>
+      <td><b>Offline chat</b><div class="fine-note" style="margin-top:6px">Local — Ollama on the Mac mini (M4, 24 GB)</div></td>
+      <td class="model hide-sm">on-device GGUF served through Open WebUI</td>
+      <td class="hide-sm">No cloud call in the path: the model loads from disk on the same machine, so the assistant answers with the uplink unplugged.</td>
+      <td><span class="rate-tag rate-local">LOCAL · $0</span></td>
+    </tr>
+<tr>
+      <td><b>Reference lookup</b><div class="fine-note" style="margin-top:6px">Local — reference files on disk (Kiwix ZIM), no model</div></td>
+      <td class="model hide-sm">Kiwix ZIM library (no model)</td>
+      <td class="hide-sm">Wikipedia, Wikivoyage, Wiktionary, Wikibooks and a medical reference are searched from local ZIM files — retrieval with no inference at all.</td>
+      <td><span class="rate-tag rate-local">LOCAL · $0</span></td>
+    </tr></tbody>
     </table>
-    <div class="cost-note">No recurring bill: the machine is already on, the library is a disk, and the model runs locally. The cost is storage and electricity.</div>
+    <div class="cost-note">Nothing is metered: the library is a disk, the model runs on the machine that is already on, and the only ongoing cost is storage and electricity. That is the point — an offline system with a subscription is not offline.</div>
     <div class="cost-note"><b>The full model price list.</b> Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates.</div>
     <table class="price-table">
       <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>

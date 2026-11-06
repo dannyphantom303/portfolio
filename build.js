@@ -163,7 +163,11 @@ function indexHtml() {
     const gridEnd = authored.lastIndexOf('  </div>\n</section>');
     if (gridEnd < 0) return authored;
     let out = authored.slice(0, gridEnd) + '\n' + missing.map(card).join('\n') + '\n' + authored.slice(gridEnd);
-    out = out.replace(/(<h2>Projects <span class="soft">)\(\d+\)(<\/span><\/h2>)/, `$1(${projects.length})$2`);
+    out = out.replace(/(<h2>Projects <span class="soft">)\((\d+)\)(<\/span><\/h2>)/, `$1(${projects.length})$3`);
+    // Write the refreshed grid back to the authored source: the design stays hand-edited,
+    // the cards stay generated, and dist/index.html remains byte-identical to src/ (which
+    // the build contract test asserts). Idempotent — next run finds nothing missing.
+    fs.writeFileSync(SRC_INDEX, out);
     return out;
   }
   const body = `
