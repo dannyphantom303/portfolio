@@ -1,0 +1,473 @@
+{
+  "_note": "Beat scripts for the portfolio explainers. focus = [x0,y0,x1,y1] as fractions of the shot; say = narration; cap = on-screen caption.",
+  "sport-command-center": {
+    "title": "Sport Command Center",
+    "shot": "sport-command-center-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.13,
+          0.045,
+          0.62,
+          0.135
+        ],
+        "cap": "One screen that opens your day",
+        "say": "This is how my day starts. The Command Center reads every system I run and tells me what is waiting, what is running and what needs a decision, before I have asked anything."
+      },
+      {
+        "focus": [
+          0.13,
+          0.165,
+          0.86,
+          0.3
+        ],
+        "cap": "Today's snapshot, pulled live",
+        "say": "The snapshot is live: content waiting for approval, trades closed, the worst alert of the session, and the security position. Each tile is a real number from a real system, not a mock-up."
+      },
+      {
+        "focus": [
+          0.13,
+          0.6,
+          0.72,
+          0.855
+        ],
+        "cap": "What is waiting on me",
+        "say": "Underneath, it separates the work that is waiting on me from the work I have not published yet, so nothing sits finished and invisible. That gap is where projects used to die."
+      }
+    ]
+  },
+  "track-my-gold": {
+    "title": "Track My Gold",
+    "shot": "track-my-gold-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.15,
+          0.02,
+          0.6,
+          0.21
+        ],
+        "cap": "166 posted · 151 waiting",
+        "say": "Track My Gold runs the YouTube channel for a gold prospecting brand. It has posted a hundred and sixty six videos and it is holding a hundred and fifty one suggestions that want a decision."
+      },
+      {
+        "focus": [
+          0.15,
+          0.24,
+          0.62,
+          0.8
+        ],
+        "cap": "Approve, post or deny, one at a time",
+        "say": "Every suggestion arrives with the video, the draft comment and a category. I approve, post or deny it in one click, and a human is always the last step before anything goes public."
+      },
+      {
+        "focus": null,
+        "cap": "Search, Instagram, affiliate, tracking",
+        "say": "The same dashboard carries the search console, Instagram, the affiliate program and the tracking log, so the channel is run from one place instead of six tabs."
+      }
+    ]
+  },
+  "gold-spot-explorer": {
+    "title": "Gold Spot Explorer",
+    "shot": "gold-spot-explorer-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.0,
+          0.01,
+          0.29,
+          0.62
+        ],
+        "cap": "Coordinates in, prospects out",
+        "say": "Gold Spot Explorer answers a prospecting question with public data only. Give it a latitude, a longitude and a radius, and it scores the ground before you drive out to it."
+      },
+      {
+        "focus": [
+          0.3,
+          0.02,
+          0.85,
+          0.95
+        ],
+        "cap": "Scored against real geology",
+        "say": "The map layers historical gold sites, active BLM claims, public land ownership and the USGS magnetic survey, so the score is anchored to what is actually under the ground."
+      },
+      {
+        "focus": [
+          0.0,
+          0.42,
+          0.29,
+          0.95
+        ],
+        "cap": "Ranked areas, then named prospects",
+        "say": "It comes back with areas ranked by prospectivity and the named prospects inside them, and it tells you plainly which claims are open and which are already taken. No API keys, no fee."
+      }
+    ]
+  },
+  "hermes-vision": {
+    "title": "Hermes Vision",
+    "shot": "hermes-vision-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.04,
+          0.05,
+          0.75,
+          0.3
+        ],
+        "cap": "Pick the agent, not the app",
+        "say": "Hermes Vision is the front door to a team of agents rather than one assistant. Each profile has its own voice, its own model and its own job, from marketing to risk."
+      },
+      {
+        "focus": [
+          0.04,
+          0.38,
+          0.95,
+          0.62
+        ],
+        "cap": "Pick up a session from any device",
+        "say": "Start a session on the phone, walk away, and pick the same conversation up on the glasses or at the desktop. The session list shows what each agent was doing and where it got to."
+      }
+    ]
+  },
+  "hermes-worlds": {
+    "title": "Hermes Worlds",
+    "shot": "hermes-worlds-home.png",
+    "beats": [
+      {
+        "focus": null,
+        "cap": "A frontier town, built in the browser",
+        "say": "Hermes Worlds is a 3D frontier town that runs in a browser tab. It is the same business model as the rest of my work, made walkable: a gold mine, a saloon and a forge on one main street."
+      },
+      {
+        "focus": [
+          0.42,
+          0.26,
+          0.88,
+          0.58
+        ],
+        "cap": "Characters with a model behind them",
+        "say": "The characters are agents with a model behind them and a job to do, so a conversation in the town is a conversation with the same systems that run the dashboards."
+      }
+    ]
+  },
+  "obsidian-brain": {
+    "title": "Obsidian Brain",
+    "shot": "obsidian-brain-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.1,
+          0.09,
+          0.52,
+          0.3
+        ],
+        "cap": "My notes, counted",
+        "say": "Obsidian Brain reads the vault where I keep every note, project and decision, and counts it: one hundred and twenty four projects, sixty five thousand links, thirty one thousand words."
+      },
+      {
+        "focus": [
+          0.1,
+          0.33,
+          0.62,
+          0.58
+        ],
+        "cap": "Written, linked, or drifting",
+        "say": "The charts split that into what is written, what is linked and what is drifting, so the graph shows where thinking has stalled instead of just looking impressive."
+      },
+      {
+        "focus": [
+          0.3,
+          0.62,
+          0.95,
+          0.86
+        ],
+        "cap": "Insights that name the gap",
+        "say": "Then it makes the observations I would miss, in plain language, next to the tables of tags and entities behind them. The vault is the memory; this is the index."
+      }
+    ]
+  },
+  "agentic-ai-course": {
+    "title": "Applied Agentic AI",
+    "shot": "agentic-ai-course-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.14,
+          0.2,
+          0.62,
+          0.46
+        ],
+        "cap": "A 12-module course, built and passing",
+        "say": "Applied Agentic AI is a twelve-module course on agent systems, multi-agent orchestration and deployment, written against the Virginia Tech and Simplilearn syllabus."
+      },
+      {
+        "focus": [
+          0.06,
+          0.55,
+          0.62,
+          0.78
+        ],
+        "cap": "Module by module, a quiz behind each one",
+        "say": "The course runs module by module with a quiz behind every section, so progress means understanding rather than a completion checkbox. Sixty five hours and a capstone at the end."
+      },
+      {
+        "focus": [
+          0.1,
+          0.66,
+          0.55,
+          0.95
+        ],
+        "cap": "Real stacks, real artefacts",
+        "say": "The modules build actual systems: tool calling, retrieval, LangChain, planning and evaluation, each one landing as a runnable artefact instead of slides."
+      }
+    ]
+  },
+  "project-showcase-engine": {
+    "title": "Project Showcase Engine",
+    "shot": "project-showcase-engine-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.05,
+          0.1,
+          0.48,
+          0.62
+        ],
+        "cap": "The portfolio you are looking at",
+        "say": "This is the portfolio itself. I built the generator because the work kept outrunning the write-up: a project was finished and the site still described the one before it."
+      },
+      {
+        "focus": [
+          0.06,
+          0.66,
+          0.55,
+          0.95
+        ],
+        "cap": "Real demos, refreshed daily",
+        "say": "The site rebuilds itself every morning from the Command Center registry, re-shoots the screens, re-renders the demos and republishes. If a project exists, it is on this page the next day."
+      }
+    ]
+  },
+  "ai-consulting": {
+    "title": "AI Consulting",
+    "shot": "ai-consulting-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.08,
+          0.14,
+          0.55,
+          0.25
+        ],
+        "cap": "Clients, projects, revenue",
+        "say": "The consulting desk tracks the business side of the work: active clients, projects in flight, leads this month and revenue booked, all on one line."
+      },
+      {
+        "focus": [
+          0.1,
+          0.3,
+          0.62,
+          0.56
+        ],
+        "cap": "Fiverr and Upwork in one pipeline",
+        "say": "Fiverr and Upwork enquiries land in the same kanban, so a lead from either marketplace moves through one pipeline with a next action on every card."
+      },
+      {
+        "focus": [
+          0.1,
+          0.62,
+          0.62,
+          0.95
+        ],
+        "cap": "Enquiries and the lead magnet",
+        "say": "Below it, every inbound enquiry is logged with its status, and the lead magnet reports what it actually converted: a thousand visits, seventy nine downloads, nine enquiries."
+      }
+    ]
+  },
+  "tradedeck": {
+    "title": "TradeDeck",
+    "shot": "tradedeck-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.15,
+          0.08,
+          0.72,
+          0.3
+        ],
+        "cap": "A trading desk that shows its working",
+        "say": "TradeDeck is a multi-agent trading desk. The account value and the equity curve are read from the broker, so the top of the page is the account's own truth rather than a reconstruction."
+      },
+      {
+        "focus": [
+          0.15,
+          0.39,
+          0.6,
+          0.57
+        ],
+        "cap": "Every number has a source",
+        "say": "Positions, realised profit and trade count sit next to the runtime that produced them. If the desk is not running, the page says so instead of showing a stale number."
+      },
+      {
+        "focus": [
+          0.0,
+          0.31,
+          0.55,
+          0.62
+        ],
+        "cap": "Signals, risk gates and a runtime that reports",
+        "say": "Signals, the idea feed, the risk gates and the strategies sit behind the chart, and the runtime block says exactly what produced the number you are looking at. If the desk is not running, the page says so instead of showing a stale figure."
+      }
+    ]
+  },
+  "peril-adventure-wear": {
+    "title": "Peril Adventure Wear",
+    "shot": "peril-adventure-wear-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.04,
+          0.09,
+          0.42,
+          0.21
+        ],
+        "cap": "A shirt line that writes its own ads",
+        "say": "Peril Adventure Wear is a print-on-demand shirt line with a content autopilot. Posts per day, the drip schedule and the channel list are set once, at the top."
+      },
+      {
+        "focus": [
+          0.05,
+          0.24,
+          0.31,
+          0.72
+        ],
+        "cap": "Three layouts, six palettes",
+        "say": "Each draft is a real shirt design rendered in three layouts and six print palettes, with the copy written for the brand: leave the place better than you found it."
+      },
+      {
+        "focus": [
+          0.32,
+          0.24,
+          0.6,
+          0.7
+        ],
+        "cap": "Approve first, publish second",
+        "say": "Nothing posts on its own. The drafts come here for approval, and only an approved design goes to Buffer or to the shop, so the brand never speaks without me having read it."
+      }
+    ]
+  },
+  "ip-competitor-watch": {
+    "title": "IP & Competitor Watch",
+    "shot": "ip-competitor-watch-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.13,
+          0.1,
+          0.6,
+          0.24
+        ],
+        "cap": "Can anyone take this from me?",
+        "say": "IP and Competitor Watch asks one uncomfortable question of every venture: if this works, who already owns it? Six projects audited, fifty two competitors tracked, nineteen threats."
+      },
+      {
+        "focus": [
+          0.13,
+          0.26,
+          0.62,
+          0.55
+        ],
+        "cap": "Ranked by how defensible it really is",
+        "say": "Each project is scored for defensibility, and the score is deliberately unkind: a local repo with no hosted remote cannot prove when it was built, so it does not get the benefit of the doubt."
+      },
+      {
+        "focus": [
+          0.13,
+          0.56,
+          0.62,
+          0.85
+        ],
+        "cap": "Who is directly in your lane",
+        "say": "At the bottom it names who is directly in the lane, so I know whether I am early, late, or already a copy of somebody else."
+      }
+    ]
+  },
+  "resmara": {
+    "title": "Resmara",
+    "shot": "resmara-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.09,
+          0.19,
+          0.46,
+          0.63
+        ],
+        "cap": "A listing that markets itself",
+        "say": "Resmara is a product for estate agents. Send it one listing and it writes the brand guide, the fourteen day content campaign and the ad launch, which is the work an agent never has time for."
+      },
+      {
+        "focus": [
+          0.5,
+          0.18,
+          0.95,
+          0.55
+        ],
+        "cap": "One credit, a whole campaign",
+        "say": "One credit produces a fortnight of posts per property, and it runs as a real hosted service with its own operator console, not a prototype. It is the first product I built to be sold to somebody other than me."
+      }
+    ]
+  },
+  "project-nomad": {
+    "title": "Project NOMAD",
+    "shot": "project-nomad-library.png",
+    "beats": [
+      {
+        "focus": [
+          0.0,
+          0.0,
+          0.55,
+          0.13
+        ],
+        "cap": "An internet that works offline",
+        "say": "Project NOMAD is an offline internet. A Kiwix library, a local AI chat and an admin console run on one small machine, so the reference material and the assistant keep working when the connection does not."
+      },
+      {
+        "focus": [
+          0.02,
+          0.12,
+          0.55,
+          0.58
+        ],
+        "cap": "Ten libraries, searched locally",
+        "say": "Wikipedia, Wikivoyage, Wiktionary, Wikibooks and a full medical reference are all searched from the same page, served over the local network rather than from the cloud."
+      }
+    ]
+  },
+  "token-killers": {
+    "title": "Token Killers",
+    "shot": "token-killers-home.png",
+    "beats": [
+      {
+        "focus": [
+          0.22,
+          0.17,
+          0.76,
+          0.38
+        ],
+        "cap": "What your tokens actually cost",
+        "say": "Token Killers is a free calculator for the question every team asks late: what is this model actually costing us? Thirty seconds, no sign-up, real published rates."
+      },
+      {
+        "focus": [
+          0.24,
+          0.68,
+          0.76,
+          1.0
+        ],
+        "cap": "Real rates, verified usage",
+        "say": "Put in your monthly calls and the token count and it shows the bill, then the optimisation checklist: what to cache, what to route to a local model, and what to stop sending at all."
+      }
+    ]
+  }
+}

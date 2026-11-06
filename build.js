@@ -273,12 +273,15 @@ function costTable(d) {
 function projectHtml(p) {
   const d = detail[p.slug] || {};
   const imgs = shots(p.slug);
+  const poster = asset(p.slug, 'jpg') && fs.existsSync(path.join(VIDEOS, `${p.slug}.jpg`))
+    ? ` poster="../videos/${p.slug}.jpg"` : '';
   const video = asset(p.slug, 'mp4')
-    ? `<div class="vid"><video controls preload="metadata">
+    ? `<div class="vid"><video controls preload="metadata"${poster} playsinline>
 <source src="../videos/${p.slug}.mp4" type="video/mp4">
 Your browser does not support the video tag.</video></div>`
     : (p.video ? `<div class="vid"><iframe src="${esc(p.video)}" allowfullscreen loading="lazy" title="${esc(p.name)} demo" style="width:100%;aspect-ratio:16/9;border:0;border-radius:18px"></iframe></div>` : '');
-  const gif = asset(p.slug, 'gif')
+  // a narrated walkthrough replaces the silent gif: shipping both doubled the page weight
+  const gif = (!asset(p.slug, 'mp4') && asset(p.slug, 'gif'))
     ? `<div class="gif"><img src="../videos/${p.slug}.gif" alt="${esc(p.name)} animated preview" loading="lazy"/></div>` : '';
   const svg = heroSvg(p.slug);
   const models = d.models || [];

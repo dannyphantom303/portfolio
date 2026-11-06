@@ -3,113 +3,125 @@
 // New cards on the dashboard become portfolio projects automatically on the next refresh —
 // no hand-editing. Idempotent. Run: node discover.js [--dry-run]
 //
+// SOURCE: the Command Center is a server-rendered SPA now. Its project registry is the
+// `const PROJECTS = [...]` array in ~/.hermes/sport-cc/web/index.html — the same array the
+// sidebar, the All-projects grid and Today all read from. This used to scrape the old
+// "Track My Gold Dashboard.app" bundle; when that app was retired every scheduled refresh
+// silently stopped finding new projects (the file was gone, and refresh.sh runs with `|| true`).
+//
 // Safety: token-gated URLs (?token=…) are NEVER stored, and such cards are flagged so the
 // public build excludes them. Never auto-captures screenshots of a sensitive page.
 const fs = require('fs');
 const path = require('path');
+const vm = require('vm');
 
 const ROOT = __dirname;
-const CC = '/Users/dan/Desktop/Track My Gold Dashboard.app/Contents/Resources/command-center.html';
+const CC_CANDIDATES = [
+  path.join(process.env.HOME, '.hermes/sport-cc/web/index.html'),      // dev / live tree
+  path.join(process.env.HOME, '.hermes/sport-cc-prod/web/index.html'), // prod tree
+];
 const REG_PATH = path.join(ROOT, 'projects.json');
 const DRY = process.argv.includes('--dry-run');
 
 const slugify = s => s.toLowerCase().replace(/&amp;/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48);
-const clean = s => (s || '')
-  .replace(/<[^>]*>/g, '')
-  .replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&quot;/g, '"')
-  .replace(/\s+/g, ' ').trim();
 
-// Command Center href -> existing portfolio slug (the CC and the portfolio name projects
-// differently; without this a new card would duplicate an existing entry).
+// Command Center name -> existing portfolio slug. The CC and the portfolio name projects
+// differently; without this a new card would duplicate an existing entry.
 const ALIAS = {
-  '/hermes': 'sport-command-center',
-  '/networth': 'net-worth-ledger',
-  '/brain': 'obsidian-brain',
-  '/portfolio': 'project-showcase-engine',
-  '/career': 'project-showcase-engine',
-  '/hermes-game': 'hermes-worlds',
-  '/vr': 'hermes-worlds',
-  '/hermes-home': 'smart-home-hub',
+  'track-my-gold': 'track-my-gold',
+  'portfolio-engine': 'project-showcase-engine',
+  'career-engine': 'project-showcase-engine',
+  'hermes-agent': 'sport-command-center',
+  'net-worth': 'net-worth-ledger',
+  'obsidian-brain': 'obsidian-brain',
+  'hermes-worlds': 'hermes-worlds',
+  'hermes-game': 'hermes-worlds',
+  'smart-home-hub': 'smart-home-hub',
+  'peril-adventure': 'peril-adventure-wear',
+  'cnbc-glasses': 'cnbc-live-on-glasses',
+  'project-nomad': 'project-nomad',
 };
 
-// Internal dashboards that must never become a portfolio project (no public artifact).
-const IGNORE = new Set(['/publish']);
+// Command Center internals that must never become a portfolio project (no public artifact).
+const IGNORE = new Set(['publish-queue', 'build-and-deploy', 'build-deploy']);
 
-const pathOf = href => {
-  try { return new URL(href, 'https://local.invalid').pathname.replace(/\/+$/, '') || '/'; }
-  catch { return ''; }
-};
-
-// Cards whose dashboard exposes private data / agent internals: list them, but keep the
-// published entry text-only (still publicSafe; no screenshot is ever auto-captured).
-const SENSITIVE = /\/networth|\/brain|\/hermes\/?$|\/ai\b|\/openclaw|token=/;
-
-function parseCards(html) {
-  const out = [];
-  const re = /<a\b[^>]*class="card"[^>]*>([\s\S]*?)<\/a>/g;
-  let m;
-  while ((m = re.exec(html))) {
-    const tag = m[0].slice(0, m[0].indexOf('>') + 1);
-    const body = m[1];
-    const href = (tag.match(/href="([^"]*)"/) || [])[1] || '';
-    const name = clean((body.match(/<h2>([\s\S]*?)<\/h2>/) || [])[1]);
-    if (!name) continue;
-    out.push({
-      href,
-      urlPath: href.startsWith('http') ? null : href,   // keep host-relative only
-      pathname: pathOf(href),                            // for alias matching on absolute URLs too
-      icon: clean((body.match(/<div class="card-icon">([\s\S]*?)<\/div>/) || [])[1]) || '📦',
-      name,
-      desc: clean((body.match(/<p>([\s\S]*?)<\/p>/) || [])[1]),
-      status: clean((body.match(/<span class="status[^"]*"[^>]*>([\s\S]*?)<\/span>/) || [])[1])
-        .replace(/^[●•]\s*/, '').replace(/^checking…?$/, '') || '',
-    });
-  }
-  return out;
+function pickSource() {
+  for (const p of CC_CANDIDATES) if (fs.existsSync(p)) return p;
+  throw new Error(`no Command Center registry found (looked in ${CC_CANDIDATES.join(', ')})`);
 }
 
-// Taglines appear on the landing cards and inside every syndicated post. A hard
-// 160-char slice cut sentences mid-word (gold-spot-explorer shipped as
-// "...and ravine beds and score w"), so cap at 200 but cut on a word boundary
-// and mark the elision instead of guillotining the word.
-const TAGLINE_MAX = 200;
-function shortTagline(s) {
-  const t = (s || '').trim();
-  if (t.length <= TAGLINE_MAX) return t;
-  const cut = t.slice(0, TAGLINE_MAX);
-  const sp = cut.lastIndexOf(' ');
-  return (sp > 80 ? cut.slice(0, sp) : cut).replace(/[\s,;:—–-]+$/, '') + '…';
+// The registry is a JS array literal inside the page. Evaluate just that literal with a
+// stub GLYPH object (icons are CC-only decoration) rather than pulling in a parser.
+function readProjects(html) {
+  const start = html.indexOf('const PROJECTS = [');
+  if (start < 0) throw new Error('PROJECTS array not found — the Command Center markup changed');
+  const from = html.indexOf('[', start);
+  let depth = 0, i = from, inStr = null, esc = false, end = -1;
+  for (; i < html.length; i++) {
+    const c = html[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === '\\') esc = true;
+      else if (c === inStr) inStr = null;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === '`') { inStr = c; continue; }
+    if (c === '[') depth++;
+    else if (c === ']') { depth--; if (depth === 0) { end = i + 1; break; } }
+  }
+  if (end < 0) throw new Error('unterminated PROJECTS array');
+  const literal = html.slice(from, end);
+  const sandbox = { GLYPH: new Proxy({}, { get: () => '' }) };
+  return vm.runInNewContext(`(${literal})`, sandbox);
+}
+
+const PRIVATE_HOST = /^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|.*\.local$|.*\.ts\.net$)/i;
+function publicUrl(p) {
+  const u = String(p.url || '');
+  if (!u || u.startsWith('#')) return null;       // in-shell route: no public page
+  if (/token=/.test(u)) return null;              // never store a gated URL
+  try {
+    const host = new URL(u).hostname;
+    // A LAN address or the tailnet URL is useless to a visitor and leaks the home setup.
+    if (PRIVATE_HOST.test(host)) return null;
+  } catch { return null; }
+  return u;
 }
 
 function main() {
+  const src = pickSource();
   const reg = JSON.parse(fs.readFileSync(REG_PATH, 'utf8'));
   const existingSlugs = new Set(reg.projects.map(p => p.slug));
-  const cards = parseCards(fs.readFileSync(CC, 'utf8'));
+  const cards = readProjects(fs.readFileSync(src, 'utf8'));
   const added = [];
 
   for (const c of cards) {
-    if (IGNORE.has(c.pathname)) continue;
-    const slug = ALIAS[c.pathname] || slugify(c.name);
+    const baseSlug = slugify(c.name || '');
+    if (!baseSlug) continue;
+    const slug = ALIAS[baseSlug] || baseSlug;
+    if (IGNORE.has(baseSlug) || IGNORE.has(slug)) continue;
     if (existingSlugs.has(slug)) continue;
-    const sensitive = SENSITIVE.test(c.href);
-    const sentences = c.desc.split(/(?<=[.!?])\s+/).filter(Boolean);
+    const desc = String(c.desc || '').replace(/\s+/g, ' ').trim();
+    const sentences = desc.split(/(?<=[.!?])\s+/).filter(Boolean);
+    const url = publicUrl(c);
     const entry = {
       slug,
       name: c.name,
-      tagline: sentences[0] ? shortTagline(sentences[0]) : c.name,
-      icon: c.icon,
-      status: c.status || 'Live',
-      aiDoable: /\bai\b|agent|automat|llm/i.test(`${c.name} ${c.desc}`),
-      publicSafe: true,                     // text-only listing; never screenshots a sensitive page
-      autoDiscovered: true,                 // write-up is auto-drafted; refine when convenient
+      tagline: sentences[0] || c.name,
+      icon: c.icon || '📦',
+      status: 'Live',
+      group: c.group || 'app',
+      aiDoable: /\bai\b|agent|automat|llm|model/i.test(`${c.name} ${desc}`),
+      publicSafe: true,
+      autoDiscovered: true,
       stack: [],
-      writeup: `${c.name} is one of the systems in my AI portfolio. ${c.desc}`.trim(),
-      highlights: (sentences.length ? sentences : [c.desc || c.name]).slice(0, 3),
+      writeup: `${c.name} is one of the systems in my AI portfolio. ${desc}`.trim(),
+      highlights: (sentences.length ? sentences : [desc || c.name]).slice(0, 3),
       screenshots: [],
       video: '',
     };
-    if (c.urlPath) entry.url = c.urlPath;
-    if (sensitive) entry.note = 'Dashboard shows private data — listed text-only, no screenshot.';
+    if (url) entry.url = url;
+    else entry.note = 'Internal or on-machine only — listed text-only, no public URL.';
     reg.projects.push(entry);
     existingSlugs.add(slug);
     added.push(entry);

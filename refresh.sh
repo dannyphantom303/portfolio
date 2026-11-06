@@ -12,8 +12,10 @@ echo "[$(date '+%F %T')] refresh start" >> "$LOG"
 # Discover projects from the Command Center and sync new ones into projects.json first,
 # so a project added to the dashboard shows up here on the next run without hand-editing.
 node "$PWD/discover.js" >> "$LOG" 2>&1 || true
-# Videos/GIFs FIRST so build.js can embed them (build preserves dist/videos via cache).
-python3 "$PWD/make-video.py" all >> "$LOG" 2>&1 || true
+# Narrated explainers FIRST so build.js can embed them. explainer.py skips videos whose
+# sources are unchanged, so a normal night re-encodes nothing.
+python3 "$PWD/explainer.py" tts >> "$LOG" 2>&1 || true
+python3 "$PWD/explainer.py" render >> "$LOG" 2>&1 || true
 node build.js >> "$LOG" 2>&1
 node syndicate.js >> "$LOG" 2>&1 || true
 node publish-dashboard.js >> "$LOG" 2>&1 || true
