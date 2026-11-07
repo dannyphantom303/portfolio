@@ -563,6 +563,26 @@
       "screenshots": [],
       "video": "",
       "note": "Runs on the local machine only — offline internet, Kiwix library and a local AI chat. Listed text-only, no public URL."
+    },
+    {
+      "slug": "sound-it-out",
+      "name": "Sound It Out",
+      "tagline": "Adult reading & spelling lab — the 53 sound units, syllable sounding-out, the spelling rules and their exceptions, flashcards and a 60-second sprint.",
+      "icon": "📦",
+      "status": "Live",
+      "group": "app",
+      "aiDoable": false,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "Sound It Out is one of the systems in my AI portfolio. Adult reading & spelling lab — the 53 sound units, syllable sounding-out, the spelling rules and their exceptions, flashcards and a 60-second sprint. Progress is kept in your browser, not on the server.",
+      "highlights": [
+        "Adult reading & spelling lab — the 53 sound units, syllable sounding-out, the spelling rules and their exceptions, flashcards and a 60-second sprint.",
+        "Progress is kept in your browser, not on the server."
+      ],
+      "screenshots": [],
+      "video": "",
+      "note": "Internal or on-machine only — listed text-only, no public URL."
     }
   ]
 }
