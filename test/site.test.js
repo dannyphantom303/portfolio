@@ -94,7 +94,7 @@ test('build: embeds the local demo video on a project page when the asset exists
 test('router: /portfolio redirects to /portfolio/ so relative links resolve', () => {
   const src = fs.readFileSync('/Users/dan/Scripts/tmg-router.js', 'utf8');
   assert.match(src, /pathname === '\/portfolio'\)[\s\S]*?301[\s\S]*?Location: '\/portfolio\/'/, 'slash redirect present');
-  assert.match(src, /pathname === '\/portfolio\/'\)[\s\S]*?dist\/index\.html/, 'index served at trailing slash');
+  assert.match(src, /if \(pathname === '\/portfolio\/'[\s\S]*?\|\| 'index\.html'/, 'index served at trailing slash');
 });
 
 test('security: no secrets, tokens, or internal URLs in the published site', () => {
@@ -117,10 +117,16 @@ test('discover: auto-syncs new projects from the Command Center, idempotently, w
   assert.doesNotMatch(raw, /token=/, 'token-gated dashboard URLs must never be written to the registry');
 });
 
-test('router: /portfolio handler exists and is traversal-guarded', () => {
+test('router: /portfolio handler exists, is traversal-guarded, and serves byte ranges', () => {
   const src = fs.readFileSync('/Users/dan/Scripts/tmg-router.js', 'utf8');
   assert.match(src, /'\/portfolio'/, 'portfolio route registered');
-  assert.match(src, /startsWith\('\/Users\/dan\/portfolio\/dist'\)/, 'dist containment guard present');
+  // Path confinement moved into serveStatic (one guard for every static mount).
+  assert.match(src, /full\.startsWith\(root \+ path\.sep\)/, 'traversal guard compares against the resolved root');
+  assert.match(src, /serveStatic\(req, res, '\/Users\/dan\/portfolio\/dist'/, 'portfolio mounted on the dist static server');
+  // A video whose reply has no Content-Length / Accept-Ranges never leaves the
+  // poster frame in Chrome and never starts at all on iOS — this is the fix.
+  assert.match(src, /'Accept-Ranges': 'bytes'/, 'range support present');
+  assert.match(src, /Content-Range/, '206 replies carry Content-Range');
 });
 
 test('publish: review dashboard lists every draft and leaks no token into the file', () => {
