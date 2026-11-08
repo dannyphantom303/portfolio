@@ -136,7 +136,8 @@ const PRIVATE_URL = /^(?:(?:https?:\/\/)?(?:localhost|127\.|0\.0\.0\.0|10\.|192\
 function countAgents() {
   try {
     return fs.readdirSync(path.join(process.env.HOME || '/Users/dan', '.hermes', 'profiles'), { withFileTypes: true })
-      .filter(d => d.isDirectory()).length;
+      .filter(d => d.isDirectory() && !d.name.startsWith('.'))   // .deleted/ holds retired profiles, not agents
+      .length;
   } catch (e) { return null; }
 }
 function countVaultNotes() {
@@ -158,6 +159,75 @@ function syncHeroStats(html) {
   return out;
 }
 
+// ── real media, not identical wireframes ─────────────────────────────────────
+// Every project card used to carry the same generic node-graph SVG, so a visitor
+// scrolling the grid saw 26 copies of one illustration and concluded the page was
+// a mock-up. Cards now show the project's own poster frame (or a real screenshot)
+// with a badge saying what it is, and the "Showcase reel" at the top plays the
+// actual narrated walkthroughs instead of three more SVGs.
+const PLAY_BADGE = (label) => `<span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;`
+  + `background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;`
+  + `font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ ${label}</span>`;
+
+function cardMedia(slug) {
+  // Videos are 1920x1080; posters are 2s frames of the same render, so the grid
+  // shows what the visitor will see when they press play.
+  if (asset(slug, 'mp4') && fs.existsSync(path.join(VIDEOS, `${slug}.jpg`))) {
+    return `<div class="well" style="position:relative;background:#0b0d12">`
+      + `<img src="videos/${slug}.jpg" alt="${slug} — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/>`
+      + PLAY_BADGE('NARRATED') + `</div>`;
+  }
+  const first = shots(slug)[0];
+  if (first) {
+    return `<div class="well" style="position:relative;background:#0b0d12">`
+      + `<img src="screenshots/${slug}/${first}" alt="${slug} — screenshot" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/>`
+      + PLAY_BADGE('SCREENSHOT') + `</div>`;
+  }
+  return null;
+}
+
+function decorateCards(html) {
+  return html.replace(/(<a class="ncard pcard"[^>]*data-slug="([a-z0-9-]+)"[^>]*>\s*)<div class="well"[^>]*>[\s\S]*?<\/div>/g,
+    (m, head, slug) => {
+      const media = cardMedia(slug);
+      return media ? head + media : m;
+    });
+}
+
+function reelSection() {
+  const featured = ['tradedeck', 'sport-command-center', 'track-my-gold']
+    .map(s => projects.find(p => p.slug === s))
+    .filter(p => p && asset(p.slug, 'mp4'));
+  const n = projects.filter(p => asset(p.slug, 'mp4')).length;
+  if (!featured.length) return '';
+  const cell = (p) => `    <figure class="reel-item" style="margin:0">
+      <video controls preload="metadata" playsinline poster="videos/${p.slug}.jpg" style="width:100%;aspect-ratio:16/9;border-radius:14px;background:#0b0d12;display:block">
+        <source src="videos/${p.slug}.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+      <figcaption style="margin-top:10px;font:700 11px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400)">
+        ${esc(p.name).toUpperCase()}</figcaption>
+      <p style="margin-top:4px;color:var(--ink-600);font-size:14px">${esc(p.tagline)}
+        <a href="project/${p.slug}.html" style="color:var(--ink);text-decoration:underline">Read the write-up →</a></p>
+    </figure>`;
+  return `<section id="reel">
+  <div class="sec-head">
+    <div class="eyebrow">NARRATED WALKTHROUGHS — ${n} OF ${projects.length}</div>
+    <h2>Real systems, <span class="soft">narrated over the real screens.</span></h2>
+    <p>Every walkthrough below is recorded from the running service — actual screenshots of the live UI — with the voice explaining what it does, what it costs to run and why it was built that way. Press play.</p>
+  </div>
+  <div class="reel-grid">
+${featured.map(cell).join('\n')}
+  </div>
+</section>`;
+}
+
+function polishIndex(html) {
+  let out = html;
+  const reel = reelSection();
+  if (reel) out = out.replace(/<section id="reel">[\s\S]*?<\/section>/, () => reel);
+  return decorateCards(out);
+}
+
 function indexHtml() {
   // Authored landing page wins over generation — see SRC_INDEX above. But its
   // cards are hand-written, so a project discovered later would never appear
@@ -172,8 +242,9 @@ function indexHtml() {
     // from the same data the rest of the page is built from.
     let heroBase = syncHeroStats(authored);
     if (!missing.length) {
-      if (heroBase !== authored) fs.writeFileSync(SRC_INDEX, heroBase);
-      return heroBase;
+      const polished = polishIndex(heroBase);
+      if (polished !== authored) fs.writeFileSync(SRC_INDEX, polished);
+      return polished;
     }
     const pill = (s) => /internal/i.test(s) ? 'st-int">LIVE · INTERNAL'
       : /private|token|gate/i.test(s) ? 'st-int">LIVE · PRIVATE'
@@ -205,8 +276,8 @@ function indexHtml() {
     // Write the refreshed grid back to the authored source: the design stays hand-edited,
     // the cards stay generated, and dist/index.html remains byte-identical to src/ (which
     // the build contract test asserts). Idempotent — next run finds nothing missing.
-    fs.writeFileSync(SRC_INDEX, out);
-    return out;
+    fs.writeFileSync(SRC_INDEX, polishIndex(out));
+    return polishIndex(out);
   }
   const body = `
 <main class="wrap">
@@ -359,6 +430,15 @@ Your browser does not support the video tag.</video></div>`
     ['STACK', (p.stack || []).join(' · ') || '—'],
   ].map(([k, v]) => `<div class="kv"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
   const gallery = imgs.length ? `<div class="shots">${imgs.map(f => `<img src="../screenshots/${p.slug}/${esc(f)}" alt="${esc(p.name)} screenshot" loading="lazy"/>`).join('')}</div>` : '';
+  // The narrated walkthrough used to sit at 62% of the page, under a generic SVG
+  // "LIVE DEMO" panel — the first thing a visitor saw was a wireframe, and most
+  // never scrolled to the video. When a real render exists it IS the demo panel.
+  const demoPanel = video
+    ? `<div class="well quad" style="aspect-ratio:16/9;padding:0;overflow:hidden;background:#0b0d12">${video}</div>`
+    : `<div class="well quad">
+      <div class="reel-chip"><i></i>LIVE DEMO</div>
+      ${svg || `<div style="display:flex;height:100%;align-items:center;justify-content:center;font:700 12px var(--font-mono);letter-spacing:2px;color:var(--ink-400)">${esc(p.name.toUpperCase())}</div>`}
+    </div>`;
   const body = `
 <header class="hero">
   <div class="ink">
@@ -379,17 +459,14 @@ Your browser does not support the video tag.</video></div>`
 
 <section id="demo">
   <div class="demo-frame">
-    <div class="well quad">
-      <div class="reel-chip"><i></i>LIVE DEMO</div>
-      ${svg || `<div style="display:flex;height:100%;align-items:center;justify-content:center;font:700 12px var(--font-mono);letter-spacing:2px;color:var(--ink-400)">${esc(p.name.toUpperCase())}</div>`}
-    </div>
+    ${demoPanel}
     <aside class="demo-side">
       <h3>At a glance</h3>
       ${sideRows}
       ${d.linkNote ? `<div class="fine-note" style="margin-top:18px">${esc(d.linkNote)}</div>` : ''}
     </aside>
   </div>
-  ${video ? `<div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div>${video}</div>` : ''}
+  ${video ? '' : `<div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><p class="fine-note" style="margin-top:6px">No recorded walkthrough yet for this project — the screenshots below are the live UI.</p></div>`}
   ${gif ? `<div style="margin-top:26px"><div class="eyebrow">ANIMATED PREVIEW</div>${gif}</div>` : ''}
 </section>
 
