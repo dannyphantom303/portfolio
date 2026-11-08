@@ -80,15 +80,27 @@ test('output: services section renders and the served index matches its source',
 test('build: embeds the local demo video on a project page when the asset exists (regression)', () => {
   // Previously build.js moved dist/videos to a cache BEFORE rendering pages, so the
   // existsSync check was always false and videos were never embedded.
+  //
+  // This test used to write a stub over the first public project's real video and
+  // then delete it, which quietly destroyed a 3MB rendered asset on every test run
+  // — the flagship Command Center page had a poster and no video for exactly that
+  // reason. Back up and restore instead: a test must never eat the artefact.
   const vdir = path.join(DIST, 'videos');
   fs.mkdirSync(vdir, { recursive: true });
   const slug = reg.projects.find(p => p.publicSafe !== false).slug;
-  fs.writeFileSync(path.join(vdir, `${slug}.mp4`), 'stub');
-  execFileSync('node', ['build.js'], { cwd: ROOT });
-  const html = fs.readFileSync(path.join(DIST, 'project', `${slug}.html`), 'utf8');
-  assert.match(html, new RegExp(`<video[^>]*>\\s*<source src="\\.\\./videos/${slug}\\.mp4"`), 'demo video embedded');
-  fs.rmSync(path.join(vdir, `${slug}.mp4`), { force: true });
-  execFileSync('node', ['build.js'], { cwd: ROOT }); // restore clean state
+  const target = path.join(vdir, `${slug}.mp4`);
+  const backup = fs.existsSync(target) ? fs.readFileSync(target) : null;
+  try {
+    if (!backup) fs.writeFileSync(target, 'stub');
+    execFileSync('node', ['build.js'], { cwd: ROOT });
+    const html = fs.readFileSync(path.join(DIST, 'project', `${slug}.html`), 'utf8');
+    assert.match(html, new RegExp(`<video[^>]*>\\s*<source src="\\.\\./videos/${slug}\\.mp4"`), 'demo video embedded');
+  } finally {
+    if (backup) fs.writeFileSync(target, backup);
+    else fs.rmSync(target, { force: true });
+    execFileSync('node', ['build.js'], { cwd: ROOT }); // restore clean state
+  }
+  if (backup) assert.strictEqual(fs.statSync(target).size, backup.length, 'real video restored byte for byte');
 });
 
 test('router: /portfolio redirects to /portfolio/ so relative links resolve', () => {
