@@ -153,6 +153,24 @@ test('router: /publish is served + slash-redirected and the approve endpoint is 
   assert.match(src, /pathname === '\/publish\/api\/approve'[\s\S]{0,200}?hwAuth\(req, res\)/, 'approve endpoint is token-gated');
 });
 
+// ── hero stats must be data, not decoration ────────────────────────────────────
+test('hero stats come from the data, not from hand-typed numbers', () => {
+  // These said "18 PROJECTS LIVE / 600+ NOTE VAULT" while the registry held 26
+  // and the vault 124: a visitor could catch the page lying about its own size.
+  const html = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
+  assert.match(html, new RegExp(`PORTFOLIO — ${reg.projects.length} BUILDS SHIPPED`), 'eyebrow tracks the registry');
+  const live = (html.match(/<div class="v">(\d+)<\/div><div class="k">PROJECTS LIVE/) || [])[1];
+  assert.strictEqual(live, String(reg.projects.length), 'projects live = registry size');
+  const notes = (html.match(/<div class="v">([^<]*)<\/div><div class="k">NOTE VAULT/) || [])[1];
+  assert.match((notes || '').trim(), /^\d+$/, 'note vault is a real count, not "600+"');
+  let want = null;
+  try {
+    const b = JSON.parse(fs.readFileSync('/Users/dan/command-center/brain-data.json', 'utf8'));
+    want = b.meta && b.meta.total_notes;
+  } catch (e) { /* vault not always present; the numeric check above still holds */ }
+  if (want) assert.strictEqual(notes.trim(), String(want), 'note vault = brain-data.json total_notes');
+});
+
 // ── project write-up pages (v3 restyle) ─────────────────────────────────────────────
 test('detail: every project has an authored write-up with all sections', () => {
   const detail = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'projects-detail.json'), 'utf8'));

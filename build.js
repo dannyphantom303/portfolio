@@ -127,6 +127,37 @@ ${cover(p, '')}
 <div class="badges"><span class="tag">${esc(p.status)}</span>${p.aiDoable ? '<span class="tag ai">AI-runnable service</span>' : ''}</div></div></a>`;
 }
 
+// ── hero numbers, derived not typed ──────────────────────────────────────────
+// The hero stats sat at "18 PROJECTS LIVE / 600+ NOTE VAULT" while the registry
+// held 26 projects and the vault 124 real notes: hand-typed numbers drift the
+// moment anything is discovered. Each figure now comes from its own source file,
+// and the rewrite is idempotent (no change in the data → no change in the bytes).
+const PRIVATE_URL = /^(?:(?:https?:\/\/)?(?:localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|169\.254\.|172\.(?:1[6-9]|2\d|3[01])\.)|.*\.local$|.*\.ts\.net$)/i;
+function countAgents() {
+  try {
+    return fs.readdirSync(path.join(process.env.HOME || '/Users/dan', '.hermes', 'profiles'), { withFileTypes: true })
+      .filter(d => d.isDirectory()).length;
+  } catch (e) { return null; }
+}
+function countVaultNotes() {
+  try {
+    const b = JSON.parse(fs.readFileSync('/Users/dan/command-center/brain-data.json', 'utf8'));
+    return (b.meta && b.meta.total_notes) || (b.nodes ? b.nodes.length : null);
+  } catch (e) { return null; }
+}
+function syncHeroStats(html) {
+  const live = projects.filter(p => p.url && !PRIVATE_URL.test(p.url)).length;
+  const agents = countAgents();
+  const notes = countVaultNotes();
+  let out = html
+    .replace(/PORTFOLIO — \d+ BUILDS SHIPPED/, `PORTFOLIO — ${projects.length} BUILDS SHIPPED`)
+    .replace(/(<div class="v">)\d+(<\/div><div class="k">PROJECTS LIVE)/, `$1${projects.length}$2`);
+  if (live) out = out.replace(/(<div class="v"><em>●<\/em> )\d+(<\/div><div class="k">RUNNING NOW)/, `$1${live}$2`);
+  if (agents) out = out.replace(/(<div class="v">)\d+(<\/div><div class="k">AI AGENTS)/, `$1${agents}$2`);
+  if (notes) out = out.replace(/(<div class="v">)[^<]+(<\/div><div class="k">NOTE VAULT)/, `$1${notes}$2`);
+  return out;
+}
+
 function indexHtml() {
   // Authored landing page wins over generation — see SRC_INDEX above. But its
   // cards are hand-written, so a project discovered later would never appear
@@ -136,7 +167,14 @@ function indexHtml() {
     const authored = fs.readFileSync(SRC_INDEX, 'utf8');
     const listed = new Set([...authored.matchAll(/data-slug="([a-z0-9-]+)"/g)].map(m => m[1]));
     const missing = projects.filter(p => !listed.has(p.slug));
-    if (!missing.length) return authored;
+    // The hero numbers were hand-typed ("18 BUILDS", "600+ NOTE VAULT") and went
+    // stale the moment a project was discovered or the vault grew. Derive them
+    // from the same data the rest of the page is built from.
+    let heroBase = syncHeroStats(authored);
+    if (!missing.length) {
+      if (heroBase !== authored) fs.writeFileSync(SRC_INDEX, heroBase);
+      return heroBase;
+    }
     const pill = (s) => /internal/i.test(s) ? 'st-int">LIVE · INTERNAL'
       : /private|token|gate/i.test(s) ? 'st-int">LIVE · PRIVATE'
       : /live|online/i.test(s) ? 'st-live">● LIVE' : 'st-online">ONLINE';
@@ -160,9 +198,9 @@ function indexHtml() {
       </div>
     </a>`;
     };
-    const gridEnd = authored.lastIndexOf('  </div>\n</section>');
-    if (gridEnd < 0) return authored;
-    let out = authored.slice(0, gridEnd) + '\n' + missing.map(card).join('\n') + '\n' + authored.slice(gridEnd);
+    const gridEnd = heroBase.lastIndexOf('  </div>\n</section>');
+    if (gridEnd < 0) return heroBase;
+    let out = heroBase.slice(0, gridEnd) + '\n' + missing.map(card).join('\n') + '\n' + heroBase.slice(gridEnd);
     out = out.replace(/(<h2>Projects <span class="soft">)\((\d+)\)(<\/span><\/h2>)/, `$1(${projects.length})$3`);
     // Write the refreshed grid back to the authored source: the design stays hand-edited,
     // the cards stay generated, and dist/index.html remains byte-identical to src/ (which
