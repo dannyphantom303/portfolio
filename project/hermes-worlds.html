@@ -244,27 +244,16 @@ footer{padding:64px 0 40px}
 
 <section id="demo">
   <div class="demo-frame">
-    <div class="well quad">
-      <div class="reel-chip"><i></i>LIVE DEMO</div>
-      <svg viewBox="0 0 320 144" role="img" aria-label="Animated: walking the 3D world">
-        <g stroke="#bcbec2" stroke-width="1">
-          <polygon points="160,22 226,60 160,98 94,60" fill="#fff"/>
-          <polygon points="94,60 160,98 160,126 94,88" fill="#e4e7ec"/>
-          <polygon points="226,60 160,98 160,126 226,88" fill="#d3d7de"/>
-        </g>
-        <rect x="150" y="40" width="22" height="30" fill="#b45309" opacity=".85" transform="skewY(-26) translate(0,28)"/>
-        <circle class="npc-dot" r="6" fill="#0369a1" stroke="#fff" stroke-width="2" style="offset-path:path('M104,84 L160,110 L216,84 L160,58 Z')"/>
-      </svg>
-    </div>
+    <div class="well quad" style="aspect-ratio:16/9;padding:0;overflow:hidden;background:#0b0d12"><div class="vid"><video controls preload="metadata" poster="../videos/hermes-worlds.jpg" playsinline>
+<source src="../videos/hermes-worlds.mp4" type="video/mp4">
+Your browser does not support the video tag.</video></div></div>
     <aside class="demo-side">
       <h3>At a glance</h3>
       <div class="kv"><span>STATUS</span><b>Live (prototype)</b></div><div class="kv"><span>SURFACE</span><b>Public link above</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>2</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>WebGL/Three.js · SSE chat · Node.js</b></div>
       
     </aside>
   </div>
-  <div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><div class="vid"><video controls preload="metadata" poster="../videos/hermes-worlds.jpg" playsinline>
-<source src="../videos/hermes-worlds.mp4" type="video/mp4">
-Your browser does not support the video tag.</video></div></div>
+  
   
 </section>
 

@@ -206,7 +206,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     <div class="hero-stats">
       <div class="hstat"><div class="v">26</div><div class="k">PROJECTS LIVE</div></div>
       <div class="hstat"><div class="v"><em>●</em> 9</div><div class="k">RUNNING NOW</div></div>
-      <div class="hstat"><div class="v">11</div><div class="k">AI AGENTS</div></div>
+      <div class="hstat"><div class="v">10</div><div class="k">AI AGENTS</div></div>
       <div class="hstat"><div class="v">124</div><div class="k">NOTE VAULT</div></div>
     </div>
   </div>
@@ -214,63 +214,38 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
 
 <section id="reel">
   <div class="sec-head">
-    <div class="eyebrow">SHOWCASE REEL</div>
-    <h2>Real demos, <span class="soft">playing now.</span></h2>
-    <p>Write-ups and demos, refreshed as I ship. Every preview below is a live animated demo — not a screenshot.</p>
+    <div class="eyebrow">NARRATED WALKTHROUGHS — 19 OF 26</div>
+    <h2>Real systems, <span class="soft">narrated over the real screens.</span></h2>
+    <p>Every walkthrough below is recorded from the running service — actual screenshots of the live UI — with the voice explaining what it does, what it costs to run and why it was built that way. Press play.</p>
   </div>
   <div class="reel-grid">
-    <div class="ncard">
-      <div class="well"><span class="reel-chip"><i></i>DEPLOY</span>
-        <svg viewBox="0 0 320 180" role="img" aria-label="Animated demo: deploying from the terminal">
-          <rect x="26" y="22" width="268" height="136" rx="12" fill="#111214"/>
-          <circle cx="44" cy="38" r="4" fill="#ff5f5f"/><circle cx="58" cy="38" r="4" fill="#b45309"/><circle cx="72" cy="38" r="4" fill="#4dffa3"/>
-          <g font-family="ui-monospace,monospace" font-size="10.5" fill="#a3a5aa">
-            <text class="terml" x="40" y="66" style="animation-delay:0s">$ hermes deploy vision v33</text>
-            <text class="terml" x="40" y="88" fill="#4dffa3" style="animation-delay:2.6s">✓ 24 checks passed</text>
-            <text class="terml" x="40" y="110" fill="#4dffa3" style="animation-delay:5.2s">✓ zipped · ready to download</text>
-            <text class="terml" x="40" y="132" style="animation-delay:7.8s">$ <tspan class="cursorblink">▍</tspan></text>
-          </g>
-        </svg>
-      </div>
-      <div class="ncard-body"><h3>Shipping Hermes Vision v33</h3><p>From code to the glasses in one session.</p></div>
-    </div>
-    <div class="ncard">
-      <div class="well"><span class="reel-chip"><i></i>VOICE</span>
-        <svg viewBox="0 0 320 180" role="img" aria-label="Animated demo: voice command on glasses">
-          <rect x="112" y="30" width="96" height="58" rx="29" fill="#111214"/>
-          <rect x="124" y="42" width="72" height="34" rx="17" fill="#54daff" opacity=".3"/>
-          <g class="wave" transform="translate(118,128)">
-            <rect x="0" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:0s"/>
-            <rect x="13" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.1s"/>
-            <rect x="26" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.2s"/>
-            <rect x="39" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.3s"/>
-            <rect x="52" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.4s"/>
-            <rect x="65" y="-15" width="6" height="30" rx="3" fill="#3d3f43" style="animation-delay:.5s"/>
-          </g>
-          <text x="160" y="166" font-size="10" font-weight="700" fill="#7c7f85" text-anchor="middle" font-family="inherit">"HEY META, TELL HERMES…"</text>
-        </svg>
-      </div>
-      <div class="ncard-body"><h3>Voice on the glasses</h3><p>Talking to the AI team hands-free.</p></div>
-    </div>
-    <div class="ncard">
-      <div class="well"><span class="reel-chip"><i></i>GRAPH</span>
-        <svg viewBox="0 0 320 180" role="img" aria-label="Animated demo: knowledge graph">
-          <g stroke="#bcbec2" stroke-width="1.2">
-            <line x1="160" y1="90" x2="55" y2="40"/><line x1="160" y1="90" x2="265" y2="40"/>
-            <line x1="160" y1="90" x2="55" y2="140"/><line x1="160" y1="90" x2="265" y2="140"/>
-          </g>
-          <g fill="#3d3f43"><circle cx="55" cy="40" r="8"/><circle cx="265" cy="40" r="8"/><circle cx="55" cy="140" r="8"/><circle cx="265" cy="140" r="8"/></g>
-          <circle cx="160" cy="90" r="15" fill="#111214"/>
-          <text x="160" y="94" font-size="9" font-weight="800" fill="#fff" text-anchor="middle" font-family="inherit">600</text>
-          <g fill="#15803d">
-            <circle r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M160,90 L55,40"/></circle>
-            <circle r="3.5"><animateMotion dur="3.1s" repeatCount="indefinite" path="M160,90 L265,140"/></circle>
-            <circle r="3.5"><animateMotion dur="2.8s" begin=".8s" repeatCount="indefinite" path="M160,90 L265,40"/></circle>
-          </g>
-        </svg>
-      </div>
-      <div class="ncard-body"><h3>The 600-note brain</h3><p>An Obsidian vault, visualized live.</p></div>
-    </div>
+    <figure class="reel-item" style="margin:0">
+      <video controls preload="metadata" playsinline poster="videos/tradedeck.jpg" style="width:100%;aspect-ratio:16/9;border-radius:14px;background:#0b0d12;display:block">
+        <source src="videos/tradedeck.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+      <figcaption style="margin-top:10px;font:700 11px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400)">
+        TRADEDECK</figcaption>
+      <p style="margin-top:4px;color:var(--ink-600);font-size:14px">Multi-agent sports &amp; market desk.
+        <a href="project/tradedeck.html" style="color:var(--ink);text-decoration:underline">Read the write-up →</a></p>
+    </figure>
+    <figure class="reel-item" style="margin:0">
+      <video controls preload="metadata" playsinline poster="videos/sport-command-center.jpg" style="width:100%;aspect-ratio:16/9;border-radius:14px;background:#0b0d12;display:block">
+        <source src="videos/sport-command-center.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+      <figcaption style="margin-top:10px;font:700 11px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400)">
+        SPORT — MULTI-AGENT AI OPERATIONS SYSTEM</figcaption>
+      <p style="margin-top:4px;color:var(--ink-600);font-size:14px">A headless control surface for the Mac: one dashboard over every agent, job, service and approval on the machine.
+        <a href="project/sport-command-center.html" style="color:var(--ink);text-decoration:underline">Read the write-up →</a></p>
+    </figure>
+    <figure class="reel-item" style="margin:0">
+      <video controls preload="metadata" playsinline poster="videos/track-my-gold.jpg" style="width:100%;aspect-ratio:16/9;border-radius:14px;background:#0b0d12;display:block">
+        <source src="videos/track-my-gold.mp4" type="video/mp4">Your browser does not support the video tag.
+      </video>
+      <figcaption style="margin-top:10px;font:700 11px var(--font-mono);letter-spacing:1.4px;color:var(--ink-400)">
+        TRACK MY GOLD</figcaption>
+      <p style="margin-top:4px;color:var(--ink-600);font-size:14px">A YouTube engagement + affiliate dashboard for a gold-prospecting content channel.
+        <a href="project/track-my-gold.html" style="color:var(--ink);text-decoration:underline">Read the write-up →</a></p>
+    </figure>
   </div>
 </section>
 
@@ -283,12 +258,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
   <div class="pgrid">
 
     <a class="ncard pcard" href="project/sport-command-center.html" id="card-sport-command-center" data-slug="sport-command-center">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: agent network">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/sport-command-center.jpg" alt="sport-command-center — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-int">LIVE · INTERNAL</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Sport — Multi-Agent AI Operations System</h3>
@@ -317,11 +287,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/track-my-gold.html" id="card-track-my-gold" data-slug="track-my-gold">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: gold price chart">
-        <g stroke="#e0e2e7" stroke-width="1"><line x1="24" y1="40" x2="296" y2="40"/><line x1="24" y1="76" x2="296" y2="76"/><line x1="24" y1="112" x2="296" y2="112"/></g>
-        <path class="drawline" d="M24,108 C60,100 84,84 116,86 C148,88 168,60 204,62 C236,64 262,44 296,40" fill="none" stroke="#b45309" stroke-width="3" stroke-linecap="round"/>
-        <circle r="5" fill="#b45309" stroke="#f1f1f3" stroke-width="2"><animateMotion dur="9s" repeatCount="indefinite" path="M24,108 C60,100 84,84 116,86 C148,88 168,60 204,62 C236,64 262,44 296,40"/></circle>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/track-my-gold.jpg" alt="track-my-gold — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Track My Gold</h3>
@@ -332,15 +298,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/content-autopilot.html" id="card-content-autopilot" data-slug="content-autopilot">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: content pipeline">
-        <rect x="96" y="22" width="128" height="100" rx="10" fill="#fff" stroke="#7c7f85" stroke-width="1.5"/>
-        <g stroke="#3d3f43" stroke-width="5" stroke-linecap="round">
-          <line class="docline" x1="116" y1="52" x2="204" y2="52" style="animation-delay:0s"/>
-          <line class="docline" x1="116" y1="72" x2="186" y2="72" style="animation-delay:1.5s"/>
-          <line class="docline" x1="116" y1="92" x2="196" y2="92" style="animation-delay:3s"/>
-        </g>
-        <path class="checkmark" d="M232,96 l10,10 l18,-20" fill="none" stroke="#15803d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/content-autopilot.jpg" alt="content-autopilot — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Content Autopilot</h3>
@@ -351,16 +309,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/token-killers.html" id="card-token-killers" data-slug="token-killers">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: falling API costs">
-        <g>
-          <rect class="barv" x="70" y="30" width="26" height="80" rx="5" fill="#dc2626" opacity=".8" style="animation-delay:0s"/>
-          <rect class="barv" x="110" y="50" width="26" height="60" rx="5" fill="#dc2626" opacity=".6" style="animation-delay:.7s"/>
-          <rect class="barv" x="150" y="70" width="26" height="40" rx="5" fill="#b45309" opacity=".7" style="animation-delay:1.4s"/>
-          <rect class="barv" x="190" y="88" width="26" height="22" rx="5" fill="#15803d" style="animation-delay:2.1s"/>
-          <rect class="barv" x="230" y="96" width="26" height="14" rx="5" fill="#15803d" style="animation-delay:2.8s"/>
-        </g>
-        <text x="160" y="130" font-size="10" font-weight="700" fill="#7c7f85" text-anchor="middle" font-family="inherit">API SPEND → DOWN 70%</text>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/token-killers.jpg" alt="token-killers — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">LIVE · CONSULTING</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Token Killers — LLM Cost Optimization</h3>
@@ -371,21 +320,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/hermes-vision.html" id="card-hermes-vision" data-slug="hermes-vision">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: glasses with voice">
-        <g fill="none" stroke="#111214" stroke-width="6" stroke-linecap="round">
-          <path d="M96,62 h56 a18,18 0 0 1 18,18 a18,18 0 0 1 -18,18 h-56 a18,18 0 0 1 -18,-18 a18,18 0 0 1 18,-18"/>
-          <path d="M224,62 h-56 a18,18 0 0 0 -18,18 a18,18 0 0 0 18,18 h56 a18,18 0 0 0 18,-18 a18,18 0 0 0 -18,-18"/>
-          <path d="M152,72 q8,-6 16,0"/>
-        </g>
-        <g class="wave" transform="translate(128,118)">
-          <rect x="0" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:0s"/>
-          <rect x="11" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.15s"/>
-          <rect x="22" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.3s"/>
-          <rect x="33" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.45s"/>
-          <rect x="44" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.6s"/>
-          <rect x="55" y="-10" width="5" height="20" rx="2.5" fill="#0369a1" style="animation-delay:.75s"/>
-        </g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/hermes-vision.jpg" alt="hermes-vision — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Hermes Vision — AI on Phone &amp; Glasses <span style="color:#b45309">★</span></h3>
@@ -396,15 +331,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/hermes-worlds.html" id="card-hermes-worlds" data-slug="hermes-worlds">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: walking the 3D world">
-        <g stroke="#bcbec2" stroke-width="1">
-          <polygon points="160,22 226,60 160,98 94,60" fill="#fff"/>
-          <polygon points="94,60 160,98 160,126 94,88" fill="#e4e7ec"/>
-          <polygon points="226,60 160,98 160,126 226,88" fill="#d3d7de"/>
-        </g>
-        <rect x="150" y="40" width="22" height="30" fill="#b45309" opacity=".85" transform="skewY(-26) translate(0,28)"/>
-        <circle class="npc-dot" r="6" fill="#0369a1" stroke="#fff" stroke-width="2" style="offset-path:path('M104,84 L160,110 L216,84 L160,58 Z')"/>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/hermes-worlds.jpg" alt="hermes-worlds — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-build">PROTOTYPE</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Hermes Worlds &amp; Game — 3D AI Agent Playgrounds</h3>
@@ -435,12 +362,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/obsidian-brain.html" id="card-obsidian-brain" data-slug="obsidian-brain">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: knowledge graph">
-        <g stroke="#bcbec2" stroke-width="1.2"><line x1="160" y1="72" x2="80" y2="34"/><line x1="160" y1="72" x2="240" y2="34"/><line x1="160" y1="72" x2="80" y2="110"/><line x1="160" y1="72" x2="240" y2="110"/></g>
-        <g fill="#3d3f43"><circle cx="80" cy="34" r="8"/><circle cx="240" cy="34" r="8"/><circle cx="80" cy="110" r="8"/><circle cx="240" cy="110" r="8"/></g>
-        <circle cx="160" cy="72" r="14" fill="#111214"/>
-        <g fill="#7c3aed"><circle r="3.5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M160,72 L80,34"/></circle><circle r="3.5"><animateMotion dur="3s" begin=".6s" repeatCount="indefinite" path="M160,72 L240,110"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/obsidian-brain.jpg" alt="obsidian-brain — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Obsidian Brain — Knowledge Graph Dashboard</h3>
@@ -451,11 +373,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/net-worth-ledger.html" id="card-net-worth-ledger" data-slug="net-worth-ledger">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: net worth growth">
-        <g stroke="#e0e2e7" stroke-width="1"><line x1="24" y1="40" x2="296" y2="40"/><line x1="24" y1="76" x2="296" y2="76"/><line x1="24" y1="112" x2="296" y2="112"/></g>
-        <path class="drawline" d="M24,100 C70,96 100,70 140,72 C180,74 210,50 250,48 C272,47 286,40 296,38" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round" style="animation-delay:1s"/>
-        <text x="24" y="30" font-size="11" font-weight="800" fill="#3d3f43" font-family="inherit">$ NET WORTH</text>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/net-worth-ledger.jpg" alt="net-worth-ledger — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Net Worth Ledger</h3>
@@ -483,17 +401,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/agentic-ai-course.html" id="card-agentic-ai-course" data-slug="agentic-ai-course">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: course checklist">
-        <g font-family="inherit" font-size="11" fill="#5c5e63">
-          <text x="90" y="46">01 · Agents 101</text><text x="90" y="74">02 · Tool design</text><text x="90" y="102">03 · Multi-agent</text>
-        </g>
-        <g fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round">
-          <path class="checkmark" d="M62,40 l6,6 l11,-12"/>
-          <path class="checkmark" d="M62,68 l6,6 l11,-12" style="animation-delay:1.2s"/>
-          <path class="checkmark" d="M62,96 l6,6 l11,-12" style="animation-delay:2.4s"/>
-        </g>
-        <text x="230" y="74" font-size="12" font-weight="800" fill="#3d3f43" font-family="inherit">11/11</text>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/agentic-ai-course.jpg" alt="agentic-ai-course — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-done">COMPLETED</span></div>
         <h3>Applied Agentic AI — Course Project</h3>
@@ -504,12 +412,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/project-showcase-engine.html" id="card-project-showcase-engine" data-slug="project-showcase-engine">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: auto-publishing engine">
-        <rect x="60" y="26" width="200" height="92" rx="10" fill="#fff" stroke="#7c7f85" stroke-width="1.5"/>
-        <rect x="60" y="26" width="200" height="22" rx="10" fill="#eef0f3"/>
-        <g><rect class="barv" x="84" y="70" width="20" height="30" rx="4" fill="#3d3f43" style="animation-delay:0s"/><rect class="barv" x="112" y="60" width="20" height="40" rx="4" fill="#3d3f43" style="animation-delay:.5s"/><rect class="barv" x="140" y="78" width="20" height="22" rx="4" fill="#3d3f43" style="animation-delay:1s"/><rect class="barv" x="168" y="52" width="20" height="48" rx="4" fill="#15803d" style="animation-delay:1.5s"/><rect class="barv" x="196" y="66" width="20" height="34" rx="4" fill="#3d3f43" style="animation-delay:2s"/></g>
-        <path class="drawline" d="M84,66 C120,60 160,58 236,48" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" style="animation-delay:.6s"/>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/project-showcase-engine.jpg" alt="project-showcase-engine — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-build">BUILDING</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Project Showcase &amp; Income Engine</h3>
@@ -545,12 +448,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/gold-spot-explorer.html" id="card-gold-spot-explorer" data-slug="gold-spot-explorer">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: terrain scoring">
-        <path d="M24,110 C60,90 90,100 120,80 C150,60 180,84 210,66 C240,48 268,60 296,44" fill="none" stroke="#7c7f85" stroke-width="2"/>
-        <path class="drawline" d="M24,110 C60,90 90,100 120,80 C150,60 180,84 210,66 C240,48 268,60 296,44" fill="none" stroke="#b45309" stroke-width="3" stroke-linecap="round" style="animation-delay:.8s"/>
-        <g fill="#b45309"><circle cx="120" cy="80" r="5"><animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/></circle><circle cx="210" cy="66" r="5"><animate attributeName="r" values="5;8;5" dur="2s" begin="1s" repeatCount="indefinite"/></circle></g>
-        <text x="24" y="130" font-size="10" font-weight="700" fill="#7c7f85" font-family="inherit">USGS LiDAR · CREEK-BED SCORING</text>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/gold-spot-explorer.jpg" alt="gold-spot-explorer — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-free">FREE DATA</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>Gold Spot Explorer</h3>
@@ -561,12 +459,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/ai-consulting.html" id="card-ai-consulting" data-slug="ai-consulting">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: client chat">
-        <g class="bub" style="animation-delay:0s"><rect x="60" y="30" width="120" height="26" rx="13" fill="#111214"/><text x="74" y="47" font-size="11" fill="#fff" font-family="inherit">Need an agent build…</text></g>
-        <g class="bub" style="animation-delay:3s"><rect x="140" y="62" width="120" height="26" rx="13" fill="#fff" stroke="#7c7f85"/><text x="154" y="79" font-size="11" fill="#3d3f43" font-family="inherit">Shipped. It's live ✓</text></g>
-        <g class="bub" style="animation-delay:6s"><rect x="60" y="94" width="110" height="26" rx="13" fill="#111214"/><text x="74" y="111" font-size="11" fill="#fff" font-family="inherit">That was fast.</text></g>
-        <g class="bub" style="animation-delay:9s"><g class="typing"><circle cx="152" cy="75" r="4" fill="#7c7f85"/><circle cx="164" cy="75" r="4" fill="#7c7f85"/><circle cx="176" cy="75" r="4" fill="#7c7f85"/></g></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/ai-consulting.jpg" alt="ai-consulting — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span><span class="svc-tag">AI-RUNNABLE</span></div>
         <h3>AI Consulting</h3>
@@ -642,12 +535,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </div>
 
     <a class="ncard pcard" href="project/tradedeck.html" id="card-tradedeck" data-slug="tradedeck">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: TradeDeck">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/tradedeck.jpg" alt="tradedeck — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>TradeDeck</h3>
@@ -658,12 +546,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/peril-adventure-wear.html" id="card-peril-adventure-wear" data-slug="peril-adventure-wear">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: Peril Adventure Wear">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/peril-adventure-wear.jpg" alt="peril-adventure-wear — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Peril Adventure Wear</h3>
@@ -690,12 +573,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/ip-competitor-watch.html" id="card-ip-competitor-watch" data-slug="ip-competitor-watch">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: IP &amp; Competitor Watch">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/ip-competitor-watch.jpg" alt="ip-competitor-watch — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-online">ONLINE</span></div>
         <h3>IP &amp; Competitor Watch</h3>
@@ -707,12 +585,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
 
 
     <a class="ncard pcard" href="project/resmara.html" id="card-resmara" data-slug="resmara">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: Resmara">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/resmara.jpg" alt="resmara — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Resmara</h3>
@@ -722,12 +595,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
       </div>
     </a>
     <a class="ncard pcard" href="project/project-nomad.html" id="card-project-nomad" data-slug="project-nomad">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: Project NOMAD">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/project-nomad.jpg" alt="project-nomad — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Project NOMAD</h3>
@@ -738,12 +606,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/sound-it-out.html" id="card-sound-it-out" data-slug="sound-it-out">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: Sound It Out">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/sound-it-out.jpg" alt="sound-it-out — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Sound It Out</h3>
@@ -754,12 +617,7 @@ a.pcard:hover .pcard-more::after{transform:translateX(4px)}
     </a>
 
     <a class="ncard pcard" href="project/jujutsu.html" id="card-jujutsu" data-slug="jujutsu">
-      <div class="well"><svg viewBox="0 0 320 144" role="img" aria-label="Animated: Jujutsu">
-        <g stroke="#7c7f85" stroke-width="1.4"><line x1="160" y1="72" x2="70" y2="36"/><line x1="160" y1="72" x2="250" y2="36"/><line x1="160" y1="72" x2="70" y2="108"/><line x1="160" y1="72" x2="250" y2="108"/></g>
-        <g fill="#3d3f43"><circle cx="70" cy="36" r="9"/><circle cx="250" cy="36" r="9"/><circle cx="70" cy="108" r="9"/><circle cx="250" cy="108" r="9"/></g>
-        <circle cx="160" cy="72" r="16" fill="#111214"/>
-        <g fill="#15803d"><circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M160,72 L70,36"/></circle><circle r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M160,72 L250,108"/></circle></g>
-      </svg></div>
+      <div class="well" style="position:relative;background:#0b0d12"><img src="videos/jujutsu.jpg" alt="jujutsu — narrated walkthrough" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;left:12px;bottom:12px;display:inline-flex;gap:6px;align-items:center;background:rgba(10,12,18,.84);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 10px;font:700 10px var(--font-mono);letter-spacing:1.2px;color:#f0b429">▶ NARRATED</span></div>
       <div class="pcard-body">
         <div class="pcard-top"><span class="pill st-live">● LIVE</span></div>
         <h3>Jujutsu</h3>
