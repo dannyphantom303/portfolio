@@ -603,6 +603,26 @@
       "screenshots": [],
       "video": "",
       "note": "Internal or on-machine only — listed text-only, no public URL."
+    },
+    {
+      "slug": "jiu-jitsu",
+      "name": "Jiu Jitsu",
+      "tagline": "Your martial-arts technique library — search a move by name, English or Japanese, and get the clip at the right timestamp plus what to drill next.",
+      "icon": "📦",
+      "status": "Live",
+      "group": "app",
+      "aiDoable": false,
+      "publicSafe": true,
+      "autoDiscovered": true,
+      "stack": [],
+      "writeup": "Jiu Jitsu is one of the systems in my AI portfolio. Your martial-arts technique library — search a move by name, English or Japanese, and get the clip at the right timestamp plus what to drill next. Streams from the G-DRIVE; rip a disc with rip.sh and the chapters become moves you name.",
+      "highlights": [
+        "Your martial-arts technique library — search a move by name, English or Japanese, and get the clip at the right timestamp plus what to drill next.",
+        "Streams from the G-DRIVE; rip a disc with rip.sh and the chapters become moves you name."
+      ],
+      "screenshots": [],
+      "video": "",
+      "note": "Internal or on-machine only — listed text-only, no public URL."
     }
   ]
 }
