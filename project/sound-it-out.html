@@ -227,7 +227,7 @@ footer{padding:64px 0 40px}
 <div class="wrap">
 <header class="hero">
   <div class="ink">
-    <div class="eyebrow">Live — FULL WRITE-UP</div>
+    <div class="eyebrow">THE PHONICS SCHOOL SKIPPED — FULL WRITE-UP</div>
     <h1>Sound It Out</h1>
     <p class="sub">Adult reading &amp; spelling lab — the 53 sound units, syllable sounding-out, the spelling rules and their exceptions, flashcards and a 60-second sprint.</p>
     <div class="cta-row"><a class="btn light" href="mailto:ddaymude.ai@gmail.com?subject=Sound%20It%20Out">Ask me for a walkthrough</a>
@@ -236,7 +236,7 @@ footer{padding:64px 0 40px}
     <div class="hero-stats">
       <div class="hstat"><div class="v">Live</div><div class="k">CURRENT STATE</div></div>
       <div class="hstat"><div class="v"><em>$0</em></div><div class="k">MARGINAL RUNNING COST</div></div>
-      <div class="hstat"><div class="v">0</div><div class="k">MODELS / ENGINES</div></div>
+      <div class="hstat"><div class="v">2</div><div class="k">MODELS / ENGINES</div></div>
       <div class="hstat"><div class="v">0</div><div class="k">STACK COMPONENTS</div></div>
     </div>
   </div>
@@ -255,11 +255,13 @@ footer{padding:64px 0 40px}
     </div>
     <aside class="demo-side">
       <h3>At a glance</h3>
-      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>0</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
+      <div class="kv"><span>STATUS</span><b>Live</b></div><div class="kv"><span>SURFACE</span><b>Private — not published</b></div><div class="kv"><span>MODEL / ENGINE SLOTS</span><b>2</b></div><div class="kv"><span>MARGINAL RUNNING COST</span><b>$0 — free tier / local</b></div><div class="kv"><span>STACK</span><b>—</b></div>
       
     </aside>
   </div>
-  
+  <div style="margin-top:26px"><div class="eyebrow">WALKTHROUGH</div><div class="vid"><video controls preload="metadata" poster="../videos/sound-it-out.jpg" playsinline>
+<source src="../videos/sound-it-out.mp4" type="video/mp4">
+Your browser does not support the video tag.</video></div></div>
   
 </section>
 
@@ -268,7 +270,7 @@ footer{padding:64px 0 40px}
     <div class="eyebrow">THE PROJECT</div>
     <h2>What it is <span class="soft">and why it exists</span></h2>
   </div>
-  <p class="prose">Sound It Out is one of the systems in my AI portfolio. Adult reading &amp; spelling lab — the 53 sound units, syllable sounding-out, the spelling rules and their exceptions, flashcards and a 60-second sprint. Progress is kept in your browser, not on the server.</p>
+  <p class="prose">A phone-first reading and spelling lab for adults — the sound units, the syllable-by-syllable decoding and the spelling rules that school moved past too quickly, plus the words that break them. 274 words are in rotation, 53 sound units and 19 spelling rules, and it opens with a five-minute session rather than a grade level. Everything runs in the browser: no backend, no accounts, no data leaving the device.</p>
   <div class="demo-side" style="margin-top:20px"><h3>Highlights</h3><ul><li>Adult reading &amp; spelling lab — the 53 sound units, syllable sounding-out, the spelling rules and their exceptions, flashcards and a 60-second sprint.</li><li>Progress is kept in your browser, not on the server.</li></ul></div>
 </section>
 
@@ -279,7 +281,16 @@ footer{padding:64px 0 40px}
     <h2>The mechanism <span class="soft">end to end</span></h2>
     <p>No hand-waving: this is the actual chain, in the order it runs.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3>Today, not a curriculum</h3><p>The front screen shows the streak, the words due and one button: a five-minute session. An adult who needs this does not want to be enrolled in something.</p></article>
+<article class="step">
+      <div class="n">02</div><h3>Sound it out</h3><p>The core drill speaks the word in syllables and then whole, you type it, and the answer is diffed letter by letter. Then the syllable chips and the reason it is spelled that way.</p></article>
+<article class="step">
+      <div class="n">03</div><h3>The rules you were never taught</h3><p>19 rules in three tiers, from magic-e and the 1-1-1 doubling rule down to the genuine one-offs, each tappable so you can hear it and see its exceptions.</p></article>
+<article class="step">
+      <div class="n">04</div><h3>Leitner boxes</h3><p>Cards move through five boxes with reviews at 0, 1, 3, 7 and 21 days. Audio-only mode for practising with your hands busy.</p></article>
+<article class="step">
+      <div class="n">05</div><h3>Nothing leaves the phone</h3><p>Progress lives in the browser's own storage and the voices come from the operating system, so there is no account to create and no server holding a record of what somebody struggles to spell.</p></article></div>
 </section>
 
 <section id="models">
@@ -291,9 +302,20 @@ footer{padding:64px 0 40px}
   <div class="cost-card">
     <table class="cost">
       <thead><tr><th>JOB IN THIS PROJECT</th><th class="hide-sm">MODEL / ENGINE</th><th class="hide-sm">WHY THIS ONE</th><th>COST</th></tr></thead>
-      <tbody></tbody>
+      <tbody><tr>
+      <td><b>Speaking each word, syllable by syllable</b><div class="fine-note" style="margin-top:6px">Client-side — the visitor's browser</div></td>
+      <td class="model hide-sm">OS speechSynthesis voices — no model call, no audio files</td>
+      <td class="hide-sm"></td>
+      <td><span class="rate-tag rate-free">$0</span></td>
+    </tr>
+<tr>
+      <td><b>Choosing what to review next</b><div class="fine-note" style="margin-top:6px">Not applicable — no model in this project</div></td>
+      <td class="model hide-sm">No model — deterministic Leitner scheduling in localStorage</td>
+      <td class="hide-sm"></td>
+      <td><span class="rate-tag rate-free">$0</span></td>
+    </tr></tbody>
     </table>
-    
+    <div class="cost-note">Static files and no model calls: the only compute is the visitor's own browser. Hosting rides on the router that already serves the rest of the fleet, so the marginal cost is zero.</div>
     <div class="cost-note"><b>The full model price list.</b> Every project below lists the models that actually do its work and which tier each one runs on. Local models and free-catalogue models are the default for volume, so the marginal cost of the recurring work is $0; credits (Ollama Cloud) and paid OpenRouter models are only drawn on deliberately. Rates are the providers' own published numbers, not estimates.</div>
     <table class="price-table">
       <thead><tr><th>MODEL</th><th class="num">$ / M INPUT</th><th class="num">$ / M OUTPUT</th></tr></thead>
@@ -323,10 +345,23 @@ footer{padding:64px 0 40px}
     <h2>The steps <span class="soft">in order, with the traps</span></h2>
     <p>This is the short version of what I would do again — including the parts that bit me first.</p>
   </div>
-  <div class="steps ordered"></div>
+  <div class="steps ordered"><article class="step">
+      <div class="n">01</div><h3></h3><p></p></article>
+<article class="step">
+      <div class="n">02</div><h3></h3><p></p></article>
+<article class="step">
+      <div class="n">03</div><h3></h3><p></p></article></div>
 </section>
 
-
+<section id="notes">
+  <div class="sec-head">
+    <div class="eyebrow">WHAT I LEARNED</div>
+    <h2>Notes from the build</h2>
+  </div>
+  <div class="lessons"><article class="lesson"><span>NOTE 01</span>Adults need a five-minute session, not a reading level. The shortest useful unit is the whole product.</article>
+<article class="lesson"><span>NOTE 02</span>Typing the word beats multiple choice: the letter diff is where the learning is.</article>
+<article class="lesson"><span>NOTE 03</span>The OS already ships good voices. Using them removed the audio pipeline, the file hosting and the bill.</article></div>
+</section>
 
 <section id="stack">
   <div class="sec-head">
@@ -334,7 +369,7 @@ footer{padding:64px 0 40px}
     <h2>What it is made of</h2>
   </div>
   <div class="stack"></div>
-  
+  <div style="margin-top:30px"><div class="eyebrow">SCREENS</div><div class="shots"><img src="../screenshots/sound-it-out/home.jpg" alt="Sound It Out screenshot" loading="lazy"/></div></div>
   <p class="fine-note">Everything above is drawn from the same registry that drives the landing page, so this page regenerates itself daily.</p>
 </section>
 </div>
@@ -345,6 +380,6 @@ footer{padding:64px 0 40px}
     <a class="btn light" style="background:var(--ink-900);color:#fff" href="mailto:ddaymude.ai@gmail.com">ddaymude.ai@gmail.com</a>
     <a class="btn line" href="../index.html#projects">Back to all work</a>
   </div>
-  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-11-07 · 25 BUILDS · 7 AGENTS</span></div>
+  <div class="fine"><span>© 2026 DANIEL DAYMUDE</span><span>UPDATED 2026-11-08 · 26 BUILDS · 7 AGENTS</span></div>
 </div></div></footer>
 </body></html>
