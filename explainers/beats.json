@@ -6,33 +6,33 @@
   "beats": [
    {
     "focus": [
-     0.13,
-     0.045,
-     0.62,
-     0.135
+     0.15,
+     0.075,
+     0.6,
+     0.155
     ],
     "cap": "One screen that opens your day",
     "say": "This is how my day starts. The Command Center reads every system I run and tells me what is waiting, what is running and what needs a decision, before I have asked anything."
    },
    {
     "focus": [
-     0.13,
-     0.165,
-     0.86,
-     0.3
+     0.15,
+     0.185,
+     0.99,
+     0.415
     ],
     "cap": "Today's snapshot, pulled live",
     "say": "The snapshot is live: content waiting for approval, trades closed, the worst alert of the session, and the security position. Each tile is a real number from a real system, not a mock-up."
    },
    {
     "focus": [
-     0.13,
-     0.6,
-     0.72,
-     0.855
+     0.15,
+     0.695,
+     0.99,
+     0.8
     ],
     "cap": "What is waiting on me",
-    "say": "Underneath, it separates the work that is waiting on me from the work I have not published yet, so nothing sits finished and invisible. That gap is where projects used to die."
+    "say": "Underneath, it separates the work that is waiting on me from the work I have not published yet — content waiting for approval, tickets, support replies — so nothing sits finished and invisible. That gap is where projects used to die."
    }
   ]
  },
