@@ -29,6 +29,8 @@ const slugify = s => s.toLowerCase().replace(/&amp;/g, 'and').replace(/[^a-z0-9]
 // differently; without this a new card would duplicate an existing entry.
 const ALIAS = {
   'track-my-gold': 'track-my-gold',
+  'jiu-jitsu': 'jujutsu',
+  'portfolio': 'project-showcase-engine',
   'portfolio-engine': 'project-showcase-engine',
   'career-engine': 'project-showcase-engine',
   'hermes-agent': 'sport-command-center',
@@ -56,21 +58,12 @@ function readProjects(html) {
   const start = html.indexOf('const PROJECTS = [');
   if (start < 0) throw new Error('PROJECTS array not found — the Command Center markup changed');
   const from = html.indexOf('[', start);
-  let depth = 0, i = from, inStr = null, esc = false, end = -1;
-  for (; i < html.length; i++) {
-    const c = html[i];
-    if (inStr) {
-      if (esc) esc = false;
-      else if (c === '\\') esc = true;
-      else if (c === inStr) inStr = null;
-      continue;
-    }
-    if (c === '"' || c === "'" || c === '`') { inStr = c; continue; }
-    if (c === '[') depth++;
-    else if (c === ']') { depth--; if (depth === 0) { end = i + 1; break; } }
-  }
+  // Bracket counting broke the moment a card's comment carried an apostrophe (the scanner read
+  // it as a string opener, never found the real end, and the literal would not parse). The array
+  // is written one property per line and closes with a bare '];' — anchor on that instead.
+  const end = html.indexOf('\n];', from);
   if (end < 0) throw new Error('unterminated PROJECTS array');
-  const literal = html.slice(from, end);
+  const literal = html.slice(from, end + 2);
   const sandbox = { GLYPH: new Proxy({}, { get: () => '' }) };
   return vm.runInNewContext(`(${literal})`, sandbox);
 }
