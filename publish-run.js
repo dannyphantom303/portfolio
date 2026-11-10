@@ -132,7 +132,25 @@ function githubRemote() {
 
   if (want('devto')) {
     const list = approved.filter(a => a.plat === 'devto');
+    // Re-running after a chip is re-approved used to create a second dev.to article for the same
+    // write-up: the queue records `draft`, so the next pass sees `approved` again. The verified
+    // results file is the record of what already exists on dev.to — treat it as the guard.
+    const existing = (() => {
+      try {
+        const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'publish', 'devto-results.json'), 'utf8'));
+        const m = {};
+        for (const p of d.posts || []) if (p && p.slug && p.id) m[p.slug] = p;
+        return m;
+      } catch (e) { return {}; }
+    })();
     for (const { slug } of list) {
+      const already = existing[slug];
+      if (already && !PUBLISH_LIVE) {
+        if (LIVE) mark(slug, 'devto', 'draft', (already.url || 'dev.to draft') + ' (already on dev.to — not re-posted)');
+        run.actions.push({ slug, platform: 'devto', result: 'already a draft', url: already.url });
+        console.log(`  dev.to  ${slug}: already a draft (id ${already.id}) — skipped`);
+        continue;
+      }
       try {
         if (!LIVE) { run.actions.push({ slug, platform: 'devto', result: 'would POST as ' + (PUBLISH_LIVE ? 'published' : 'draft') }); console.log(`  dev.to  ${slug}: would post ${PUBLISH_LIVE ? 'PUBLISHED' : 'DRAFT'}`); continue; }
         const url = await postDevto(slug);
@@ -154,6 +172,10 @@ function githubRemote() {
   if (want('github')) {
     const list = approved.filter(a => a.plat === 'github');
     const remote = githubRemote();
+    // One deploy publishes the whole site: every slug lives in the same Pages build. Deploying
+    // once per approved chip meant 27 identical pushes per run, each rewriting the same branch.
+    let deployed = false;
+    let deployError = null;
     for (const { slug } of list) {
       if (!remote) {
         const msg = 'no git remote — add one (git remote add origin <url>) then bash deploy-github-pages.sh';
@@ -161,15 +183,22 @@ function githubRemote() {
         run.actions.push({ slug, platform: 'github', result: 'blocked', error: msg });
         console.log(`  github  ${slug}: blocked — ${msg}`);
       } else if (!LIVE) {
-        run.actions.push({ slug, platform: 'github', result: 'would push to ' + remote });
-        console.log(`  github  ${slug}: would push to ${remote}`);
+        const note = deployed ? 'covered by the same deploy' : 'would deploy the site once to ' + remote;
+        deployed = true;
+        run.actions.push({ slug, platform: 'github', result: note });
+        console.log(`  github  ${slug}: ${note}`);
       } else {
         try {
-          execFileSync('bash', ['deploy-github-pages.sh'], { cwd: ROOT, stdio: 'pipe', timeout: 120000 });
+          if (deployError) throw deployError;
+          if (!deployed) {
+            execFileSync('bash', ['deploy-github-pages.sh'], { cwd: ROOT, stdio: 'pipe', timeout: 120000 });
+            deployed = true;
+          }
           mark(slug, 'github', 'published', remote);
           run.actions.push({ slug, platform: 'github', result: 'ok', remote });
           console.log(`  github  ${slug}: pushed to ${remote}`);
         } catch (e) {
+          deployError = e;  // one failure is the site's failure, not 27 separate ones
           mark(slug, 'github', 'blocked', String(e.message).slice(0, 160));
           run.actions.push({ slug, platform: 'github', result: 'blocked', error: String(e.message).slice(0, 160) });
           console.log(`  github  ${slug}: FAIL ${String(e.message).slice(0, 160)}`);

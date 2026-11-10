@@ -177,6 +177,1183 @@
       "live": false,
       "actions": [],
       "summary": {}
+    },
+    {
+      "at": "2026-11-10 23:55:13",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "film-room",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "resmara",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "smart-home-hub",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "film-room",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "resmara",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "smart-home-hub",
+          "platform": "blogger",
+          "result": "manual",
+          "error": "Blogger has no key-only write path. Sign in as ddaymude.ai@gmail.com in the browser, then drive the editor per skill `blogger-publishing` (or supply an OAuth refresh token)."
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "blogger",
+          "result": "manual",
+          "error": "Blogger has no key-only write path. Sign in as ddaymude.ai@gmail.com in the browser, then drive the editor per skill `blogger-publishing` (or supply an OAuth refresh token)."
+        }
+      ],
+      "summary": {
+        "would": 54,
+        "manual": 2
+      }
+    },
+    {
+      "at": "2026-11-10 23:55:18",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "film-room",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "resmara",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "github",
+          "result": "would push to https://github.com/dannyphantom303/portfolio.git"
+        }
+      ],
+      "summary": {
+        "would": 27
+      }
+    },
+    {
+      "at": "2026-11-10 23:55:21",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "github",
+          "result": "would deploy the site once to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "film-room",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "resmara",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        }
+      ],
+      "summary": {
+        "would": 1,
+        "covered by the same deploy": 26
+      }
+    },
+    {
+      "at": "2026-11-10 23:55:21",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "github",
+          "result": "would deploy the site once to https://github.com/dannyphantom303/portfolio.git"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "film-room",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "resmara",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "github",
+          "result": "covered by the same deploy"
+        }
+      ],
+      "summary": {
+        "would": 1,
+        "covered by the same deploy": 26
+      }
+    },
+    {
+      "at": "2026-11-10 23:55:23",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "film-room",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "resmara",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        }
+      ],
+      "summary": {
+        "would": 27
+      }
+    },
+    {
+      "at": "2026-11-10 23:55:23",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "film-room",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "resmara",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        }
+      ],
+      "summary": {
+        "would": 27
+      }
+    },
+    {
+      "at": "2026-11-10 23:55:29",
+      "live": false,
+      "actions": [
+        {
+          "slug": "smart-home-hub",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/home-assistant-on-a-raspberry-pi-driven-by-plain-english-g8o-temp-slug-6679663"
+        },
+        {
+          "slug": "sport-command-center",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/sport-a-multi-agent-ai-operations-system-for-a-one-person-company-3kba-temp-slug-8139883"
+        },
+        {
+          "slug": "track-my-gold",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/track-my-gold-a-youtube-engagement-and-affiliate-dashboard-2a6i-temp-slug-5048751"
+        },
+        {
+          "slug": "content-autopilot",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/content-autopilot-draft-review-approve-publish-on-a-schedule-244h-temp-slug-8315740"
+        },
+        {
+          "slug": "token-killers",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/token-killers-cutting-ai-api-spend-without-cutting-quality-2a85-temp-slug-1383795"
+        },
+        {
+          "slug": "hermes-vision",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-vision-a-live-ai-agent-session-on-phone-and-glasses-484f-temp-slug-5516050"
+        },
+        {
+          "slug": "hermes-worlds",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/hermes-worlds-an-explorable-3d-frontier-where-the-agents-are-characters-5bc5-temp-slug-5700636"
+        },
+        {
+          "slug": "autolisting",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/autolisting-a-visible-ten-step-pipeline-that-turns-property-video-into-a-finished-listing-2e55-temp-slug-2048318"
+        },
+        {
+          "slug": "obsidian-brain",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/obsidian-brain-a-live-3d-graph-of-a-note-vault-built-without-a-single-model-call-2d2c-temp-slug-4921636"
+        },
+        {
+          "slug": "net-worth-ledger",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/net-worth-ledger-one-number-computed-from-entries-a-human-can-audit-5a43-temp-slug-77653"
+        },
+        {
+          "slug": "insta360-x4",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/insta360-x4-a-local-dashboard-for-a-360-camera-mounted-behind-a-path-prefix-1a1a-temp-slug-4895120"
+        },
+        {
+          "slug": "agentic-ai-course",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/applied-agentic-ai-what-survived-contact-with-a-real-agent-fleet-41ei-temp-slug-89796"
+        },
+        {
+          "slug": "project-showcase-engine",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/project-showcase-engine-the-daily-pipeline-that-generates-this-portfolio-506e-temp-slug-518112"
+        },
+        {
+          "slug": "cnbc-live-on-glasses",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/cnbc-live-on-the-meta-ray-ban-display-a-proxy-in-front-of-a-referer-gated-cdn-3952-temp-slug-9985471"
+        },
+        {
+          "slug": "gold-spot-explorer",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/gold-spot-explorer-ranking-historical-gold-ground-against-bare-earth-lidar-j78-temp-slug-984874"
+        },
+        {
+          "slug": "ai-consulting",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/ai-consulting-the-commercial-half-of-the-portfolio-built-on-the-same-board-2eo-temp-slug-1023725"
+        },
+        {
+          "slug": "openclaw",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/openclaw-a-local-agent-gateway-configured-in-one-auditable-file-1f62-temp-slug-5691914"
+        },
+        {
+          "slug": "muse-prototypes",
+          "platform": "devto",
+          "result": "already a draft",
+          "url": "https://dev.to/dan_f3bcb7300e832d9d2f797/muse-prototypes-the-same-3d-world-packaged-to-be-opened-rather-than-deployed-2h94-temp-slug-7400802"
+        },
+        {
+          "slug": "tradedeck",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "peril-adventure-wear",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "film-room",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "ip-competitor-watch",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "resmara",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "project-nomad",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "sound-it-out",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jujutsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        },
+        {
+          "slug": "jiu-jitsu",
+          "platform": "devto",
+          "result": "would POST as draft"
+        }
+      ],
+      "summary": {
+        "already a draft": 18,
+        "would": 9
+      }
     }
   ]
 }
