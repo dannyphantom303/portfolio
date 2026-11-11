@@ -203,6 +203,17 @@ def render(slug, proj, keep_silent=False):
     prev = wide_crop(iw, ih)
     segs = []
     for i, b in enumerate(beats):
+        # A beat may name its own screenshot. One shot reused for three beats is
+        # why the picture can sit still while the narration walks through three
+        # different screens — if a beat describes something else, it says so with
+        # "shot": "<file>.png" and the camera cuts to that screen instead.
+        bname = b.get("shot") or proj["shot"]
+        if bname != proj["shot"]:
+            bbase = Image.open(os.path.join(SHOTS, bname)).convert("RGB")
+            biw, bih = bbase.size
+            prev = wide_crop(biw, bih)
+        else:
+            bbase, biw, bih = base, iw, ih
         vf = voice_file(slug, i, b["say"])
         if not os.path.exists(vf) or dur(vf) < 0.3:
             os.makedirs(VOICE, exist_ok=True)
@@ -214,7 +225,7 @@ def render(slug, proj, keep_silent=False):
             raise SystemExit(f"no narration for {slug} beat {i} and text-to-speech failed")
         total_t = LEAD + speech + TAIL
         nframes = int(round(total_t * FPS))
-        tgt = focus_crop(iw, ih, b["focus"]) if b.get("focus") else wide_crop(iw, ih)
+        tgt = focus_crop(biw, bih, b["focus"]) if b.get("focus") else wide_crop(biw, bih)
         seg = os.path.join(tmp, f"{i}.mp4")
         ff = subprocess.Popen(
             ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
@@ -227,7 +238,7 @@ def render(slug, proj, keep_silent=False):
             # the camera holds still while the line starts, then pushes in
             k = ease((t - LEAD * 0.6) / max(0.3, total_t - LEAD * 0.6 - TAIL * 0.35))
             crop = tuple(prev[j] + (tgt[j] - prev[j]) * k for j in range(4))
-            img = draw_frame(base, crop, proj["title"], b["cap"], b.get("focus"), i, total)
+            img = draw_frame(bbase, crop, proj["title"], b["cap"], b.get("focus"), i, total)
             ff.stdin.write(img.tobytes())
         ff.stdin.close()
         ff.wait()

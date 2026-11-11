@@ -109,23 +109,23 @@
   "beats": [
    {
     "focus": [
-     0.04,
-     0.05,
-     0.75,
-     0.3
+     0.13,
+     0.085,
+     0.98,
+     0.42
     ],
     "cap": "Pick the agent, not the app",
     "say": "Hermes Vision is the front door to a team of agents rather than one assistant. Each profile has its own voice, its own model and its own job, from marketing to risk."
    },
    {
+    "cap": "Each profile, its own model",
     "focus": [
-     0.04,
-     0.38,
-     0.95,
-     0.62
+     0.13,
+     0.325,
+     0.98,
+     0.605
     ],
-    "cap": "Pick up a session from any device",
-    "say": "Start a session on the phone, walk away, and pick the same conversation up on the glasses or at the desktop. The session list shows what each agent was doing and where it got to."
+    "say": "Seven profiles, each with the model it actually runs: goldie on Gemini, fin and tradedeck on OpenRouter, dev on DeepSeek, default on a local reflection model. Pick the agent, not the app."
    }
   ]
  },
@@ -155,34 +155,34 @@
   "shot": "obsidian-brain-home.png",
   "beats": [
    {
+    "cap": "The vault, counted",
     "focus": [
-     0.1,
-     0.09,
-     0.52,
-     0.3
+     0.175,
+     0.215,
+     0.63,
+     0.47
     ],
-    "cap": "My notes, counted",
-    "say": "Obsidian Brain reads the vault where I keep every note, project and decision, and counts it: one hundred and twenty four projects, sixty five thousand links, thirty one thousand words."
+    "say": "Obsidian Brain reads the vault where every note, project and decision lives, and counts it: a hundred and twenty four notes, ninety five thousand six hundred wikilinks, and eighty three percent of the vault still unlinked."
    },
    {
+    "cap": "Note pulse — sixty days",
     "focus": [
-     0.1,
-     0.33,
-     0.62,
-     0.58
+     0.365,
+     0.265,
+     0.655,
+     0.6
     ],
-    "cap": "Written, linked, or drifting",
-    "say": "The charts split that into what is written, what is linked and what is drifting, so the graph shows where thinking has stalled instead of just looking impressive."
+    "say": "The pulse panel plots new notes over the last sixty days with the seven day trend on top, so a quiet week shows up as a gap instead of a feeling. The insight list underneath names what was written and when."
    },
    {
+    "cap": "What the notes hang on",
     "focus": [
-     0.3,
-     0.62,
-     0.95,
-     0.86
+     0.625,
+     0.265,
+     0.98,
+     0.62
     ],
-    "cap": "Insights that name the gap",
-    "say": "Then it makes the observations I would miss, in plain language, next to the tables of tags and entities behind them. The vault is the memory; this is the index."
+    "say": "Beside it, the tags and entities the notes actually hang on, ranked by count, so the vocabulary of the vault is visible instead of implied."
    }
   ]
  },
@@ -237,14 +237,14 @@
     "say": "This is the portfolio itself. I built the generator because the work kept outrunning the write-up: a project was finished and the site still described the one before it."
    },
    {
+    "cap": "Counted at build time",
     "focus": [
-     0.06,
-     0.66,
-     0.55,
-     0.95
+     0.13,
+     0.65,
+     0.62,
+     0.8
     ],
-    "cap": "Real demos, refreshed daily",
-    "say": "The site rebuilds itself every morning from the Command Center registry, re-shoots the screens, re-renders the demos and republishes. If a project exists, it is on this page the next day."
+    "say": "The numbers under the headline are generated too: twenty six builds shipped, nine running now, ten agents and a hundred and twenty four notes in the vault, all read from the registry every build."
    }
   ]
  },
@@ -345,14 +345,14 @@
     "say": "Each draft is a real shirt design rendered in three layouts and six print palettes, with the copy written for the brand: leave the place better than you found it."
    },
    {
+    "cap": "Approval before posting",
     "focus": [
-     0.32,
-     0.24,
-     0.6,
-     0.7
+     0.02,
+     0.16,
+     0.99,
+     0.8
     ],
-    "cap": "Approve first, publish second",
-    "say": "Nothing posts on its own. The drafts come here for approval, and only an approved design goes to Buffer or to the shop, so the brand never speaks without me having read it."
+    "say": "Nothing posts on its own. Every draft waits here with its own status, and only an approved design goes to Buffer or to the shop, so the brand never speaks without me having read it."
    }
   ]
  },
@@ -407,14 +407,14 @@
     "say": "Resmara is a product for estate agents. Send it one listing and it writes the brand guide, the fourteen day content campaign and the ad launch, which is the work an agent never has time for."
    },
    {
+    "cap": "One listing, one fortnight",
     "focus": [
-     0.5,
-     0.18,
-     0.95,
-     0.55
+     0.03,
+     0.12,
+     0.99,
+     0.95
     ],
-    "cap": "One credit, a whole campaign",
-    "say": "One credit produces a fortnight of posts per property, and it runs as a real hosted service with its own operator console, not a prototype. It is the first product I built to be sold to somebody other than me."
+    "say": "One credit produces a fortnight of posts per property: the brand guide, the campaign and the ad launch. It runs as a hosted service, not a prototype."
    }
   ]
  },
@@ -423,14 +423,14 @@
   "shot": "project-nomad-library.png",
   "beats": [
    {
+    "cap": "The offline library",
     "focus": [
-     0.0,
-     0.0,
-     0.55,
-     0.13
+     0.06,
+     0.1,
+     0.99,
+     0.9
     ],
-    "cap": "An internet that works offline",
-    "say": "Project NOMAD is an offline internet. A Kiwix library, a local AI chat and an admin console run on one small machine, so the reference material and the assistant keep working when the connection does not."
+    "say": "Project NOMAD is an offline internet: a Kiwix library, a local AI chat and an admin console on one small machine, so the reference material and the assistant keep working when the connection does not. This is the library."
    },
    {
     "focus": [
@@ -449,24 +449,35 @@
   "shot": "token-killers-home.png",
   "beats": [
    {
+    "cap": "Ten thousand calls a month",
     "focus": [
-     0.22,
-     0.17,
-     0.76,
-     0.38
+     0.225,
+     0.0,
+     0.775,
+     0.72
     ],
-    "cap": "What your tokens actually cost",
-    "say": "Token Killers is a free calculator for the question every team asks late: what is this model actually costing us? Thirty seconds, no sign-up, real published rates."
+    "say": "Token Killers is a free calculator for the question every team asks late: what is this model actually costing us? Ten thousand API calls a month, a thousand tokens each, on a standard model."
    },
    {
+    "cap": "Eighty dollars, then twenty four",
     "focus": [
-     0.24,
-     0.68,
-     0.76,
+     0.255,
+     0.395,
+     0.745,
+     0.685
+    ],
+    "say": "It bills out at eighty dollars a month, twenty four after the optimisation, and zero if you move it to a local model. Real published rates, no sign up."
+   },
+   {
+    "cap": "What to fix first",
+    "focus": [
+     0.22,
+     0.56,
+     0.78,
      1.0
     ],
-    "cap": "Real rates, verified usage",
-    "say": "Put in your monthly calls and the token count and it shows the bill, then the optimisation checklist: what to cache, what to route to a local model, and what to stop sending at all."
+    "shot": "token-killers-checklist.png",
+    "say": "Then the checklist, in order of what is worth doing first: prompt caching, a model downgrade, context pruning, batch processing, and the work you should not be sending at all."
    }
   ]
  },
